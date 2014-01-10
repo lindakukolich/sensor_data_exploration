@@ -36,6 +36,7 @@ DEFAULT_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'sensor_data_exploration.apps.explorer',
 )
 
 THIRD_PARTY_APPS = (
