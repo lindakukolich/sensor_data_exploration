@@ -1,0 +1,1977 @@
+# http://api.wunderground.com/api/2cbf77167bf2fe35/history_20131231/q/pws:KMABOSTO32.json
+# history per day
+# see 'dailysummary' line 1955
+
+{
+  "response": {
+  "version":"0.1",
+  "termsofService":"http://www.wunderground.com/weather/api/d/terms.html",
+  "features": {
+  "history": 1
+  }
+	}
+		,
+	"history": {
+		"date": {
+		"pretty": "December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "00",
+		"min": "00",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "05",
+		"min": "00",
+		"tzname": "UTC"
+		},
+		"observations": [
+		{
+		"date": {
+		"pretty": "12:05 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "00",
+		"min": "05",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "5:05 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "05",
+		"min": "05",
+		"tzname": "UTC"
+		},
+		"tempm":"-6.9", "tempi":"19.6","dewptm":"-12.2", "dewpti":"10.0","hum":"67","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"53","wdire":"NE","pressurem":"1021.6", "pressurei":"30.17","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "12:20 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "00",
+		"min": "20",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "5:20 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "05",
+		"min": "20",
+		"tzname": "UTC"
+		},
+		"tempm":"-7.0", "tempi":"19.4","dewptm":"-12.2", "dewpti":"10.0","hum":"67","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"26","wdire":"NNE","pressurem":"1021.2", "pressurei":"30.16","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "12:35 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "00",
+		"min": "35",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "5:35 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "05",
+		"min": "35",
+		"tzname": "UTC"
+		},
+		"tempm":"-7.4", "tempi":"18.6","dewptm":"-13.9", "dewpti":"7.0","hum":"62","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"30","wdire":"NNE","pressurem":"1020.9", "pressurei":"30.15","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "12:50 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "00",
+		"min": "50",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "5:50 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "05",
+		"min": "50",
+		"tzname": "UTC"
+		},
+		"tempm":"-7.5", "tempi":"18.5","dewptm":"-13.3", "dewpti":"8.0","hum":"65","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"20","wdire":"NNE","pressurem":"1021.2", "pressurei":"30.16","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "1:05 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "01",
+		"min": "05",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "6:05 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "06",
+		"min": "05",
+		"tzname": "UTC"
+		},
+		"tempm":"-7.6", "tempi":"18.4","dewptm":"-13.3", "dewpti":"8.0","hum":"65","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"28","wdire":"NNE","pressurem":"1021.6", "pressurei":"30.17","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "1:20 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "01",
+		"min": "20",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "6:20 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "06",
+		"min": "20",
+		"tzname": "UTC"
+		},
+		"tempm":"-7.8", "tempi":"17.9","dewptm":"-13.3", "dewpti":"8.0","hum":"65","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"19","wdire":"NNE","pressurem":"1021.6", "pressurei":"30.17","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "1:35 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "01",
+		"min": "35",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "6:35 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "06",
+		"min": "35",
+		"tzname": "UTC"
+		},
+		"tempm":"-7.8", "tempi":"17.9","dewptm":"-13.3", "dewpti":"8.0","hum":"65","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"19","wdire":"NNE","pressurem":"1021.9", "pressurei":"30.18","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "1:50 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "01",
+		"min": "50",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "6:50 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "06",
+		"min": "50",
+		"tzname": "UTC"
+		},
+		"tempm":"-8.0", "tempi":"17.6","dewptm":"-14.4", "dewpti":"6.0","hum":"60","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"32","wdire":"NNE","pressurem":"1021.9", "pressurei":"30.18","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "2:05 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "02",
+		"min": "05",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "7:05 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "07",
+		"min": "05",
+		"tzname": "UTC"
+		},
+		"tempm":"-8.3", "tempi":"17.0","dewptm":"-13.9", "dewpti":"7.0","hum":"64","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"40","wdire":"NE","pressurem":"1021.9", "pressurei":"30.18","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "2:20 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "02",
+		"min": "20",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "7:20 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "07",
+		"min": "20",
+		"tzname": "UTC"
+		},
+		"tempm":"-8.6", "tempi":"16.6","dewptm":"-13.9", "dewpti":"7.0","hum":"65","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"31","wdire":"NNE","pressurem":"1021.9", "pressurei":"30.18","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "2:35 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "02",
+		"min": "35",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "7:35 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "07",
+		"min": "35",
+		"tzname": "UTC"
+		},
+		"tempm":"-8.8", "tempi":"16.1","dewptm":"-15.0", "dewpti":"5.0","hum":"61","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"73","wdire":"ENE","pressurem":"1021.9", "pressurei":"30.18","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "2:50 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "02",
+		"min": "50",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "7:50 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "07",
+		"min": "50",
+		"tzname": "UTC"
+		},
+		"tempm":"-8.8", "tempi":"16.1","dewptm":"-16.1", "dewpti":"3.0","hum":"57","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"36","wdire":"NE","pressurem":"1021.9", "pressurei":"30.18","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "3:05 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "03",
+		"min": "05",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "8:05 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "08",
+		"min": "05",
+		"tzname": "UTC"
+		},
+		"tempm":"-8.9", "tempi":"15.9","dewptm":"-16.7", "dewpti":"2.0","hum":"54","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"18","wdire":"NNE","pressurem":"1021.9", "pressurei":"30.18","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "3:20 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "03",
+		"min": "20",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "8:20 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "08",
+		"min": "20",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.2", "tempi":"15.4","dewptm":"-17.8", "dewpti":"0.0","hum":"50","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"5","wdire":"North","pressurem":"1021.9", "pressurei":"30.18","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "3:35 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "03",
+		"min": "35",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "8:35 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "08",
+		"min": "35",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.3", "tempi":"15.2","dewptm":"-18.3", "dewpti":"-1.0","hum":"49","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"29","wdire":"NNE","pressurem":"1021.9", "pressurei":"30.18","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "3:50 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "03",
+		"min": "50",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "8:50 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "08",
+		"min": "50",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.6", "tempi":"14.8","dewptm":"-17.8", "dewpti":"0.0","hum":"51","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"19","wdire":"NNE","pressurem":"1021.9", "pressurei":"30.18","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "4:05 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "04",
+		"min": "05",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "9:05 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "09",
+		"min": "05",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.6", "tempi":"14.8","dewptm":"-17.2", "dewpti":"1.0","hum":"54","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"58","wdire":"ENE","pressurem":"1021.9", "pressurei":"30.18","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "4:21 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "04",
+		"min": "21",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "9:21 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "09",
+		"min": "21",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.7", "tempi":"14.6","dewptm":"-17.8", "dewpti":"0.0","hum":"53","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"57","wdire":"ENE","pressurem":"1021.9", "pressurei":"30.18","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "4:36 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "04",
+		"min": "36",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "9:36 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "09",
+		"min": "36",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.7", "tempi":"14.6","dewptm":"-17.8", "dewpti":"0.0","hum":"53","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"19","wdire":"NNE","pressurem":"1021.6", "pressurei":"30.17","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "4:51 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "04",
+		"min": "51",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "9:51 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "09",
+		"min": "51",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.4", "tempi":"15.0","dewptm":"-18.3", "dewpti":"-1.0","hum":"50","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"45","wdire":"NE","pressurem":"1021.6", "pressurei":"30.17","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "5:06 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "05",
+		"min": "06",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "10:06 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "10",
+		"min": "06",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.5", "tempi":"14.9","dewptm":"-18.3", "dewpti":"-1.0","hum":"49","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"350","wdire":"North","pressurem":"1021.6", "pressurei":"30.17","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "5:21 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "05",
+		"min": "21",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "10:21 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "10",
+		"min": "21",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.6", "tempi":"14.7","dewptm":"-18.3", "dewpti":"-1.0","hum":"50","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"23","wdire":"NNE","pressurem":"1021.2", "pressurei":"30.16","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "5:36 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "05",
+		"min": "36",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "10:36 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "10",
+		"min": "36",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.3", "tempi":"15.2","dewptm":"-18.3", "dewpti":"-1.0","hum":"50","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"36","wdire":"NE","pressurem":"1021.2", "pressurei":"30.16","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "5:51 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "05",
+		"min": "51",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "10:51 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "10",
+		"min": "51",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.3", "tempi":"15.2","dewptm":"-17.8", "dewpti":"0.0","hum":"52","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"342","wdire":"NNW","pressurem":"1021.2", "pressurei":"30.16","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "6:06 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "06",
+		"min": "06",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "11:06 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "11",
+		"min": "06",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.3", "tempi":"15.3","dewptm":"-17.8", "dewpti":"0.0","hum":"51","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"355","wdire":"North","pressurem":"1021.2", "pressurei":"30.16","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "6:21 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "06",
+		"min": "21",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "11:21 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "11",
+		"min": "21",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.3", "tempi":"15.2","dewptm":"-18.3", "dewpti":"-1.0","hum":"49","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"348","wdire":"NNW","pressurem":"1020.9", "pressurei":"30.15","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "6:36 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "06",
+		"min": "36",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "11:36 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "11",
+		"min": "36",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.4", "tempi":"15.0","dewptm":"-18.3", "dewpti":"-1.0","hum":"50","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"15","wdire":"NNE","pressurem":"1021.2", "pressurei":"30.16","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "6:51 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "06",
+		"min": "51",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "11:51 AM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "11",
+		"min": "51",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.2", "tempi":"15.5","dewptm":"-17.2", "dewpti":"1.0","hum":"52","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"355","wdire":"North","pressurem":"1021.2", "pressurei":"30.16","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "7:06 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "07",
+		"min": "06",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "12:06 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "12",
+		"min": "06",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.2", "tempi":"15.5","dewptm":"-17.8", "dewpti":"0.0","hum":"50","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"5","wdire":"North","pressurem":"1021.2", "pressurei":"30.16","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "7:21 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "07",
+		"min": "21",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "12:21 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "12",
+		"min": "21",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.2", "tempi":"15.4","dewptm":"-17.8", "dewpti":"0.0","hum":"51","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"16","wdire":"NNE","pressurem":"1021.2", "pressurei":"30.16","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "7:36 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "07",
+		"min": "36",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "12:36 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "12",
+		"min": "36",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.1", "tempi":"15.6","dewptm":"-17.8", "dewpti":"0.0","hum":"51","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"355","wdire":"North","pressurem":"1020.9", "pressurei":"30.15","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "7:52 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "07",
+		"min": "52",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "12:52 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "12",
+		"min": "52",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.3", "tempi":"15.3","dewptm":"-18.3", "dewpti":"-1.0","hum":"49","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"27","wdire":"NNE","pressurem":"1020.9", "pressurei":"30.15","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "8:07 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "08",
+		"min": "07",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "1:07 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "13",
+		"min": "07",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.2", "tempi":"15.4","dewptm":"-17.8", "dewpti":"0.0","hum":"51","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"5","wdire":"North","pressurem":"1020.9", "pressurei":"30.15","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "8:22 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "08",
+		"min": "22",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "1:22 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "13",
+		"min": "22",
+		"tzname": "UTC"
+		},
+		"tempm":"-9.2", "tempi":"15.5","dewptm":"-18.3", "dewpti":"-1.0","hum":"48","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"15","wdire":"NNE","pressurem":"1020.9", "pressurei":"30.15","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "8:38 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "08",
+		"min": "38",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "1:38 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "13",
+		"min": "38",
+		"tzname": "UTC"
+		},
+		"tempm":"-8.6", "tempi":"16.5","dewptm":"-17.8", "dewpti":"0.0","hum":"49","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"317","wdire":"NW","pressurem":"1021.2", "pressurei":"30.16","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "8:52 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "08",
+		"min": "52",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "1:52 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "13",
+		"min": "52",
+		"tzname": "UTC"
+		},
+		"tempm":"-8.5", "tempi":"16.7","dewptm":"-18.3", "dewpti":"-1.0","hum":"46","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"24","wdire":"NNE","pressurem":"1021.2", "pressurei":"30.16","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "9:07 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "09",
+		"min": "07",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "2:07 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "14",
+		"min": "07",
+		"tzname": "UTC"
+		},
+		"tempm":"-8.5", "tempi":"16.7","dewptm":"-17.8", "dewpti":"0.0","hum":"47","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"19","wdire":"NNE","pressurem":"1021.2", "pressurei":"30.16","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "9:22 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "09",
+		"min": "22",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "2:22 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "14",
+		"min": "22",
+		"tzname": "UTC"
+		},
+		"tempm":"-8.3", "tempi":"17.1","dewptm":"-17.8", "dewpti":"0.0","hum":"47","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"40","wdire":"NE","pressurem":"1021.2", "pressurei":"30.16","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "9:37 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "09",
+		"min": "37",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "2:37 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "14",
+		"min": "37",
+		"tzname": "UTC"
+		},
+		"tempm":"-8.2", "tempi":"17.3","dewptm":"-16.7", "dewpti":"2.0","hum":"50","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"28","wdire":"NNE","pressurem":"1020.9", "pressurei":"30.15","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "9:52 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "09",
+		"min": "52",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "2:52 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "14",
+		"min": "52",
+		"tzname": "UTC"
+		},
+		"tempm":"-8.6", "tempi":"16.6","dewptm":"-17.8", "dewpti":"0.0","hum":"49","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"23","wdire":"NNE","pressurem":"1020.9", "pressurei":"30.15","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "10:07 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "10",
+		"min": "07",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "3:07 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "15",
+		"min": "07",
+		"tzname": "UTC"
+		},
+		"tempm":"-8.1", "tempi":"17.4","dewptm":"-17.2", "dewpti":"1.0","hum":"48","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"28","wdire":"NNE","pressurem":"1020.5", "pressurei":"30.14","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "10:22 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "10",
+		"min": "22",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "3:22 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "15",
+		"min": "22",
+		"tzname": "UTC"
+		},
+		"tempm":"-7.8", "tempi":"18.0","dewptm":"-16.7", "dewpti":"2.0","hum":"49","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"350","wdire":"North","pressurem":"1020.5", "pressurei":"30.14","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "10:37 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "10",
+		"min": "37",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "3:37 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "15",
+		"min": "37",
+		"tzname": "UTC"
+		},
+		"tempm":"-7.3", "tempi":"18.9","dewptm":"-16.1", "dewpti":"3.0","hum":"49","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"315","wdire":"NW","pressurem":"1020.2", "pressurei":"30.13","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "10:52 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "10",
+		"min": "52",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "3:52 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "15",
+		"min": "52",
+		"tzname": "UTC"
+		},
+		"tempm":"-7.2", "tempi":"19.1","dewptm":"-16.1", "dewpti":"3.0","hum":"49","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"323","wdire":"NW","pressurem":"1019.9", "pressurei":"30.12","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "11:07 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "11",
+		"min": "07",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "4:07 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "16",
+		"min": "07",
+		"tzname": "UTC"
+		},
+		"tempm":"-6.8", "tempi":"19.7","dewptm":"-16.1", "dewpti":"3.0","hum":"49","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"316","wdire":"NW","pressurem":"1019.5", "pressurei":"30.11","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "11:23 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "11",
+		"min": "23",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "4:23 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "16",
+		"min": "23",
+		"tzname": "UTC"
+		},
+		"tempm":"-6.9", "tempi":"19.5","dewptm":"-15.6", "dewpti":"4.0","hum":"50","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"321","wdire":"NW","pressurem":"1019.2", "pressurei":"30.10","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "11:38 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "11",
+		"min": "38",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "4:38 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "16",
+		"min": "38",
+		"tzname": "UTC"
+		},
+		"tempm":"-7.1", "tempi":"19.3","dewptm":"-16.1", "dewpti":"3.0","hum":"49","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"307","wdire":"NW","pressurem":"1018.8", "pressurei":"30.09","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "11:53 AM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "11",
+		"min": "53",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "4:53 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "16",
+		"min": "53",
+		"tzname": "UTC"
+		},
+		"tempm":"-6.7", "tempi":"19.9","dewptm":"-16.1", "dewpti":"3.0","hum":"49","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"325","wdire":"NW","pressurem":"1018.8", "pressurei":"30.09","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "12:08 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "12",
+		"min": "08",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "5:08 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "17",
+		"min": "08",
+		"tzname": "UTC"
+		},
+		"tempm":"-6.2", "tempi":"20.9","dewptm":"-15.0", "dewpti":"5.0","hum":"50","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"292","wdire":"WNW","pressurem":"1018.2", "pressurei":"30.07","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "12:23 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "12",
+		"min": "23",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "5:23 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "17",
+		"min": "23",
+		"tzname": "UTC"
+		},
+		"tempm":"-6.0", "tempi":"21.2","dewptm":"-15.0", "dewpti":"5.0","hum":"50","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"313","wdire":"NW","pressurem":"1018.5", "pressurei":"30.08","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "12:38 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "12",
+		"min": "38",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "5:38 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "17",
+		"min": "38",
+		"tzname": "UTC"
+		},
+		"tempm":"-5.8", "tempi":"21.6","dewptm":"-15.0", "dewpti":"5.0","hum":"50","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"311","wdire":"NW","pressurem":"1018.2", "pressurei":"30.07","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "12:53 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "12",
+		"min": "53",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "5:53 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "17",
+		"min": "53",
+		"tzname": "UTC"
+		},
+		"tempm":"-5.8", "tempi":"21.6","dewptm":"-15.6", "dewpti":"4.0","hum":"47","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"330","wdire":"NNW","pressurem":"1018.2", "pressurei":"30.07","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "1:08 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "13",
+		"min": "08",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "6:08 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "18",
+		"min": "08",
+		"tzname": "UTC"
+		},
+		"tempm":"-5.7", "tempi":"21.7","dewptm":"-15.6", "dewpti":"4.0","hum":"46","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"315","wdire":"NW","pressurem":"1017.8", "pressurei":"30.06","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "1:23 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "13",
+		"min": "23",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "6:23 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "18",
+		"min": "23",
+		"tzname": "UTC"
+		},
+		"tempm":"-5.2", "tempi":"22.6","dewptm":"-15.6", "dewpti":"4.0","hum":"44","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"318","wdire":"NW","pressurem":"1017.8", "pressurei":"30.06","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "1:38 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "13",
+		"min": "38",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "6:38 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "18",
+		"min": "38",
+		"tzname": "UTC"
+		},
+		"tempm":"-5.3", "tempi":"22.4","dewptm":"-15.6", "dewpti":"4.0","hum":"45","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"303","wdire":"WNW","pressurem":"1017.8", "pressurei":"30.06","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "1:53 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "13",
+		"min": "53",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "6:53 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "18",
+		"min": "53",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.7", "tempi":"23.6","dewptm":"-15.0", "dewpti":"5.0","hum":"46","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"312","wdire":"NW","pressurem":"1017.8", "pressurei":"30.06","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "2:08 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "14",
+		"min": "08",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "7:08 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "19",
+		"min": "08",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.1", "tempi":"24.7","dewptm":"-14.4", "dewpti":"6.0","hum":"45","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"296","wdire":"WNW","pressurem":"1017.5", "pressurei":"30.05","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "2:23 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "14",
+		"min": "23",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "7:23 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "19",
+		"min": "23",
+		"tzname": "UTC"
+		},
+		"tempm":"-3.8", "tempi":"25.1","dewptm":"-14.4", "dewpti":"6.0","hum":"45","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"319","wdire":"NW","pressurem":"1017.5", "pressurei":"30.05","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "2:39 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "14",
+		"min": "39",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "7:39 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "19",
+		"min": "39",
+		"tzname": "UTC"
+		},
+		"tempm":"-3.9", "tempi":"24.9","dewptm":"-13.9", "dewpti":"7.0","hum":"47","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"286","wdire":"WNW","pressurem":"1017.5", "pressurei":"30.05","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "2:54 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "14",
+		"min": "54",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "7:54 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "19",
+		"min": "54",
+		"tzname": "UTC"
+		},
+		"tempm":"-3.5", "tempi":"25.7","dewptm":"-12.8", "dewpti":"9.0","hum":"50","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"288","wdire":"WNW","pressurem":"1017.5", "pressurei":"30.05","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "3:09 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "15",
+		"min": "09",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "8:09 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "20",
+		"min": "09",
+		"tzname": "UTC"
+		},
+		"tempm":"-3.6", "tempi":"25.6","dewptm":"-12.8", "dewpti":"9.0","hum":"50","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"311","wdire":"NW","pressurem":"1017.8", "pressurei":"30.06","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "3:24 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "15",
+		"min": "24",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "8:24 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "20",
+		"min": "24",
+		"tzname": "UTC"
+		},
+		"tempm":"-3.7", "tempi":"25.4","dewptm":"-12.8", "dewpti":"9.0","hum":"49","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"300","wdire":"WNW","pressurem":"1018.2", "pressurei":"30.07","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "3:39 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "15",
+		"min": "39",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "8:39 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "20",
+		"min": "39",
+		"tzname": "UTC"
+		},
+		"tempm":"-3.9", "tempi":"24.9","dewptm":"-13.3", "dewpti":"8.0","hum":"49","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"286","wdire":"WNW","pressurem":"1018.2", "pressurei":"30.07","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "3:54 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "15",
+		"min": "54",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "8:54 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "20",
+		"min": "54",
+		"tzname": "UTC"
+		},
+		"tempm":"-3.7", "tempi":"25.3","dewptm":"-12.8", "dewpti":"9.0","hum":"51","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"288","wdire":"WNW","pressurem":"1018.2", "pressurei":"30.07","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "4:09 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "16",
+		"min": "09",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "9:09 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "21",
+		"min": "09",
+		"tzname": "UTC"
+		},
+		"tempm":"-3.8", "tempi":"25.2","dewptm":"-12.8", "dewpti":"9.0","hum":"50","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"281","wdire":"West","pressurem":"1018.2", "pressurei":"30.07","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "4:24 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "16",
+		"min": "24",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "9:24 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "21",
+		"min": "24",
+		"tzname": "UTC"
+		},
+		"tempm":"-3.6", "tempi":"25.5","dewptm":"-11.7", "dewpti":"11.0","hum":"54","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"311","wdire":"NW","pressurem":"1018.5", "pressurei":"30.08","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "4:39 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "16",
+		"min": "39",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "9:39 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "21",
+		"min": "39",
+		"tzname": "UTC"
+		},
+		"tempm":"-3.5", "tempi":"25.7","dewptm":"-12.2", "dewpti":"10.0","hum":"52","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"312","wdire":"NW","pressurem":"1018.8", "pressurei":"30.09","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "4:54 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "16",
+		"min": "54",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "9:54 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "21",
+		"min": "54",
+		"tzname": "UTC"
+		},
+		"tempm":"-3.5", "tempi":"25.7","dewptm":"-11.1", "dewpti":"12.0","hum":"56","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"312","wdire":"NW","pressurem":"1018.8", "pressurei":"30.09","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "5:09 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "17",
+		"min": "09",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "10:09 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "22",
+		"min": "09",
+		"tzname": "UTC"
+		},
+		"tempm":"-3.6", "tempi":"25.6","dewptm":"-10.6", "dewpti":"13.0","hum":"60","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"313","wdire":"NW","pressurem":"1019.2", "pressurei":"30.10","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "5:24 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "17",
+		"min": "24",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "10:24 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "22",
+		"min": "24",
+		"tzname": "UTC"
+		},
+		"tempm":"-3.7", "tempi":"25.3","dewptm":"-11.1", "dewpti":"12.0","hum":"58","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"335","wdire":"NNW","pressurem":"1019.5", "pressurei":"30.11","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "5:39 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "17",
+		"min": "39",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "10:39 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "22",
+		"min": "39",
+		"tzname": "UTC"
+		},
+		"tempm":"-3.8", "tempi":"25.2","dewptm":"-10.6", "dewpti":"13.0","hum":"59","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"316","wdire":"NW","pressurem":"1019.5", "pressurei":"30.11","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "5:54 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "17",
+		"min": "54",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "10:54 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "22",
+		"min": "54",
+		"tzname": "UTC"
+		},
+		"tempm":"-3.9", "tempi":"25.0","dewptm":"-10.6", "dewpti":"13.0","hum":"60","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"288","wdire":"WNW","pressurem":"1019.5", "pressurei":"30.11","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "6:10 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "18",
+		"min": "10",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "11:10 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "23",
+		"min": "10",
+		"tzname": "UTC"
+		},
+		"tempm":"-3.9", "tempi":"24.9","dewptm":"-11.1", "dewpti":"12.0","hum":"59","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"288","wdire":"WNW","pressurem":"1019.9", "pressurei":"30.12","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "6:25 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "18",
+		"min": "25",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "11:25 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "23",
+		"min": "25",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.0", "tempi":"24.8","dewptm":"-11.1", "dewpti":"12.0","hum":"59","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"284","wdire":"WNW","pressurem":"1019.5", "pressurei":"30.11","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "6:40 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "18",
+		"min": "40",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "11:40 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "23",
+		"min": "40",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.2", "tempi":"24.5","dewptm":"-11.1", "dewpti":"12.0","hum":"60","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"295","wdire":"WNW","pressurem":"1019.5", "pressurei":"30.11","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "6:55 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "18",
+		"min": "55",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "11:55 PM GMT on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "23",
+		"min": "55",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.2", "tempi":"24.4","dewptm":"-10.6", "dewpti":"13.0","hum":"61","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"263","wdire":"West","pressurem":"1019.5", "pressurei":"30.11","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "7:10 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "19",
+		"min": "10",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "12:10 AM GMT on January 01, 2014",
+		"year": "2014",
+		"mon": "01",
+		"mday": "01",
+		"hour": "00",
+		"min": "10",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.2", "tempi":"24.4","dewptm":"-10.0", "dewpti":"14.0","hum":"64","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"284","wdire":"WNW","pressurem":"1019.5", "pressurei":"30.11","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "7:25 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "19",
+		"min": "25",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "12:25 AM GMT on January 01, 2014",
+		"year": "2014",
+		"mon": "01",
+		"mday": "01",
+		"hour": "00",
+		"min": "25",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.4", "tempi":"24.0","dewptm":"-10.0", "dewpti":"14.0","hum":"65","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"267","wdire":"West","pressurem":"1019.5", "pressurei":"30.11","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "7:40 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "19",
+		"min": "40",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "12:40 AM GMT on January 01, 2014",
+		"year": "2014",
+		"mon": "01",
+		"mday": "01",
+		"hour": "00",
+		"min": "40",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.7", "tempi":"23.6","dewptm":"-10.0", "dewpti":"14.0","hum":"66","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"278","wdire":"West","pressurem":"1019.5", "pressurei":"30.11","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "7:55 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "19",
+		"min": "55",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "12:55 AM GMT on January 01, 2014",
+		"year": "2014",
+		"mon": "01",
+		"mday": "01",
+		"hour": "00",
+		"min": "55",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.7", "tempi":"23.6","dewptm":"-10.0", "dewpti":"14.0","hum":"67","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"286","wdire":"WNW","pressurem":"1019.9", "pressurei":"30.12","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "8:10 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "20",
+		"min": "10",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "1:10 AM GMT on January 01, 2014",
+		"year": "2014",
+		"mon": "01",
+		"mday": "01",
+		"hour": "01",
+		"min": "10",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.6", "tempi":"23.8","dewptm":"-9.4", "dewpti":"15.0","hum":"69","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"284","wdire":"WNW","pressurem":"1019.9", "pressurei":"30.12","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "8:25 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "20",
+		"min": "25",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "1:25 AM GMT on January 01, 2014",
+		"year": "2014",
+		"mon": "01",
+		"mday": "01",
+		"hour": "01",
+		"min": "25",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.3", "tempi":"24.3","dewptm":"-9.4", "dewpti":"15.0","hum":"68","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"282","wdire":"WNW","pressurem":"1020.5", "pressurei":"30.14","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "8:40 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "20",
+		"min": "40",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "1:40 AM GMT on January 01, 2014",
+		"year": "2014",
+		"mon": "01",
+		"mday": "01",
+		"hour": "01",
+		"min": "40",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.2", "tempi":"24.4","dewptm":"-8.9", "dewpti":"16.0","hum":"69","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"292","wdire":"WNW","pressurem":"1020.9", "pressurei":"30.15","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "8:55 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "20",
+		"min": "55",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "1:55 AM GMT on January 01, 2014",
+		"year": "2014",
+		"mon": "01",
+		"mday": "01",
+		"hour": "01",
+		"min": "55",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.1", "tempi":"24.6","dewptm":"-9.4", "dewpti":"15.0","hum":"67","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"294","wdire":"WNW","pressurem":"1020.5", "pressurei":"30.14","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "9:10 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "21",
+		"min": "10",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "2:10 AM GMT on January 01, 2014",
+		"year": "2014",
+		"mon": "01",
+		"mday": "01",
+		"hour": "02",
+		"min": "10",
+		"tzname": "UTC"
+		},
+		"tempm":"-3.9", "tempi":"24.9","dewptm":"-8.9", "dewpti":"16.0","hum":"69","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"294","wdire":"WNW","pressurem":"1020.5", "pressurei":"30.14","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "9:26 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "21",
+		"min": "26",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "2:26 AM GMT on January 01, 2014",
+		"year": "2014",
+		"mon": "01",
+		"mday": "01",
+		"hour": "02",
+		"min": "26",
+		"tzname": "UTC"
+		},
+		"tempm":"-3.9", "tempi":"24.9","dewptm":"-8.9", "dewpti":"16.0","hum":"68","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"285","wdire":"WNW","pressurem":"1020.9", "pressurei":"30.15","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "9:41 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "21",
+		"min": "41",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "2:41 AM GMT on January 01, 2014",
+		"year": "2014",
+		"mon": "01",
+		"mday": "01",
+		"hour": "02",
+		"min": "41",
+		"tzname": "UTC"
+		},
+		"tempm":"-3.9", "tempi":"24.9","dewptm":"-8.9", "dewpti":"16.0","hum":"70","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"304","wdire":"NW","pressurem":"1020.9", "pressurei":"30.15","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "9:56 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "21",
+		"min": "56",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "2:56 AM GMT on January 01, 2014",
+		"year": "2014",
+		"mon": "01",
+		"mday": "01",
+		"hour": "02",
+		"min": "56",
+		"tzname": "UTC"
+		},
+		"tempm":"-3.9", "tempi":"25.0","dewptm":"-8.3", "dewpti":"17.0","hum":"70","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"323","wdire":"NW","pressurem":"1021.2", "pressurei":"30.16","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "10:11 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "22",
+		"min": "11",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "3:11 AM GMT on January 01, 2014",
+		"year": "2014",
+		"mon": "01",
+		"mday": "01",
+		"hour": "03",
+		"min": "11",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.1", "tempi":"24.6","dewptm":"-8.9", "dewpti":"16.0","hum":"70","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"287","wdire":"WNW","pressurem":"1021.2", "pressurei":"30.16","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "10:26 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "22",
+		"min": "26",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "3:26 AM GMT on January 01, 2014",
+		"year": "2014",
+		"mon": "01",
+		"mday": "01",
+		"hour": "03",
+		"min": "26",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.3", "tempi":"24.3","dewptm":"-8.9", "dewpti":"16.0","hum":"71","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"293","wdire":"WNW","pressurem":"1021.2", "pressurei":"30.16","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "10:41 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "22",
+		"min": "41",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "3:41 AM GMT on January 01, 2014",
+		"year": "2014",
+		"mon": "01",
+		"mday": "01",
+		"hour": "03",
+		"min": "41",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.4", "tempi":"24.0","dewptm":"-8.9", "dewpti":"16.0","hum":"70","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"290","wdire":"WNW","pressurem":"1021.2", "pressurei":"30.16","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "10:56 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "22",
+		"min": "56",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "3:56 AM GMT on January 01, 2014",
+		"year": "2014",
+		"mon": "01",
+		"mday": "01",
+		"hour": "03",
+		"min": "56",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.4", "tempi":"24.0","dewptm":"-9.4", "dewpti":"15.0","hum":"69","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"296","wdire":"WNW","pressurem":"1021.6", "pressurei":"30.17","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "11:11 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "23",
+		"min": "11",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "4:11 AM GMT on January 01, 2014",
+		"year": "2014",
+		"mon": "01",
+		"mday": "01",
+		"hour": "04",
+		"min": "11",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.4", "tempi":"24.0","dewptm":"-10.0", "dewpti":"14.0","hum":"67","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"300","wdire":"WNW","pressurem":"1021.6", "pressurei":"30.17","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "11:26 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "23",
+		"min": "26",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "4:26 AM GMT on January 01, 2014",
+		"year": "2014",
+		"mon": "01",
+		"mday": "01",
+		"hour": "04",
+		"min": "26",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.6", "tempi":"23.8","dewptm":"-10.0", "dewpti":"14.0","hum":"67","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"286","wdire":"WNW","pressurem":"1021.9", "pressurei":"30.18","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "11:41 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "23",
+		"min": "41",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "4:41 AM GMT on January 01, 2014",
+		"year": "2014",
+		"mon": "01",
+		"mday": "01",
+		"hour": "04",
+		"min": "41",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.7", "tempi":"23.5","dewptm":"-10.0", "dewpti":"14.0","hum":"67","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"281","wdire":"West","pressurem":"1022.2", "pressurei":"30.19","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" },
+		{
+		"date": {
+		"pretty": "11:56 PM EST on December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "23",
+		"min": "56",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "4:56 AM GMT on January 01, 2014",
+		"year": "2014",
+		"mon": "01",
+		"mday": "01",
+		"hour": "04",
+		"min": "56",
+		"tzname": "UTC"
+		},
+		"tempm":"-4.8", "tempi":"23.4","dewptm":"-10.0", "dewpti":"14.0","hum":"66","wspdm":"0.0", "wspdi":"0.0","wgustm":"0.0", "wgusti":"0.0","wdird":"293","wdire":"WNW","pressurem":"1022.2", "pressurei":"30.19","windchillm":"-999", "windchilli":"-999","heatindexm":"-9999", "heatindexi":"-9999","precip_ratem":"0.0", "precip_ratei":"0.00","precip_totalm":"0.0", "precip_totali":"0.00","solarradiation":"","UV":"","softwaretype":"weatherlink.com 1.10" }
+		],
+		"dailysummary": [
+		{ "date": {
+		"pretty": "December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "00",
+		"min": "00",
+		"tzname": "America/New_York"
+		},
+		"utcdate": {
+		"pretty": "December 31, 2013",
+		"year": "2013",
+		"mon": "12",
+		"mday": "31",
+		"hour": "05",
+		"min": "00",
+		"tzname": "UTC"
+		},
+		"meantempm":"-6.4", "meantempi":"20.5","meandewptm":"-14.0", "meandewpti":"6.7","meanwindspdm":"0.0", "meanwindspdi":"0.0","meanwdire":"South","meanwdird":"","humidity":"56","maxtempm":"-3.5", "maxtempi":"25.7","mintempm":"-9.7", "mintempi":"14.6","maxhumidity":"71","minhumidity":"44","maxdewptm":"-8.3", "maxdewpti":"17.0","mindewptm":"-18.3", "mindewpti":"-1.0","maxpressurem":"1022.2", "maxpressurei":"30.19","minpressurem":"1017.5", "minpressurei":"30.05","maxwspdm":"0.0", "maxwspdi":"0.0","precipm":"0.0", "precipi":"0.00" }
+		]
+	}
+}
