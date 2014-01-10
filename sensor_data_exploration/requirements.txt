@@ -1,0 +1,4 @@
+# install all of our production dependencies only.
+# use pip install -r requirements/dev.txt to install the development dependencies
+# They are currently the same
+-r requirements/prod.txt
