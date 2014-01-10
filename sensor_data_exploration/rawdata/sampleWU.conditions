@@ -1,0 +1,94 @@
+# http://api.wunderground.com/api/2cbf77167bf2fe35/conditions/q/pws:KMABOSTO32.json
+# current conditions
+{
+  "response": {
+  	        "version":"0.1",
+		"termsofService":"http://www.wunderground.com/weather/api/d/terms.html",
+		"features": {
+		             "conditions": 1
+			    }
+	       },
+  "current_observation": {
+		"image": {
+			 "url":"http://icons-ak.wxug.com/graphics/wu2/logo_130x80.png",
+			 "title":"Weather Underground",
+			 "link":"http://www.wunderground.com"
+			 },
+		"display_location": {
+		         "full":"Boston, MA",
+			 "city":"Boston",
+			 "state":"MA",
+			 "state_name":"Massachusetts",
+			 "country":"US",
+			 "country_iso3166":"US",
+			 "zip":"02127",
+			 "magic":"1",
+			 "wmo":"99999",
+			 "latitude":"42.317165",
+			 "longitude":"-71.007622",
+			 "elevation":"5.00000000"
+			 },
+		"observation_location": {
+			"full":"Thompson Island, Boston, Massachusetts",
+			"city":"Thompson Island, Boston",
+			"state":"Massachusetts",
+			"country":"US",
+			"country_iso3166":"US",
+			"latitude":"42.317165",
+			"longitude":"-71.007622",
+			"elevation":"100 ft"
+			},
+		"estimated": {
+			},
+		"station_id":"KMABOSTO32",
+		"observation_time":"Last Updated on January 10, 11:52 AM EST",
+		"observation_time_rfc822":"Fri, 10 Jan 2014 11:52:09 -0500",
+		"observation_epoch":"1389372729",
+		"local_time_rfc822":"Fri, 10 Jan 2014 11:55:37 -0500",
+		"local_epoch":"1389372937",
+		"local_tz_short":"EST",
+		"local_tz_long":"America/New_York",
+		"local_tz_offset":"-0500",
+		"weather":"Haze",
+		"temperature_string":"29.5 F (-1.4 C)",
+		"temp_f":29.5,
+		"temp_c":-1.4,
+		"relative_humidity":"91%",
+		"wind_string":"Calm",
+		"wind_dir":"West",
+		"wind_degrees":268,
+		"wind_mph":0.0,
+		"wind_gust_mph":0,
+		"wind_kph":0,
+		"wind_gust_kph":0,
+		"pressure_mb":"1032",
+		"pressure_in":"30.48",
+		"pressure_trend":"-",
+		"dewpoint_string":"27 F (-3 C)",
+		"dewpoint_f":27,
+		"dewpoint_c":-3,
+		"heat_index_string":"NA",
+		"heat_index_f":"NA",
+		"heat_index_c":"NA",
+		"windchill_string":"30 F (-1 C)",
+		"windchill_f":"30",
+		"windchill_c":"-1",
+		"feelslike_string":"30 F (-1 C)",
+		"feelslike_f":"30",
+		"feelslike_c":"-1",
+		"visibility_mi":"6.0",
+		"visibility_km":"9.7",
+		"solarradiation":"--",
+		"UV":"1","precip_1hr_string":"0.00 in ( 0 mm)",
+		"precip_1hr_in":"0.00",
+		"precip_1hr_metric":" 0",
+		"precip_today_string":"0.00 in (0 mm)",
+		"precip_today_in":"0.00",
+		"precip_today_metric":"0",
+		"icon":"hazy",
+		"icon_url":"http://icons-ak.wxug.com/i/c/k/hazy.gif",
+		"forecast_url":"http://www.wunderground.com/US/MA/Boston.html",
+		"history_url":"http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID=KMABOSTO32",
+		"ob_url":"http://www.wunderground.com/cgi-bin/findweather/getForecast?query=42.317165,-71.007622"
+	}
+}
