@@ -1,0 +1,39 @@
+django-admin.py startproject my_project
+cd my_project
+./manage.py runserver
+^C
+git init
+
+django-admin.py startapp my_app
+# Edit my_project/settings to list my_app in INSTALLED_APPS
+# Update my_app/views.py
+# create my_app/urls.py
+# update my_project/urls.py, urlpatterns: url(r'^my_app/', import('my_app.urls')),
+
+Database commands
+
+
+Heroku
+------
+
+git remote add alt git@heroku.com:stark-caverns-7053.git
+git fetch alt master
+git merge origin/master
+
+git remote # To see the list of remotes that I have registered
+git push alt
+
+SQL
+---
+
+when you change the models, rm db.sqlite3
+./manage.py syncdb
+./manage.py sql APP_NAME
+
+When you repopulate the database
+./populate.py
+./manage.py syncdb
+./manage.py dbshell
+>> .schema
+>> select * from explorer_datasource
+>> .quit
