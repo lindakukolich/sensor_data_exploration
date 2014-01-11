@@ -14,7 +14,7 @@ class SensorID(models.Model):
     sensor_desc = models.TextField("Human readable description for use in the page describing this sensor", blank=True, null=True)
     #Might use a choices type for units.
     units = models.CharField(max_length = 64, blank=True, null=True)
-    kind = models.CharField("A human readable description of like Air Temp", max_length=64, blank=True, null=True)
+    kind = models.CharField("A human readable description of the kind of sensor, e.g.like Air Temp, Salinity", max_length=64, blank=True, null=True)
     type = models.CharField("float, string, mp3, jpg, etc.", max_length = 20)
     data_is_prediction_p = models.BooleanField()
     data_source = models.ForeignKey(DataSource)
