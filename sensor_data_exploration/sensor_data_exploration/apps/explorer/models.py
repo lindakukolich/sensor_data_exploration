@@ -8,19 +8,22 @@ class DataSource(models.Model):
     longitude = models.FloatField(blank=True, null=True)
     elevation = models.FloatField(blank=True, null=True)
 
-class SensorID(models.Model):
+class Sensor(models.Model):
     sensor_id = models.CharField("A short, unique description for use by programmers.", max_length = 64, unique=True)
     sensor_short_name = models.CharField("Human readable field that  we will use in drop down menus", max_length = 64, unique="true")
     sensor_desc = models.TextField("Human readable description for use in the page describing this sensor", blank=True, null=True)
     #Might use a choices type for units.
     units = models.CharField(max_length = 64, blank=True, null=True)
     kind = models.CharField("A human readable description of the kind of sensor, e.g.like Air Temp, Salinity", max_length=64, blank=True, null=True)
-    type = models.CharField("float, string, mp3, jpg, etc.", max_length = 20)
+    data_type = models.CharField("float, string, mp3, jpg, etc.", max_length = 20)
     data_is_prediction_p = models.BooleanField()
     data_source = models.ForeignKey(DataSource)
+    update_granularity_sec = models.FloatField("Check to be sure we don't add to the data table any more fequently then this. Setting the default to 60 sec", default = 60)
+    data_min = models.FloatField("If set then check that the data value is more then this",  blank=True, null=True) 
+    data_max = models.FloatField("If set then check that the data value is less then this",  blank=True, null=True) 
     
 class SensorData(models.Model):
     time_stamp = models.DateTimeField()
     num_value = models.FloatField(blank=True, null=True)
     string_value = models.TextField(blank=True, null=True)
-    sensor_id = models.ForeignKey(SensorID)
+    sensor_id = models.ForeignKey(Sensor)
