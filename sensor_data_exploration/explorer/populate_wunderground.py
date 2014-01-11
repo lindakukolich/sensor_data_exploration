@@ -1,5 +1,5 @@
 import os
-
+from explorer.models import DataSource
 def populate():
     wu_data_source = add_data_source(
         name = "Weather Underground Thompson Island",
@@ -14,6 +14,6 @@ def add_data_source(name, access_info,latitude,longitude,elevation):
 # Start execution here!
 if __name__ == '__main__':
     print "Starting Weather Underground population script..."
-#    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
-    from apps.explorer.models import DataSource
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sensor_data_exploration.settings')
+    from explorer.models import DataSource
     populate()

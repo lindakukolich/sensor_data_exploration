@@ -42,7 +42,7 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
-    'sensor_data_exploration.apps.explorer',
+    'explorer',
 )
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -68,7 +68,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+     }
 }
 
 # Internationalization

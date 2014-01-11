@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from sensor_data_exploration.apps.explorer import views
+import explorer.views as views
 
 urlpatterns = patterns('',
         url(r'^$', views.index, name='index'))
