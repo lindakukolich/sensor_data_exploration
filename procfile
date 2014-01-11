@@ -1,0 +1,1 @@
+web: gunicorn sensor_data_exploration.wsgi
