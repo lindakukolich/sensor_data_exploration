@@ -2,14 +2,14 @@ import os
 
 def populate():
     wu_data_source = add_data_source(
-        name = "Weather Underground Thompson Island",
+        datasource_id = "Weather Underground Thompson Island",
         access_info = "",
         latitude = None,
         longitude = None,
         elevation = None)
 
-def add_data_source(name, access_info,latitude,longitude,elevation):
-        d = DataSource.objects.get_or_create(name=name, access_info=access_info, latitude=latitude, longitude=longitude, elevation=elevation)[0]
+def add_data_source(datasource_id, access_info,latitude,longitude,elevation):
+        d = DataSource.objects.get_or_create(datasource_id=datasource_id, access_info=access_info, latitude=latitude, longitude=longitude, elevation=elevation)[0]
         return d
 
 # Start execution here!

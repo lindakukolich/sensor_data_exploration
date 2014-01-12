@@ -1,7 +1,8 @@
 from django.db import models
 
 class DataSource(models.Model):
-    name = models.TextField("Human readable name for use in the page describing the sensor or other type of data source")
+    datasource_id = models.CharField("Unique short name for identifying this source",  max_length = 64, primary_key=True)
+    datasource_desc = models.TextField("Human readable name for use in the page describing the sensor or other type of data source", blank=True, null=True)
     access_info = models.TextField("For use by the scripts that load the data",blank=True)
     owner = models.TextField("who owns the equiptment eg. UMassBoston, NPS")
     latitude = models.FloatField(blank=True, null=True)
@@ -9,8 +10,8 @@ class DataSource(models.Model):
     elevation = models.FloatField(blank=True, null=True)
 
 class Sensor(models.Model):
-    sensor_id = models.CharField("A short, unique description for use by programmers.", max_length = 64, unique=True)
-    sensor_short_name = models.CharField("Human readable field that  we will use in drop down menus", max_length = 64, unique="true")
+    sensor_id = models.CharField("A short, unique description for use by programmers.", max_length = 64, primary_key=True)
+    sensor_short_name = models.CharField("Human readable field that  we will use in drop down menus", max_length = 64)
     sensor_desc = models.TextField("Human readable description for use in the page describing this sensor", blank=True, null=True)
     #Might use a choices type for units.
     units = models.CharField(max_length = 64, blank=True, null=True)
