@@ -2,7 +2,8 @@
 #Team: Girls & Buoys
 
 ###Milestone 1
- http://6.470.scripts.mit.edu/2014/contest/milestones
+ Assignment: http://6.470.scripts.mit.edu/2014/contest/milestones
+ Web View of this document with inline images: https://docs.google.com/document/d/1jDVu2GrVXLrxMKOSHJWBlOuMUS36qe8FqKL5eVxp0VU/pub
 
 ##Summary
 We are creating a site that allows Boston area residents, especially Boston Public School (BPS) children and teachers to learn about the environment at Thompson Island.  
@@ -30,7 +31,7 @@ Additional users include, Thompson Island Staff, UMass Boston researchers, visit
 ####Primary Use case: Supporting classroom instruction
 Before or after their class trip to Thompson Island, the teacher and students brainstorm questions about the environment at Thompson Island that align with their science class’ studies of Weather and Water.  They choose some questions that they think the sensors on Thompson Island might help them answer.  
 For this example we will use “What affects the algae levels in the salt pond?”  This graph from the hydrology sensor website gives some hints as to why this is an interesting question.
-
+![Example Image](https://docs.google.com/document/d/1jDVu2GrVXLrxMKOSHJWBlOuMUS36qe8FqKL5eVxp0VU/pubimage?id=1jDVu2GrVXLrxMKOSHJWBlOuMUS36qe8FqKL5eVxp0VU&image_id=1EGO50U0ocOtpoAcwrxCmb7jbDTmn2ZCTUyPHXw)
 Right now all you can see is last weeks data, there is not a UI to graph other time frames. There is also no way to graph the tides, the weather, the water temperature etc.
 Users will go to our site and select:
 * The date range
@@ -128,7 +129,9 @@ However, a serious issue is that when you change the location via the drop down 
 
 See image files.
 
-
+![Iteration 1](https://docs.google.com/document/d/1jDVu2GrVXLrxMKOSHJWBlOuMUS36qe8FqKL5eVxp0VU/pubimage?id=1jDVu2GrVXLrxMKOSHJWBlOuMUS36qe8FqKL5eVxp0VU&image_id=1dXMwLWyHFYY7aFWlzE2oj1G8yfrR1GFxmLDGQg)
+![Iteration 2](https://docs.google.com/document/d/1jDVu2GrVXLrxMKOSHJWBlOuMUS36qe8FqKL5eVxp0VU/pubimage?id=1jDVu2GrVXLrxMKOSHJWBlOuMUS36qe8FqKL5eVxp0VU&image_id=1ACJHnVPe95KN4r_wf8hUEcAbq87xVVn0oNReEQ)
+![Iteration 3](https://docs.google.com/document/d/1jDVu2GrVXLrxMKOSHJWBlOuMUS36qe8FqKL5eVxp0VU/pubimage?id=1jDVu2GrVXLrxMKOSHJWBlOuMUS36qe8FqKL5eVxp0VU&image_id=1mBlG8DBI95ZZMljrikK3XdSKj0pX62-zkIr5xA)
 
 
 
