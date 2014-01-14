@@ -10,8 +10,11 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
+PROJECT_DIR = os.path.dirname(__file__)
+# parent directory
+BASE_DIR = os.path.dirname(PROJECT_DIR + os.pardir)
+# Absolute path, useful for templates
+PROJECT_PATH = os.path.abspath(PROJECT_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -89,3 +92,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_PATH, 'static'),
+)
+
+# Templates
+TEMPLATE_DIRS = (
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashed, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_PATH, 'templates'),
+)
+
+# Media page, for insecure storage of user data like uploaded profile pictures
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media') # absolute path
