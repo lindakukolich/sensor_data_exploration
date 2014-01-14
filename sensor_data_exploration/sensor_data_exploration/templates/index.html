@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 
+<!-- Django. static -->
 {% load static %}
 
 <html>
   <head>
     <meta charset="utf-8"></meta>
     <title>Sensor Data Exploration Root</title>
+    <!-- static is defined in settings, a directory for static data files -->
     <link rel="stylesheet" type="text/css" media="screen" href="{%static "common.css" %}" />
   </head>
   <body>
@@ -20,10 +22,11 @@
     </nav>
     <div id="container">
       <h1> Sensor Data Exploration Says</h1>
+      <!-- boldmessage is defined in the index method in views.py -->
       hello world! <strong>{{ boldmessage}}</strong><br />
     </div>
     <div id="footer">
-      <div id="footer">Copyright 2014 © Girls &amp; Buoys</div>
+      <div id="footer">Copyright 2014 &copy; Girls &amp; Buoys</div>
     </div>
   </body>
 </html>

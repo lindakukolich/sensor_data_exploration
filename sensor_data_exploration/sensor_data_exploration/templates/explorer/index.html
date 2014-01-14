@@ -10,7 +10,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
-    <script src="{%static "highcharts-sample.js" %}"></script>
+    <script src="{%static "sensordata-highcharts.js" %}"></script>
 
 
 
@@ -30,10 +30,12 @@
       <h1> Sensor Data Exploration Says</h1>
 
       <div id="data">
-	There is XData - It is: <br>
-	{{ xdata }}<br>
-	Ydata is: <br>
+	There is XData - It is: <br />
+	{{ xdata }}<br />
+	Ydata is: <br />
 	{{ ydata }}
+	<p />In JSON format, this looks like: <br />
+	{{ jsonydata }}<br />
 <br>
 <h2>And now for a random chart that has nothing to do with this data!!</h2>
 <br>
@@ -42,7 +44,7 @@
 
     </div>
     <div id="footer">
-      <div id="footer">Copyright 2014 © Girls &amp; Buoys</div>
+      <div id="footer">Copyright 2014 &copy; Girls &amp; Buoys</div>
     </div>
   </body>
 </html>

@@ -11,7 +11,12 @@ django-admin.py startapp my_app
 # update my_project/urls.py, urlpatterns: url(r'^my_app/', import('my_app.urls')),
 
 Database commands
-
+./manage.py dbshell
+.databases
+.tables explorer
+.schema explorer_sensordata
+select time_stamp,num_value from explorer_sensordata where sensor_id_id='wu_ti_temp_f';
+SensorData.object.filter(sensor_id_id='wu_ti_temp_f')
 
 Heroku
 ------
@@ -23,17 +28,29 @@ git merge origin/master
 git remote # To see the list of remotes that I have registered
 git push alt
 
-SQL
----
 
-when you change the models, rm db.sqlite3
+tiadmin
+sheep4wheat^
+
+heroku run bash --app stark-caverns-7053
+# ?
+heroku run cd sensor_data_exploration; python manage.py syncdb
+
+Populating the SQL
+------------------
+
+rm db.sqlite3
 ./manage.py syncdb
-./manage.py sql APP_NAME
+# See what the database tables are
+./manage.py sql explorer
+# Now repopulate the tables
+./populate_wunderground_TI.py
+./addData_wunderground_TI.py --history -d 20140101 20140102
 
-When you repopulate the database
-./populate.py
 ./manage.py syncdb
 ./manage.py dbshell
 >> .schema
->> select * from explorer_datasource
+>> select * from explorer_datasource;
+>> select * from explorer_sensor;
+>> select * from explorer_sensordata;
 >> .quit
