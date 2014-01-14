@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html>
+  <head>
+    <meta charset="utf-8"></meta>
+    <title>Explorer</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="{%static "common.css" %}" />
+    <!--
+    <script src="{% static "js/jquery.js" %}"></script>
+    -->
+  </head>
+  <body>
+    <nav>
+      <ul>
+	<li class="logo">Girls&Buoys</li>
+	<li><a href="#">Map</a></li>
+	<li><a href="#">Graphs</B></li>
+	<li><a href="#">Data</a></li>
+	<li><a href="#">Prediction</a></li>
+      </ul>
+    </nav>
+    <div id="container">
+      <h1> Explorer Says</h1>
+      hello world! <strong>{{ boldmessage}}</strong><br />
+      <img src="{% static "binche.jpg" %}" alt="Picture of Binche lace, circa 1700" />
+    </div>
+    <div id="footer">
+      <a href="/explorer/about/">About</a><br />
+      <p />Copyright 2014 &copy Girls &amp; Buoys
+    </div>
+  </body>
+</html>

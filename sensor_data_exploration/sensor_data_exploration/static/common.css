@@ -1,0 +1,151 @@
+/* This was originally taken wholesale from the 6470 CSS homework
+   solution.  In the future it probably wants to be taken wholesale
+   from the CSS for the Thompson Island Homepage.  Real soon,
+   actually, so we don't waste time writing pages that use the wrong
+   CSS tags.
+
+   On the other hand, one of their CSS page has 405 rules in it.
+   Maybe for now we just want to match the IDs of the tags and do easy
+   stuff.  Or just refer to the style sheet they actually use, which
+   is one of the smart options.  There is a different style sheet for
+   the header than for the body and they all have wierd hashes for
+   names (courtesy the web tool used to generate them) We need to
+   figure out which ones go with what and how tightly we want to
+   follow their style (pretty tight?) */
+
+body { font-family: Helvetica,
+     sans-serif; margin: 0; padding: 0; }
+
+nav {
+    -webkit-box-shadow: 0 1px 14px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 1px 14px 0 rgba(0, 0, 0, 0.4);
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 300;
+    font-size: 20px;
+    height: 30px;
+    padding: 15px 0;
+    position: relative;
+    width: 100%;
+}
+
+nav a {
+    color: #777;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #aaa;
+}
+
+nav ul {
+    height: 20px;
+    list-style-type: none;
+    margin-top:-10px;
+    position: absolute;
+    top:50%;
+}
+
+nav li {
+    float: left;
+    padding-left:40px;
+}
+
+nav .logo {
+    color: rgb(204, 51, 63);
+}
+
+#container {
+    width: 960px;
+    margin: auto;
+}
+
+/* block full of divs */
+
+#main {
+    display: inline-block;
+    background-color: #FCFBEB;
+    width: 600px; /* why is this not 640px? */
+    padding: 20px;
+    overflow: hidden;
+    vertical-align: top;
+}
+
+/* styling divs */
+#main  div {
+    border: none;
+    color: white;
+    display:inline-block;
+    height: 150px;
+    margin: 15px;
+    padding: 0;
+    position: relative;
+    width: 150px;
+}
+
+.style1 {
+    background-color: rgb(239, 116, 111);
+}
+
+.style2 {
+    background-color: #ECF081;
+}
+
+.style3 {
+    background-color: rgb(179, 204, 87);
+}
+
+.style4 {
+    background-color: rgb(171, 62, 91);
+}
+
+.style5 {
+    background-color: rgb(255, 190, 64);
+}
+
+/* sidebar containing sign in*/
+#sidebar {
+    display: inline-block;;
+    background-color: #EBDBC5;
+    width: 260px; /* related to prev: why not 320px? */;
+    padding: 30px;
+    vertical-align: top;
+}
+
+/* Styles for the right hand registration panel*/
+
+.form_field {
+    margin-bottom: 10px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 300;
+}
+
+.form_field label {
+    display: block;
+    margin-bottom: 3px;
+}
+
+.text-field {
+    border: 1px #aaa solid;
+    border-radius: 5px;
+    height: 20px;
+    width: 200px;
+}
+
+#submit {
+    background-color: rgb(255, 190, 64);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 15px;
+    padding: 5px 10px;
+    height: 30px;
+}
+
+/*
+    look into border-box regarding previous comments
+    http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+*/
+
+#footer {
+    padding: 10px;
+}

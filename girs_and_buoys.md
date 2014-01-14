@@ -52,8 +52,9 @@ While viewing graphs users can:
 * Download graphs in image form
 * Download data in CSV format
 * Save a graph to “MyGraphs”
-* View statistics for each graph such as Min, Max, Mean, STD
+* View statistics for each graph such as Min, Max, Mean, StdDev
 * Make a prediction about the measurement for some time in the future (what will the average chlorophyll level be tomorrow?) and check how they did when the data is collected.
+
 ###Personas
 Middle School Student: Bobby is a 6th grade student at Orchard Gardens K8 school.
 
@@ -69,7 +70,7 @@ Non Boston High-Schooler doing a programming project:  Phyllis is a high school 
 
 5th grader at Orchard Gardens BPS Student: Sam is an active 5th grader, reading slightly below grade level, going to Thompson Island for the first time.
 
-10th grader from Orchard Gardens now attending Boston Latin: Samantha has been going to programs at Thompson Island since 5th grade. 
+9th grader from Orchard Gardens now attending Boston Latin: Samantha has been going to programs at Thompson Island since 5th grade. 
 
 ##Design Philosophy:
 
@@ -102,10 +103,10 @@ Things to like and emulate:
 
 Things to change:
 * We want one line per graph as that is easier to understand. (This is a recommendation from the client)
-* We want the buttons to add graphs, at least some of them, immediately visible not behind a Configure menu
+* We want the buttons to add graphs (at least some of them) to be immediately visible, not hidden behind a Configure menu
 * We want to easily change time frames
 * We need download buttons for graphs and data
-* We need what is shown in the graph to be easier to see/understand because we will have a lot more variety they WU does.  For instance a graph of wind and current will look a lot alike. We could have Temp from different devices, and water temp etc.
+* We need what is shown in the graph to be easier to see/understand because we will have a lot more variety of graphs than WU does.  For instance a graph of wind and current will look a lot alike. We could have Temp from different devices, and water temp etc.
 
 Another site working with this type of data is NERACOOS:
 
@@ -121,7 +122,7 @@ A simpler graph from NERACOOS:
 
 http://www.neracoos.org/datatools/climatologies_display
 
-In this graph, I like how the range of data is displayed as an area on the graph. It also has just a few options inviting exploration.
+In this graph, we like how the range of data is displayed as an area on the graph. It also has just a few options inviting exploration.
 
 However, a serious issue is that when you change the location via the drop down menu nothing happens for several seconds while it computes the new graph. Our site definitely needs to have a “Loading” icon pop up as soon as the user clicks a button.  
 
@@ -142,21 +143,28 @@ See image files.
 
 ####Design 1 (Black board)
 Pros:
+
 1. One chart, allowing easy comparison of data
 2. Data is all in one place
 3. Allows various ways to access the data (visual, numeric, downloads)
+
 Cons:
+
 1. One chart, confusing younger users about what each line is and what it means
 2. Date selectors hard to work with
 3. ComboBoxes to select data to display disorganized
 
 
 ####Design 2 (Balsamiq mockup)
+
 Pros:
+
 1. One graph per data stream
 2. Less confusing than previous mockup
 3. Cleaner design
+
 Cons:
+
 1. Drop downs hide info from naive users, making it hard for them to find the data sources they want
 2. Options are so limited that experienced users may not be able to quickly meet their goals
 3. Date selectors still hard to work with
@@ -164,10 +172,13 @@ Cons:
 
 ####Design 3 (White board)
 Pros:
+
 1. Graphing new data sources is now just one click.
 2. Starts with graphs shown for instant gratification
 3. Date range radio buttons simplify selection of time spans
+
 Cons:
+
 1.  May be very difficult to implement
 2. There is a limit to the number of data sources that can be displayed simultaneously with comprehension
 3. Use of greek letter Sigma will obscure the meaning 
@@ -175,7 +186,7 @@ Cons:
 ##Minimum Viable Product
 
 
-###1. the proper functioning of your application?
+###1. What is the proper functioning of your application?
 * Data from at least 2 sensor  sources (wunderground, nortek))
 * One month of data
 * Ability to create multiple line graphs on a page choosing data from these two sources
@@ -214,21 +225,27 @@ We feel this MVP would be valuable to Thompson Island and that nothing critical 
    * With different Y Axis
    * Provide statistics about correlation
 As you can see, there are many good and important ideas.  We know we will not get to all of them in this project so we will prioritize using agile methodologies. 
-###3. Are there any other aspects of your application that are reduced in your MVP? Examples including limited fake datasets, stylistic concerns, security concerns, etc.
-We will use real data from our first two data sources.  We may not completely match the Thompson Island style but we should be recognizably close in our MVP.  The MVP does not include login so we won’t have security concerns yet.  However, as we start to add login and personalization we will start to have security concerns about student PII making that a potentially expensive set of features to add.
-##Additional Questions:
-###Who is in your team? 
 
-Caroline Meeks MIT ‘85 carolineroos@alum.mit.edu
-Linda Kukolich MIT ‘86 lindakukolich@alum.mit.edu
-Jan Gunther MIT ‘85 jan@gunther.com
-Max Gunther RIT CE undergrad mdg1547@rit.edu
-Elizabeth Brooks MIT ‘84 lizbrooks@alum.mit.edu
+###3. Are there any other aspects of your application that are reduced in your MVP? Examples including limited fake datasets, stylistic concerns, security concerns, etc.
+
+We will use real data from our first two data sources.  We may not completely match the Thompson Island style but we should be recognizably close in our MVP.  The MVP does not include login so we won’t have security concerns yet.  However, as we start to add login and personalization we will start to have security concerns about student PII making that a potentially expensive set of features to add.
+
+##Additional Questions:
+
+###1. Who is in your team? 
+
++ Caroline Meeks MIT ‘85 carolineroos@alum.mit.edu
++ Linda Kukolich MIT ‘86 lindakukolich@alum.mit.edu
++ Jan Gunther MIT ‘85 jan@gunther.com
++ Max Gunther RIT CE undergrad mdg1547@rit.edu
++ Elizabeth Brooks MIT ‘84 lizbrooks@alum.mit.edu
 
 Note: We know we have too many people on our team. Only Caroline and Linda can commit for the whole time period. Also since we aren’t competing and we do have a real world use, we are working together.
-###Which of the themes does your application match best?
+
+###2. Which of the themes does your application match best?
 
 Our site fits both Urban Living, Exploration, and Transportation and Environmental Sustainability.  We allow Boston residents to explore Thompson Island, which is within the city limits of Boston and a mile from downtown giving them a greater awareness of their local natural environment. 
+
 ###3. What technology do you plan to use for your server-side programming (e.g. PHP, Ruby on Rails, etc)?
 Python and Django
 
