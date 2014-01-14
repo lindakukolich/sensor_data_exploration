@@ -7,6 +7,14 @@
     <meta charset="utf-8"></meta>
     <title>Sensor Data Exploration Root</title>
     <link rel="stylesheet" type="text/css" media="screen" href="{%static "common.css" %}" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script src="{%static "highcharts-sample.js" %}"></script>
+
+
+
+
   </head>
   <body>
     <nav>
@@ -18,7 +26,7 @@
 	<li><a href="#">Prediction</a></li>
       </ul>
     </nav>
-    <div id="container">
+    <div id="page">
       <h1> Sensor Data Exploration Says</h1>
 
       <div id="data">
@@ -26,8 +34,12 @@
 	{{ xdata }}<br>
 	Ydata is: <br>
 	{{ ydata }}
-
+<br>
+<h2>And now for a random chart that has nothing to do with this data!!</h2>
+<br>
       </div>
+      <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
     </div>
     <div id="footer">
       <div id="footer">Copyright 2014 © Girls &amp; Buoys</div>
