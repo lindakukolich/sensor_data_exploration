@@ -5,6 +5,7 @@
 <html>
   <head>
     <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sensor Data Exploration Root</title>
     <link rel="stylesheet" type="text/css" media="screen" href="{%static "common.css" %}" />
 
@@ -13,6 +14,16 @@
     </script>    
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+    
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
     <script src="{%static "sensordata-highcharts.js" %}"></script>
@@ -22,35 +33,56 @@
 
   </head>
   <body>
-    <nav>
-      <ul>
-	<li class="logo">Girls&Buoys</li>
-	<li><a href="#">Map</a></li>
-	<li><a href="#">Graphs</a></li>
-	<li><a href="#">Data</a></li>
-	<li><a href="#">Prediction</a></li>
-      </ul>
-    </nav>
-    <div id="page">
-      <h1> Sensor Data Exploration Says</h1>
-
-      <div id="data">
-	There is XData - It is: <br />
-	{{ xdata }}<br />
-	Ydata is: <br />
-	{{ jsonydata }}<br />
-	<br>
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Thomspon Island Sensor Data</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+	    <li><a href="#">Map</a></li>
+	    <li><a href="#">Graphs</a></li>
+	    <li><a href="#">Data</a></li>
+	    <li><a href="#">Prediction</a></li>            
+	    <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+	  </ul>
+        </div><!--/.nav-collapse -->
       </div>
-      <h2>And now for a random chart that has nothing to do with this data!!</h2>
-      <br>
+    </div>
+    <div class="container">
+      <div class="jumbotron">
+	<h1> Sensor Data Exploration Says</h1>
+	</div>
+	<div id="data">
+	  There is XData - It is: <br />
+	  {{ xdata }}<br />
+	  Ydata is: <br />
+	  {{ ydata }}
+	  <p />In JSON format, this looks like: <br />
+	  {{ jsonydata }}<br />
+	  <br>
+	  <h2>And now for a random chart that has nothing to do with this data!!</h2>
+	  <br>
+	</div>
       <div id="ourdata" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-      <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-    </div>
-    <div id="newchart">
-      Did you love that chart?  Want to see it twice? Click Here!
-    </div>
-    <div id="footer">
-      <div id="footer">Copyright 2014 &copy; Girls &amp; Buoys</div>
+	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+      </div>
+      <div id="newchart">
+	Did you love that chart?  Want to see it twice? Click Here!
+      </div>
+      <div id="footer">
+	<div id="footer">Copyright 2014 &copy; Girls &amp; Buoys</div>
+      </div>
     </div>
   </body>
 </html>
