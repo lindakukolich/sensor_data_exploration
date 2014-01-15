@@ -18,14 +18,16 @@ def add_datasource(datasource_id,owner,desc="",access_info="",latitude=None,
     return source
 
 def add_sensor(sensor_id, source, short_name, data_type, desc="",units="",kind=None,
-               prediction=False,update_granularity_sec=60,data_min=None,data_max=None):
+               is_number=False,prediction=False,update_granularity_sec=60,
+               data_min=None,data_max=None):
     sensor,created = Sensor.objects.get_or_create(sensor_id=sensor_id,
                                                   sensor_short_name=short_name,
                                                   sensor_desc=desc,
                                                   units=units,
                                                   kind=kind,
                                                   data_type=data_type,
-                                                  data_is_prediction_p=prediction,
+                                                  data_is_number=is_number,
+                                                  data_is_prediction=prediction,
                                                   data_source=source,
                                                   update_granularity_sec=update_granularity_sec,
                                                   data_min=data_min,
@@ -54,6 +56,7 @@ if __name__ == '__main__':
                      source = mysource,
                      short_name="Temperature F",
                      data_type = "float",
+                     is_number = True,
                      units = "degrees farenheit",
                      kind = "air temperature",
                  )
@@ -61,6 +64,7 @@ if __name__ == '__main__':
                      source = mysource,
                      short_name="Wind Speed",
                      data_type = "float",
+                     is_number = True,
                      units = "miles per hour",
                      kind = "wind speed",
                  )
@@ -73,6 +77,7 @@ if __name__ == '__main__':
                      source = mysource,
                      short_name="Precipitation 1hr",
                      data_type = "float",
+                     is_number = True,
                      units = "inches",
                  )
     s5 = add_sensor( sensor_id = "wu_ti_sunrise",

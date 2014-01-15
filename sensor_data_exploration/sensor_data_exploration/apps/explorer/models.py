@@ -20,7 +20,8 @@ class Sensor(models.Model):
     units = models.CharField(max_length = 64, blank=True, null=True)
     kind = models.CharField("A human readable description of the kind of sensor, e.g.like Air Temp, Salinity", max_length=64, blank=True, null=True)
     data_type = models.CharField("float, string, mp3, jpg, etc.", max_length = 20)
-    data_is_prediction_p = models.BooleanField()
+    data_is_number = models.BooleanField()
+    data_is_prediction = models.BooleanField()
     data_source = models.ForeignKey(DataSource)
     update_granularity_sec = models.FloatField("Check to be sure we don't add to the data table any more fequently then this. Setting the default to 60 sec", default = 60)
     data_min = models.FloatField("If set then check that the data value is more then this",  blank=True, null=True) 
@@ -33,11 +34,16 @@ class SensorData(models.Model):
     time_stamp = models.DateTimeField()
     num_value = models.FloatField(blank=True, null=True)
     string_value = models.TextField(blank=True, null=True)
+    value_is_number = models.BooleanField()
     sensor_id = models.ForeignKey(Sensor)
     
     def __unicode__(self):
         # We need to jump through sensor_id to know what to show for value
         # And after we have done that we need to do string comparisons to see if the field is a float or something else
-        output = self.time_stamp + ": " + sensor_id
+        output = self.time_stamp + ": " + self.sensor_id
+        if self.value_is_number:
+            output = output + " = " + self.num_value
+        else:
+            output = output + " = " + self.string_value
         return output
     

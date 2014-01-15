@@ -17,7 +17,7 @@ APIkey='2cbf77167bf2fe35'
 stationID='KMABOSTO32'
 
 def get_args():
-    parser = argparse.ArgumentParser(description='load historical data from wunderground into the database')
+    parser = argparse.ArgumentParser(description='Load historical data from wunderground into the database.')
     parser.add_argument('-d','--date',metavar='YYYYMMDD', nargs='+',
                         help='Retrieve and load data from this date.')
     parser.add_argument('--history', action='store_true',
@@ -80,12 +80,13 @@ def parse_dt(dt_string):
     dt=datetime(x.year,x.month,x.day,x.hour,x.minute,x.second, tz)
     return dt
 
-def load(sensor_id,time_stamp,num_value=None,string_value=None):
+def load(sensor_id,time_stamp,num_value=None,string_value=None,value_is_number=False):
     '''creates a sensorData entry (unless already exists)'''
     result=SensorData.objects.get_or_create(sensor_id=sensor_id,
                                             time_stamp=time_stamp,
                                             num_value=num_value,
-                                            string_value=string_value)
+                                            string_value=string_value,
+                                            value_is_number=value_is_number)
     return result
 
 
@@ -120,10 +121,11 @@ if __name__ == '__main__':
                 ts = assemble_dt(entry["date"])
                 for key in keys:
                     value = entry[ key[1] ]
-                    try:
+                    numeric = sensors[key[0]].data_is_number
+                    if numeric:
                         value = float(value)
-                        load(sensor_id=sensors[key[0]], time_stamp=ts, num_value=value)
-                    except ValueError:
+                        load(sensor_id=sensors[key[0]], time_stamp=ts, num_value=value, value_is_number=True)
+                    else:
                         load(sensor_id=sensors[key[0]], time_stamp=ts, string_value=value)
 
     # process current
