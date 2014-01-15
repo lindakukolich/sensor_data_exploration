@@ -43,3 +43,15 @@ def get_data():
     ydata = q.values_list('num_value', flat=True)
     context_dict = {'xdata': xdata, 'ydata': ydata}
     return context_dict
+
+
+def get_data_ajax(request):
+    print "starting get_data_ajax"
+    q = SensorData.objects.filter(
+        sensor_id_id='wu_ti_temp_f'
+    )
+    
+    xdata = q.values_list('time_stamp', flat=True)
+    ydata = q.values_list('num_value', flat=True)
+    context_dict = {'xdata': xdata, 'ydata': ydata}
+    return HttpResponse(context_dict)
