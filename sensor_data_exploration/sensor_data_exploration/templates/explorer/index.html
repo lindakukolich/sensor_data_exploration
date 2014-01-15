@@ -31,7 +31,7 @@
 
   </head>
   <body>
-<!-- Fixed navbar -->
+    <!-- Fixed navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -56,30 +56,30 @@
         </div><!--/.nav-collapse -->
       </div>
     </div>
-    
-    </nav>
-    <div class="jumbotron">
-      <h1> Sensor Data Exploration Says</h1>
+    <div class="container">
+      <div class="jumbotron">
+	<h1> Sensor Data Exploration Says</h1>
+	</div>
+	<div id="data">
+	  There is XData - It is: <br />
+	  {{ xdata }}<br />
+	  Ydata is: <br />
+	  {{ ydata }}
+	  <p />In JSON format, this looks like: <br />
+	  {{ jsonydata }}<br />
+	  <br>
+	  <h2>And now for a random chart that has nothing to do with this data!!</h2>
+	  <br>
+	</div>
+	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
-      <div id="data">
-	There is XData - It is: <br />
-	{{ xdata }}<br />
-	Ydata is: <br />
-	{{ ydata }}
-	<p />In JSON format, this looks like: <br />
-	{{ jsonydata }}<br />
-<br>
-<h2>And now for a random chart that has nothing to do with this data!!</h2>
-<br>
       </div>
-      <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-
-    </div>
-    <div id="newchart">
-      Did you love that chart?  Want to see it twice? Click Here!
-    </div>
-    <div id="footer">
-      <div id="footer">Copyright 2014 &copy; Girls &amp; Buoys</div>
+      <div id="newchart">
+	Did you love that chart?  Want to see it twice? Click Here!
+      </div>
+      <div id="footer">
+	<div id="footer">Copyright 2014 &copy; Girls &amp; Buoys</div>
+      </div>
     </div>
   </body>
 </html>
