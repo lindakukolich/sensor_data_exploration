@@ -9,19 +9,24 @@ $(function () {
     //    if (context['ydata'].length < n_points) {
     //	n_points = context['ydata'].length;
     //    }
-    var n_points = 10;
-    var json_ydata = JSON.parse(document.getElementById('jsonydata'));
+    var n_points = 0;
+    var json_ydata = jsonydata
     console.log("jsonydata =");
     console.log(json_ydata);
-    if (json_ydata.length() < n_points) {
-	n_points = json_ydata.length();
-    }
+    n_points = json_ydata.length;
+
+    console.log("n_points is ")
+    console.log(n_points)
     for (i = 0; i < n_points; i++) {
 	//	dataArray.append([ context['xdata'][i], context['ydata'][i] ]);
 	dataArray1.push( [Date.UTC(1970, 1, i), json_ydata[i]]);
 	dataArray2.push( [Date.UTC(1970, 1, i), i+5]);
 	dataArray3.push( [Date.UTC(1970, 1, i), i-5]);
+	console.log("i is ");
+	console.log(i);
     }
+    console.log("dataArray1=");
+    console.log(dataArray1);
 	
     $('#container').highcharts({
             chart: {
@@ -54,7 +59,7 @@ $(function () {
             },
             
             series: [{
-                name: 'Winter 2007-2008',
+                name: 'Maybe Our data?',
                 // Define the data points. All series have a dummy year
                 // of 1970/71 in order to be compared on the same x axis. Note
                 // that in JavaScript, months start at 0 for January, 1 for February etc.
