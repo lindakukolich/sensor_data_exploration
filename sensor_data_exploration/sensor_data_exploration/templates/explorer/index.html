@@ -10,7 +10,13 @@
     <link rel="stylesheet" type="text/css" media="screen" href="{%static "common.css" %}" />
 
     <script type="text/javascript"> 
-      var jsonydata = "{{jsonydata|safe}}"
+      var goodPlotData = "{{ goodPlotData|safe }}"
+      var jsonxdata = "{{ jsonxdata|safe }}"
+      var jsonydata = "{{ jsonydata|safe }}"
+      var plot_title= "{{ plot_title|safe }}"
+      var plot_subtitle = "{{plot_subtitle|safe}}"
+      var plot_yaxis_label = "{{ plot_yaxis_label|safe }}"
+      var plot_point_label = "{{ point_label|safe }}"
     </script>    
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -24,6 +30,7 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
+    <!-- javascript for generating plots -->
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
     <script src="{%static "sensordata-highcharts.js" %}"></script>
@@ -49,6 +56,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
 	    <li><a href="#">Map</a></li>
+	    <!-- Make it so the link doesn't work here -->
 	    <li><a href="#">Graphs</a></li>
 	    <li><a href="#">Data</a></li>
 	    <li><a href="#">Prediction</a></li>            
@@ -64,11 +72,16 @@
 	</div>
 	<div id="data">
 	  There is XData - It is: <br />
-	  {{ xdata }}<br />
+	  {{ jsonxdata }}<br />
 	  Ydata is: <br />
-	  {{ ydata }}
-	  <p />In JSON format, this looks like: <br />
-	  {{ jsonydata }}<br />
+	  {{ jsonydata }}
+	  <p />PLOT LABELS
+	  <ul>
+	    <li />TITLE: {{plot_title}}
+	    <li />SUBTITLE: {{plot_subtitle}}
+	    <li />YAXIS: {{plot_yaxis_label}}
+	    <li />UNITS: {{point_label}}
+	  </ul>
 	  <br>
 	  <h2>And now for a random chart that has nothing to do with this data!!</h2>
 	  <br>

@@ -50,6 +50,7 @@ rm db.sqlite3  (or ./manage.py sqlclear explorer & paste commands into dbshell)
 ./manage.py syncdb
 ./manage.py dbshell
 >> .schema
+>> .schema "explorer_datasource"
 >> select * from explorer_datasource;
 >> select * from explorer_sensor;
 >> select * from explorer_sensordata;

@@ -1,26 +1,28 @@
 $(function () {
-    var chart = sensordata_chart('Air Temperature', 'wu_ti_temp_f', 'degrees Farenheit');
+    /* Add a check of goodPlotDdata, so we can print an error message here if there is no plot */
+    var my_xdata = jQuery.parseJSON(jsonxdata);
+    console.log("xdata=", my_xdata);
+    var my_ydata = jQuery.parseJSON(jsonydata);
+    console.log("ydata=".my_ydata);
+    var chart = sensordata_chart(plot_title, plot_subtitle, plot_yaxis_label, plot_point_label, my_xdata, my_ydata);
 });
 
-function sensordata_chart(title, subtitle, units) {
+function sensordata_chart(title, subtitle, units, short_units, xdata, ydata) {
 
     var dataArray1 = [];
     
     var n_points = 0;
-    var json_ydata = jQuery.parseJSON(jsonydata);
-    console.log("jsonydata =");
-    console.log(json_ydata);
-    n_points = json_ydata.length;
+    n_points = ydata.length;
 
-    console.log("n_points is ");
-    console.log(n_points);
-    for (i = 0; i < n_points; i++) {
-	dataArray1.push( [Date.UTC(1970, 1, i), json_ydata[i]]);
+    if (n_points > xdata.length) {
+	n_points = xdata.length;
     }
-    console.log("dataArray1=");
-    console.log(dataArray1);
+
+    for (i = 0; i < n_points; i++) {
+	//	dataArray1.push( [Date.UTC(1970, 1, i), ydata[i]]);
+	dataArray1.push( [xdata[i], ydata[i]]);
+    }
 	
-    //    $('#ourdata').highcharts({
     var chart = new Highcharts.Chart({
             chart: {
 		renderTo: 'ourdata',
@@ -34,10 +36,9 @@ function sensordata_chart(title, subtitle, units) {
             },
             xAxis: {
                 type: 'datetime',
-                dateTimeLabelFormats: { // don't display the dummy year
-                    month: '%e. %b',
-                    year: '%b'
-                }
+		title: {
+		    text: "Date and Time"
+		},
             },
             yAxis: {
                 title: {
@@ -48,15 +49,12 @@ function sensordata_chart(title, subtitle, units) {
             tooltip: {
                 formatter: function() {
 		    return '<b>'+ this.series.name +'</b><br/>'+
-		    Highcharts.dateFormat('%e. %b', this.x) +': '+ this.y +' m';
+		    Highcharts.dateFormat('%Y/%m/%d %H:%M', this.x) +': '+ this.y +' ' + short_units;
                 }
             },
             
             series: [{
-		name: 'Maybe Our data?',
-		// Define the data points. All series have a dummy year
-		// of 1970/71 in order to be compared on the same x axis. Note
-		// that in JavaScript, months start at 0 for January, 1 for February etc.
+		name: title,
 		data: dataArray1
 	    }]
         });
