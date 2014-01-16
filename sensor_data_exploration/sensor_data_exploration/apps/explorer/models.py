@@ -14,10 +14,11 @@ class DataSource(models.Model):
 
 class Sensor(models.Model):
     sensor_id = models.CharField("A short, unique description for use by programmers.", max_length = 64, primary_key=True)
-    sensor_short_name = models.CharField("Human readable field that  we will use in drop down menus", max_length = 64)
+    sensor_short_name = models.CharField("Human readable field that we will use in drop down menus", max_length = 64)
     sensor_desc = models.TextField("Human readable description for use in the page describing this sensor", blank=True, null=True)
     #Might use a choices type for units.
-    units = models.CharField(max_length = 64, blank=True, null=True)
+    units_long = models.CharField("unit name for labeling axis of graph - e.g. percent, miles per hour",max_length = 64, blank=True, null=True)
+    units_short = models.CharField("unit to follow numbers - e.g. %, mph",max_length = 20, blank=True, null=True)
     kind = models.CharField("A human readable description of the kind of sensor, e.g.like Air Temp, Salinity", max_length=64, blank=True, null=True)
     data_type = models.CharField("float, string, mp3, jpg, etc.", max_length = 20)
     data_is_number = models.BooleanField()
