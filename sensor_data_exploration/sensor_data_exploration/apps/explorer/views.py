@@ -1,8 +1,10 @@
+import json
 from django.shortcuts import render
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from sensor_data_exploration.apps.explorer.models import *
 from django.utils import simplejson
+from django.core.serializers.json import DjangoJSONEncoder
 
 # Create your views here.
 
@@ -51,7 +53,11 @@ def get_data_ajax(request):
         sensor_id_id='wu_ti_temp_f'
     )
     
-    xdata = q.values_list('time_stamp', flat=True)
-    ydata = q.values_list('num_value', flat=True)
-    context_dict = {'xdata': xdata, 'ydata': ydata}
-    return HttpResponse(context_dict)
+    xdata = list(q.values_list('time_stamp', flat=True))
+    ydata = list(q.values_list('num_value', flat=True))
+    data_to_dump = {'xdata': xdata, 'ydata': ydata}
+    print "data_to_dump"
+    print data_to_dump
+    json_data = json.dumps(data_to_dump, cls=DjangoJSONEncoder)
+    print json_data
+    return HttpResponse(json_data, mimetype='application/json')
