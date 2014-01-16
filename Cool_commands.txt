@@ -43,9 +43,9 @@ rm db.sqlite3  (or ./manage.py sqlclear explorer & paste commands into dbshell)
 ./manage.py syncdb
 # See what the database tables are
 ./manage.py sql explorer
-# Now repopulate the tables
-./populate_wunderground_TI.py
-./addData_wunderground_TI.py --history -d 20140101 20140102
+# Now repopulate the tables - new names
+./wunderground_TI_setup.py   [./populate_wunderground_TI.py]
+./wunderground_TI_addData.py --history -d 20140101 20140102  [./addData_wunderground_TI.py]
 
 ./manage.py syncdb
 ./manage.py dbshell
