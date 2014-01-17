@@ -43,9 +43,13 @@ rm db.sqlite3  (or ./manage.py sqlclear explorer & paste commands into dbshell)
 ./manage.py syncdb
 # See what the database tables are
 ./manage.py sql explorer
-# Now repopulate the tables
-./populate_wunderground_TI.py
-./addData_wunderground_TI.py --history -d 20140101 20140102
+# Now repopulate the tables - new names
+./wunderground_TI_setup.py   [was ./populate_wunderground_TI.py]
+./wunderground_TI_addData.py --history -d 20140101 20140102  [was ./addData_wunderground_TI.py]
+
+# more data to populate:
+./beacon_buoy_setup.py
+./beacon_buoy_addData.py --history   Note, this takes 2-3 minutes to run! (26000+ entries)
 
 ./manage.py syncdb
 ./manage.py dbshell

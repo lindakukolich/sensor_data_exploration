@@ -91,8 +91,8 @@ def load(sensor_id,time_stamp,num_value=None,string_value=None,value_is_number=F
 
 
 if __name__ == '__main__':
-    if debug: print "Starting Weather Underground population script..."
     args = get_args()
+    if debug: print "Starting Weather Underground population script..."
 
     # environment setup ---------------------------------------------------
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sensor_data_exploration.settings')
