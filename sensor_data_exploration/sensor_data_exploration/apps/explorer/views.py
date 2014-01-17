@@ -66,10 +66,8 @@ def get_data(plot_sensor_id):
     # Pick out Sensor fields to display as part of the plot
     context_dict['plot_title'] = plot_sensor['sensor_short_name']
     context_dict['plot_subtitle'] = plot_sensor['data_source_id']
-    # This wants to be units_long
-    context_dict['plot_yaxis_label'] = plot_sensor['units']
-    # This wants to be units_short
-    context_dict['point_label'] = plot_sensor['units']
+    context_dict['plot_yaxis_label'] = plot_sensor['units_long']
+    context_dict['point_label'] = plot_sensor['units_short']
     
     # Retrieve the actual data for the plot
     q = SensorData.objects.filter(
