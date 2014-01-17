@@ -96,6 +96,11 @@
 
     <div id="ajax button">
       <button id="ajax-graph" data-sensorid="wu_ti_temp_f" type="button" class="btn btn-default">Use AJAX!</button>
+      {% if sensor_list %}
+      {% for sensor in sensor_list %}
+      <button id="ajax-graph" data-sensorid="{{sensor}}" type="button" class="btn btn-default">{{sensor}}</button>
+      {% endfor %}
+      {% endif %}
     </div>
 
       <div id="footer">

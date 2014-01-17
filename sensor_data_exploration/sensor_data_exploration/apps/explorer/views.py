@@ -24,8 +24,13 @@ def index(request):
     context_dict['jsonydata'] = simplejson.dumps(context_dict['ydata'])
     context_dict['jsonxdata'] = simplejson.dumps(context_dict['xdata'])
 
+    #Get the available sensors to print out buttons for them
+    context_dict['sensor_list'] = get_sensors()
+
+
     print "context_dict"
     print context_dict
+
 
     # Return a rendered response to send to the client.
     # We make use of the shortcut function to make our lives easier.
@@ -162,3 +167,8 @@ def get_data_ajax(request):
     json_data = json.dumps(data_to_dump, cls=DjangoJSONEncoder)
     print json_data
     return HttpResponse(json_data, mimetype='application/json')
+
+def get_sensors():
+    #Evnetually put more logic in here about what we actually want to show and maybe make categories of differnt types of sensors
+    sensors = SensorData.objects.values_list('sensor_id').distinct()
+    return sensors
