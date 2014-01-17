@@ -2,9 +2,13 @@ $(function () {
     $( "#newchart" ).click(function() {
 	sample_highchart('newchart')
     });
-    $('.ajax-graph').click(function(){
+    $('.btn-default').click(function(){
 	var sensorid;
 	sensorid = $(this).attr('data-sensorid');
+	$(this).addClass('btn-primary');
+	$(this).removeClass('btn-default');
+
+
 	d=document.createElement('div');
 	d.setAttribute("id", sensorid);
 	$('#charts').append(d)
@@ -12,9 +16,6 @@ $(function () {
 	console.log(sensorid)
 	$.getJSON('/explorer/get_data_ajax/',{'sensorid': sensorid})
 	    .done(function(data) {
-		console.log('the get_data_ajax ran and the data is:');
-		console.log(data);
-		console.log(data.ydata);
 		var chart = sensordata_chart(data.plot_title, data.plot_subtitle, data.plot_yaxis_label, data.plot_point_label, data.xdata, data.ydata, sensorid);
 		
 	    })
