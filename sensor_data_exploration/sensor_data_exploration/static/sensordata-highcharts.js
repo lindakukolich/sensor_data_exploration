@@ -4,13 +4,13 @@ $(function () {
     console.log("xdata=", my_xdata);
     var my_ydata = jQuery.parseJSON(jsonydata);
     console.log("ydata=".my_ydata);
-    var chart = sensordata_chart(plot_title, plot_subtitle, plot_yaxis_label, plot_point_label, my_xdata, my_ydata);
+    var chart = sensordata_chart(plot_title, plot_subtitle, plot_yaxis_label, plot_point_label, my_xdata, my_ydata, 'ourdata');
 });
 
-function sensordata_chart(title, subtitle, units, short_units, xdata, ydata) {
+function sensordata_chart(title, subtitle, units, short_units, xdata, ydata, rendor_to) {
 
     var dataArray1 = [];
-    
+    console.log("ydata=", ydata);
     var n_points = 0;
     n_points = ydata.length;
 
@@ -25,7 +25,7 @@ function sensordata_chart(title, subtitle, units, short_units, xdata, ydata) {
 	
     var chart = new Highcharts.Chart({
             chart: {
-		renderTo: 'ourdata',
+		renderTo: rendor_to,
                 type: 'spline'
             },
             title: {
