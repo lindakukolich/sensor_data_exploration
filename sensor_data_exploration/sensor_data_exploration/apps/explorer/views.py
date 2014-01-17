@@ -170,5 +170,6 @@ def get_data_ajax(request):
 
 def get_sensors():
     #Evnetually put more logic in here about what we actually want to show and maybe make categories of differnt types of sensors
-    sensors = SensorData.objects.values_list('sensor_id').distinct()
+    sensors = SensorData.objects.values_list('sensor_id', flat=True).distinct()
+    sensor = list(sensors)
     return sensors
