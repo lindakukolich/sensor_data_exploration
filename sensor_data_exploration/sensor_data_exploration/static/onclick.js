@@ -2,7 +2,7 @@ $(function () {
     $( "#newchart" ).click(function() {
 	sample_highchart('newchart')
     });
-    $('#ajax-graph').click(function(){
+    $('.ajax-graph').click(function(){
 	var sensorid;
 	sensorid = $(this).attr('data-sensorid');
 	console.log('about to try get_data_ajax and sensorid is:');
