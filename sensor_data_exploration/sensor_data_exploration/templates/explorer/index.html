@@ -11,13 +11,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="{%static "explorer.css" %}" />
 
     <script type="text/javascript"> 
-      var goodPlotData = "{{ goodPlotData|safe }}"
-      var jsonxdata = "{{ jsonxdata|safe }}"
-      var jsonydata = "{{ jsonydata|safe }}"
-      var plot_title= "{{ plot_title|safe }}"
-      var plot_subtitle = "{{plot_subtitle|safe}}"
-      var plot_yaxis_label = "{{ plot_yaxis_label|safe }}"
-      var plot_point_label = "{{ point_label|safe }}"
+      var plotdata = '{{ plotdata|safe }}';
     </script>    
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -69,21 +63,21 @@
     <div class="container">
       <div class="jumbotron">
 	<h1> Data from Thompson Island</h1>
-	</div>
+      </div>
       <div id="ourdata">
       </div>
       <div id="charts">
-	<---- Charts are added here with javascript -->
+	<!-- Charts are added here with javascript -->
       </div>
 
-    <div id="ajax-graph" align="center" class="navbar-fixed-bottom">
+      <div id="ajax-graph" align="center" class="navbar-fixed-bottom">
 
-      {% if sensor_list %}
-         {% for sensor in sensor_list %}
-           <button data-sensorid="{{sensor}}" type="button" class="btn btn-default">{{sensor}}</button>
-	 {% endfor %}
-      {% endif %}
-    </div>
+	{% if sensor_list %}
+          {% for sensor in sensor_list %}
+            <button data-sensorid="{{sensor}}" type="button" class="btn btn-default">{{sensor}}</button>
+	  {% endfor %}
+	{% endif %}
+      </div>
 
       <div id="footer">
 	<div id="footer">Copyright 2014 &copy; Girls &amp; Buoys</div>

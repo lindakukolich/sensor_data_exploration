@@ -1,7 +1,11 @@
 $(function () {
+    /* If the click came from the "Use AJAX" button, make a copy of
+       the sample graph from HighCharts */
     $( "#newchart" ).click(function() {
 	sample_highchart('newchart')
     });
+    /* If the click came from one of the "sensor" buttons, make a graph
+       for that sensor */
     $('.btn-default').click(function(){
 	var sensorid;
 	sensorid = $(this).attr('data-sensorid');
@@ -22,8 +26,17 @@ $(function () {
 	    $('body').animate({"scrollTop": $('#charts')[0].scrollHeight}, "slow");
 	    $.getJSON('/explorer/get_data_ajax/',{'sensorid': sensorid})
 		.done(function(data) {
+<<<<<<< HEAD
 		    var chart = sensordata_chart(data.plot_title, data.plot_subtitle, data.plot_yaxis_label, data.plot_point_label, data.xdata, data.ydata, sensorid);
 		    
+=======
+		    if (data.goodPlotData) {
+			var chart = sensordata_chart(data.plot_title, data.plot_subtitle, data.plot_yaxis_label, data.plot_point_label, data.xdata, data.ydata, sensorid);
+		    } else {
+			d.innerHTML = "<br /><b>" + data.plotError +"</b><br />";
+		    }
+		
+>>>>>>> df485da8bf47fabaff74823d3e2e7ea6c13fbbf4
 		})
 		.fail(function(jqxhr, textStatus, error) {
 		    var err = textStatus + ", " + error;
@@ -31,5 +44,4 @@ $(function () {
 		});
 	};
 	});
-
 });
