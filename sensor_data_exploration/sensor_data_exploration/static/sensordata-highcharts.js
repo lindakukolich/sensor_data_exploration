@@ -18,8 +18,6 @@ function sensordata_chart(title, subtitle, units, short_units, xdata, ydata, ren
             chart: {
 		renderTo: rendor_to,
                 type: 'spline',
-		height: 250,
-		zoomType: 'x'
             },
             title: {
                 text: title
@@ -30,7 +28,7 @@ function sensordata_chart(title, subtitle, units, short_units, xdata, ydata, ren
             xAxis: {
                 type: 'datetime',
 		title: {
-		    text: "Date and Time"
+		    text: null
 		},
             },
             yAxis: {
