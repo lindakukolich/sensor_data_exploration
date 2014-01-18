@@ -44,8 +44,11 @@ rm db.sqlite3  (or ./manage.py sqlclear explorer & paste commands into dbshell)
 # See what the database tables are
 ./manage.py sql explorer
 # Now repopulate the tables - new names
-./wunderground_TI_setup.py   [was ./populate_wunderground_TI.py]
-./wunderground_TI_addData.py --history -d 20140101 20140102  [was ./addData_wunderground_TI.py]
+./wunderground_TI_setup.py
+# You need to call this over and over again to get all the days in the range
+./wunderground_TI_addData.py --history -d 20131206
+# 20131207, 20131208, ...
+./wunderground_TI_addData.py --history -d 20131205
 
 # more data to populate:
 ./beacon_buoy_setup.py
@@ -59,3 +62,23 @@ rm db.sqlite3  (or ./manage.py sqlclear explorer & paste commands into dbshell)
 >> select * from explorer_sensor;
 >> select * from explorer_sensordata;
 >> .quit
+
+SQL COMMANDS
+------------
+Things that have taken too long to figure out...
+The Double-Quote on the column name is really important. No, I don't know why.
+
+Count all the records
+See the records where I pulled the wrong ones and want to delete them
+
+  select * from explorer_sensordata where "time_stamp" < '2013-11-30'
+
+Count the records I don't want
+
+  select count(*) from explorer_sensordata where "time_stamp" < '2013-11-30'
+
+Delete the records I don't want
+
+  delete from explorer_sensordata where "time_stamp" < '2013-11-30'
+
+Now you can count all the records again and see that the number is right

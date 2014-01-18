@@ -68,7 +68,8 @@ def get_data_ajax(request):
     # Retrieve the actual data for the plot
     q = SensorData.objects.filter(
         sensor_id_id=plot_sensor_id
-        )
+        ).filter(time_stamp__range=["2014-01-01 08:00","2014-01-04 08:00"]).order_by('time_stamp')
+    
     
     # Pick out the times of the observations, and convert them to JavaScript
     # timestamps, which are in milliseconds
