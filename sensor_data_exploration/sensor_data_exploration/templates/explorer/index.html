@@ -97,9 +97,9 @@
     <div id="ajax-graph">
 
       {% if sensor_list %}
-      {% for sensor in sensor_list %}
-      <button data-sensorid="{{sensor}}" type="button" class="btn btn-default">{{sensor}}</button>
-      {% endfor %}
+         {% for sensor in sensor_list %}
+           <button data-sensorid="{{sensor}}" type="button" class="btn btn-default">{{sensor}}</button>
+	 {% endfor %}
       {% endif %}
     </div>
 
