@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sensor Data Exploration Root</title>
     <link rel="stylesheet" type="text/css" media="screen" href="{%static "common.css" %}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{%static "explorer.css" %}" />
 
     <script type="text/javascript"> 
       var goodPlotData = "{{ goodPlotData|safe }}"
@@ -67,7 +68,7 @@
     </div>
     <div class="container">
       <div class="jumbotron">
-	<h1> Data from Thomspon Island</h1>
+	<h1> Data from Thompson Island</h1>
 	</div>
       <div id="ourdata">
       </div>
@@ -75,7 +76,7 @@
 	<---- Charts are added here with javascript -->
       </div>
 
-    <div id="ajax-graph">
+    <div id="ajax-graph" align="center" class="navbar-fixed-bottom">
 
       {% if sensor_list %}
          {% for sensor in sensor_list %}
