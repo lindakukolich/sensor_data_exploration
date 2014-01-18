@@ -10,13 +10,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="{%static "common.css" %}" />
 
     <script type="text/javascript"> 
-      var goodPlotData = "{{ goodPlotData|safe }}"
-      var jsonxdata = "{{ jsonxdata|safe }}"
-      var jsonydata = "{{ jsonydata|safe }}"
-      var plot_title= "{{ plot_title|safe }}"
-      var plot_subtitle = "{{plot_subtitle|safe}}"
-      var plot_yaxis_label = "{{ plot_yaxis_label|safe }}"
-      var plot_point_label = "{{ point_label|safe }}"
+      var plotdata = '{{ plotdata|safe }}';
     </script>    
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -71,22 +65,10 @@
 	<h1> Sensor Data Exploration Says</h1>
 	</div>
 	<div id="data">
-	  There is XData - It is: <br />
-	  {{ jsonxdata }}<br />
-	  Ydata is: <br />
-	  {{ jsonydata }}
-	  <p />PLOT LABELS
-	  <ul>
-	    <li />TITLE: {{plot_title}}
-	    <li />SUBTITLE: {{plot_subtitle}}
-	    <li />YAXIS: {{plot_yaxis_label}}
-	    <li />UNITS: {{point_label}}
-	  </ul>
-	  <br>
 	  <h2>And now for a random chart that has nothing to do with this data!!</h2>
 	  <br>
 	</div>
-      <div id="ourdata" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+	<div id="ourdata" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
       </div>
@@ -97,9 +79,9 @@
     <div id="ajax-graph">
 
       {% if sensor_list %}
-      {% for sensor in sensor_list %}
-      <button data-sensorid="{{sensor}}" type="button" class="btn btn-default">{{sensor}}</button>
-      {% endfor %}
+        {% for sensor in sensor_list %}
+          <button data-sensorid="{{sensor}}" type="button" class="btn btn-default">{{sensor}}</button>
+        {% endfor %}
       {% endif %}
     </div>
 

@@ -18,19 +18,14 @@ def index(request):
 
     # Construct a dictionary to pass to the template engine as its context.
     # Note the key boldmessage is the same as {{ boldmessage }} in the template!
-    context_dict = get_data('wu_ti_temp_f')
+    plot_data = get_data('wu_ti_temp_f')
     # We only need to convert the complicated things to JSON.
     # The strings for things like titles are fine the way they are
-    context_dict['jsonydata'] = simplejson.dumps(context_dict['ydata'])
-    context_dict['jsonxdata'] = simplejson.dumps(context_dict['xdata'])
+    context_dict = {}
+    context_dict['plotdata'] = simplejson.dumps(plot_data)
 
     #Get the available sensors to print out buttons for them
     context_dict['sensor_list'] = get_sensors()
-
-
-    print "context_dict"
-    print context_dict
-
 
     # Return a rendered response to send to the client.
     # We make use of the shortcut function to make our lives easier.
@@ -53,14 +48,14 @@ def get_data(plot_sensor_id):
     # Improve feedback when the sensor_id is bad
     # Improve feedback when there is no plot data
 
-    context_dict = {}
-    context_dict['goodPlotData'] = True
+    plot_data = {}
+    plot_data['goodPlotData'] = True
 
     # Make sure we have a sensor_id that is in the sensor table
     if Sensor.objects.filter(sensor_id=plot_sensor_id) == False:
-        context_dict['goodPlotData'] = False
-        print "get_data: Error retrieving plot data for sensor " + plot_sendor_id + "No such sensor in explorer_sensor table"
-        return context_dict
+        plot_data['goodPlotData'] = False
+        plot_data['plotError'] = "Error retrieving plot data for sensor " + plot_sensor_id + ". No such sensor."
+        return plot_data
 
     # We know there is at least one sensor that matches our given id.
     # just take the first one.  That'll teach them to repeat values!
@@ -70,10 +65,10 @@ def get_data(plot_sensor_id):
     plot_sensor = s.values()[0]
     print plot_sensor
     # Pick out Sensor fields to display as part of the plot
-    context_dict['plot_title'] = plot_sensor['sensor_short_name']
-    context_dict['plot_subtitle'] = plot_sensor['data_source_id']
-    context_dict['plot_yaxis_label'] = plot_sensor['units_long']
-    context_dict['point_label'] = plot_sensor['units_short']
+    plot_data['plot_title'] = plot_sensor['sensor_short_name']
+    plot_data['plot_subtitle'] = plot_sensor['data_source_id']
+    plot_data['plot_yaxis_label'] = plot_sensor['units_long']
+    plot_data['point_label'] = plot_sensor['units_short']
     
     # Retrieve the actual data for the plot
     q = SensorData.objects.filter(
@@ -86,40 +81,42 @@ def get_data(plot_sensor_id):
     xdata_datetime = q.values_list('time_stamp', flat=True)
     for i in range(0, len(xdata_datetime)):
         xdata.append(time.mktime(xdata_datetime[i].timetuple()) * 1000)
-    context_dict['xdata'] = list(xdata)
+    plot_data['xdata'] = list(xdata)
 
     # Pick out the values for each observation
     ydata = q.values_list('num_value', flat=True)
-    context_dict['ydata'] = list(ydata)
+    plot_data['ydata'] = list(ydata)
 
     # Make sure that we actually got some data, or this plot is no good
-    if len(context_dict['xdata']) == 0 or len(context_dict['ydata']) == 0:
-        print "get_data: Error retrieving plot data for plot " + plot_sensor_id + ": No data"
-        context_dict['goodPlotData'] = 0
+    if len(plot_data['xdata']) == 0 or len(plot_data['ydata']) == 0:
+        plot_data['plotError'] = "Error retrieving plot data for plot " + plot_sensor_id + ": No data" # for the time range {startdate} {enddate}
+        plot_data['goodPlotData'] = False
 
-    return context_dict
+    return plot_data
 
 
 def get_data_ajax(request):
+    '''Read data from the database, preparing to make a plot'''
+
     print "starting get_data_ajax with plot_sensor_id= "
     plot_sensor_id = request.GET.get('sensorid')
     print plot_sensor_id
-
-    '''Read data from the database, preparing to make a plot'''
 
     # TODO
     # add data/time selectors
     # Improve feedback when the sensor_id is bad
     # Improve feedback when there is no plot data
 
-    #CM: Q for Linda? Do we want to default to False then have the code change it to good when proven good?
-    goodPlotData = True
-
     # Make sure we have a sensor_id that is in the sensor table
     if Sensor.objects.filter(sensor_id=plot_sensor_id) == False:
-        goodPlotData = False
-        print "get_data: Error retrieving plot data for sensor " + plot_sendor_id + "No such sensor in explorer_sensor table"
-        return HttpResponse(json.dumps(goodPlotData), mimetype='application/json')
+        data_to_dump = {'goodPlotData': False,
+                        'plotError': "Error retrieving plot data for sensor " + plot_sensor_id + ": No such sensor",
+                        }
+        print "data_to_dump"
+        print data_to_dump
+        json_data = json.dumps(data_to_dump, cls=DjangoJSONEncoder)
+        print json_data
+        return HttpResponse(json_data, mimetype='application/json')
 
     # We know there is at least one sensor that matches our given id.
     # just take the first one.  That'll teach them to repeat values!
@@ -129,7 +126,6 @@ def get_data_ajax(request):
     plot_sensor = s.values()[0]
     print plot_sensor
     # Pick out Sensor fields to display as part of the plot
-
     
     # Retrieve the actual data for the plot
     q = SensorData.objects.filter(
@@ -151,9 +147,16 @@ def get_data_ajax(request):
     # Make sure that we actually got some data, or this plot is no good
     if len(xdata) == 0 or len(ydata) == 0:
         print "get_data: Error retrieving plot data for plot " + plot_sensor_id + ": No data"
-        goodPlotData = False
+        data_to_dump = {'goodPlotData': False,
+                        'plotError': "Error retrieving plot data for plot " + plot_sensor_id + ": No data for time range [starttime, endtime]",
+                        }
+        print "data_to_dump"
+        print data_to_dump
+        json_data = json.dumps(data_to_dump, cls=DjangoJSONEncoder)
+        print json_data
+        return HttpResponse(json_data, mimetype='application/json')
 
-    #should this be in an else?    
+    goodPlotData = True
     data_to_dump = {'xdata': xdata, 
                     'ydata': ydata,
                     'plot_title': plot_sensor['sensor_short_name'],
@@ -169,7 +172,9 @@ def get_data_ajax(request):
     return HttpResponse(json_data, mimetype='application/json')
 
 def get_sensors():
-    #Evnetually put more logic in here about what we actually want to show and maybe make categories of differnt types of sensors
+    '''Make a list of the available sensors'''
+    #Eventually put more logic in here about what we actually want to
+    #show and maybe make categories of different types of sensors
     sensors = SensorData.objects.values_list('sensor_id', flat=True).distinct()
     sensor = list(sensors)
     return sensors

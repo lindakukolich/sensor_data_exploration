@@ -1,11 +1,16 @@
 $(function () {
-    /* Add a check of goodPlotDdata, so we can print an error message here if there is no plot */
-    var my_xdata = jQuery.parseJSON(jsonxdata);
-    console.log("xdata=", my_xdata);
-    var my_ydata = jQuery.parseJSON(jsonydata);
-    console.log("ydata=".my_ydata);
-    var chart = sensordata_chart(plot_title, plot_subtitle, plot_yaxis_label, plot_point_label, my_xdata, my_ydata, 'ourdata');
-});
+    var my_plotdata = jQuery.parseJSON(plotdata);
+
+    var xdata = my_plotdata.xdata;
+    console.log("xdata=", xdata);
+    var ydata = my_plotdata.ydata;
+    console.log("ydata=", ydata);
+    var chart = sensordata_chart(my_plotdata.plot_title,
+				 my_plotdata.plot_subtitle,
+				 my_plotdata.plot_yaxis_label,
+				 my_plotdata.plot_point_label,
+				 xdata, ydata, 'ourdata');
+    });
 
 function sensordata_chart(title, subtitle, units, short_units, xdata, ydata, rendor_to) {
 

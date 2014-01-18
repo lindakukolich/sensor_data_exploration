@@ -10,7 +10,7 @@ class DataSource(models.Model):
     elevation = models.FloatField(blank=True, null=True)
     
     def __unicode__(self):
-        return self.datasource_id + " " + self.latitude + "N, " + self.longitude + "W, " + self.elevation + "elev"
+        return str(self.datasource_id) + " " + str(self.latitude) + "N, " + str(self.longitude) + "W, " + str(self.elevation) + "elev"
 
 class Sensor(models.Model):
     sensor_id = models.CharField("A short, unique description for use by programmers.", max_length = 64, primary_key=True)
@@ -29,7 +29,7 @@ class Sensor(models.Model):
     data_max = models.FloatField("If set then check that the data value is less then this",  blank=True, null=True) 
 
     def __unicode__(self):
-        return self.data_source + ":" + self.sensor_id + " (" + self.sensor_short_name + ") " + self.sensor_desc + "updated every " + self.update_granularity_sec + " seconds"
+        return str(self.data_source) + ":" + str(self.sensor_id) + " (" + self.sensor_short_name + ") " + self.sensor_desc + "updated every " + str(self.update_granularity_sec) + " seconds"
     
 class SensorData(models.Model):
     time_stamp = models.DateTimeField()
@@ -41,9 +41,9 @@ class SensorData(models.Model):
     def __unicode__(self):
         # We need to jump through sensor_id to know what to show for value
         # And after we have done that we need to do string comparisons to see if the field is a float or something else
-        output = self.time_stamp + ": " + self.sensor_id
+        output = str(self.time_stamp) + ": " + str(self.sensor_id)
         if self.value_is_number:
-            output = output + " = " + self.num_value
+            output = output + " = " + str(self.num_value)
         else:
             output = output + " = " + self.string_value
         return output
