@@ -26,7 +26,8 @@ Highcharts.theme = {
     title: {
 	style: {
 	    color: '#000',
-	    font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'
+	    font: 'bold 16px "Trebuchet MS", Verdana, sans-serif',
+	    style: '200px'
 	},
 	align: 'left',
 	verticalAlign: 'top'
@@ -36,10 +37,12 @@ Highcharts.theme = {
 	y: 50,
 	style: {
 	    color: '#666666',
-	    font: 'bold 12px "Trebuchet MS", Verdana, sans-serif'
+	    font: 'bold 12px "Trebuchet MS", Verdana, sans-serif',
+	    style: '200px'
 	}
     },
     xAxis: {
+	type: 'datetime',
 	gridLineWidth: 1,
 	lineColor: '#000',
 	tickColor: '#000',
