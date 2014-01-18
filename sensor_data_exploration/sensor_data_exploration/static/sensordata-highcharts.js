@@ -1,17 +1,3 @@
-$(function () {
-    var my_plotdata = jQuery.parseJSON(plotdata);
-
-    var xdata = my_plotdata.xdata;
-    console.log("xdata=", xdata);
-    var ydata = my_plotdata.ydata;
-    console.log("ydata=", ydata);
-    var chart = sensordata_chart(my_plotdata.plot_title,
-				 my_plotdata.plot_subtitle,
-				 my_plotdata.plot_yaxis_label,
-				 my_plotdata.plot_point_label,
-				 xdata, ydata, 'ourdata');
-    });
-
 function sensordata_chart(title, subtitle, units, short_units, xdata, ydata, rendor_to) {
 
     var dataArray1 = [];
