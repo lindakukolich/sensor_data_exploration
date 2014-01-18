@@ -26,7 +26,9 @@ function sensordata_chart(title, subtitle, units, short_units, xdata, ydata, ren
     var chart = new Highcharts.Chart({
             chart: {
 		renderTo: rendor_to,
-                type: 'spline'
+                type: 'spline',
+		height: 250,
+		zoomType: 'x'
             },
             title: {
                 text: title
