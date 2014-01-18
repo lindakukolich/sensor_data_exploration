@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sensor Data Exploration Root</title>
     <link rel="stylesheet" type="text/css" media="screen" href="{%static "common.css" %}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{%static "explorer.css" %}" />
 
     <script type="text/javascript"> 
       var plotdata = '{{ plotdata|safe }}';
@@ -28,7 +29,6 @@
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
     <script src="{%static "sensordata-highcharts.js" %}"></script>
-    <script src="{%static "highcharts-sample.js" %}"></script>
     <script src="{%static "onclick.js" %}"></script>
 
 
@@ -62,28 +62,22 @@
     </div>
     <div class="container">
       <div class="jumbotron">
-	<h1> Sensor Data Exploration Says</h1>
-	</div>
-	<div id="data">
-	  <h2>And now for a random chart that has nothing to do with this data!!</h2>
-	  <br>
-	</div>
-	<div id="ourdata" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-	<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-
+	<h1> Data from Thompson Island</h1>
+      </div>
+      <div id="ourdata">
       </div>
       <div id="charts">
-
+	<!-- Charts are added here with javascript -->
       </div>
 
-    <div id="ajax-graph">
+      <div id="ajax-graph" align="center" class="navbar-fixed-bottom">
 
-      {% if sensor_list %}
-        {% for sensor in sensor_list %}
-          <button data-sensorid="{{sensor}}" type="button" class="btn btn-default">{{sensor}}</button>
-        {% endfor %}
-      {% endif %}
-    </div>
+	{% if sensor_list %}
+          {% for sensor in sensor_list %}
+            <button data-sensorid="{{sensor}}" type="button" class="btn btn-default">{{sensor}}</button>
+	  {% endfor %}
+	{% endif %}
+      </div>
 
       <div id="footer">
 	<div id="footer">Copyright 2014 &copy; Girls &amp; Buoys</div>
