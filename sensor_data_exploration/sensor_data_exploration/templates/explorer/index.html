@@ -20,6 +20,13 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
+    <!-- Nonresponsive so the charts and the legend for the charts to go onto separate rows -->
+    <link rel="stylesheet" type="text/css" media="screen" href="{%static "non-responsive.css" %}" />
+
+
+
+
+    <script src="{%static "handlebars-v1.3.0.js" %}"></script>
     <!-- javascript for generating plots -->
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
@@ -27,6 +34,21 @@
     <script src="{%static "sensordata-highcharts.js" %}"></script>
     <script src="{%static "onclick.js" %}"></script>
 
+    <!-- Handlebar templates -->
+    <script id="chart-row" type="text/x-handlebars-template">
+      {% verbatim %}
+      <div id="{{ sensorid }}">
+	<div id="{{sensorid}}-legend" class="col-md-2">
+	  <h4>{{ title }}</h4>
+	  <h5>{{subtitle}}</h5>
+	  {{units}}
+	</div>
+	<div id="{{sensorid}}-chart" class="col-md-10">
+	<!-- Highcharts will render the chart here -->
+	</div>
+      </div>
+      {% endverbatim %}
+    </script>
 
   </head>
   <body>

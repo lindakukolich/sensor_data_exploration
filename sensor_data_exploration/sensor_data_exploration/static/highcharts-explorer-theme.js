@@ -21,7 +21,6 @@ Highcharts.theme = {
 	plotBorderWidth: 1,
 	height: 250,
 	zoomType: 'x',
-	marginLeft: 200
     },
     title: {
 	style: {
@@ -75,18 +74,7 @@ Highcharts.theme = {
 	}
     },
     legend: {
-	align: 'left',
-	itemStyle: {
-	    font: '9pt Trebuchet MS, Verdana, sans-serif',
-	    color: 'black'
-	    
-	},
-	itemHoverStyle: {
-	    color: '#039'
-	},
-	itemHiddenStyle: {
-	    color: 'gray'
-	}
+	enabled: false
     },
     labels: {
 	style: {

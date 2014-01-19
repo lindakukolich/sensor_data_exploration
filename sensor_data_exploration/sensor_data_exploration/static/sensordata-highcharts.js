@@ -20,10 +20,10 @@ function sensordata_chart(title, subtitle, units, short_units, xdata, ydata, ren
                 type: 'spline',
             },
             title: {
-                text: title
+                text: null
             },
             subtitle: {
-                text: subtitle
+                text: null
             },
             xAxis: {
 		title: {

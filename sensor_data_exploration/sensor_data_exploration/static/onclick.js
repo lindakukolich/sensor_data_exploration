@@ -1,4 +1,5 @@
 $(function () {
+
     /* If the click came from the "Use AJAX" button, make a copy of
        the sample graph from HighCharts */
     $( "#newchart" ).click(function() {
@@ -17,19 +18,27 @@ $(function () {
 	    $(this).addClass('btn-default');
 	    $(this).removeClass('btn-primary');
 	} else {
-	    //I am changing the button first because I lose "this" inside the .getJSON.
 	    $(this).addClass('btn-primary');
 	    $(this).removeClass('btn-default');
-	    d=document.createElement('div'); //create a new div we will name sensorid
-	    d.setAttribute("id", sensorid);
-	    $('#charts').append(d);
-	    $('body').animate({"scrollTop": $('#charts')[0].scrollHeight}, "slow");
 	    $.getJSON('/explorer/get_data_ajax/',{'sensorid': sensorid})
 		.done(function(data) {
+		    //make the div use chart-row template
+		    var chart_source = $('#chart-row').html();
+		    var chart_template = Handlebars.compile(chart_source); //I wonder if I really need to be doing this compile over and over again like this?
+		    var legend_data = {
+			sensorid: sensorid,
+			title: data.plot_title,
+			subtitle: data.plot_subtitle,
+			units: data.plot_yaxis_label
+		    };
+		    console.log(legend_data)
+		    $('#charts').append(chart_template(legend_data));
+		    $('body').animate({"scrollTop": $('#charts')[0].scrollHeight}, "slow");
+		    var chart_id = sensorid + "-chart";
 		    if (data.goodPlotData) {
-			var chart = sensordata_chart(data.plot_title, data.plot_subtitle, data.plot_yaxis_label, data.plot_point_label, data.xdata, data.ydata, sensorid);
+			var chart = sensordata_chart(data.plot_title, data.plot_subtitle, data.plot_yaxis_label, data.plot_point_label, data.xdata, data.ydata, chart_id);
 		    } else {
-			d.innerHTML = "<br /><b>" + data.plotError +"</b><br />";
+			$('#'+chart_id).append("<br /><b>" + data.plotError +"</b><br />");
 		    }
 		})
 		.fail(function(jqxhr, textStatus, error) {
@@ -37,5 +46,6 @@ $(function () {
 		    console.log( "Request Failed: " + err );
 		});
 	};
-	});
+    });
 });
+
