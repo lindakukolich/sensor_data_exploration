@@ -65,6 +65,7 @@ function ajax_make_chart(sensorid) {
 	    var chart_id = sensorid + "-chart";
 	    if (data.goodPlotData) {
 		var chart = sensordata_chart(data.plot_title, data.plot_subtitle, data.plot_yaxis_label, data.plot_point_label, data.xdata, data.ydata, chart_id);
+		syncronizeCrossHairs(chart);
 	    } else {
 		$('#'+chart_id).append("<br /><b>" + data.plotError +"</b><br />");
 	    }
@@ -75,3 +76,26 @@ function ajax_make_chart(sensorid) {
 	});
     $('body').animate({"scrollTop": $(document).height()}, "slow");
 };
+
+function syncronizeCrossHairs(chart) {
+    var container = $(chart.container),
+    offset = container.offset(),
+    x, y, isInside, report;
+	
+    container.mousemove(function (evt) {
+	    
+        x = evt.clientX - chart.plotLeft - offset.left;
+        y = evt.clientY - chart.plotTop - offset.top;
+        var xAxis = chart.xAxis[0];
+        //remove old plot line and draw new plot line (crosshair) for this chart
+        var xAxis1 = chart.xAxis[0];
+        xAxis1.removePlotLine("myPlotLineId");
+        xAxis1.addPlotLine({
+            value: chart.xAxis[0].translate(x, true),
+            width: 1,
+            color: 'red',
+            //dashStyle: 'dash',                   
+            id: "myPlotLineId"
+        });
+    });
+}
