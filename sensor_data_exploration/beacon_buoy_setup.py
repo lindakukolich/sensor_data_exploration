@@ -40,7 +40,7 @@ def add_sensor(sensor_id, source, short_name, data_type, desc="",units_long="",
 
 if __name__ == '__main__':
     # environment setup ---------------------------------------------------
-    if debug: print "Starting Weather Underground population script..."
+    if debug: print "Starting Beacon Buoy setup script..."
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sensor_data_exploration.settings')
     from sensor_data_exploration.apps.explorer.models import *
 
@@ -56,7 +56,7 @@ if __name__ == '__main__':
 
     # create Sensors from this datasource ---------------------------------
     if debug: print "Creating sensors..."
-    s1 = add_sensor( sensor_id = "bouy5_Salinity",
+    s1 = add_sensor( sensor_id = "buoy5_Salinity",
                      source = mysource,
                      short_name="Salinity",
                      data_type = "float",
@@ -73,7 +73,7 @@ if __name__ == '__main__':
                      units_long = "QSU",
                      units_short = "QSU",
                  )
-    s3 = add_sensor( sensor_id = "bouy5_WaterTemp",
+    s3 = add_sensor( sensor_id = "buoy5_WaterTemp",
                      source = mysource,
                      short_name="Water Temperature F",
                      data_type = "float",
@@ -82,7 +82,7 @@ if __name__ == '__main__':
                      units_short = "°F",
                      kind = "water temperature",
                  )
-    s4 = add_sensor( sensor_id = "bouy5_AirTemp",
+    s4 = add_sensor( sensor_id = "buoy5_AirTemp",
                      source = mysource,
                      short_name="Air Temperature F",
                      data_type = "float",
@@ -157,4 +157,4 @@ if __name__ == '__main__':
                       units_short = "uE",
                   )
 
-    if debug: print "Finished Weather Underground population script!"
+    if debug: print "Finished Beacon Buoy setup script!"

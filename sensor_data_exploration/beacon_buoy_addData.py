@@ -92,10 +92,10 @@ if __name__ == '__main__':
     from sensor_data_exploration.apps.explorer.models import *
 
     # list of sensors for this source: (sensor_id, field# Hobolink (default), field# Cesn)
-    keys=[("bouy5_Salinity",13,2),
+    keys=[("buoy5_Salinity",13,2),
           ("buoy5_CDOM",12,3),
-          ("bouy5_WaterTemp",2,5),
-          ("bouy5_AirTemp",7,6),
+          ("buoy5_WaterTemp",2,5),
+          ("buoy5_AirTemp",7,6),
           ("buoy5_WindSpeed",3,7),
           ("buoy5_GustSpeed",4,8),
           ("buoy5_WindDir",5,9),
