@@ -1,5 +1,8 @@
 $(function () {
 
+    //set up a variable to keep all the charts in, we need to iterate over them to set up the crosshairs.
+    window.chartList = []
+
     //Set up initial graphs: 
     var initial_sensors = ['wu_ti_temp_f', 'bouy5_AirTemp', 'bouy5_WaterTemp'];
     initial_sensors.forEach(function(sensorid) {
