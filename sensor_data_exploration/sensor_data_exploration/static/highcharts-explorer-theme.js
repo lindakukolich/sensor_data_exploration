@@ -15,11 +15,13 @@ Highcharts.theme = {
 		[1, 'rgb(240, 240, 255)']
 	    ]
 	},
-	borderWidth: 2,
+	borderWidth: 0,
 	plotBackgroundColor: 'rgba(255, 255, 255, .9)',
-	plotShadow: true,
-	plotBorderWidth: 1,
-	height: 250,
+	plotShadow: false,
+	plotBorderWidth: 0,
+	height: 150,
+	marginTop: 0,
+	marginBottom: 0,
 	zoomType: 'x',
     },
     title: {
