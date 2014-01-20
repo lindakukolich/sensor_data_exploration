@@ -65,9 +65,9 @@ function ajax_make_chart(sensorid) {
 	    var chart_id = sensorid + "-chart";
 	    if (data.goodPlotData) {
 		var chart = sensordata_chart(data.plot_title, data.plot_subtitle, data.plot_yaxis_label, data.plot_point_label, data.xdata, data.ydata, chart_id);
-		chartList.push(chart);
-		console.log(chartList);
-		syncronizeCrossHairs(chart);
+//		chartList.push(chart);
+//		console.log(chartList);
+//		syncronizeCrossHairs(chart);
 
 	    } else {
 		$('#'+chart_id).append("<br /><b>" + data.plotError +"</b><br />");
