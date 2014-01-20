@@ -1,4 +1,10 @@
 $(function () {
+    //For bottom tabs
+    $('#btn-tabs a').click(function (e) {
+	e.preventDefault()
+	$(this).tab('show')
+    })
+
 
     //set up a variable to keep all the charts in, we need to iterate over them to set up the crosshairs.
     window.chartList = []
