@@ -12,8 +12,8 @@ $(function () {
     //Set up initial graphs: 
     var initial_sensors = ['wu_ti_temp_f', 'bouy5_AirTemp', 'bouy5_WaterTemp'];
     initial_sensors.forEach(function(sensorid) {
-	    $('#btn-'+sensorid).addClass('btn-primary');
-	    $('#btn-'+sensorid).removeClass('btn-default');
+	    $('.'+sensorid).addClass('btn-primary');
+	    $('.'+sensorid).removeClass('btn-default');
 	    ajax_make_chart(sensorid);
 	});
     	
@@ -29,11 +29,11 @@ $(function () {
 	    // I bet this needs to get refactored so that it can also be called when you click the "x" from issue 8.
 	    console.log('about to remove: ' + sensorid);
 	    $("#" + sensorid).remove()
-	    $(this).addClass('btn-default');
-	    $(this).removeClass('btn-primary');
+	    $('.'+sensorid).addClass('btn-default');
+	    $('.'+sensorid).removeClass('btn-primary');
 	} else {
-	    $(this).addClass('btn-primary');
-	    $(this).removeClass('btn-default');
+	    $('.'+sensorid).addClass('btn-primary');
+	    $('.'+sensorid).removeClass('btn-default');
 	    ajax_make_chart(sensorid);
 	};
     });
