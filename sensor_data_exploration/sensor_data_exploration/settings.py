@@ -26,13 +26,11 @@ PROJECT_PATH = os.path.abspath(PROJECT_DIR)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '6fi=sl-=r9fp!&5b2i$63fbzuy^kew^#k&!r%kw&gc!@^56sou'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-TEMPLATE_DEBUG = True
-
-#ALLOWED_HOSTS = []
-
+# DEBUG is always false here.  Only turn it on in your local_settings.py file,
+# which you DO NOT CHECK IN.  There should never be a local_settings.py on
+# GitHub
+DEBUG = False
+TEMPLATE_DEBUG = False
 
 # Application definition
 
@@ -115,14 +113,19 @@ TEMPLATE_DIRS = (
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media') # absolute path
 
-#Heroku specific
-# Parse database configuration from $DATABASE_URL
-if (not os.environ.get('EXPLORER_DEV')):
-    import dj_database_url
-    DATABASES['default'] =  dj_database_url.config()
-
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
+
+#Heroku specific
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+
+# Try to load local_settings.py if it exists
+try:
+    from local_settings import *
+except Exception as e:
+    pass

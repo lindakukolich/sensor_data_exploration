@@ -78,3 +78,7 @@ docs/_build/
 # Ignore the default SQLite database.
 *.sqlite3
 *.sqlite3-journal
+
+# Ignore the local_settings.py file, so we each can build our own
+# but GitHub is always ready for deployment
+local_settings.py
