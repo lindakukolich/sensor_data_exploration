@@ -8,7 +8,6 @@ import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sensor_data_exploration.settings')
 from sensor_data_exploration.apps.explorer.models import *
 
-
 colors = { 'black':'#000000',
            'blue':'#0000CC',
            'red':'#CC0000',
@@ -53,3 +52,24 @@ def hex_color(name):
         return colors[name]
     else:
         return None
+
+def get_sensors(keys):
+    '''return a dictionary containing the sensor object for each sensor name in the keys list'''
+    sensors={}
+    for key in keys:
+        sid=key[0]
+        try:
+            sobj = Sensor.objects.get(sensor_id=sid)
+        except Sensor.DoesNotExist:
+            sys.exit("%s is not a sensor in the database." % sid)
+        sensors[sid] = sobj
+    return sensors
+
+def load_data(sensor_id,time_stamp,num_value=None,string_value=None,value_is_number=False):
+    '''creates a sensorData entry (unless already exists)'''
+    result=SensorData.objects.get_or_create(sensor_id=sensor_id,
+                                            time_stamp=time_stamp,
+                                            num_value=num_value,
+                                            string_value=string_value,
+                                            value_is_number=value_is_number)
+    return result

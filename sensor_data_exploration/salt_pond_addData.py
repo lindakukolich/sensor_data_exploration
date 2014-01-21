@@ -6,10 +6,12 @@
 # (run with -h to see full usage message)
 # as new sensors are added, add them to the list of sensors (keys) in main.
 
-import os,sys
+import sys
 import argparse
 import urllib2
 from datetime import datetime,tzinfo,timedelta
+import populate
+
 debug = True
 
 def get_args():
@@ -22,18 +24,6 @@ def get_args():
     if args.history == args.current:
         sys.exit("You must specify either --history OR --current")
     return args
-
-def get_sensors(keys):
-    '''return a dictionary containing the sensor object for each sensor name in the keys list'''
-    sensors={}
-    for key in keys:
-        sid=key[0]
-        try:
-            sobj = Sensor.objects.get(sensor_id=sid)
-        except Sensor.DoesNotExist:
-            sys.exit("%s is not a sensor in the database." % sid)
-        sensors[sid] = sobj
-    return sensors
 
 def get_data(url):
     '''fetch data from this url'''
@@ -64,25 +54,9 @@ def parse_dt(dt_string):
     dt=datetime(int(x.year),int(x.month),int(x.day),int(x.hour),int(x.minute),int(x.second),tzinfo=tz)
     return dt
 
-def load(sensor_id,time_stamp,num_value=None,string_value=None,value_is_number=False):
-    '''creates a sensorData entry (unless already exists)'''
-    result=SensorData.objects.get_or_create(sensor_id=sensor_id,
-                                            time_stamp=time_stamp,
-                                            num_value=num_value,
-                                            string_value=string_value,
-                                            value_is_number=value_is_number)
-    return result
-
-def check_date():
-    pass
-
 if __name__ == '__main__':
     args = get_args()
     if debug: print "Starting population script..."
-
-    # environment setup ---------------------------------------------------
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sensor_data_exploration.settings')
-    from sensor_data_exploration.apps.explorer.models import *
 
     # list of sensors for this source: (sensor_id, field_#)
     keys=[ ("sp_air_pressure",1),
@@ -96,7 +70,7 @@ if __name__ == '__main__':
 
     # get sensor objects for each sensor
     if debug: print "Getting sensor information..."
-    sensors=get_sensors(keys)
+    sensors=populate.get_sensors(keys)
 
     # get data list
     if debug: print "Reading data..."
@@ -114,20 +88,19 @@ if __name__ == '__main__':
         d = get_data(urls[-1])
         data.extend(clean_data(d))
 
-    # load data
+    # load sensor data
     if debug: print "Loading data..."
-    for i,entry in enumerate(data):
-        if debug: print i,
-        ts = parse_dt(entry[0])
+    for entry in data:
+        timestamp = parse_dt(entry[0])
         # if args.current check here for > max prev date
         for key in keys:
             value = entry[ key[1] ]
             numeric = sensors[key[0]].data_is_number
             if numeric:
                 value = float(value)
-                load(sensor_id=sensors[key[0]], time_stamp=ts, num_value=value, value_is_number=True)
+                populate.load_data(sensor_id=sensors[key[0]], time_stamp=timestamp, num_value=value, value_is_number=True)
             else:
-                load(sensor_id=sensors[key[0]], time_stamp=ts, string_value=value)
+                populate.load_data(sensor_id=sensors[key[0]], time_stamp=timestamp, string_value=value)
 
     if debug: print "\nFinishing population script..."
 
