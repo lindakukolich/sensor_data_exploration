@@ -39,6 +39,10 @@ def get_data_ajax(request):
     print "starting get_data_ajax with plot_sensor_id= "
     plot_sensor_id = request.GET.get('sensorid')
     print plot_sensor_id
+    print "start and end times are= "
+    plot_starttime = request.GET.get('starttime')
+    plot_endtime = request.GET.get('endtime')
+    print plot_starttime + ", " + plot_endtime
 
     # TODO
     # add data/time selectors
@@ -68,7 +72,7 @@ def get_data_ajax(request):
     # Retrieve the actual data for the plot
     q = SensorData.objects.filter(
         sensor_id_id=plot_sensor_id
-        ).filter(time_stamp__range=["2014-01-01 08:00","2014-01-04 08:00"]).order_by('time_stamp')
+        ).filter(time_stamp__range=[plot_starttime, plot_endtime]).order_by('time_stamp')
     
     
     # Pick out the times of the observations, and convert them to JavaScript
@@ -85,9 +89,9 @@ def get_data_ajax(request):
 
     # Make sure that we actually got some data, or this plot is no good
     if len(xdata) == 0 or len(ydata) == 0:
-        print "get_data: Error retrieving plot data for plot " + plot_sensor_id + ": No data"
+        print "get_data_ajax: Error retrieving plot data for plot " + plot_sensor_id + ": No data"
         data_to_dump = {'goodPlotData': False,
-                        'plotError': "Error retrieving plot data for plot " + plot_sensor_id + ": No data for time range [starttime, endtime]",
+                        'plotError': "Error retrieving plot data for plot " + plot_sensor_id + ": No data for time range [" + plot_starttime + ", " + plot_endtime + "]",
                         }
         print "data_to_dump"
         print data_to_dump

@@ -49,8 +49,8 @@ function sensordata_chart(title, subtitle, units, short_units, xdata, ydata, ren
     return chart;
 }
 
-function ajax_make_chart(sensorid) {
-    $.getJSON('/explorer/get_data_ajax/',{'sensorid': sensorid})
+function ajax_make_chart(sensorid, starttime, endtime) {
+    $.getJSON('/explorer/get_data_ajax/',{'sensorid': sensorid, 'starttime': starttime, 'endtime': endtime})
 	.done(function(data) {
 	    //make the div use chart-row template
 	    var chart_source = $('#chart-row').html();
