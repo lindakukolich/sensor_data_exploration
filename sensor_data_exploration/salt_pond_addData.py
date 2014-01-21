@@ -10,26 +10,7 @@ import os,sys
 import argparse
 import urllib2
 from datetime import datetime,tzinfo,timedelta
-from time import time, ctime
 debug = True
-
-# data slices  start time, end time (local time)
-# 047   09/27/13 10:30 am   10/11/13 10:40 pm	
-data047='https://datagarrison.com/users/011998000354656/011998000354839/download.php?data_launch=47&data_start=1380277800&data_end=1381531200&data_desc=DataGarrison%20Cell%20Station&utc=0'
-url047='https://datagarrison.com/users/011998000354656/011998000354839/temp/DataGarrison_Cell_Station_047.txt'
-
-# 048   10/11/13 10:40 pm   11/18/13 6:50 pm	
-data048='https://datagarrison.com/users/011998000354656/011998000354839/download.php?data_launch=48&data_start=1381531200&data_end=1384800600&data_desc=DataGarrison%20Cell%20Station&utc=0'
-url048='https://datagarrison.com/users/011998000354656/011998000354839/temp/DataGarrison_Cell_Station_048.txt'
-
-# 049   11/21/13 12:20 pm   01/03/14 10:35 am	
-data049='https://datagarrison.com/users/011998000354656/011998000354839/download.php?data_launch=49&data_start=1385036400&data_end=1388745300&data_desc=DataGarrison%20Cell%20Station&utc=0'
-url049='https://datagarrison.com/users/011998000354656/011998000354839/temp/DataGarrison_Cell_Station_049.txt'
-
-# 050   01/15/14 1:50 pm   present
-now=int(time())
-data050='https://datagarrison.com/users/011998000354656/011998000354839/download.php?data_launch=50&data_start=1389793800&data_end='+str(now)+'&data_desc=DataGarrison%20Cell%20Station&utc=0'
-url050='https://datagarrison.com/users/011998000354656/011998000354839/temp/DataGarrison_Cell_Station_050.txt'
 
 def get_args():
     parser = argparse.ArgumentParser(description='Load historical data into the database.')
@@ -119,13 +100,24 @@ if __name__ == '__main__':
 
     # get data list
     if debug: print "Reading data..."
-    url049='https://datagarrison.com/users/011998000354656/011998000354839/temp/DataGarrison_Cell_Station_049.txt'
-    data = get_data(url049)  # TBD!!!!!!
-    data = clean_data(data)
+    data = []
+    urls = ['https://datagarrison.com/users/011998000354656/011998000354839/temp/DataGarrison_Cell_Station_047.txt',
+            'https://datagarrison.com/users/011998000354656/011998000354839/temp/DataGarrison_Cell_Station_048.txt',
+            'https://datagarrison.com/users/011998000354656/011998000354839/temp/DataGarrison_Cell_Station_049.txt',
+            'https://datagarrison.com/users/011998000354656/011998000354839/temp/DataGarrison_Cell_Station_050.txt',
+    ]
+    if args.history:
+        for url in urls:
+            d = get_data(url)
+            data.extend(clean_data(d))
+    else:
+        d = get_data(urls[-1])
+        data.extend(clean_data(d))
 
     # load data
     if debug: print "Loading data..."
-    for entry in data:
+    for i,entry in enumerate(data):
+        if debug: print i,
         ts = parse_dt(entry[0])
         # if args.current check here for > max prev date
         for key in keys:
@@ -137,5 +129,5 @@ if __name__ == '__main__':
             else:
                 load(sensor_id=sensors[key[0]], time_stamp=ts, string_value=value)
 
-    if debug: print "Finishing population script..."
+    if debug: print "\nFinishing population script..."
 
