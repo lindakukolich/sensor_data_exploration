@@ -49,6 +49,7 @@ $(function () {
       Change the date range to be from 'graph_days' ago till now
       TODO:
        Update all the currently displayed graphs
+       Update currently displayed start and end times
      */
     $(".time-btn").click(function(){
 	    change = $(this).attr('graph_days');
