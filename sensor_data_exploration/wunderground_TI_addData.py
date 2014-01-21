@@ -77,7 +77,7 @@ def parse_dt(dt_string):
     ## grrrr, %z is not available!
     dt_string = dt_string[:-6]
     x=datetime.strptime(dt_string, "%a, %d %b %Y %H:%M:%S")
-    dt=datetime(x.year,x.month,x.day,x.hour,x.minute,x.second, tz)
+    dt=datetime(int(x.year),int(x.month),int(x.day),int(x.hour),int(x.minute),int(x.second), tz)
     return dt
 
 def load(sensor_id,time_stamp,num_value=None,string_value=None,value_is_number=False):
