@@ -9,6 +9,10 @@
     <title>Sensor Data Exploration Root</title>
     <!-- static is defined in settings, a directory for static data files -->
     <link rel="stylesheet" type="text/css" media="screen" href="{%static "common.css" %}" />
+    <script type="text/javascript"> 
+      var starttime = '{{ starttime|safe }}';
+      var endtime = '{{ endtime|safe }}';
+    </script>
   </head>
   <body>
     <nav>
