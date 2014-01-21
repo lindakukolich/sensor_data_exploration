@@ -62,6 +62,8 @@ class EST(tzinfo):
     '''returns an object representing EST time zone offset'''
     def utcoffset(self, dt):
         return timedelta(hours=-5)
+    def dst(self, dt):
+        return timedelta(0)
 
 def parse_dt(dt_string):
     '''takes a string and returns a datetime object'''
@@ -80,8 +82,19 @@ def load(sensor_id,time_stamp,num_value=None,string_value=None,value_is_number=F
                                             value_is_number=value_is_number)
     return result
 
-def check_date():
-    pass
+def database_date(keys):
+    '''find the latest date already in the database'''
+    tz = EST()
+    min_time = datetime.now(tz)
+    try:
+        for key in keys:
+            sdobj = SensorData.objects.filter(sensor_id_id__exact=key[0]).latest('time_stamp')
+            if sdobj.time_stamp < min_time:
+                min_time = sdobj.time_stamp
+    except:
+        print "Error in database_date()"
+        min_time = None
+    return min_time
 
 if __name__ == '__main__':
     args = get_args()
@@ -118,11 +131,18 @@ if __name__ == '__main__':
     data = get_data(url)
     data = clean_data(data,args.cesn)
 
+    # get the latest date already in the database
+    previous_load_date = None
+    if args.current:
+        previous_load_date = database_date(keys)
+
     # load data
     if debug: print "Loading data..."
     for entry in data:
-        ts = parse_dt(entry[1])
-        # if args.current check here for > max prev date
+        timestamp = parse_dt(entry[1])
+        if args.current:
+            if previous_load_date and timestamp <= previous_load_date:
+                continue
         for key in keys:
             value = entry[ key[1] ]
             if args.cesn:
@@ -132,9 +152,9 @@ if __name__ == '__main__':
             numeric = sensors[key[0]].data_is_number
             if numeric:
                 value = float(value)
-                load(sensor_id=sensors[key[0]], time_stamp=ts, num_value=value, value_is_number=True)
+                load(sensor_id=sensors[key[0]], time_stamp=timestamp, num_value=value, value_is_number=True)
             else:
-                load(sensor_id=sensors[key[0]], time_stamp=ts, string_value=value)
+                load(sensor_id=sensors[key[0]], time_stamp=timestamp, string_value=value)
 
     if debug: print "Finishing Beacon Buoy population script..."
 
