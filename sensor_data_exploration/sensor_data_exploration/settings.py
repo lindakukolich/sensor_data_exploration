@@ -8,10 +8,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 import os
-#Heroku specific
-# Parse database configuration from $DATABASE_URL
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -80,12 +76,14 @@ WSGI_APPLICATION = 'sensor_data_exploration.wsgi.application'
 # Database - commenting this out for Heroku
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-#}
+# NOTE: This is for local development.  If we are on the production
+# server, this DATABASES value is changed below.
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -121,3 +119,9 @@ TEMPLATE_DIRS = (
 # Media page, for insecure storage of user data like uploaded profile pictures
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media') # absolute path
+
+#Heroku specific
+# Parse database configuration from $DATABASE_URL
+if (not os.environ.get('EXPLORER_DEV')):
+    import dj_database_url
+    DATABASES['default'] =  dj_database_url.config()
