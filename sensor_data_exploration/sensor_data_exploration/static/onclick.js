@@ -29,20 +29,33 @@ $(function () {
 	       for that sensor */
 	var sensorid;
 	sensorid = $(this).attr('data-sensorid');
+	$('.'+sensorid).button('loading');
+
 	console.log('button clicked: ' + sensorid)
 	if ($("#" + sensorid).length != 0) {
 	    // This checks to see if a div called sensorid exists already.
 	    // To remove a chart. Remove the div. Change the button classes back. 
 	    // I bet this needs to get refactored so that it can also be called when you click the "x" from issue 8.
 	    console.log('about to remove: ' + sensorid);
-	    $("#" + sensorid).remove()
+	    $("#" + sensorid).remove();
 	    $('.'+sensorid).addClass('btn-default');
 	    $('.'+sensorid).removeClass('btn-primary');
+	    //Arbitrarily make the loading show up for half a second to discourage double clicking.
+	    setTimeout(function () {
+		$('.'+sensorid).button('reset');
+            }, 500);	    
+	    
 	} else {
+	    $('.'+sensorid).button('loading');
 	    $('.'+sensorid).addClass('btn-primary');
 	    $('.'+sensorid).removeClass('btn-default');
-	    ajax_make_chart(sensorid, window.starttime, window.endtime);
+	    $.when(ajax_make_chart(sensorid, window.starttime, window.endtime))
+	      .done(function() {
+		  $('.'+sensorid).button('reset');
+	      });
+
 	};
+	
 	});
 
     /**
