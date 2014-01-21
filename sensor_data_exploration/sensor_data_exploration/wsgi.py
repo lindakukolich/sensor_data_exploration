@@ -12,3 +12,8 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sensor_data_exploration.setting
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
+
+#This copied from Heroku
+#from dj_static import Cling
+
+#application = Cling(get_wsgi_application())
