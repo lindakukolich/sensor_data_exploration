@@ -18,7 +18,10 @@ PROJECT_DIR = os.path.dirname(__file__)
 # parent directory
 BASE_DIR = os.path.dirname(PROJECT_DIR + os.pardir)
 # Absolute path, useful for templates
-PROJECT_PATH = os.path.abspath(PROJECT_DIR)
+#PROJECT_PATH = os.path.abspath(PROJECT_DIR)
+
+#From Heroku docs
+PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -95,6 +98,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
+#advice from stack overflow
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
