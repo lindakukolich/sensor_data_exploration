@@ -22,3 +22,10 @@ urlpatterns = patterns('',
 #                (r'media/(?P<path>.*)',
 #                'serve',
 #                {'document_root': settings.MEDIA_ROOT}), )
+
+# Static files, both in DEBUG and not DEBUG mode
+urlpatterns += patterns(
+    'django.views.static',
+    (r'static/(?P<path>.*)',
+     'serve',
+     {'document_root': settings.STATIC_ROOT}), )
