@@ -118,18 +118,11 @@ def get_data_ajax(request):
     goodPlotData = True
     data_to_dump = {'xdata': xdata, 
                     'ydata': ydata,
-<<<<<<< HEAD
                     'plot_short_name': plot_sensor['sensor_short_name'],
                     'plot_source_id': plot_sensor['data_source_id'],
                     'plot_units_long': plot_sensor['units_long'],
                     'plot_units_short': plot_sensor['units_short'],
-=======
-                    'plot_title': plot_sensor['sensor_short_name'],
-                    'plot_subtitle': plot_sensor['data_source_id'],
-                    'plot_yaxis_label': plot_sensor['units_long'],
-                    'point_label': plot_sensor['units_short'],
                     'line_color': plot_sensor['line_color'],
->>>>>>> cad5ff473aea94f31f47e23341aba36c5e436d7c
                     'goodPlotData': goodPlotData
                 }
     print "data_to_dump"
