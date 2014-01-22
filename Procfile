@@ -1,2 +1,1 @@
-web: python sensor_data_exploration/manage.py runserver
-
+web: gunicorn --pythonpath sensor_data_exploration sensor_data_exploration.wsgi
