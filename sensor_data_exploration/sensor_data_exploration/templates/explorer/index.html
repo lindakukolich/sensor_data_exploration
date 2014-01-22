@@ -7,8 +7,6 @@
     <meta charset="utf-8"></meta>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sensor Data Exploration Root</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="{%static "explorer.css" %}" />
-
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
     <!-- Theme from http://bootswatch.com/cerulean -->
@@ -20,6 +18,10 @@
 
     <!-- Nonresponsive so the charts and the legend for the charts to go onto separate rows -->
     <link rel="stylesheet" type="text/css" media="screen" href="{%static "non-responsive.css" %}" />
+
+    <!-- Load this stylesheet last. It has the styles that overwrite bootstrap  -->
+    <link rel="stylesheet" type="text/css" media="screen" href="{%static "explorer.css" %}" />
+
 
     <script src="{%static "handlebars-v1.3.0.js" %}"></script>
     <!-- javascript for generating plots -->
