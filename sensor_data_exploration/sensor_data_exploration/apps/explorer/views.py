@@ -122,6 +122,7 @@ def get_data_ajax(request):
                     'plot_subtitle': plot_sensor['data_source_id'],
                     'plot_yaxis_label': plot_sensor['units_long'],
                     'point_label': plot_sensor['units_short'],
+                    'line_color': plot_sensor['line_color'],
                     'goodPlotData': goodPlotData
                 }
     print "data_to_dump"
