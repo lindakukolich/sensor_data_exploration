@@ -20,8 +20,9 @@ div.container {
 }
 
 .col-md-10 {
-    padding: 4px 6px;
+
 }
+
 
 .badge {
     font-size: 8px;
@@ -78,6 +79,7 @@ div.container {
   border-bottom-color: transparent;
   margin-bottom: 0px;
   margin-right: 5px;
+  margin-top: 10px;
 }
 
 .tab-content {
