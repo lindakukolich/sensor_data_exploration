@@ -94,38 +94,38 @@
 	  <li class="active"><a href="#favs">Favorites</a></li>
 	  <li><a href="#met">Meterological</a></li>
 	  <li><a href="#hydro">Hydrological</a></li>
+	  {% if misc_sensor_list %}
 	  <li><a href="#misc">Misc</a></li>
+	  {% endif %}
 	</ul>
 
 	<div id="buttons" class="tab-content">
-	  <div class="tab-pane active" id="favs">
-	    {% if sensor_list %}
-            {% for sensor in sensor_list %}
+	  <div class="tab-pane active" id="headliner">
+	    {% if headliners_sensor_list %}
+            {% for sensor in headliners_sensor_list %}
             <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">{{sensor.sensor_short_name}}</button>
 	    {% endfor %}
 	    {% endif %}
 	  </div>
 	  <div class="tab-pane" id="met">
-	    {% if sensor_list %}
-            {% for sensor in sensor_list %}
-            <button id="btn-{{sensor}}" data-sensorid="{{sensor}}" type="button" class="graph-btn btn btn-default {{sensor}}">{{sensor}}</button>
+            {% for sensor in met_sensor_list %}
+             <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">{{sensor.sensor_short_name}}</button>
 	    {% endfor %}
-	    {% endif %}
 	  </div>
 	  <div class="tab-pane" id="hydro">
-	    {% if sensor_list %}
-            {% for sensor in sensor_list %}
-            <button id="btn-{{sensor}}" data-sensorid="{{sensor}}" type="button" class="graph-btn btn btn-default {{sensor}}">{{sensor}}</button>
+	    {% if hydro_sensor_list %}
+            {% for sensor in hydro_sensor_list %}
+             <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">{{sensor.sensor_short_name}}</button>
 	    {% endfor %}
 	    {% endif %}
 	  </div>
+
 	  <div class="tab-pane" id="misc">
-	    {% if sensor_list %}
-            {% for sensor in sensor_list %}
-            <button id="btn-{{sensor}}" data-sensorid="{{sensor}}" type="button" class="graph-btn btn btn-default {{sensor}}">{{sensor}}</button>
+            {% for sensor in misc_sensor_list %}
+             <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">{{sensor.sensor_short_name}}</button>
 	    {% endfor %}
-	    {% endif %}
 	  </div>
+
 	</div>
       </div>
       <div id="footer">
