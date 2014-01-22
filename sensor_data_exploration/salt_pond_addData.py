@@ -6,30 +6,13 @@
 # (run with -h to see full usage message)
 # as new sensors are added, add them to the list of sensors (keys) in main.
 
-import os,sys
+import sys
 import argparse
 import urllib2
 from datetime import datetime,tzinfo,timedelta
-from time import time, ctime
+import populate
+
 debug = True
-
-# data slices  start time, end time (local time)
-# 047   09/27/13 10:30 am   10/11/13 10:40 pm	
-data047='https://datagarrison.com/users/011998000354656/011998000354839/download.php?data_launch=47&data_start=1380277800&data_end=1381531200&data_desc=DataGarrison%20Cell%20Station&utc=0'
-url047='https://datagarrison.com/users/011998000354656/011998000354839/temp/DataGarrison_Cell_Station_047.txt'
-
-# 048   10/11/13 10:40 pm   11/18/13 6:50 pm	
-data048='https://datagarrison.com/users/011998000354656/011998000354839/download.php?data_launch=48&data_start=1381531200&data_end=1384800600&data_desc=DataGarrison%20Cell%20Station&utc=0'
-url048='https://datagarrison.com/users/011998000354656/011998000354839/temp/DataGarrison_Cell_Station_048.txt'
-
-# 049   11/21/13 12:20 pm   01/03/14 10:35 am	
-data049='https://datagarrison.com/users/011998000354656/011998000354839/download.php?data_launch=49&data_start=1385036400&data_end=1388745300&data_desc=DataGarrison%20Cell%20Station&utc=0'
-url049='https://datagarrison.com/users/011998000354656/011998000354839/temp/DataGarrison_Cell_Station_049.txt'
-
-# 050   01/15/14 1:50 pm   present
-now=int(time())
-data050='https://datagarrison.com/users/011998000354656/011998000354839/download.php?data_launch=50&data_start=1389793800&data_end='+str(now)+'&data_desc=DataGarrison%20Cell%20Station&utc=0'
-url050='https://datagarrison.com/users/011998000354656/011998000354839/temp/DataGarrison_Cell_Station_050.txt'
 
 def get_args():
     parser = argparse.ArgumentParser(description='Load historical data into the database.')
@@ -41,18 +24,6 @@ def get_args():
     if args.history == args.current:
         sys.exit("You must specify either --history OR --current")
     return args
-
-def get_sensors(keys):
-    '''return a dictionary containing the sensor object for each sensor name in the keys list'''
-    sensors={}
-    for key in keys:
-        sid=key[0]
-        try:
-            sobj = Sensor.objects.get(sensor_id=sid)
-        except Sensor.DoesNotExist:
-            sys.exit("%s is not a sensor in the database." % sid)
-        sensors[sid] = sobj
-    return sensors
 
 def get_data(url):
     '''fetch data from this url'''
@@ -83,25 +54,9 @@ def parse_dt(dt_string):
     dt=datetime(int(x.year),int(x.month),int(x.day),int(x.hour),int(x.minute),int(x.second),tzinfo=tz)
     return dt
 
-def load(sensor_id,time_stamp,num_value=None,string_value=None,value_is_number=False):
-    '''creates a sensorData entry (unless already exists)'''
-    result=SensorData.objects.get_or_create(sensor_id=sensor_id,
-                                            time_stamp=time_stamp,
-                                            num_value=num_value,
-                                            string_value=string_value,
-                                            value_is_number=value_is_number)
-    return result
-
-def check_date():
-    pass
-
 if __name__ == '__main__':
     args = get_args()
     if debug: print "Starting population script..."
-
-    # environment setup ---------------------------------------------------
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sensor_data_exploration.settings')
-    from sensor_data_exploration.apps.explorer.models import *
 
     # list of sensors for this source: (sensor_id, field_#)
     keys=[ ("sp_air_pressure",1),
@@ -115,27 +70,37 @@ if __name__ == '__main__':
 
     # get sensor objects for each sensor
     if debug: print "Getting sensor information..."
-    sensors=get_sensors(keys)
+    sensors=populate.get_sensors(keys)
 
     # get data list
     if debug: print "Reading data..."
-    url049='https://datagarrison.com/users/011998000354656/011998000354839/temp/DataGarrison_Cell_Station_049.txt'
-    data = get_data(url049)  # TBD!!!!!!
-    data = clean_data(data)
+    data = []
+    urls = ['https://datagarrison.com/users/011998000354656/011998000354839/temp/DataGarrison_Cell_Station_047.txt',
+            'https://datagarrison.com/users/011998000354656/011998000354839/temp/DataGarrison_Cell_Station_048.txt',
+            'https://datagarrison.com/users/011998000354656/011998000354839/temp/DataGarrison_Cell_Station_049.txt',
+            'https://datagarrison.com/users/011998000354656/011998000354839/temp/DataGarrison_Cell_Station_050.txt',
+    ]
+    if args.history:
+        for url in urls:
+            d = get_data(url)
+            data.extend(clean_data(d))
+    else:
+        d = get_data(urls[-1])
+        data.extend(clean_data(d))
 
-    # load data
+    # load sensor data
     if debug: print "Loading data..."
     for entry in data:
-        ts = parse_dt(entry[0])
+        timestamp = parse_dt(entry[0])
         # if args.current check here for > max prev date
         for key in keys:
             value = entry[ key[1] ]
             numeric = sensors[key[0]].data_is_number
             if numeric:
                 value = float(value)
-                load(sensor_id=sensors[key[0]], time_stamp=ts, num_value=value, value_is_number=True)
+                populate.load_data(sensor_id=sensors[key[0]], time_stamp=timestamp, num_value=value, value_is_number=True)
             else:
-                load(sensor_id=sensors[key[0]], time_stamp=ts, string_value=value)
+                populate.load_data(sensor_id=sensors[key[0]], time_stamp=timestamp, string_value=value)
 
-    if debug: print "Finishing population script..."
+    if debug: print "\nFinishing population script..."
 

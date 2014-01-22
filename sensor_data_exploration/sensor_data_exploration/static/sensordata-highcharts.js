@@ -68,16 +68,17 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 //		chartList.push(chart);
 //		console.log(chartList);
 //		syncronizeCrossHairs(chart);
-
+		$('.'+sensorid).button('reset');  //Reset the loading on the button
 	    } else {
 		$('#'+chart_id).append("<br /><b>" + data.plotError +"</b><br />");
+		$('.'+sensorid).button('reset');  //Reset the loading on the button
 	    }
 	})
 	.fail(function(jqxhr, textStatus, error) {
 	    var err = textStatus + ", " + error;
 	    console.log( "Request Failed: " + err );
 	});
-    $('body').animate({"scrollTop": $(document).height()}, "slow");
+	$('body').animate({"scrollTop": $(document).height()}, "slow");
 };
 
 function syncronizeCrossHairs(chart) {
