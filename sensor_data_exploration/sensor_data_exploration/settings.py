@@ -102,9 +102,9 @@ USE_TZ = True
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = ()
-#    os.path.join(PROJECT_PATH, 'static'),
-#)
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_PATH, 'static'),
+)
 
 # Templates
 TEMPLATE_DIRS = (
