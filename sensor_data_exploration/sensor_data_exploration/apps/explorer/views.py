@@ -20,7 +20,10 @@ def index(request):
     context_dict = {}
 
     #Get the available sensors to print out buttons for them
-    context_dict['sensor_list'] = get_sensors()
+    #    context_dict['sensor_list'] = get_sensors()
+    
+    sensor_list = Sensor.objects.order_by('sensor_short_name')
+    context_dict = {'sensor_list': sensor_list}
 
     # Return a rendered response to send to the client.
     # We make use of the shortcut function to make our lives easier.

@@ -101,7 +101,7 @@
 	  <div class="tab-pane active" id="favs">
 	    {% if sensor_list %}
             {% for sensor in sensor_list %}
-            <button id="btn-{{sensor}}" data-sensorid="{{sensor}}" type="button" class="graph-btn btn btn-default {{sensor}}">{{sensor}}</button>
+            <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">{{sensor.sensor_short_name}}</button>
 	    {% endfor %}
 	    {% endif %}
 	  </div>
