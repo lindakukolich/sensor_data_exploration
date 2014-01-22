@@ -6,11 +6,24 @@ body {
 }
 
 div.container {
-    background: #FFFFFF;
+    /* background: #FFFFFF; */
     padding: 0px;
 }
 
 .navbar {
     width: 100%;
+    padding-left: 6px;
 }
 
+.time-btn,
+.graph-btn {
+    padding: 4px 6px;
+}
+
+.col-md-2 {
+    padding: 4px 6px;
+}
+
+.col-md-10 {
+    padding: 4px 6px;
+}
