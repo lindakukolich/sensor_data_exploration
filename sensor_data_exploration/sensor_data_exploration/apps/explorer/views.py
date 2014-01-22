@@ -20,7 +20,23 @@ def index(request):
     context_dict = {}
 
     #Get the available sensors to print out buttons for them
-    context_dict['sensor_list'] = get_sensors()
+    #    context_dict['sensor_list'] = get_sensors()
+    
+    sensor_list = Sensor.objects.order_by('sensor_short_name')
+
+    headliners_sensor_list = Sensor.objects.filter(is_headliner=True).order_by('sensor_short_name')
+    met_sensor_list = Sensor.objects.filter(kind='meteorological').order_by('sensor_short_name')
+    hydro_sensor_list = Sensor.objects.filter(kind='hydrological').order_by('sensor_short_name')
+    misc_sensor_list = Sensor.objects.exclude(kind='hydrological').exclude( kind='meteorological' )
+
+    
+    context_dict = {
+        'sensor_list': sensor_list,
+        'headliners_sensor_list': headliners_sensor_list,
+        'met_sensor_list': met_sensor_list,
+        'hydro_sensor_list': hydro_sensor_list,
+        'misc_sensor_list': misc_sensor_list
+    }
 
     # Return a rendered response to send to the client.
     # We make use of the shortcut function to make our lives easier.
