@@ -8,9 +8,11 @@ $(function () {
 
 
     //set up a variable to keep all the charts in, we need to iterate over them to set up the crosshairs.
-    window.chartList = [];
+    window.chartList = {};
 
     // set up variables to keep the timestamp range in
+    // TODO: Change this to make the graph start by showing today
+    // changeStartTime(1);
     window.starttime = "2014-01-01 08:00";
     window.endtime = "2014-01-02 08:00";
 
@@ -37,37 +39,28 @@ $(function () {
 	    // To remove a chart. Remove the div. Change the button classes back. 
 	    // I bet this needs to get refactored so that it can also be called when you click the "x" from issue 8.
 	    console.log('about to remove: ' + sensorid);
-	    $("#" + sensorid).remove();
-	    $('.'+sensorid).addClass('btn-default');
-	    $('.'+sensorid).removeClass('btn-primary');
-	    //Arbitrarily make the loading show up for half a second to discourage double clicking.
-	    setTimeout(function () {
-		$('.'+sensorid).button('reset');
-            }, 500);	    
-	    
+	    remove_chart_and_manipulate_buttons(sensorid);
 	} else {
-	    $('.'+sensorid).button('loading');
-	    $('.'+sensorid).addClass('btn-primary');
-	    $('.'+sensorid).removeClass('btn-default');
-	    $.when(ajax_make_chart(sensorid, window.starttime, window.endtime))
-	      .done(function() {
-		  $('.'+sensorid).button('reset');
-	      });
-
+	    make_chart_and_manipulate_buttons(sensorid);
 	};
 	
 	});
 
     /**
       Change the date range to be from 'graph_days' ago till now
+      Update all the currently displayed graphs
       TODO:
-       Update all the currently displayed graphs
        Update currently displayed start and end times
      */
     $(".time-btn").click(function(){
 	    change = $(this).attr('graph_days');
 	    console.log('days to graph: ' + change);
 	    changeStartTime(change);
+
+	    for(var s_id in window.chartList) {
+		remove_chart_and_manipulate_buttons(s_id);
+		make_chart_and_manipulate_buttons(s_id);
+	    }
 	});
     });
 
@@ -103,4 +96,30 @@ function printDate(d) {
     t = d.getMinutes();
     rtn += ((t < 10) ? "0" : "") + t;
     return rtn;
+}
+
+/**
+   Make the sensorid button display a loading message till the chart is
+   displayed
+ */
+function make_chart_and_manipulate_buttons(sensorid) {
+    $('.'+sensorid).button('loading');
+    $('.'+sensorid).addClass('btn-primary');
+    $('.'+sensorid).removeClass('btn-default');
+    $.when(ajax_make_chart(sensorid, window.starttime, window.endtime))
+	.done(function() {
+		$('.'+sensorid).button('reset');
+	    });
+}
+
+/**
+ */
+function remove_chart_and_manipulate_buttons(sensorid) {
+    $("#" + sensorid).remove();
+    $('.'+sensorid).addClass('btn-default');
+    $('.'+sensorid).removeClass('btn-primary');
+    //Arbitrarily make the loading show up for half a second to discourage double clicking.
+    setTimeout(function () {
+	    $('.'+sensorid).button('reset');
+	}, 500);
 }

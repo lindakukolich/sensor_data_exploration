@@ -65,7 +65,7 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 	    var chart_id = sensorid + "-chart";
 	    if (data.goodPlotData) {
 		var chart = sensordata_chart(data.plot_title, data.plot_subtitle, data.plot_yaxis_label, data.plot_point_label, data.xdata, data.ydata, chart_id);
-//		chartList.push(chart);
+		chartList[sensorid] = chart;
 //		console.log(chartList);
 //		syncronizeCrossHairs(chart);
 		$('.'+sensorid).button('reset');  //Reset the loading on the button
