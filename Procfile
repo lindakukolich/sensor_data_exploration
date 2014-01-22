@@ -1,1 +1,2 @@
-web: python manage.py runserver
+web: python sensor_data_exploration/manage.py runserver
+
