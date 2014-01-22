@@ -57,14 +57,14 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 	    var chart_template = Handlebars.compile(chart_source); //I wonder if I really need to be doing this compile over and over again like this?
 	    var legend_data = {
 		sensorid: sensorid,
-		title: data.plot_title,
-		subtitle: data.plot_subtitle,
-		units: data.plot_yaxis_label
+		title: data.plot_short_name,
+		subtitle: data.plot_source_id,
+		units: data.plot_units_short+' '+data.plot_units_long
 	    };
 	    $('#charts').append(chart_template(legend_data));
 	    var chart_id = sensorid + "-chart";
 	    if (data.goodPlotData) {
-		var chart = sensordata_chart(data.plot_title, data.plot_subtitle, data.plot_yaxis_label, data.plot_point_label, data.xdata, data.ydata, chart_id);
+		var chart = sensordata_chart(data.plot_short_name, data.plot_source_id, data.plot_units_long, data.plot_units_short, data.xdata, data.ydata, chart_id);
 //		chartList.push(chart);
 //		console.log(chartList);
 //		syncronizeCrossHairs(chart);
