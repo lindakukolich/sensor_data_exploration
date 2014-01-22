@@ -15,15 +15,38 @@ div.container {
     padding-left: 6px;
 }
 
-.time-btn,
-.graph-btn {
-    padding: 4px 6px;
-}
-
 .col-md-2 {
     padding: 4px 6px;
 }
 
 .col-md-10 {
     padding: 4px 6px;
+}
+
+.badge {
+    font-size: 8px;
+    font-weight: normal;
+    min-width: 5px;
+    background-color: #ddf0fb;
+}
+
+.time-btn,
+.graph-btn {
+    padding: 4px 6px;
+}
+
+.btn-default .badge {
+  color:  black;
+  background-color: #ddf0fb;
+}
+
+.btn-primary .badge {
+  color:  black;
+  background-color: #ddf0fb;
+}
+
+.btn .badge {
+  position: relative;
+  top: 0px;
+  right: -3px;
 }
