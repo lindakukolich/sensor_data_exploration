@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sensor Data Exploration Root</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
     <!-- Theme from http://bootswatch.com/cerulean -->
     <link rel="stylesheet" href="{%static "bootstrap.css" %}" />
@@ -46,7 +47,6 @@
       </div>
       {% endverbatim %}
     </script>
-
   </head>
   <body>
     <!-- Fixed navbar -->
@@ -79,14 +79,44 @@
 	<div class="col-md-2"></div>
 	<div class="col-md-10">
 	  <button id="day-btn" graph_days=1 type="button" class="btn btn-default time-btn">Last Day</button>
-	  <button id"week-btn" graph_days=7 type="button" class="btn btn-default time-btn">Last Week</button>
-	  <button id"month-btn" graph_days=30 type="button" class="btn btn-default time-btn">Last Month</button>
-	  <button id"year-btn" graph_days=365 type="button" class="btn btn-default time-btn">Last Year</button>
-	  <!-- TODO: Add a custom selector -->
-	  <!-- Look at jquery.datepicker -->
-	  <!-- TODO: Display and update the current start and end dates -->
-	  Start: {{starttime}}  End: {{endtime}}
+	  <button id="week-btn" graph_days=7 type="button" class="btn btn-default time-btn">Last Week</button>
+	  <button id="month-btn" graph_days=30 type="button" class="btn btn-default time-btn">Last Month</button>
+	  <button id="year-btn" graph_days=365 type="button" class="btn btn-default time-btn">Last Year</button>
+	  <button id="custom-date-btn" type="button" class="btn btn-default" data-toggle="modal" data-target="#setDateModal">Custom Date</button>
+	  <p />
+	  <label>Start Date:</label> <span id="startdate">Yesterday</span>
+	  <label>End Date:</label> <span id="enddate">Today</span>
 	</div>
+
+	<div class="modal fade" id="setDateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h4 class="modal-title">Select Date Range</h4>
+	      </div>
+	      <div class="modal-body">
+		<label>Start Date:</label><input type="text" id="startdatepicker">
+		<label>End Date:</label><input type="text" id="enddatepicker">
+		<script>
+		  $( "#startdatepicker" ).datepicker({
+		  dateFormat: "yy-mm-dd",
+		  maxDate: "-1d",
+		  });
+		  $( "#enddatepicker" ).datepicker({
+		  dateFormat: "yy-mm-dd",
+		  maxDate: "0d",
+		  });
+		</script>
+	      </div>
+	      <div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<button type="button" id="dateSelSaveBtn" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	      
       </div>
       <div id="charts">
 	<!-- Charts are added here with javascript -->

@@ -1,9 +1,9 @@
 /* This function is called automatically when the page is fully loaded */
-$(function () {
+$( function () {
     //For bottom tabs
-    $('#btn-tabs a').click(function (e) {
+    $( '#btn-tabs a' ).click( function (e) {
 	e.preventDefault();
-	$(this).tab('show');
+	$( this ).tab( 'show' );
     });
 
 
@@ -11,37 +11,39 @@ $(function () {
     window.chartList = {};
 
     // set up variables to keep the timestamp range in
-    // TODO: Change this to make the graph start by showing today
-    // changeStartTime(1);
-    window.starttime = "2014-01-01 08:00";
-    window.endtime = "2014-01-02 08:00";
+    window.starttime = "2014-01-01";
+    window.endtime = "2014-01-03";
+    $("#startdatepicker").datepicker("setDate", window.starttime);
+    $("#enddatepicker").datepicker("setDate", window.endtime);
+    // TODO: Make this use today and yesterday
+    //    changeStartTime( 1 );
 
     //Set up initial graphs: 
     var initial_sensors = ['wu_ti_temp_f', 'bouy5_AirTemp', 'bouy5_WaterTemp'];
-    initial_sensors.forEach(function(sensorid) {
-	    $('.'+sensorid).addClass('btn-primary');
-	    $('.'+sensorid).removeClass('btn-default');
-	    ajax_make_chart(sensorid, window.starttime, window.endtime);
+    initial_sensors.forEach( function( sensorid ) {
+	    $( '.' + sensorid ).addClass( 'btn-primary' );
+	    $( '.' + sensorid ).removeClass( 'btn-default' );
+	    ajax_make_chart( sensorid, window.starttime, window.endtime );
 	});
     	
 
     /** Register the callback that handles clicks on the graph buttons */
-    $('.graph-btn').click(function(){
+    $( '.graph-btn' ).click( function(){
 	    /* If the click came from one of the "sensor" buttons, make a graph
 	       for that sensor */
 	var sensorid;
-	sensorid = $(this).attr('data-sensorid');
-	$('.'+sensorid).button('loading');
+	sensorid = $( this ).attr( 'data-sensorid' );
+	$( '.' + sensorid ).button( 'loading' );
 
-	console.log('button clicked: ' + sensorid)
-	if ($("#" + sensorid).length != 0) {
+	console.log( 'button clicked: ' + sensorid )
+	if ($( "#" + sensorid ).length != 0) {
 	    // This checks to see if a div called sensorid exists already.
 	    // To remove a chart. Remove the div. Change the button classes back. 
 	    // I bet this needs to get refactored so that it can also be called when you click the "x" from issue 8.
-	    console.log('about to remove: ' + sensorid);
-	    remove_chart_and_manipulate_buttons(sensorid);
+	    console.log( 'about to remove: ' + sensorid );
+	    remove_chart_and_manipulate_buttons( sensorid );
 	} else {
-	    make_chart_and_manipulate_buttons(sensorid);
+	    make_chart_and_manipulate_buttons( sensorid );
 	};
 	
 	});
@@ -52,9 +54,8 @@ $(function () {
       TODO:
        Update currently displayed start and end times
      */
-    $(".time-btn").click(function(){
+    $( ".time-btn" ).click(function(){
 	    change = $(this).attr('graph_days');
-	    console.log('days to graph: ' + change);
 	    changeStartTime(change);
 
 	    for(var s_id in window.chartList) {
@@ -62,7 +63,27 @@ $(function () {
 		make_chart_and_manipulate_buttons(s_id);
 	    }
 	});
+
+    $( "#dateSelSaveBtn" ).click(function() {
+	    var startDate = $("#startdatepicker").datepicker("getDate");
+	    var endDate = $("#enddatepicker").datepicker("getDate");
+	    if (startDate < endDate) {
+		window.starttime = printDate( startDate );
+		$("#startdate").html(window.starttime);
+		window.endtime = printDate( endDate );
+		$("#enddate").html(window.endtime);
+		console.log("Change graphs to go from " + window.starttime + " to " + window.endtime);
+
+		for (var s_id in window.chartList) {
+		    remove_chart_and_manipulate_buttons(s_id);
+		    make_chart_and_manipulate_buttons(s_id);
+		}
+	    } else {
+		console.log("dates are bad. Do not use them");
+	    }
+	});
     });
+
 
 /**
    Change window.endtime to now.
@@ -70,20 +91,23 @@ $(function () {
 */
 function changeStartTime(days) {
     var today = new Date();
-    console.log("From " + days + " days ago to now");
-    console.log("end: " + printDate(today));
     var starttime = today.getTime();
     starttime -= days * 24 * 3600 * 1000;
     var startday = new Date(starttime);
-    console.log("start: " + printDate(startday));
-    window.endtime = printDate(today);
-    window.starttime = printDate(startday);
+    window.endtime = printDate( today );
+    window.starttime = printDate( startday );
+    $("#startdate").html(window.starttime);
+    $("#enddate").html(window.endtime);
+    $("#startdatepicker").datepicker("setDate", window.starttime);
+    $("#enddatepicker").datepicker("setDate", window.endtime);
 }
 
 /**
    Print the given Date in the format the database will expect
+
+   TODO: Add time zone and make sure it is GMT
  */
-function printDate(d) {
+function printDate( d ) {
     var rtn = "";
     var t;
     rtn += d.getFullYear();
@@ -102,24 +126,26 @@ function printDate(d) {
    Make the sensorid button display a loading message till the chart is
    displayed
  */
-function make_chart_and_manipulate_buttons(sensorid) {
-    $('.'+sensorid).button('loading');
-    $('.'+sensorid).addClass('btn-primary');
-    $('.'+sensorid).removeClass('btn-default');
-    $.when(ajax_make_chart(sensorid, window.starttime, window.endtime))
-	.done(function() {
-		$('.'+sensorid).button('reset');
+function make_chart_and_manipulate_buttons( sensorid ) {
+    $( '.'+sensorid ).button( 'loading' );
+    $( '.'+sensorid ).addClass( 'btn-primary' );
+    $( '.'+sensorid ).removeClass( 'btn-default' );
+    $.when( ajax_make_chart( sensorid, window.starttime, window.endtime ))
+	.done( function() {
+		$( '.'+sensorid ).button( 'reset' );
 	    });
 }
 
 /**
+   Delete charts and play with the buttons to keep users from clicking
+   too often and to make sure they get colored right
  */
-function remove_chart_and_manipulate_buttons(sensorid) {
-    $("#" + sensorid).remove();
-    $('.'+sensorid).addClass('btn-default');
-    $('.'+sensorid).removeClass('btn-primary');
+function remove_chart_and_manipulate_buttons( sensorid ) {
+    $( "." + sensorid ).remove();
+    $( '.' + sensorid ).addClass( 'btn-default');
+    $( '.' + sensorid ).removeClass( 'btn-primary');
     //Arbitrarily make the loading show up for half a second to discourage double clicking.
-    setTimeout(function () {
-	    $('.'+sensorid).button('reset');
+    setTimeout( function () {
+	    $( '.'+sensorid ).button( 'reset' );
 	}, 500);
 }
