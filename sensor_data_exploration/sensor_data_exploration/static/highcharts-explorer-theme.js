@@ -20,8 +20,9 @@ Highcharts.theme = {
 	plotShadow: false,
 	plotBorderWidth: 0,
 	height: 150,
-	marginTop: 0,
-	marginBottom: 0,
+	marginTop: 10,
+	marginBottom: 10,
+	marginLeft: 30,
 	zoomType: 'x',
     },
     title: {

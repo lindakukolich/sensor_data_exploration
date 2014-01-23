@@ -24,18 +24,9 @@ def index(request):
     
     sensor_list = Sensor.objects.order_by('sensor_short_name')
 
-    headliners_sensor_list = Sensor.objects.filter(is_headliner=True).order_by('sensor_short_name')
-    met_sensor_list = Sensor.objects.filter(kind='meteorological').order_by('sensor_short_name')
-    hydro_sensor_list = Sensor.objects.filter(kind='hydrological').order_by('sensor_short_name')
-    misc_sensor_list = Sensor.objects.exclude(kind='hydrological').exclude( kind='meteorological' )
 
-    
     context_dict = {
         'sensor_list': sensor_list,
-        'headliners_sensor_list': headliners_sensor_list,
-        'met_sensor_list': met_sensor_list,
-        'hydro_sensor_list': hydro_sensor_list,
-        'misc_sensor_list': misc_sensor_list
     }
 
     # Return a rendered response to send to the client.
@@ -52,23 +43,23 @@ def about(request):
 def get_data_ajax(request):
     '''Read data from the database, preparing to make a plot'''
 
-    print "starting get_data_ajax with plot_sensor_id= "
+#    print "starting get_data_ajax with plot_sensor_id= "
     plot_sensor_id = request.GET.get('sensorid')
-    print plot_sensor_id
+ #   print plot_sensor_id
     print "start and end times are= "
     plot_starttime = request.GET.get('starttime')
     plot_endtime = request.GET.get('endtime')
-    print plot_starttime + ", " + plot_endtime
+  #  print plot_starttime + ", " + plot_endtime
 
     # Make sure we have a sensor_id that is in the sensor table
     if Sensor.objects.filter(sensor_id=plot_sensor_id) == False:
         data_to_dump = {'goodPlotData': False,
                         'plotError': "Error retrieving plot data for sensor " + plot_sensor_id + ": No such sensor",
                         }
-        print "data_to_dump"
-        print data_to_dump
+        #print "data_to_dump"
+        #print data_to_dump
         json_data = json.dumps(data_to_dump, cls=DjangoJSONEncoder)
-        print json_data
+        #print json_data
         return HttpResponse(json_data, mimetype='application/json')
 
     # We know there is at least one sensor that matches our given id.

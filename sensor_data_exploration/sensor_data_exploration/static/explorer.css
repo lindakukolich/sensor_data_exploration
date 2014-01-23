@@ -6,11 +6,89 @@ body {
 }
 
 div.container {
-    background: #FFFFFF;
+    /* background: #FFFFFF; */
     padding: 0px;
 }
 
 .navbar {
     width: 100%;
+    padding-left: 6px;
 }
 
+.col-md-2 {
+    padding: 4px 6px;
+}
+
+.col-md-10 {
+
+}
+
+
+.badge {
+    font-size: 8px;
+    font-weight: normal;
+    min-width: 5px;
+    background-color: #ddf0fb;
+}
+
+.time-btn,
+.graph-btn {
+    padding: 4px 6px;
+}
+
+.btn-default .badge {
+  color:  black;
+  background-color: #ddf0fb;
+}
+
+.btn-primary .badge {
+  color:  black;
+  background-color: #ddf0fb;
+}
+
+.btn .badge {
+  position: relative;
+  top: 0px;
+  right: -3px;
+}
+
+.btn {
+  margin-bottom: 3px;
+  margin-top: 3px;
+}
+
+.nav-tabs {
+  border-bottom: 0px;
+}
+
+
+
+.nav-tabs.nav-justified > .active > a,
+.nav-tabs.nav-justified > .active > a:hover,
+.nav-tabs.nav-justified > .active > a:focus {
+  border: 0;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  color: #555555;
+  cursor: default;
+  background-color:  #ddf0fb;
+  border: 0;
+  border-bottom-color: transparent;
+  margin-bottom: 0px;
+  margin-right: 5px;
+  margin-top: 10px;
+}
+
+.tab-content {
+      background-color:  #ddf0fb;
+      padding: 5px;
+      margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .nav-tabs.nav-justified > li > a {
+    border-bottom: 10px;
+  }

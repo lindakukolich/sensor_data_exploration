@@ -123,39 +123,51 @@
       </div>
 
       <div id="ajax-graph" align="center" class="">
-	<ul class="nav nav-tabs" id="btn-tabs">
-	  <li class="active"><a href="#favs">Favorites</a></li>
+	<ul class="nav nav-tabs nav-justified" id="btn-tabs">
+	  <li class="active"><a href="#favs">Headliners</a></li>
 	  <li><a href="#met">Meterological</a></li>
 	  <li><a href="#hydro">Hydrological</a></li>
-	  {% if misc_sensor_list %}
 	  <li><a href="#misc">Misc</a></li>
-	  {% endif %}
 	</ul>
 
 	<div id="buttons" class="tab-content">
 	  <div class="tab-pane active" id="headliner">
-	    {% if headliners_sensor_list %}
-            {% for sensor in headliners_sensor_list %}
-            <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">{{sensor.sensor_short_name}}</button>
-	    {% endfor %}
+            {% for sensor in sensor_list %}
+	    {% if sensor.is_headliner %}
+            <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">
+	      {{sensor.sensor_short_name}} <span class="badge">{{ sensor.data_source.symbol }}</span>
+
+	    </button>
 	    {% endif %}
+	    {% endfor %}
+
 	  </div>
 	  <div class="tab-pane" id="met">
-            {% for sensor in met_sensor_list %}
-             <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">{{sensor.sensor_short_name}}</button>
+            {% for sensor in sensor_list %}
+	    {% if sensor.kind == "meteorological" %}
+             <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">
+	      {{sensor.sensor_short_name}} <span class="badge">{{ sensor.data_source.symbol }}</span>
+	     </button>
+	     {% endif %}
 	    {% endfor %}
 	  </div>
 	  <div class="tab-pane" id="hydro">
-	    {% if hydro_sensor_list %}
-            {% for sensor in hydro_sensor_list %}
-             <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">{{sensor.sensor_short_name}}</button>
-	    {% endfor %}
+            {% for sensor in sensor_list %}
+	    {% if sensor.kind == "hydrological" %}
+             <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">
+	     	      {{sensor.sensor_short_name}} <span class="badge">{{ sensor.data_source.symbol }}</span>
+	     </button>
 	    {% endif %}
+	    {% endfor %}
 	  </div>
 
 	  <div class="tab-pane" id="misc">
-            {% for sensor in misc_sensor_list %}
-             <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">{{sensor.sensor_short_name}}</button>
+            {% for sensor in sensor_list %}
+	    {% if sensor.kind != "hydrological" and sensor.kind != "meteorological" %}
+             <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">
+	     	      {{sensor.sensor_short_name}} <span class="badge">{{ sensor.data_source.symbol }}</span>
+	     </button>
+	     {% endif %}
 	    {% endfor %}
 	  </div>
 
