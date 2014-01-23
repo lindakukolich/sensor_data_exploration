@@ -40,6 +40,11 @@ def about(request):
     context_dict = {}
     return render_to_response('explorer/about.html', context_dict, context)
 
+def map(request):
+    context = RequestContext(request)
+    context_dict = {}
+    return render_to_response('explorer/map.html', context_dict, context)
+
 def get_data_ajax(request):
     '''Read data from the database, preparing to make a plot'''
 
