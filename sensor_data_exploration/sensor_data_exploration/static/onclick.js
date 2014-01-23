@@ -59,17 +59,33 @@ $(function () {
 
 	for(var s_id in window.chartList) {
 	    var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
+	    console.log('chartIndex is' + chartIndex +"for " + s_id);	    
 	    var thisChart = Highcharts.charts[chartIndex];
 	    thisChart.showLoading();
 	    $('.'+s_id).button('loading');
 
-	    console.log('about to call getjson for ' + s_id);
+
 	    $.getJSON('/explorer/get_data_ajax/',{'sensorid': s_id, 'starttime': starttime, 'endtime': endtime})
 		.done(function(data) {
 		    if (data.goodPlotData) {
-			var chart_id = data.sensor_id + "-chart";
-			console.log('got goodPlotData for ' + data.sensor_id + 'chart_id ' + chart_id);
-			var chart = sensordata_chart(data.plot_short_name, data.plot_source_id, data.plot_units_long, data.plot_units_short, data.xdata, data.ydata, chart_id, data.line_color);
+			var chartIndex = $("#"+data.sensor_id+"-chart").data('highchartsChart');
+
+			var thisChart = Highcharts.charts[chartIndex];
+			var dataArray1 = [];
+			
+			var n_points = 0;
+			n_points = data.ydata.length;
+
+			if (n_points > data.xdata.length) {
+			    n_points = data.xdata.length;
+			}
+			for (i = 0; i < n_points; i++) {
+			    //	dataArray1.push( [Date.UTC(1970, 1, i), data.ydata[i]]);
+			    dataArray1.push( [data.xdata[i], data.ydata[i]]);
+			}
+			thisChart.series[0].setData(dataArray1,true);
+			thisChart.hideLoading();
+
 			$('.'+data.sensor_id).button('reset');  //Reset the loading on the button
 		    } else {
 			$('#'+chart_id).append("<br /><b>" + data.plotError +"</b><br />");
