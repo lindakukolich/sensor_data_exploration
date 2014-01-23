@@ -56,16 +56,51 @@ $( function () {
       TODO:
        Update currently displayed start and end times
      */
-    $( ".time-btn" ).click(function(){
-	    change = $(this).attr('graph_days');
-	    changeStartTime(change);
+    $(".time-btn").click(function(){
+	change = $(this).attr('graph_days');
+	console.log('days to graph: ' + change);
+	changeStartTime(change);
 
-	    for(var s_id in window.chartList) {
-		remove_chart_and_manipulate_buttons(s_id);
-		make_chart_and_manipulate_buttons(s_id);
-	    }
-	});
+	for(var s_id in window.chartList) {
+	    var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
+	    console.log('chartIndex is' + chartIndex +"for " + s_id);	    
+	    var thisChart = Highcharts.charts[chartIndex];
+	    thisChart.showLoading();
+	    $('.'+s_id).button('loading');
 
+
+	    $.getJSON('/explorer/get_data_ajax/',{'sensorid': s_id, 'starttime': starttime, 'endtime': endtime})
+		.done(function(data) {
+		    if (data.goodPlotData) {
+			var chartIndex = $("#"+data.sensor_id+"-chart").data('highchartsChart');
+
+			var thisChart = Highcharts.charts[chartIndex];
+			var dataArray1 = [];
+			
+			var n_points = 0;
+			n_points = data.ydata.length;
+
+			if (n_points > data.xdata.length) {
+			    n_points = data.xdata.length;
+			}
+			for (i = 0; i < n_points; i++) {
+			    //	dataArray1.push( [Date.UTC(1970, 1, i), data.ydata[i]]);
+			    dataArray1.push( [data.xdata[i], data.ydata[i]]);
+			}
+			thisChart.series[0].setData(dataArray1,true);
+			thisChart.hideLoading();
+
+			$('.'+data.sensor_id).button('reset');  //Reset the loading on the button
+		    } else {
+			$('#'+chart_id).append("<br /><b>" + data.plotError +"</b><br />");
+			$('.'+data.sensor_id).button('reset');  //Reset the loading on the button
+		    }
+		})
+		.fail(function(jqxhr, textStatus, error) {
+		    var err = textStatus + ", " + error;
+		    console.log( "Request Failed: " + err );
+		});
+	};
     /*
     $( "#dateSelSaveBtn" ).click(function() {
 	    var startDate = $("#startdatepicker").datepicker("getDate");
@@ -87,6 +122,7 @@ $( function () {
 	});
     */
     });
+});
 
 
 /**

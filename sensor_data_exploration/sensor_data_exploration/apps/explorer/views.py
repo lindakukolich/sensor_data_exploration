@@ -109,7 +109,8 @@ def get_data_ajax(request):
                     'plot_units_long': plot_sensor['units_long'],
                     'plot_units_short': plot_sensor['units_short'],
                     'line_color': plot_sensor['line_color'],
-                    'goodPlotData': goodPlotData
+                    'goodPlotData': goodPlotData,
+                    'sensor_id': plot_sensor['sensor_id']
                 }
     print "data_to_dump"
     print data_to_dump
