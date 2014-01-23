@@ -89,6 +89,31 @@ $(function () {
 		});
 	};
     });
+
+
+    $("#unzoom").click(function(){
+	// Unzoom all the charts
+	console.log('startin unzoom')
+
+	var endDate = new Date(window.endtime);
+	var endUTC = endDate.getTime() + endDate.getTimezoneOffset() * 60000;
+	var startDate =new Date(window.starttime);
+	var startUTC = startDate.getTime() + startDate.getTimezoneOffset() * 60000;
+
+	$('div#charts > div').each(function() {
+	    s_id = $(this).attr('data-sensorid');
+	    console.log('going to unzome the following: ' + s_id);
+	    var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
+	    var thisChart = Highcharts.charts[chartIndex];
+	    thisChart.options.chart.isZoomed = false;
+
+	    thisChart.xAxis[0].setExtremes(startUTC, endUTC, true);
+//	    thisChart.xAxis[0].setExtremes(null, null);
+	});
+//	console.log('going to unzome the following: ' + sensor_visible);
+//	for (sensor_div in sensor_visible) {
+
+    });
 });
 
 /**

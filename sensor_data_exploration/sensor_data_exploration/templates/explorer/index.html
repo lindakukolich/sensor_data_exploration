@@ -34,13 +34,13 @@
     <!-- Handlebar templates -->
     <script id="chart-row" type="text/x-handlebars-template">
       {% verbatim %}
-      <div id="{{ sensorid }}">
+      <div id="{{ sensorid }}"  data-sensorid="{{sensorid}}">
 	<div id="{{sensorid}}-legend" class="col-md-2">
 	  <h4>{{title}}</h4>
 	  <h6>{{units}}</h6>
 	  <h5>{{subtitle}}</h5>
 	</div>
-	<div id="{{sensorid}}-chart" class="col-md-10">
+	<div id="{{sensorid}}-chart" class="col-md-10 highchart"">
 	<!-- Highcharts will render the chart here -->
 	</div>
       </div>
@@ -77,7 +77,7 @@
       
       <div id="timeselection">
 	<div class="col-md-2"></div>
-	<div class="col-md-10">
+	<div class="col-md-8">
 	  <button id="day-btn" graph_days=1 type="button" class="btn btn-default time-btn">Last Day</button>
 	  <button id"week-btn" graph_days=7 type="button" class="btn btn-default time-btn">Last Week</button>
 	  <button id"month-btn" graph_days=30 type="button" class="btn btn-default time-btn">Last Month</button>
@@ -87,6 +87,9 @@
 	  <!-- TODO: Display and update the current start and end dates -->
 	  Start: {{starttime}}  End: {{endtime}}
 	</div>
+	<div class="col-md-2">
+	  <button id="unzoom" class="btn btn-default">Unzoom</button>
+	  <button id="clear" class="btn btn-default">Clear All</button>
       </div>
       <div id="charts">
 	<!-- Charts are added here with javascript -->
