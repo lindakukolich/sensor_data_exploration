@@ -53,16 +53,34 @@ $(function () {
        Update currently displayed start and end times
      */
     $(".time-btn").click(function(){
-	    change = $(this).attr('graph_days');
-	    console.log('days to graph: ' + change);
-	    changeStartTime(change);
+	change = $(this).attr('graph_days');
+	console.log('days to graph: ' + change);
+	changeStartTime(change);
 
-	    for(var s_id in window.chartList) {
-		remove_chart_and_manipulate_buttons(s_id);
-		make_chart_and_manipulate_buttons(s_id);
-	    }
-	});
+	for(var s_id in window.chartList) {
+	    $("#chart-"+s_id).html("loading");
+	    $('.'+s_id).button('loading');
+
+	    console.log('about to call getjson for ' + s_id);
+	    $.getJSON('/explorer/get_data_ajax/',{'sensorid': s_id, 'starttime': starttime, 'endtime': endtime})
+		.done(function(data) {
+		    if (data.goodPlotData) {
+			var chart_id = data.sensor_id + "-chart";
+			console.log('got goodPlotData for ' + data.sensor_id + 'chart_id ' + chart_id);
+			var chart = sensordata_chart(data.plot_short_name, data.plot_source_id, data.plot_units_long, data.plot_units_short, data.xdata, data.ydata, chart_id, data.line_color);
+			$('.'+data.sensor_id).button('reset');  //Reset the loading on the button
+		    } else {
+			$('#'+chart_id).append("<br /><b>" + data.plotError +"</b><br />");
+			$('.'+data.sensor_id).button('reset');  //Reset the loading on the button
+		    }
+		})
+		.fail(function(jqxhr, textStatus, error) {
+		    var err = textStatus + ", " + error;
+		    console.log( "Request Failed: " + err );
+		});
+	};
     });
+});
 
 /**
    Change window.endtime to now.
