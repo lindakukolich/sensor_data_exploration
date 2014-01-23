@@ -1,27 +1,11 @@
-<!DOCTYPE html>
-
+{% extends 'base.html' %}
 {% load static %}
-
-<html>
-  <head>
-    <meta charset="utf-8"></meta>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sensor Data Exploration Root</title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-
-    <!-- Theme from http://bootswatch.com/cerulean -->
-    <link rel="stylesheet" href="{%static "bootstrap.css" %}" />
-
-    
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-
+{% block head_extra %}
     <!-- Nonresponsive so the charts and the legend for the charts to go onto separate rows -->
-    <link rel="stylesheet" type="text/css" media="screen" href="{%static "non-responsive.css" %}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static "non-responsive.css" %}" />
     
     <!-- Load this stylesheet last. It has the styles that overwrite bootstrap  -->
-    <link rel="stylesheet" type="text/css" media="screen" href="{%static "explorer.css" %}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static "explorer.css" %}" />
     
     
     <script src="{%static "handlebars-v1.3.0.js" %}"></script>
@@ -47,34 +31,8 @@
       </div>
       {% endverbatim %}
     </script>
-  </head>
-  <body>
-    <!-- Fixed navbar -->
-    <div class="container">
-      <div class="navbar navbar-inverse" role="navigation">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Thomspon Island Sensor Data</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-	    <li><a href="#">Map</a></li>
-	    <!-- Make it so the link doesn't work here -->
-	    <li><a href="#">Graphs</a></li>
-	    <li><a href="#">Data</a></li>
-	    <li><a href="#">Prediction</a></li>            
-	    <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-	  </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-      
+    {% endblock %}
+    {% block body_block %}
       <div id="timeselection">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
@@ -144,9 +102,5 @@
 
 	</div>
       </div>
-      <div id="footer">
-	<div id="footer">Copyright 2014 &copy; Girls &amp; Buoys</div>
-      </div>
-    </div>
-  </body>
-</html>
+{% endblock %}
+
