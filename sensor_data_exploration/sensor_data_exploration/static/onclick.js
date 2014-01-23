@@ -13,8 +13,10 @@ $( function () {
     // set up variables to keep the timestamp range in
     window.starttime = "2014-01-01";
     window.endtime = "2014-01-03";
-    $("#startdatepicker").datepicker("setDate", window.starttime);
-    $("#enddatepicker").datepicker("setDate", window.endtime);
+    /*
+      $("#startdatepicker").datepicker("setDate", window.starttime);
+      $("#enddatepicker").datepicker("setDate", window.endtime);
+    */
     // TODO: Make this use today and yesterday
     //    changeStartTime( 1 );
 
@@ -64,6 +66,7 @@ $( function () {
 	    }
 	});
 
+    /*
     $( "#dateSelSaveBtn" ).click(function() {
 	    var startDate = $("#startdatepicker").datepicker("getDate");
 	    var endDate = $("#enddatepicker").datepicker("getDate");
@@ -82,6 +85,7 @@ $( function () {
 		console.log("dates are bad. Do not use them");
 	    }
 	});
+    */
     });
 
 
@@ -98,8 +102,10 @@ function changeStartTime(days) {
     window.starttime = printDate( startday );
     $("#startdate").html(window.starttime);
     $("#enddate").html(window.endtime);
-    $("#startdatepicker").datepicker("setDate", window.starttime);
-    $("#enddatepicker").datepicker("setDate", window.endtime);
+    /*
+      $("#startdatepicker").datepicker("setDate", window.starttime);
+      $("#enddatepicker").datepicker("setDate", window.endtime);
+    */
 }
 
 /**
