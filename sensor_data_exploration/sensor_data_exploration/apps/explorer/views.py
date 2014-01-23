@@ -51,11 +51,6 @@ def get_data_ajax(request):
     plot_endtime = request.GET.get('endtime')
   #  print plot_starttime + ", " + plot_endtime
 
-    # TODO
-    # add data/time selectors
-    # Improve feedback when the sensor_id is bad
-    # Improve feedback when there is no plot data
-
     # Make sure we have a sensor_id that is in the sensor table
     if Sensor.objects.filter(sensor_id=plot_sensor_id) == False:
         data_to_dump = {'goodPlotData': False,
