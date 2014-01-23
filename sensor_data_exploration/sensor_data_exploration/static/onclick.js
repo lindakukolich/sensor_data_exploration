@@ -61,6 +61,10 @@ $( function () {
 	change = $(this).attr('graph_days');
 	console.log('days to graph: ' + change);
 	changeStartTime(change);
+	var endDate = new Date(window.endtime);
+	var endUTC = endDate.getTime() + endDate.getTimezoneOffset() * 60000;
+	var startDate =new Date(window.starttime);
+	var startUTC = startDate.getTime() + startDate.getTimezoneOffset() * 60000;
 	
 	console.log('about to loop through chartList' + window.chartList);
 	for(var s_id in window.chartList) {
@@ -78,7 +82,8 @@ $( function () {
 			var chartIndex = $("#"+data.sensor_id+"-chart").data('highchartsChart');
 
 			var thisChart = Highcharts.charts[chartIndex];
-			thisChart.series[0].setData(data.data_array1,true);
+			thisChart.series[0].setData(data.data_array1,false);
+			thisChart.xAxis[0].setExtremes(startUTC, endUTC, true);
 			thisChart.hideLoading();
 
 			$('.'+data.sensor_id).button('reset');  //Reset the loading on the button
@@ -118,7 +123,7 @@ $( function () {
     $("#unzoom").click(function(){
 	// Unzoom all the charts
 	console.log('startin unzoom')
-
+	// We don't use startUTC and EndUTC here because we want to force to window settings.
 	var endDate = new Date(window.endtime);
 	var endUTC = endDate.getTime() + endDate.getTimezoneOffset() * 60000;
 	var startDate =new Date(window.starttime);
@@ -204,3 +209,20 @@ function remove_chart_and_manipulate_buttons( sensorid ) {
 	    $( '.'+sensorid ).button( 'reset' );
 	}, 500);
 }
+
+
+// function startUTC() {
+//     //This returns the start extreme for the xAxis in UTC.
+//     //Need to add zoom here eventually
+//     var startDate =new Date(window.starttime);
+//     var startUTC = startDate.getTime() + startDate.getTimezoneOffset() * 60000;
+//     return startUTC;
+// }
+
+// function endUTC() {
+//     //This returns the end extreme for the xAxis in UTC.
+//     //Need to add zoom here eventually
+//     var endDate = new Date(window.endtime);
+//     var endUTC = endDate.getTime() + endDate.getTimezoneOffset() * 60000;
+//     return endUTC;
+// 

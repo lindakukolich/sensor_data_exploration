@@ -1,6 +1,12 @@
 function sensordata_chart(title, subtitle, units, short_units, dataArray1, rendor_to, line_color) {
     //Its getting confusing to just keep putting variables in in order. Should we refactor to use a JSON or Dict? - CM
     console.log('about to crate chart to put in ' + rendor_to);
+    // Get the graph extremes
+    var startDate =new Date(window.starttime);
+    var startUTC = startDate.getTime() + startDate.getTimezoneOffset() * 60000;
+    var endDate = new Date(window.endtime);
+    var endUTC = endDate.getTime() + endDate.getTimezoneOffset() * 60000;
+
     var chart = new Highcharts.Chart({
         chart: {
 	    renderTo: rendor_to,
@@ -13,6 +19,8 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, rendo
             text: null
         },
         xAxis: {
+	    min: startUTC,
+	    max: endUTC,
 	    title: {
 		text: null
 	    }
