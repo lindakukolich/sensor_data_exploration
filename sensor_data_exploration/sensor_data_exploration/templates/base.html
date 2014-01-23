@@ -38,11 +38,10 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class=""><a href="/">Home</a></li>
+            <li {% block home %}{% endblock %}><a href="/">Home</a></li>
 	    <li><a href="#">Map</a></li>
 	    <!-- Make it so the link doesn't work here -->
-	    <li><a href="/explorer/">Graphs</a></li>
-	    <li><a href="#">Data</a></li>
+	    <li {% block graphs %}{% endblock %}><a href="/explorer/">Graphs</a></li>
 	    <li><a href="#">Prediction</a></li>            
 	    <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
