@@ -51,7 +51,12 @@
 
       {% block body_block %}Default Text for Sensor Data Explorer{% endblock %}
 
-      <div id="footer" align="right">Copyright 2014 &copy; Girls &amp; Buoys</div>
+      <div id="footer">
+	<hr>
+	<div class="col-md-2"> This site powered by</div>
+	<div class="col-md-2"> <img src={% static "wu_logo.png" %} height=20px ></img></div>
+	<div class="col-md-6"></div>
+	<div class="col-md-2"><a href="https://github.com/lindakukolich/sensor_data_exploration"> Open Source Code</a> </div>
     </div>
 
   </body>
