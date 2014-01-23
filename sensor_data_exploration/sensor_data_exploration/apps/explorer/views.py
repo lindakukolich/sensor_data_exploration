@@ -75,8 +75,7 @@ def get_data_ajax(request):
     q = SensorData.objects.filter(
         sensor_id_id=plot_sensor_id
         ).filter(time_stamp__range=[plot_starttime, plot_endtime]).order_by('time_stamp')
-    
-    
+
     # Pick out the times of the observations, and convert them to JavaScript
     # timestamps, which are in milliseconds
     xdata = []
@@ -88,34 +87,42 @@ def get_data_ajax(request):
     # Pick out the values for each observation
     ydata = q.values_list('num_value', flat=True)
     ydata = list(ydata)
-
+    
     # Make sure that we actually got some data, or this plot is no good
     if len(xdata) == 0 or len(ydata) == 0:
         print "get_data_ajax: Error retrieving plot data for plot " + plot_sensor_id + ": No data"
         data_to_dump = {'goodPlotData': False,
                         'plotError': "Error retrieving plot data for plot " + plot_sensor_id + ": No data for time range [" + plot_starttime + ", " + plot_endtime + "]",
-                        }
-        print "data_to_dump"
-        print data_to_dump
-        json_data = json.dumps(data_to_dump, cls=DjangoJSONEncoder)
-        print json_data
-        return HttpResponse(json_data, mimetype='application/json')
+                    }
+    else:
+        #we have good data lets prep it and send it back.
+    
+        #make the array for highcharts
+        n_points = 0
+        n_points = len(ydata)
 
-    goodPlotData = True
-    data_to_dump = {'xdata': xdata, 
-                    'ydata': ydata,
-                    'plot_short_name': plot_sensor['sensor_short_name'],
-                    'plot_source_id': plot_sensor['data_source_id'],
-                    'plot_units_long': plot_sensor['units_long'],
-                    'plot_units_short': plot_sensor['units_short'],
-                    'line_color': plot_sensor['line_color'],
-                    'goodPlotData': goodPlotData,
-                    'sensor_id': plot_sensor['sensor_id']
-                }
+        if (n_points > len(xdata)):
+            n_points = len(xdata)
+
+        dataArray1 = []
+        for i in range (0, n_points) :
+             dataArray1.append( [xdata[i], ydata[i]] );
+
+        goodPlotData = True
+        data_to_dump = {'data_array1': dataArray1, 
+                        'plot_short_name': plot_sensor['sensor_short_name'],
+                        'plot_source_id': plot_sensor['data_source_id'],
+                        'plot_units_long': plot_sensor['units_long'],
+                        'plot_units_short': plot_sensor['units_short'],
+                        'line_color': plot_sensor['line_color'],
+                        'goodPlotData': goodPlotData,
+                        'sensor_id': plot_sensor['sensor_id']
+                    }
+    
+    #send back the data or error as created above.
     print "data_to_dump"
     print data_to_dump
     json_data = json.dumps(data_to_dump, cls=DjangoJSONEncoder)
-    print json_data
     return HttpResponse(json_data, mimetype='application/json')
 
 def get_sensors():
