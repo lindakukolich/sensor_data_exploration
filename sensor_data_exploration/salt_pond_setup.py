@@ -10,7 +10,7 @@ debug = True
 
 
 if __name__ == '__main__':
-    if debug: print "Starting setup script..."
+    if debug: print "Starting Salt Pond setup script..."
 
     # create Salt Pond data source ------------------------------
     if debug: print "Creating Datasource..."
@@ -40,7 +40,7 @@ if __name__ == '__main__':
                      units_long = "degrees Celsius",
                      units_short = "°C",
                      kind = "hydrological",
-                     line_color = populate.hex_color('green'),
+                     line_color = populate.hex_color('purple'),
                  )
     s3 = populate.add_sensor( sensor_id = "sp_salinity",
                      source = mysource,
@@ -51,7 +51,7 @@ if __name__ == '__main__':
                      units_short = "ppt",
                      is_headliner = True,
                      kind = "hydrological",
-                     line_color = populate.hex_color('red'),
+                     line_color = populate.hex_color('dark_green'),
                  )
     s4 = populate.add_sensor( sensor_id = "sp_water_pressure",
                      source = mysource,
@@ -61,7 +61,7 @@ if __name__ == '__main__':
                      units_long = "decibars",
                      units_short = "dbar",
                      kind = "hydrological",
-                     line_color = populate.hex_color('blue'),
+                     line_color = populate.hex_color('lilac'),
                  )
     s5 = populate.add_sensor( sensor_id = "sp_chlorophyll",
                      source = mysource,
@@ -72,7 +72,7 @@ if __name__ == '__main__':
                      units_short = "ug/L",
                      is_headliner = True,
                      kind = "hydrological",
-                     line_color = populate.hex_color('green'),
+                     line_color = populate.hex_color('light_green'),
                  )
     s6 = populate.add_sensor( sensor_id = "sp_disolved_oxygen",
                      source = mysource,
@@ -82,7 +82,7 @@ if __name__ == '__main__':
                      units_long = "percent",
                      units_short = "%",
                      kind = "hydrological",
-                     line_color = populate.hex_color('black'),
+                     line_color = populate.hex_color('grey'),
                  )
     s7 = populate.add_sensor( sensor_id = "sp_rel_pressure",
                      source = mysource,
@@ -92,7 +92,7 @@ if __name__ == '__main__':
                      units_long = "decibars",
                      units_short = "dbar",
                      kind = "meteorological",
-                     line_color = populate.hex_color('red'),
+                     line_color = populate.hex_color('cyan'),
                  )
 
-    if debug: print "Finished setup script!"
+    if debug: print "Finished Salt Pond setup script!"

@@ -9,9 +9,20 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sensor_data_exploration.setting
 from sensor_data_exploration.apps.explorer.models import *
 
 colors = { 'black':'#000000',
-           'blue':'#0000CC',
+           'brown':'#660000',
+           'gray':'#A0A0A0',
+           'dark_blue':'#003366',
+           'blue':'#0033CC',
+           'cyan':'#00FFFF',
+           'purple':'#660099',
+           'lilac':'#9966FF',
            'red':'#CC0000',
+           'pink':'#FF0099',
+           'orange':'#FF9900',
+           'yellow':'#FFFF00',
+           'dark_green':'#006633',
            'green':'#00CC00',
+           'light_green':'#33FF33',
 }
 
 def add_datasource(datasource_id,owner,desc="",access_info="",latitude=None,
@@ -29,7 +40,7 @@ def add_datasource(datasource_id,owner,desc="",access_info="",latitude=None,
 def add_sensor(sensor_id, source, short_name, data_type, desc="",units_long="",
                units_short="",kind=None,is_number=False,is_prediction=False,
                update_granularity_sec=60,data_min=None,data_max=None,
-               is_headliner=False,line_color=colors["blue"]):
+               is_headliner=False,line_color=colors["dark_blue"]):
     sensor,created = Sensor.objects.get_or_create(sensor_id=sensor_id,
                                                   sensor_short_name=short_name,
                                                   sensor_desc=desc,

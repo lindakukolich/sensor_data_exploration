@@ -10,7 +10,7 @@ debug = True
 
 
 if __name__ == '__main__':
-    if debug: print "Starting Weather Underground population script..."
+    if debug: print "Starting Weather Underground setup script..."
 
     # create Weather Underground data source ------------------------------
     if debug: print "Creating Datasource..."
@@ -23,7 +23,7 @@ if __name__ == '__main__':
                            )
 
     # create Sensors from this datasource ---------------------------------
-    if debug: print "Creating sensors..."
+    if debug: print "Creating Sensors..."
     s1 = populate.add_sensor( sensor_id = "wu_ti_temp_f",
                      source = mysource,
                      short_name="Air Temperature",
@@ -33,17 +33,17 @@ if __name__ == '__main__':
                      units_short = "°F",
                      is_headliner = True,
                      kind = "meteorological",
-                     line_color = populate.hex_color('blue'),
+                     line_color = populate.hex_color('red'),
                  )
-    s2 = populate.add_sensor( sensor_id = "wu_ti_wind_mph",
+    s2 = populate.add_sensor( sensor_id = "wu_ti_relative_humidity",
                      source = mysource,
-                     short_name="Wind Speed",
+                     short_name="Relative Humidity",
                      data_type = "float",
                      is_number = True,
-                     units_long = "miles per hour",
-                     units_short = "mph",
+                     units_long = "percent",
+                     units_short = "%",
                      kind = "meteorological",
-                     line_color = populate.hex_color('green'),
+                     line_color = populate.hex_color('brown'),
                  )
     s3 = populate.add_sensor( sensor_id = "wu_ti_wind_dir",
                      source = mysource,
@@ -52,25 +52,75 @@ if __name__ == '__main__':
                      kind = "meteorological",
                      line_color = populate.hex_color('black'),
                  )
-    s4 = populate.add_sensor( sensor_id = "wu_ti_precip_1hr_in",
+    s4 = populate.add_sensor( sensor_id = "wu_ti_wind_degrees",
                      source = mysource,
-                     short_name="Precipitation 1hr",
+                     short_name="",
+                     data_type = "float",
+                     is_number = True,
+                     units_long = "degrees",
+                     units_short = "°",
+                     kind = "meteorological",
+                     line_color = populate.hex_color('black'),
+                 )
+    s5 = populate.add_sensor( sensor_id = "wu_ti_wind_mph",
+                     source = mysource,
+                     short_name="Wind Speed",
+                     data_type = "float",
+                     is_number = True,
+                     units_long = "miles per hour",
+                     units_short = "mph",
+                     kind = "meteorological",
+                     line_color = populate.hex_color('dark_blue'),
+                 )
+    s6 = populate.add_sensor( sensor_id = "wu_ti_wind_gust_mph",
+                     source = mysource,
+                     short_name="Gust Speed",
+                     data_type = "float",
+                     is_number = True,
+                     units_long = "miles per hour",
+                     units_short = "mph",
+                     kind = "meteorological",
+                     line_color = populate.hex_color('blue'),
+                 )
+    s7 = populate.add_sensor( sensor_id = "wu_ti_pressure_in",
+                     source = mysource,
+                     short_name="Air Pressure",
+                     data_type = "float",
+                     is_number = True,
+                     units_long = "inches mercury",
+                     units_short = "inHg",
+                     kind = "meteorological",
+                     line_color = populate.hex_color('gray'),
+                 )
+    s8 = populate.add_sensor( sensor_id = "wu_ti_dewpoint_f",
+                     source = mysource,
+                     short_name="Dew Point",
+                     data_type = "float",
+                     is_number = True,
+                     units_long = "degrees Farenheit",
+                     units_short = "°F",
+                     kind = "meteorological",
+                     line_color = populate.hex_color('orange'),
+                 )
+    s9 = populate.add_sensor( sensor_id = "wu_ti_precip_1hr_in",
+                     source = mysource,
+                     short_name="Precipitation Rate",
                      data_type = "float",
                      is_number = True,
                      units_long = "inches",
                      units_short = '"',
                      kind = "meteorological",
-                     line_color = populate.hex_color('green'),
+                     line_color = populate.hex_color('cyan'),
                  )
-    s5 = populate.add_sensor( sensor_id = "wu_ti_sunrise",
+    s10 = populate.add_sensor( sensor_id = "wu_ti_precip_today_in",
                      source = mysource,
-                     short_name="Sunrise",
-                     data_type = "string",
-                     units_long = "h:mm",
-                     units_short = "",
-                     desc = "Predicted time for sunrise on this date.",
-                     is_prediction = True,
-                     line_color = populate.hex_color('red'),
+                     short_name="Precipitation Total",
+                     data_type = "float",
+                     is_number = True,
+                     units_long = "inches",
+                     units_short = '"',
+                     kind = "meteorological",
+                     line_color = populate.hex_color('cyan'),
                  )
 
-    if debug: print "Finished Weather Underground population script!"
+    if debug: print "Finished Weather Underground setup script!"
