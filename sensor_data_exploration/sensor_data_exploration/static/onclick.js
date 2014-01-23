@@ -134,9 +134,6 @@ $( function () {
 	    thisChart.xAxis[0].setExtremes(startUTC, endUTC, true);
 //	    thisChart.xAxis[0].setExtremes(null, null);
 	});
-//	console.log('going to unzome the following: ' + sensor_visible);
-//	for (sensor_div in sensor_visible) {
-
     });
 });
 
