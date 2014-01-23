@@ -32,7 +32,8 @@ div.container {
 }
 
 .time-btn,
-.graph-btn {
+.graph-btn,
+#custom-btn {
 }
 
 .btn-default .badge {
@@ -93,6 +94,12 @@ div.container {
     border-bottom: 10px;
   }
 
+
 .navbar-brand {
    padding: 5px 5px;
 }
+
+.modal {
+  position: relative;
+}
+
