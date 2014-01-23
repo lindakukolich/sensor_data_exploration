@@ -92,3 +92,7 @@ div.container {
   .nav-tabs.nav-justified > li > a {
     border-bottom: 10px;
   }
+
+.navbar-brand {
+   padding: 5px 5px;
+}
