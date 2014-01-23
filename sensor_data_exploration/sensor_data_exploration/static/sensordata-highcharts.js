@@ -1,43 +1,44 @@
 function sensordata_chart(title, subtitle, units, short_units, dataArray1, rendor_to, line_color) {
     //Its getting confusing to just keep putting variables in in order. Should we refactor to use a JSON or Dict? - CM
-    	
+    console.log('about to crate chart to put in ' + rendor_to);
     var chart = new Highcharts.Chart({
         chart: {
 	    renderTo: rendor_to,
             type: 'spline' 
         },
         title: {
+            text: null
+        },
+        subtitle: {
+            text: null
+        },
+        xAxis: {
+	    title: {
+		text: null
+	    }
+        },
+        yAxis: {
+            title: {
                 text: null
-            },
-            subtitle: {
-                text: null
-            },
-            xAxis: {
-		title: {
-		    text: null
-		},
-            },
-            yAxis: {
-                title: {
-                    text: null,
-                }
-            },
-            tooltip: {
-                formatter: function() {
-		    return '<b>'+ this.series.name +'</b><br/>'+
+            }
+        },
+        tooltip: {
+            formatter: function() {
+		return '<b>'+ this.series.name +'</b><br/>'+
 		    Highcharts.dateFormat('%Y/%m/%d %H:%M', this.x) +': '+ this.y +' ' + short_units;
-                }
-            },            
-            series: [{
-		name: title,
-		color: line_color,
-		data: dataArray1
-	    }]
-        });
+            }
+        },            
+        series: [{
+	    name: title,
+	    color: line_color,
+	    data: dataArray1
+	}]
+    });
     return chart;
 }
 
 function ajax_make_chart(sensorid, starttime, endtime) {
+    console.log('GetJSON for ' + sensorid);
     $.getJSON('/explorer/get_data_ajax/',{'sensorid': sensorid, 'starttime': starttime, 'endtime': endtime})
 	.done(function(data) {
 	    //make the div use chart-row template
