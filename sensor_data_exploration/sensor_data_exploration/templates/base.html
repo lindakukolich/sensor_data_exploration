@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- Django. static -->
+{% load static %}
+
+<html>
+  <head>
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Sensor Data Explorer{% endblock %}</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+    <!-- Theme from http://bootswatch.com/cerulean -->
+    <link rel="stylesheet" href="{%static "bootstrap.css" %}" />
+
+    
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+    <!-- static is defined in settings, a directory for static data files -->
+    <link rel="stylesheet" type="text/css" media="screen" href="{%static "explorer.css" %}" />
+
+      {% block head_extra %} {% endblock %}
+    
+  </head>
+  <body>
+    <!-- Fixed navbar -->
+    <div class="container" class="col-md-2">
+      <div class="navbar navbar-inverse" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Thomspon Island Sensor Data</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li {% block home %}{% endblock %}><a href="/">Home</a></li>
+	    <li><a href="#">Map</a></li>
+	    <!-- Make it so the link doesn't work here -->
+	    <li {% block graphs %}{% endblock %}><a href="/explorer/">Graphs</a></li>
+	    <li><a href="#">Prediction</a></li>            
+	    <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+	  </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    
+
+      {% block body_block %}Default Text for Sensor Data Explorer{% endblock %}
+
+      <div id="footer" align="right">Copyright 2014 &copy; Girls &amp; Buoys</div>
+    </div>
+
+  </body>
+</html>

@@ -1,31 +1,6 @@
-<!DOCTYPE html>
-
+{% extends 'base.html' %}
 {% load static %}
-
-<html>
-  <head>
-    <meta charset="utf-8"></meta>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sensor Data Exploration Root</title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-    <!-- JQuery date time picker -->
-<!--
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
--->
-    <!-- Original Date Picker -->
-<!--
-    <link rel="stylesheet" href="{%static "datepicker.css" %}" />
-    <script src="{%static "boostrap-datepicker.js" %}"></script>
-
-    <!-- Theme from http://bootswatch.com/cerulean -->
-    <link rel="stylesheet" href="{%static "bootstrap.css" %}" />
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
--->
-
+{% block head_extra %}
     <!-- Twitter date time picker. This must come after boostrap.min, which
       breaks some of the drop-down settings used by the actual picker -->
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
@@ -36,12 +11,12 @@
     </script>
 
     <!-- Nonresponsive so the charts and the legend for the charts to go onto separate rows -->
-    <link rel="stylesheet" type="text/css" media="screen" href="{%static "non-responsive.css" %}" />
-
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static "non-responsive.css" %}" />
+    
     <!-- Load this stylesheet last. It has the styles that overwrite bootstrap  -->
-    <link rel="stylesheet" type="text/css" media="screen" href="{%static "explorer.css" %}" />
-
-
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static "explorer.css" %}" />
+    
+    
     <script src="{%static "handlebars-v1.3.0.js" %}"></script>
     <!-- javascript for generating plots -->
     <script src="http://code.highcharts.com/highcharts.js"></script>
@@ -49,53 +24,28 @@
     <script src="{%static "highcharts-explorer-theme.js" %}"></script>
     <script src="{%static "sensordata-highcharts.js" %}"></script>
     <script src="{%static "onclick.js" %}"></script>
-
+    
     <!-- Handlebar templates -->
     <script id="chart-row" type="text/x-handlebars-template">
       {% verbatim %}
-      <div id="{{ sensorid }}">
+      <div id="{{ sensorid }}"  data-sensorid="{{sensorid}}">
 	<div id="{{sensorid}}-legend" class="col-md-2">
 	  <h4>{{title}}</h4>
 	  <h6>{{units}}</h6>
 	  <h5>{{subtitle}}</h5>
 	</div>
-	<div id="{{sensorid}}-chart" class="col-md-10">
-	<!-- Highcharts will render the chart here -->
+	<div id="{{sensorid}}-chart" class="col-md-10 highchart">
+	  <!-- Highcharts will render the chart here -->
 	</div>
       </div>
       {% endverbatim %}
     </script>
-  </head>
-  <body>
-    <!-- Fixed navbar -->
-    <div class="container">
-      <div class="navbar navbar-inverse" role="navigation">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Thomspon Island Sensor Data</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-	    <li><a href="#">Map</a></li>
-	    <!-- Make it so the link doesn't work here -->
-	    <li><a href="#">Graphs</a></li>
-	    <li><a href="#">Data</a></li>
-	    <li><a href="#">Prediction</a></li>            
-	    <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-	  </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-      
+    {% endblock %}
+    {% block graphs %}class="active"{% endblock %}
+    {% block body_block %}
       <div id="timeselection">
 	<div class="col-md-2"></div>
-	<div class="col-md-10">
+	<div class="col-md-8">
 	  <button id="day-btn" graph_days=1 type="button" class="btn btn-default time-btn">Last Day</button>
 	  <button id="week-btn" graph_days=7 type="button" class="btn btn-default time-btn">Last Week</button>
 	  <button id="month-btn" graph_days=30 type="button" class="btn btn-default time-btn">Last Month</button>
@@ -117,7 +67,7 @@
 		      <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
 		    </span>
 		    <label>End Date</label>
-		    <span id="endtimepicker" class="input-append date">
+s		    <span id="endtimepicker" class="input-append date">
 		      <input type="text" />
 		      <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
 		    </span>
@@ -148,6 +98,10 @@
 	  <label>Start Date:</label><span id="startdate">Yesterday</span>
 	  <label>End date:</label><span id="enddate">Today</span>
 	</div>
+	<div class="col-md-2">
+	  <button id="unzoom" class="btn btn-default">Unzoom</button>
+	  <button id="clear" class="btn btn-default">Clear All</button>
+       </div>
       </div>
       <div id="charts">
 	<!-- Charts are added here with javascript -->
@@ -204,9 +158,5 @@
 
 	</div>
       </div>
-      <div id="footer">
-	<div id="footer">Copyright 2014 &copy; Girls &amp; Buoys</div>
-      </div>
-    </div>
-  </body>
-</html>
+{% endblock %}
+

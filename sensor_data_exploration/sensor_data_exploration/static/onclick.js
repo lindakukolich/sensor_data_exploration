@@ -47,26 +47,31 @@ $( function () {
 	};
 	
 	});
-
     /**
       Change the date range to be from 'graph_days' ago till now
       Update all the currently displayed graphs
       TODO:
        Update currently displayed start and end times
      */
+
     $(".time-btn").click(function(){
 	change = $(this).attr('graph_days');
 	console.log('days to graph: ' + change);
 	changeStartTime(change);
+	var endDate = new Date(window.endtime);
+	var endUTC = endDate.getTime() + endDate.getTimezoneOffset() * 60000;
+	var startDate =new Date(window.starttime);
+	var startUTC = startDate.getTime() + startDate.getTimezoneOffset() * 60000;
 	
 	console.log('about to loop through chartList' + window.chartList);
-	for(var s_id in window.chartList) {
+	$('div#charts > div').each(function() {
+	    s_id = $(this).attr('data-sensorid');
 	    var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
 	    console.log('chartIndex is' + chartIndex +"for " + s_id);	    
 	    var thisChart = Highcharts.charts[chartIndex];
 	    thisChart.showLoading();
 	    $('.'+s_id).button('loading');
-
+	    
 
 	    $.getJSON('/explorer/get_data_ajax/',{'sensorid': s_id, 'starttime': starttime, 'endtime': endtime})
 		.done(function(data) {
@@ -75,7 +80,8 @@ $( function () {
 			var chartIndex = $("#"+data.sensor_id+"-chart").data('highchartsChart');
 
 			var thisChart = Highcharts.charts[chartIndex];
-			thisChart.series[0].setData(data.data_array1,true);
+			thisChart.series[0].setData(data.data_array1,false);
+			thisChart.xAxis[0].setExtremes(startUTC, endUTC, true);
 			thisChart.hideLoading();
 
 			$('.'+data.sensor_id).button('reset');  //Reset the loading on the button
@@ -88,27 +94,29 @@ $( function () {
 		    var err = textStatus + ", " + error;
 		    console.log( "Request Failed: " + err );
 		});
-	};
-    /*
-    $( "#dateSelSaveBtn" ).click(function() {
-	    var startDate = $("#startdatepicker").datepicker("getDate");
-	    var endDate = $("#enddatepicker").datepicker("getDate");
-	    if (startDate < endDate) {
-		window.starttime = printDate( startDate );
-		$("#startdate").html(window.starttime);
-		window.endtime = printDate( endDate );
-		$("#enddate").html(window.endtime);
-		console.log("Change graphs to go from " + window.starttime + " to " + window.endtime);
-
-		for (var s_id in window.chartList) {
-		    remove_chart_and_manipulate_buttons(s_id);
-		    make_chart_and_manipulate_buttons(s_id);
-		}
-	    } else {
-		console.log("dates are bad. Do not use them");
-	    }
 	});
-    */
+    });
+
+
+    $("#unzoom").click(function(){
+	// Unzoom all the charts
+	console.log('startin unzoom')
+	// We don't use startUTC and EndUTC here because we want to force to window settings.
+	var endDate = new Date(window.endtime);
+	var endUTC = endDate.getTime() + endDate.getTimezoneOffset() * 60000;
+	var startDate =new Date(window.starttime);
+	var startUTC = startDate.getTime() + startDate.getTimezoneOffset() * 60000;
+
+	$('div#charts > div').each(function() {
+	    s_id = $(this).attr('data-sensorid');
+	    console.log('going to unzome the following: ' + s_id);
+	    var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
+	    var thisChart = Highcharts.charts[chartIndex];
+	    thisChart.options.chart.isZoomed = false;
+
+	    thisChart.xAxis[0].setExtremes(startUTC, endUTC, true);
+//	    thisChart.xAxis[0].setExtremes(null, null);
+	});
     });
 });
 
@@ -177,3 +185,20 @@ function remove_chart_and_manipulate_buttons( sensorid ) {
 	    $( '.'+sensorid ).button( 'reset' );
 	}, 500);
 }
+
+
+// function startUTC() {
+//     //This returns the start extreme for the xAxis in UTC.
+//     //Need to add zoom here eventually
+//     var startDate =new Date(window.starttime);
+//     var startUTC = startDate.getTime() + startDate.getTimezoneOffset() * 60000;
+//     return startUTC;
+// }
+
+// function endUTC() {
+//     //This returns the end extreme for the xAxis in UTC.
+//     //Need to add zoom here eventually
+//     var endDate = new Date(window.endtime);
+//     var endUTC = endDate.getTime() + endDate.getTimezoneOffset() * 60000;
+//     return endUTC;
+// 

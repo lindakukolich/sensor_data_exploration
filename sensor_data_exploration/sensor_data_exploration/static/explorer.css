@@ -34,7 +34,6 @@ div.container {
 .time-btn,
 .graph-btn,
 #custom-btn {
-    padding: 4px 6px;
 }
 
 .btn-default .badge {
@@ -56,6 +55,7 @@ div.container {
 .btn {
   margin-bottom: 3px;
   margin-top: 3px;
+  padding: 4px 6px;
 }
 
 .nav-tabs {
