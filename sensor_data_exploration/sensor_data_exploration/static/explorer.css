@@ -32,7 +32,8 @@ div.container {
 }
 
 .time-btn,
-.graph-btn {
+.graph-btn,
+#custom-btn {
     padding: 4px 6px;
 }
 
@@ -92,3 +93,7 @@ div.container {
   .nav-tabs.nav-justified > li > a {
     border-bottom: 10px;
   }
+
+.modal {
+  position: relative;
+}

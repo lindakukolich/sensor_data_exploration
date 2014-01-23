@@ -8,14 +8,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sensor Data Exploration Root</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+    <!-- JQuery date time picker -->
+<!--
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+-->
+    <!-- Original Date Picker -->
+<!--
+    <link rel="stylesheet" href="{%static "datepicker.css" %}" />
+    <script src="{%static "boostrap-datepicker.js" %}"></script>
 
     <!-- Theme from http://bootswatch.com/cerulean -->
     <link rel="stylesheet" href="{%static "bootstrap.css" %}" />
 
-    
     <!-- Latest compiled and minified JavaScript -->
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+-->
+
+    <!-- Twitter date time picker. This must come after boostrap.min, which
+      breaks some of the drop-down settings used by the actual picker -->
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen"
+     href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
+    <script type="text/javascript"
+     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+    </script>
 
     <!-- Nonresponsive so the charts and the legend for the charts to go onto separate rows -->
     <link rel="stylesheet" type="text/css" media="screen" href="{%static "non-responsive.css" %}" />
@@ -82,45 +100,54 @@
 	  <button id="week-btn" graph_days=7 type="button" class="btn btn-default time-btn">Last Week</button>
 	  <button id="month-btn" graph_days=30 type="button" class="btn btn-default time-btn">Last Month</button>
 	  <button id="year-btn" graph_days=365 type="button" class="btn btn-default time-btn">Last Year</button>
-<!--
-	  <button id="custom-date-btn" type="button" class="btn btn-default" data-toggle="modal" data-target="#setDateModal">Custom Date</button>
-->
-	  <p />
-	  <label>Start Date:</label> <span id="startdate">Yesterday</span>
-	  <label>End Date:</label> <span id="enddate">Today</span>
+	  <button id="custom-btn" class="btn btn-default" data-toggle="modal" data-target="#dateModal"> Custom Dates </button>
+	  <div class="modal fade" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel" aria-hidden="true">
+	    <!-- Modal -->
+	    <div class="modal-dialog">
+	      <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		  <h4 class="modal-title" id="dateModalLabel">Select Start and End Dates</h4>
+		</div>
+		<div class="modal-body">
+		  <div>
+		    <label>Start Date</label>
+		    <span id="starttimepicker" class="input-append date">
+		      <input type="text" />
+		      <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
+		    </span>
+		    <label>End Date</label>
+		    <span id="endtimepicker" class="input-append date">
+		      <input type="text" />
+		      <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
+		    </span>
+		    <script type="text/javascript">
+		      $('#starttimepicker').datetimepicker({
+		      format: 'yyyy-MM-dd',
+		      language: 'en',
+		      endDate: new Date(),
+		      pickTime: false,
+		      });
+		      $('#endtimepicker').datetimepicker({
+		      format: 'yyyy-MM-dd',
+		      language: 'en',
+		      endDate: new Date(),
+		      pickTime: false,
+		      });
+		    </script>
+		  </div>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-primary">Save changes</button>
+		</div>
+	      </div><!-- /.modal-content -->
+	    </div><!-- /.modal-dialog -->
+	  </div><!-- /.modal -->
+	  <br />
+	  <label>Start Date:</label><span id="startdate">Yesterday</span>
+	  <label>End date:</label><span id="enddate">Today</span>
 	</div>
-
-<!--
-	<div class="modal fade" id="setDateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		<h4 class="modal-title">Select Date Range</h4>
-	      </div>
-	      <div class="modal-body">
-		<label>Start Date:</label><input type="text" id="startdatepicker">
-		<label>End Date:</label><input type="text" id="enddatepicker">
-		<script>
-		  $( "#startdatepicker" ).datepicker({
-		  dateFormat: "yy-mm-dd",
-		  maxDate: "-1d",
-		  });
-		  $( "#enddatepicker" ).datepicker({
-		  dateFormat: "yy-mm-dd",
-		  maxDate: "0d",
-		  });
-		</script>
-	      </div>
-	      <div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		<button type="button" id="dateSelSaveBtn" class="btn btn-primary" data-dismiss="modal">Save changes</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
--->
-	      
       </div>
       <div id="charts">
 	<!-- Charts are added here with javascript -->
