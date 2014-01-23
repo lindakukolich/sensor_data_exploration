@@ -21,7 +21,7 @@ Highcharts.theme = {
 	plotBorderWidth: 0,
 	height: 150,
 	marginTop: 10,
-	marginBottom: 10,
+	marginBottom: 30,
 	marginLeft: 30,
 	zoomType: 'x',
     },
@@ -50,11 +50,15 @@ Highcharts.theme = {
     },
     xAxis: {
 	type: 'datetime',
+	dateTimeLabelFormats: {
+            hour: '%b-%e %H:%M',
+	    day: '%b-%e-%y'
+            },
 	gridLineWidth: 1,
 	lineColor: '#000',
 	tickColor: '#000',
 	labels: {
-	    enabled: false
+	    enabled: true
 	},
 	title: {
 	    text: null
