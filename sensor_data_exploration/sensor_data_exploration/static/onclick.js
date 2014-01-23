@@ -58,7 +58,9 @@ $(function () {
 	changeStartTime(change);
 
 	for(var s_id in window.chartList) {
-	    $("#chart-"+s_id).html("loading");
+	    var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
+	    var thisChart = Highcharts.charts[chartIndex];
+	    thisChart.showLoading();
 	    $('.'+s_id).button('loading');
 
 	    console.log('about to call getjson for ' + s_id);

@@ -25,6 +25,11 @@ Highcharts.theme = {
 	marginLeft: 30,
 	zoomType: 'x',
     },
+    loading: {
+        labelStyle: {
+            top: '45%'
+        }
+    },
     title: {
 	style: {
 	    color: '#000',
