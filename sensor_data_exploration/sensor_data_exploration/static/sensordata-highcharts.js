@@ -1,19 +1,6 @@
-function sensordata_chart(title, subtitle, units, short_units, xdata, ydata, rendor_to, line_color) {
+function sensordata_chart(title, subtitle, units, short_units, dataArray1, rendor_to, line_color) {
     //Its getting confusing to just keep putting variables in in order. Should we refactor to use a JSON or Dict? - CM
-    var dataArray1 = [];
-    console.log("ydata=", ydata);
-    var n_points = 0;
-    n_points = ydata.length;
-
-    if (n_points > xdata.length) {
-	n_points = xdata.length;
-    }
-
-    for (i = 0; i < n_points; i++) {
-	//	dataArray1.push( [Date.UTC(1970, 1, i), ydata[i]]);
-	dataArray1.push( [xdata[i], ydata[i]]);
-    }
-	
+    	
     var chart = new Highcharts.Chart({
         chart: {
 	    renderTo: rendor_to,
@@ -65,7 +52,7 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 	    $('#charts').append(chart_template(legend_data));
 	    var chart_id = sensorid + "-chart";
 	    if (data.goodPlotData) {
-		var chart = sensordata_chart(data.plot_short_name, data.plot_source_id, data.plot_units_long, data.plot_units_short, data.xdata, data.ydata, chart_id, data.line_color);
+		var chart = sensordata_chart(data.plot_short_name, data.plot_source_id, data.plot_units_long, data.plot_units_short, data.data_array1, chart_id, data.line_color);
 		chartList[sensorid] = chart;
 
 //		console.log(chartList);
