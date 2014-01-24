@@ -122,3 +122,13 @@ h6,
 .h6 {
   color:  #ddf0fb;
 }
+
+
+hr {
+    margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+#footer {
+    padding-top: 10px;
+}

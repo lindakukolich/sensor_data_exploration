@@ -71,6 +71,7 @@ $( function () {
 	change = $(this).attr('graph_days');
 	console.log('days to graph: ' + change);
 	changeStartTime(change);
+	update_existing_charts();
     });
 
     $("#clear").click(function(){
@@ -96,8 +97,8 @@ $( function () {
 	    console.log('chartindex is' + chartIndex);
 	    if (typeof chartIndex === 'number') {    //error messages will have undefined chartIndex
 		var thisChart = Highcharts.charts[chartIndex];
-//		thisChart.options.chart.isZoomed = false;
 		thisChart.xAxis[0].setExtremes(startUTC, endUTC, true);
+		return false; // once we set one the sync zoom will set the rest
 	    };
 	});
     });
@@ -148,6 +149,7 @@ function update_existing_charts() {
 	    };
 	});
 }
+
 
 /**
    Change window.endtime to now.
@@ -215,6 +217,8 @@ function make_chart_and_manipulate_buttons( sensorid ) {
    too often and to make sure they get colored right
  */
 function remove_chart_and_manipulate_buttons( sensorid ) {
+    // Remove the graph
+    $( "#" + sensorid + "-chart" ).remove();
     $( "#" + sensorid ).remove();
     $( '.' + sensorid ).addClass( 'btn-default');
     $( '.' + sensorid ).removeClass( 'btn-primary');
@@ -254,15 +258,9 @@ function update_dates(startday, endday) {
     window.prettyEnd = prettyDate( endday );
     $("#startdate").html( window.prettyStart );
     $("#enddate").html( window.prettyEnd );
-    $("#startText").val( window.prettyStart );
-    $("#endText").val( window.prettyEnd );
-    /* The Documentation for eternicode's date picker is pretty clear
-     * on the idea that one of these lines should cause the date we
-     * see on the custom date selector to match the date here.  It
-     * does not work.  This may be because we had to hack things to
-     * make them work for Bootstrap 3 and datepicker was written for
-     * bootstrap 2 */
     
+    // This one does not get set
     $("#endtimepicker").datepicker( 'setDate', endday );
+    // This one does, so that's a start
     $("#starttimepicker").datepicker( 'setDate', startday );
 }

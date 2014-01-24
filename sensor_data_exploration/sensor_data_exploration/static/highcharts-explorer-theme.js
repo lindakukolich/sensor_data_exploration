@@ -20,10 +20,10 @@ Highcharts.theme = {
 	plotShadow: false,
 	plotBorderWidth: 0,
 	height: 150,
+	zoomType: 'x',
 	marginTop: 10,
 	marginBottom: 30,
 	marginLeft: 30,
-	zoomType: 'x',
     },
     loading: {
         labelStyle: {
@@ -62,6 +62,11 @@ Highcharts.theme = {
 	},
 	title: {
 	    text: null
+	},
+	events: {
+            afterSetExtremes: function(zoomEvent) {
+		syncZoom(zoomEvent);
+	    }
 	}
     },
     yAxis: {
@@ -93,7 +98,6 @@ Highcharts.theme = {
 	    color: '#99b'
 	}
     },
-    
     navigation: {
 	buttonOptions: {
 	    theme: {
@@ -101,22 +105,11 @@ Highcharts.theme = {
 	    }
 	}
     },
-    exporting: {
-	buttons: { 
-            exportButton: {
-		enabled:false
-            },
-            printButton: {
-		enabled:false
-            }
-	    
-	}
-    }
+
+   
 };
 
 // Apply the theme
 var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
 
-var export_menu = Highcharts.getOptions().exporting.buttons.contextButton.menuItems;
-console.log('highcharts export menu is:');
 
