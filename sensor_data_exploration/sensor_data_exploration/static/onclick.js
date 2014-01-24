@@ -92,7 +92,7 @@ $(".time-btn").click(function(){
 
 			$('.'+data.sensor_id).button('reset');  //Reset the loading on the button
 		    } else {
-			$('#'+'data.sensor_id'+'-chart').append("<br /><b>" + data.plotError +"</b><br />");
+			$('#'+'data.sensor_id'+'-chart').append(data.plotError);
 			$('.'+data.sensor_id).button('reset');  //Reset the loading on the button
 		    }
 		})
