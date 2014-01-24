@@ -186,7 +186,7 @@ function make_chart_and_manipulate_buttons( sensorid ) {
    too often and to make sure they get colored right
  */
 function remove_chart_and_manipulate_buttons( sensorid ) {
-    $( "." + sensorid ).remove();
+    $( "#" + sensorid ).remove();
     $( '.' + sensorid ).addClass( 'btn-default');
     $( '.' + sensorid ).removeClass( 'btn-primary');
     //Arbitrarily make the loading show up for half a second to discourage double clicking.
