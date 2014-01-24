@@ -4,15 +4,12 @@
     <!-- Twitter date time picker. This must come after boostrap.min, which
       breaks some of the drop-down settings used by the actual picker -->
 
-    <link rel="stylesheet" type="text/css" media="screen"
-     href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
-    <script type="text/javascript"
-     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
-    </script>
+    <!--- Datetime picker from http://eternicode.github.io/bootstrap-datepicker/ -->
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static "datepicker3.css" %}" />
 
     <!-- Nonresponsive so the charts and the legend for the charts to go onto separate rows -->
     <link rel="stylesheet" type="text/css" media="screen" href="{% static "non-responsive.css" %}" />
-    
+        <script src="{%static "bootstrap-datepicker.js" %}"></script>
     <!-- Load this stylesheet last. It has the styles that overwrite bootstrap  -->
     <link rel="stylesheet" type="text/css" media="screen" href="{% static "explorer.css" %}" />
     
@@ -62,34 +59,29 @@
 	      <div class="modal-body">
 		<div>
 		  <label>Start Date</label>
-		  <span id="starttimepicker" class="input-append date">
-		    <input type="text" />
-		    <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
-		  </span>
+		  <div id="starttimepicker" class="input-group date">
+		    <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+		  </div>
+		  
 		  <label>End Date</label>
-		  <span id="endtimepicker" class="input-append date">
-		    <input type="text" />
-		    <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
-		  </span>
+		  <div id="endtimepicker" class="input-group date">
+		    <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+		  </div>
 		  <script type="text/javascript">
-		    $('#starttimepicker').datetimepicker({
-		    format: 'yyyy-MM-dd',
-		    language: 'en',
-		    endDate: new Date(),
-		    pickTime: false,
+		    $('#starttimepicker').datepicker({
+		    startDate: "1-1-2013",
+		    endDate: "0d"
 		    });
-		    $('#endtimepicker').datetimepicker({
-		    format: 'yyyy-MM-dd',
-		    language: 'en',
-		    endDate: new Date(),
-		    pickTime: false,
+		    $('#endtimepicker').datepicker({
+		    startDate: "1-1-2013",
+		    endDate: "0d"
 		    });
 		  </script>
 		</div>
 	      </div>
 	      <div class="modal-footer">
 		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		<button type="button" class="btn btn-primary">Save changes</button>
+		<button id="save-date" type="button" class="btn btn-primary">Save changes</button>
 	      </div>
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->

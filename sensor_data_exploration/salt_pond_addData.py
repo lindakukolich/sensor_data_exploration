@@ -54,9 +54,10 @@ def parse_dt(dt_string):
     dt=datetime(int(x.year),int(x.month),int(x.day),int(x.hour),int(x.minute),int(x.second),tzinfo=tz)
     return dt
 
+
 if __name__ == '__main__':
     args = get_args()
-    if debug: print "Starting population script..."
+    if debug: print "Starting Salt Pond population script..."
 
     # list of sensors for this source: (sensor_id, field_#)
     keys=[ ("sp_air_pressure",1),
@@ -88,11 +89,18 @@ if __name__ == '__main__':
         d = get_data(urls[-1])
         data.extend(clean_data(d))
 
+    # get the latest date already in the database
+    previous_load_date = None
+    if args.current:
+        previous_load_date = populate.database_latest_date(keys)
+
     # load sensor data
     if debug: print "Loading data..."
     for entry in data:
         timestamp = parse_dt(entry[0])
-        # if args.current check here for > max prev date
+        if args.current:
+            if previous_load_date and timestamp <= previous_load_date:
+                continue
         for key in keys:
             value = entry[ key[1] ]
             numeric = sensors[key[0]].data_is_number
@@ -102,5 +110,4 @@ if __name__ == '__main__':
             else:
                 populate.load_data(sensor_id=sensors[key[0]], time_stamp=timestamp, string_value=value)
 
-    if debug: print "\nFinishing population script..."
-
+    if debug: print "Finishing Salt Pond population script..."

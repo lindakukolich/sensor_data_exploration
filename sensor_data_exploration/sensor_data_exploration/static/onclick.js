@@ -46,7 +46,8 @@ $( function () {
 	    make_chart_and_manipulate_buttons( sensorid );
 	};
 	
-	});
+    });
+   
     /**
       Change the date range to be from 'graph_days' ago till now
       Update all the currently displayed graphs
@@ -54,7 +55,12 @@ $( function () {
        Update currently displayed start and end times
      */
 
-    $(".time-btn").click(function(){
+    $('#save-date').click(function(){
+	var newstart = $('#starttimepicker').datepicker('getDate');
+	console.log('custom date start is ' + newstart);
+    });
+
+$(".time-btn").click(function(){
 	change = $(this).attr('graph_days');
 	console.log('days to graph: ' + change);
 	changeStartTime(change);

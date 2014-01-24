@@ -1,4 +1,4 @@
-#Team: Girs & Buoyrs
+#Team: Girls & Buoys
 
 ###Milestone 2
 Website: http://stark-caverns-7053.herokuapp.com/explorer/
@@ -44,7 +44,7 @@ Next priority:
 ###What technologies are you using for the back-end? Include any frameworks if relevant.
 Django/Python
 ###What technologies are you using for the front-end? Include Javascript frameworks such as jQuery, templating frameworks such as Handlebars.js, and other client-side frameworks such as Ember.js or Backbone.js.
-Jquery, Bootstrap, Highcharts
+Jquery, Bootstrap 3, Highcharts
 ###What is the main browser you are targeting? Must be one of our supported browsers.
 Chrome, Firefox
 ###What implementation unknown / risks are you still facing? Consider this an exercise of imagination, not a test of confidence.

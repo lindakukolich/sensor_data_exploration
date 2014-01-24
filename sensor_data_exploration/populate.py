@@ -4,14 +4,26 @@
 # collection of functions used to populate the database
 
 import os
+from datetime import datetime,tzinfo,timedelta
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sensor_data_exploration.settings')
 from sensor_data_exploration.apps.explorer.models import *
 
 colors = { 'black':'#000000',
-           'blue':'#0000CC',
+           'brown':'#660000',
+           'gray':'#A0A0A0',
+           'dark_blue':'#003366',
+           'blue':'#0033CC',
+           'cyan':'#00FFFF',
+           'purple':'#660099',
+           'lilac':'#9966FF',
            'red':'#CC0000',
+           'pink':'#FF0099',
+           'orange':'#FF9900',
+           'yellow':'#FFFF00',
+           'dark_green':'#006633',
            'green':'#00CC00',
+           'light_green':'#33FF33',
 }
 
 def add_datasource(datasource_id,owner,desc="",access_info="",latitude=None,
@@ -29,7 +41,7 @@ def add_datasource(datasource_id,owner,desc="",access_info="",latitude=None,
 def add_sensor(sensor_id, source, short_name, data_type, desc="",units_long="",
                units_short="",kind=None,is_number=False,is_prediction=False,
                update_granularity_sec=60,data_min=None,data_max=None,
-               is_headliner=False,line_color=colors["blue"]):
+               is_headliner=False,line_color=colors["dark_blue"]):
     sensor,created = Sensor.objects.get_or_create(sensor_id=sensor_id,
                                                   sensor_short_name=short_name,
                                                   sensor_desc=desc,
@@ -73,3 +85,23 @@ def load_data(sensor_id,time_stamp,num_value=None,string_value=None,value_is_num
                                             string_value=string_value,
                                             value_is_number=value_is_number)
     return result
+
+class EST(tzinfo):
+    '''returns an object representing EST time zone offset'''
+    def utcoffset(self, dt):
+        return timedelta(hours=-5)
+    def dst(self, dt):
+        return timedelta(0)
+
+def database_latest_date(keys):
+    '''find the latest date already in the database'''
+    tz = EST()
+    min_time = datetime.now(tz)
+    try:
+        for key in keys:
+            sdobj = SensorData.objects.filter(sensor_id_id__exact=key[0]).latest('time_stamp')
+            if sdobj.time_stamp < min_time:
+                min_time = sdobj.time_stamp
+    except:
+        min_time = None
+    return min_time

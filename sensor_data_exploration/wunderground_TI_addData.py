@@ -67,7 +67,7 @@ def parse_dt(dt_string):
     ## grrrr, %z is not available!
     dt_string = dt_string[:-6]
     x=datetime.strptime(dt_string, "%a, %d %b %Y %H:%M:%S")
-    dt=datetime(int(x.year),int(x.month),int(x.day),int(x.hour),int(x.minute),int(x.second), tz)
+    dt=datetime(int(x.year),int(x.month),int(x.day),int(x.hour),int(x.minute),int(x.second),tzinfo=tz)
     return dt
 
 
@@ -75,11 +75,18 @@ if __name__ == '__main__':
     args = get_args()
     if debug: print "Starting Weather Underground population script..."
 
-    # list of sensors for this source
-    keys=[("wu_ti_temp_f","tempi"),
-          ("wu_ti_wind_mph","wspdi"),
-          ("wu_ti_wind_dir","wdire"),
-          ("wu_ti_precip_1hr_in","precip_ratei"),
+    # list of sensors for this source 
+    # (sensor_id, field name current-conditions, field name history)
+    keys=[("wu_ti_temp_c","temp_c","tempm"),
+          ("wu_ti_relative_humidity","relative_humidity","hum"),
+          ("wu_ti_wind_dir","wind_dir","wdire"),
+          ("wu_ti_wind_degrees","wind_degrees","wdird"),
+          ("wu_ti_wind_kph","wind_kph","wspdm"),
+          ("wu_ti_wind_gust_kph","wind_gust_kph","wgustm"),
+          ("wu_ti_pressure_mb","pressure_mb","pressurem"),
+          ("wu_ti_dewpoint_c","dewpoint_c","dewptm"),
+          ("wu_ti_precip_1hr_metric","precip_1hr_metric","precip_ratem"),
+          ("wu_ti_precip_today_metric","precip_today_metric","precip_totalm"),
     ]
 
     # get sensor objects for each sensor
@@ -97,18 +104,35 @@ if __name__ == '__main__':
 
             if debug: print "Loading data for date %s...\n"% date,
             for entry in data["history"]["observations"]:
-                ts = assemble_dt(entry["date"])
+                timestamp = assemble_dt(entry["date"])
                 for key in keys:
-                    value = entry[ key[1] ]
+                    value = entry[ key[2] ]
                     numeric = sensors[key[0]].data_is_number
                     if numeric:
                         value = float(value)
-                        populate.load_data(sensor_id=sensors[key[0]], time_stamp=ts, num_value=value, value_is_number=True)
+                        populate.load_data(sensor_id=sensors[key[0]], time_stamp=timestamp, num_value=value, value_is_number=True)
                     else:
-                        populate.load_data(sensor_id=sensors[key[0]], time_stamp=ts, string_value=value)
+                        populate.load_data(sensor_id=sensors[key[0]], time_stamp=timestamp, string_value=value)
 
     # load current sensor data
     elif args.current:
-        pass
+        if debug: print "Reading current data..."
+        url='http://api.wunderground.com/api/%s/conditions/q/pws:%s.json' % (APIkey,stationID)
+        data = get_data(url)
+
+        if debug: print "Loading current data..."
+        entry = data["current_observation"]
+        timestamp = parse_dt(entry["observation_time_rfc822"])
+        for key in keys:
+            value = entry[ key[1] ]
+            if key[1] == "relative_humidity":
+                value = value.rstrip(' %')
+            numeric = sensors[key[0]].data_is_number
+            if numeric:
+                value = float(value)
+                populate.load_data(sensor_id=sensors[key[0]], time_stamp=timestamp, num_value=value, value_is_number=True)
+            else:
+                populate.load_data(sensor_id=sensors[key[0]], time_stamp=timestamp, string_value=value)
+
 
     if debug: print "Finishing Weather Underground population script..."
