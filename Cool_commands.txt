@@ -46,7 +46,7 @@ rm db.sqlite3  (or ./manage.py sqlclear explorer & paste commands into dbshell)
 # Now repopulate the tables - new names
 ./wunderground_TI_setup.py
 # You need to call this over and over again to get all the days in the range
-./wunderground_TI_addData.py --history -d 20131206
+./wunderground_TI_addData.py --history -d 20131206 
 # 20131207, 20131208, ...
 ./wunderground_TI_addData.py --history -d 20131205
 
@@ -82,3 +82,21 @@ Delete the records I don't want
   delete from explorer_sensordata where "time_stamp" < '2013-11-30'
 
 Now you can count all the records again and see that the number is right
+
+Heroku Reload database
+
+heroku pg:psql --app stark-caverns-7053
+BEGIN;
+DROP TABLE "explorer_sensordata";
+DROP TABLE "explorer_sensor";
+DROP TABLE "explorer_datasource";
+
+COMMIT;
+
+heroku run python sensor_data_exploration/manage.py syncdb --app stark-caverns-7053
+heroku run bash --app stark-caverns-7053
+
+~ $ cd sensor_data_exploration/
+~/sensor_data_exploration $ ./setupDB.sh
+
+
