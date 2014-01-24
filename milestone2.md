@@ -1,4 +1,4 @@
-#Team: Girs & Buoyrs
+#Team: Girls & Buoys
 
 ###Milestone 2
 Website: http://stark-caverns-7053.herokuapp.com/explorer/
