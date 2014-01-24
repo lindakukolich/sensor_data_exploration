@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Map of Sensor Locations {% endblock %}
+{% block map %}class="active"{% endblock %}
+{% block body_block %}
+
+<img src={% static "map.jpg" %} width="100%"></img>
+
+{% endblock %}

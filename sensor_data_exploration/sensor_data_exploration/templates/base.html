@@ -34,15 +34,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Thomspon Island Sensor Data</a>
+          <a class="navbar-brand" href="/"><img src={% static "logo.png" %} height=40px ></img></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li {% block home %}{% endblock %}><a href="/">Home</a></li>
-	    <li><a href="#">Map</a></li>
+	    <li  {% block map %}{% endblock %}><a href="/explorer/map">Map</a></li>
 	    <!-- Make it so the link doesn't work here -->
 	    <li {% block graphs %}{% endblock %}><a href="/explorer/">Graphs</a></li>
-	    <li><a href="#">Prediction</a></li>            
 	    <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
 	  </ul>
@@ -52,7 +51,12 @@
 
       {% block body_block %}Default Text for Sensor Data Explorer{% endblock %}
 
-      <div id="footer" align="right">Copyright 2014 &copy; Girls &amp; Buoys</div>
+      <div id="footer">
+	<hr>
+	<div class="col-md-2"> This site powered by</div>
+	<div class="col-md-2"> <img src={% static "wu_logo.png" %} height=20px ></img></div>
+	<div class="col-md-6"></div>
+	<div class="col-md-2"><a href="https://github.com/lindakukolich/sensor_data_exploration"> Open Source Code</a> </div>
     </div>
 
   </body>
