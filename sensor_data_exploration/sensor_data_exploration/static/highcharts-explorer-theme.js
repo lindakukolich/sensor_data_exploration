@@ -93,23 +93,11 @@ Highcharts.theme = {
 	    color: '#99b'
 	}
     },
-    
     navigation: {
 	buttonOptions: {
 	    theme: {
 		stroke: '#CCCCCC'
 	    }
-	}
-    },
-    exporting: {
-	buttons: { 
-            exportButton: {
-		enabled:false
-            },
-            printButton: {
-		enabled:false
-            }
-	    
 	}
     }
 };
@@ -117,6 +105,4 @@ Highcharts.theme = {
 // Apply the theme
 var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
 
-var export_menu = Highcharts.getOptions().exporting.buttons.contextButton.menuItems;
-console.log('highcharts export menu is:');
 
