@@ -46,7 +46,7 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, rendo
 }
 
 function ajax_make_chart(sensorid, starttime, endtime) {
-    console.log('GetJSON for ' + sensorid);
+    console.log('GetJSON for ' + sensorid + ' starttime: ' +starttime);
     $.getJSON('/explorer/get_data_ajax/',{'sensorid': sensorid, 'starttime': starttime, 'endtime': endtime})
 	.done(function(data) {
 	    //make the div use chart-row template
