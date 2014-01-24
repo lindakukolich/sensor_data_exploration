@@ -20,6 +20,7 @@ if __name__ == '__main__':
                                longitude=-71.007622,
                                elevation=100.0,
                                access_info="stationID='KMABOSTO32' APIkey='2cbf77167bf2fe35'",
+                                symbol="WU"
                            )
 
     # create Sensors from this datasource ---------------------------------
@@ -43,6 +44,7 @@ if __name__ == '__main__':
                      units_long = "percent",
                      units_short = "%",
                      kind = "meteorological",
+                     is_headliner = True,
                      line_color = populate.hex_color('light_green'),
                  )
     s3 = populate.add_sensor( sensor_id = "wu_ti_wind_dir",
@@ -50,6 +52,7 @@ if __name__ == '__main__':
                      short_name="Wind Direction",
                      data_type = "string",
                      kind = "meteorological",
+                     is_headliner = True,
                      line_color = populate.hex_color('black'),
                  )
     s4 = populate.add_sensor( sensor_id = "wu_ti_wind_degrees",
@@ -69,6 +72,7 @@ if __name__ == '__main__':
                      is_number = True,
                      units_long = "kilometers per hour",
                      units_short = "kph",
+                     is_headliner = True,
                      kind = "meteorological",
                      line_color = populate.hex_color('dark_blue'),
                  )
@@ -80,6 +84,7 @@ if __name__ == '__main__':
                      units_long = "kilometers per hour",
                      units_short = "kph",
                      kind = "meteorological",
+                     is_headliner = True,
                      line_color = populate.hex_color('blue'),
                  )
     s7 = populate.add_sensor( sensor_id = "wu_ti_pressure_mb",
@@ -90,6 +95,7 @@ if __name__ == '__main__':
                      units_long = "millibars",
                      units_short = "mb",
                      kind = "meteorological",
+                     is_headliner = True,
                      line_color = populate.hex_color('gray'),
                  )
     s8 = populate.add_sensor( sensor_id = "wu_ti_dewpoint_c",

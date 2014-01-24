@@ -18,6 +18,7 @@ if __name__ == '__main__':
                                desc="Thompson Island Salt Pond hydrologic sensor",
                                owner = "cesn - Coastal Environmental Sensing Networks",
                                access_info="https://datagarrison.com/ thompson,thompson",
+                                symbol="SP"
                            )
 
     # create Sensors from this datasource ---------------------------------
@@ -49,7 +50,7 @@ if __name__ == '__main__':
                      is_number = True,
                      units_long = "ppt",
                      units_short = "ppt",
-                     is_headliner = True,
+                     is_headliner = False,
                      kind = "hydrological",
                      line_color = populate.hex_color('orange'),
                  )
@@ -70,7 +71,7 @@ if __name__ == '__main__':
                      is_number = True,
                      units_long = "ug/L",
                      units_short = "ug/L",
-                     is_headliner = True,
+                     is_headliner = False,
                      kind = "hydrological",
                      line_color = populate.hex_color('dark_green'),
                  )
