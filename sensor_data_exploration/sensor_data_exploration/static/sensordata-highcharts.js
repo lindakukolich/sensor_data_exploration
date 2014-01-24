@@ -106,5 +106,20 @@ function syncronizeCrossHairs(chart) {
 function syncZoom(zoomEvent) {
 
     var min = zoomEvent.min;
-    console.log('syncZoom Ran!' + min);
+    var max = zoomEvent.max;
+
+    //let run through all the charts and set them all to this min/max
+    $('div#charts > div').each(function() {
+	s_id = $(this).attr('data-sensorid');
+	    var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
+	    console.log('chartindex is' + chartIndex);
+	    if (typeof chartIndex === 'number') {    //error messages will have undefined chartIndex
+		var thisChart = Highcharts.charts[chartIndex];
+		var thisXAxis = thisChart.xAxis[0].getExtremes();
+		console.log(s_id + ' max is ' + thisXAxis.max + ' max is ' + max);
+		if (thisXAxis.min != min || thisXAxis.max != max) {
+		    thisChart.xAxis[0].setExtremes(min, max, true);
+		}
+	    }
+    });
 }
