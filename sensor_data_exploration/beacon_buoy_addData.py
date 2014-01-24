@@ -62,19 +62,6 @@ def parse_dt(dt_string):
     dt=datetime(int(x.year),int(x.month),int(x.day),int(x.hour),int(x.minute),int(x.second),tzinfo=tz)
     return dt
 
-def database_date(keys):
-    '''find the latest date already in the database'''
-    tz = EST()
-    min_time = datetime.now(tz)
-    try:
-        for key in keys:
-            sdobj = SensorData.objects.filter(sensor_id_id__exact=key[0]).latest('time_stamp')
-            if sdobj.time_stamp < min_time:
-                min_time = sdobj.time_stamp
-    except:
-        print "Error in database_date()"
-        min_time = None
-    return min_time
 
 if __name__ == '__main__':
     args = get_args()
@@ -110,7 +97,7 @@ if __name__ == '__main__':
     # get the latest date already in the database
     previous_load_date = None
     if args.current:
-        previous_load_date = database_date(keys)
+        previous_load_date = populate.database_latest_date(keys)
 
     # load sensor data
     if debug: print "Loading data..."

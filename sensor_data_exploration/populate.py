@@ -4,6 +4,7 @@
 # collection of functions used to populate the database
 
 import os
+from datetime import datetime,tzinfo,timedelta
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sensor_data_exploration.settings')
 from sensor_data_exploration.apps.explorer.models import *
@@ -84,3 +85,23 @@ def load_data(sensor_id,time_stamp,num_value=None,string_value=None,value_is_num
                                             string_value=string_value,
                                             value_is_number=value_is_number)
     return result
+
+class EST(tzinfo):
+    '''returns an object representing EST time zone offset'''
+    def utcoffset(self, dt):
+        return timedelta(hours=-5)
+    def dst(self, dt):
+        return timedelta(0)
+
+def database_latest_date(keys):
+    '''find the latest date already in the database'''
+    tz = EST()
+    min_time = datetime.now(tz)
+    try:
+        for key in keys:
+            sdobj = SensorData.objects.filter(sensor_id_id__exact=key[0]).latest('time_stamp')
+            if sdobj.time_stamp < min_time:
+                min_time = sdobj.time_stamp
+    except:
+        min_time = None
+    return min_time
