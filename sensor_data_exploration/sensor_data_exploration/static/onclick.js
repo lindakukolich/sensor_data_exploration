@@ -128,8 +128,8 @@ $(".time-btn").click(function(){
 	    console.log('chartindex is' + chartIndex);
 	    if (typeof chartIndex === 'number') {    //error messages will have undefined chartIndex
 		var thisChart = Highcharts.charts[chartIndex];
-//		thisChart.options.chart.isZoomed = false;
 		thisChart.xAxis[0].setExtremes(startUTC, endUTC, true);
+		return false //once we set one the sync zoom will set the rest.
 	    };
 	});
     });
