@@ -16,10 +16,10 @@ $( function () {
     window.endtime = "2014-01-03";
 
     // TODO: Make this use today and yesterday
-    changeStartTime( 7 );
+    changeStartTime( 30 );
 
     //Set up initial graphs: 
-    var initial_sensors = ['wu_ti_temp_f', 'bouy5_AirTemp', 'bouy5_WaterTemp'];
+    var initial_sensors = ['wu_ti_temp_f', 'buoy5_AirTemp', 'buoy5_WaterTemp'];
     initial_sensors.forEach( function( sensorid ) {
 	    $( '.' + sensorid ).addClass( 'btn-primary' );
 	    $( '.' + sensorid ).removeClass( 'btn-default' );
