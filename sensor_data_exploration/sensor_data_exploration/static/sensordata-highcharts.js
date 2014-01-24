@@ -102,3 +102,9 @@ function syncronizeCrossHairs(chart) {
         });
     });
 }
+
+function syncZoom(zoomEvent) {
+
+    var min = zoomEvent.min;
+    console.log('syncZoom Ran!' + min);
+}
