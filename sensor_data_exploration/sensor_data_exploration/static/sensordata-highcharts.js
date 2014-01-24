@@ -46,7 +46,7 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, rendo
 }
 
 function ajax_make_chart(sensorid, starttime, endtime) {
-    console.log('GetJSON for ' + sensorid);
+    console.log('GetJSON for ' + sensorid + ' starttime: ' +starttime);
     $.getJSON('/explorer/get_data_ajax/',{'sensorid': sensorid, 'starttime': starttime, 'endtime': endtime})
 	.done(function(data) {
 	    //make the div use chart-row template
@@ -68,7 +68,8 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 //		syncronizeCrossHairs(chart);
 		$('.'+sensorid).button('reset');  //Reset the loading on the button
 	    } else {
-		$('#'+chart_id).append('<div>'+data.plotError+'</div>');
+		var errorClass = 'alert alert-warning';
+		$('#'+chart_id).html('<div class="' + errorClass + '" >'+data.plotError+'</div>');
 		$('.'+sensorid).button('reset');  //Reset the loading on the button
 	    }
 	})

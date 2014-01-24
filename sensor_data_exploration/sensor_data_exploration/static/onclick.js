@@ -19,11 +19,10 @@ $( function () {
     changeStartTime( 30 );
 
     //Set up initial graphs: 
-    var initial_sensors = ['wu_ti_temp_f', 'buoy5_AirTemp', 'buoy5_WaterTemp'];
+    var initial_sensors = ['wu_ti_temp_c', 'wu_ti_pressure_mb', 'wu_ti_wind_kph'];
     initial_sensors.forEach( function( sensorid ) {
-	    $( '.' + sensorid ).addClass( 'btn-primary' );
-	    $( '.' + sensorid ).removeClass( 'btn-default' );
-	    ajax_make_chart( sensorid, window.starttime, window.endtime );
+	console.log('setting up initial graph for'+ sensorid);
+	make_chart_and_manipulate_buttons( sensorid );
 	});
     	
 
@@ -73,36 +72,45 @@ $(".time-btn").click(function(){
 	$('div#charts > div').each(function() {
 	    s_id = $(this).attr('data-sensorid');
 	    var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
-	    console.log('chartIndex is' + chartIndex +"for " + s_id);	    
+	    console.log('chartIndex is' + chartIndex +"for " + s_id);	  
 	    var thisChart = Highcharts.charts[chartIndex];
-	    thisChart.showLoading();
-	    $('.'+s_id).button('loading');
-	    
+	    if (typeof chartIndex === 'number') {    //error messages will have undefined chartIndex  
+		thisChart.showLoading();
+		$('.'+s_id).button('loading');
 
-	    $.getJSON('/explorer/get_data_ajax/',{'sensorid': s_id, 'starttime': starttime, 'endtime': endtime})
-		.done(function(data) {
-		    if (data.goodPlotData) {
 
-			var chartIndex = $("#"+data.sensor_id+"-chart").data('highchartsChart');
+		$.getJSON('/explorer/get_data_ajax/',{'sensorid': s_id, 'starttime': starttime, 'endtime': endtime})
+		    .done(function(data) {
+			if (data.goodPlotData) {
 
-			var thisChart = Highcharts.charts[chartIndex];
-			thisChart.series[0].setData(data.data_array1,false);
-			thisChart.xAxis[0].setExtremes(startUTC, endUTC, true);
-			thisChart.hideLoading();
+			    var chartIndex = $("#"+data.sensor_id+"-chart").data('highchartsChart');
+			    var thisChart = Highcharts.charts[chartIndex];
+			    thisChart.series[0].setData(data.data_array1,false);
+			    thisChart.xAxis[0].setExtremes(startUTC, endUTC, true);
+			    thisChart.hideLoading();
 
-			$('.'+data.sensor_id).button('reset');  //Reset the loading on the button
-		    } else {
-			$('#'+'data.sensor_id'+'-chart').append(data.plotError);
-			$('.'+data.sensor_id).button('reset');  //Reset the loading on the button
-		    }
-		})
-		.fail(function(jqxhr, textStatus, error) {
-		    var err = textStatus + ", " + error;
-		    console.log( "Request Failed: " + err );
-		});
+			    $('.'+data.sensor_id).button('reset');  //Reset the loading on the button
+			} else {
+			    var errorClass = 'alert alert-warning';
+			    $('#'+'data.sensor_id'+'-chart').html('<div class="' + errorClass + '" >'+data.plotError+'</div>');
+			    $('.'+data.sensor_id).button('reset');  //Reset the loading on the button
+			}
+		    })
+		    .fail(function(jqxhr, textStatus, error) {
+			var err = textStatus + ", " + error;
+			console.log( "Request Failed: " + err );
+		    });
+		//need an else here to try again to draw the graph if it had an error in the original time.
+	    };
 	});
     });
 
+    $("#clear").click(function(){
+	$('div#charts > div').each(function() {
+	    s_id = $(this).attr('data-sensorid');
+	    remove_chart_and_manipulate_buttons( s_id );
+	});
+    });
 
     $("#unzoom").click(function(){
 	// Unzoom all the charts
@@ -117,11 +125,12 @@ $(".time-btn").click(function(){
 	    s_id = $(this).attr('data-sensorid');
 	    console.log('going to unzome the following: ' + s_id);
 	    var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
-	    var thisChart = Highcharts.charts[chartIndex];
-	    thisChart.options.chart.isZoomed = false;
-
-	    thisChart.xAxis[0].setExtremes(startUTC, endUTC, true);
-//	    thisChart.xAxis[0].setExtremes(null, null);
+	    console.log('chartindex is' + chartIndex);
+	    if (typeof chartIndex === 'number') {    //error messages will have undefined chartIndex
+		var thisChart = Highcharts.charts[chartIndex];
+//		thisChart.options.chart.isZoomed = false;
+		thisChart.xAxis[0].setExtremes(startUTC, endUTC, true);
+	    };
 	});
     });
 });
@@ -183,7 +192,7 @@ function make_chart_and_manipulate_buttons( sensorid ) {
    too often and to make sure they get colored right
  */
 function remove_chart_and_manipulate_buttons( sensorid ) {
-    $( "." + sensorid ).remove();
+    $( "#" + sensorid ).remove();
     $( '.' + sensorid ).addClass( 'btn-default');
     $( '.' + sensorid ).removeClass( 'btn-primary');
     //Arbitrarily make the loading show up for half a second to discourage double clicking.

@@ -19,13 +19,14 @@
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
     <script src="{%static "highcharts-explorer-theme.js" %}"></script>
+    <script src="{%static "export-csv.js" %}"></script>
     <script src="{%static "sensordata-highcharts.js" %}"></script>
     <script src="{%static "onclick.js" %}"></script>
 
     <!-- Handlebar templates -->
     <script id="chart-row" type="text/x-handlebars-template">
       {% verbatim %}
-      <div id="{{ sensorid }}"  data-sensorid="{{sensorid}}">
+      <div id="{{ sensorid }}" class="row"  data-sensorid="{{sensorid}}">
 	<div id="{{sensorid}}-legend" class="col-md-2">
 	  <h4>{{title}}</h4>
 	  <h6>{{units}}</h6>
@@ -98,10 +99,10 @@
 
       <div id="ajax-graph" align="center" class="">
 	<ul class="nav nav-tabs nav-justified" id="btn-tabs">
-	  <li class="active"><a href="#favs">Headliners</a></li>
-	  <li><a href="#met">Meterological</a></li>
+	  <li class="active"><a href="#headliner">Weather Underground</a></li>
+	  <li><a href="#met">All Meterological</a></li>
 	  <li><a href="#hydro">Hydrological</a></li>
-	  <li><a href="#misc">Misc</a></li>
+	  <li><a href="#misc">Other Sensor Data</a></li>
 	</ul>
 
 	<div id="buttons" class="tab-content">

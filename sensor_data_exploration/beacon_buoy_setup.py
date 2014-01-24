@@ -32,7 +32,7 @@ if __name__ == '__main__':
                      is_number = True,
                      units_long = "practical salinity units",
                      units_short = "PSU",
-                     is_headliner = True,
+                     is_headliner = False,
                      kind = "hydrological",
                      line_color = populate.hex_color('orange'),
                  )
@@ -53,7 +53,7 @@ if __name__ == '__main__':
                      is_number = True,
                      units_long = "degrees farenheit",
                      units_short = "°F",
-                     is_headliner = True,
+                     is_headliner = False,
                      kind = "hydrological",
                      line_color = populate.hex_color('purple'),
                  )

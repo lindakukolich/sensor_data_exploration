@@ -1,8 +1,8 @@
-#charts { padding-bottom: 100px; }
 
 body {
     background:#045c9c url(http://web51163.aiso.net/wp-content/uploads/back.jpg);background-repeat:repeat-x;
     padding-top: 0px;
+    color: #317eac;
 }
 
 div.container {
@@ -103,3 +103,22 @@ div.container {
   position: relative;
 }
 
+.alert {
+  margin: 20px;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  color:  #ddf0fb;
+}
