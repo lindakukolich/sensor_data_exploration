@@ -56,20 +56,64 @@ $( function () {
 
     $('#save-date').click(function(){
 	var newstart = $('#starttimepicker').datepicker('getDate');
-	console.log('custom date start is ' + newstart);
+	var newend = $('#endtimepicker').datepicker('getDate');
+	if (newstart > newend) {
+	    var swaptime = newstart;
+	    newstart = newend;
+	    newend = swaptime;
+	}
+	console.log('custom date start is ' + newstart + " and end is " + newend);
+	update_dates(newstart, newend);
+	update_existing_charts();
     });
 
-$(".time-btn").click(function(){
+    $(".time-btn").click(function() {
 	change = $(this).attr('graph_days');
 	console.log('days to graph: ' + change);
 	changeStartTime(change);
+    });
+
+    $("#clear").click(function(){
+	$('div#charts > div').each(function() {
+	    s_id = $(this).attr('data-sensorid');
+	    remove_chart_and_manipulate_buttons( s_id );
+	});
+    });
+
+    $("#unzoom").click(function(){
+	// Unzoom all the charts
+	console.log('startin unzoom')
+	// We don't use startUTC and EndUTC here because we want to force to window settings.
 	var endDate = new Date(window.endtime);
 	var endUTC = endDate.getTime() + endDate.getTimezoneOffset() * 60000;
 	var startDate =new Date(window.starttime);
 	var startUTC = startDate.getTime() + startDate.getTimezoneOffset() * 60000;
-	
-	console.log('about to loop through chartList' + window.chartList);
+
 	$('div#charts > div').each(function() {
+	    s_id = $(this).attr('data-sensorid');
+	    console.log('going to unzome the following: ' + s_id);
+	    var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
+	    console.log('chartindex is' + chartIndex);
+	    if (typeof chartIndex === 'number') {    //error messages will have undefined chartIndex
+		var thisChart = Highcharts.charts[chartIndex];
+//		thisChart.options.chart.isZoomed = false;
+		thisChart.xAxis[0].setExtremes(startUTC, endUTC, true);
+	    };
+	});
+    });
+});
+
+/** This function updates the existing charts on our page with new time
+    selectors, which have already been stored in window.starttime and
+    window.endtime */
+function update_existing_charts() {
+    var endDate = new Date(window.endtime);
+    var endUTC = endDate.getTime() + endDate.getTimezoneOffset() * 60000;
+    var startDate =new Date(window.starttime);
+    var startUTC = startDate.getTime() + startDate.getTimezoneOffset() * 60000;
+	
+    console.log('about to loop through chartList' + window.chartList);
+    $('div#charts > div').each(function() {
 	    s_id = $(this).attr('data-sensorid');
 	    var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
 	    console.log('chartIndex is' + chartIndex +"for " + s_id);	  
@@ -103,38 +147,7 @@ $(".time-btn").click(function(){
 		//need an else here to try again to draw the graph if it had an error in the original time.
 	    };
 	});
-    });
-
-    $("#clear").click(function(){
-	$('div#charts > div').each(function() {
-	    s_id = $(this).attr('data-sensorid');
-	    remove_chart_and_manipulate_buttons( s_id );
-	});
-    });
-
-    $("#unzoom").click(function(){
-	// Unzoom all the charts
-	console.log('startin unzoom')
-	// We don't use startUTC and EndUTC here because we want to force to window settings.
-	var endDate = new Date(window.endtime);
-	var endUTC = endDate.getTime() + endDate.getTimezoneOffset() * 60000;
-	var startDate =new Date(window.starttime);
-	var startUTC = startDate.getTime() + startDate.getTimezoneOffset() * 60000;
-
-	$('div#charts > div').each(function() {
-	    s_id = $(this).attr('data-sensorid');
-	    console.log('going to unzome the following: ' + s_id);
-	    var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
-	    console.log('chartindex is' + chartIndex);
-	    if (typeof chartIndex === 'number') {    //error messages will have undefined chartIndex
-		var thisChart = Highcharts.charts[chartIndex];
-//		thisChart.options.chart.isZoomed = false;
-		thisChart.xAxis[0].setExtremes(startUTC, endUTC, true);
-	    };
-	});
-    });
-});
-
+}
 
 /**
    Change window.endtime to now.
@@ -142,15 +155,12 @@ $(".time-btn").click(function(){
 */
 function changeStartTime(days) {
     var today = new Date();
-    var starttime = today.getTime();
+    // Get to midnight tonight, just on the start of tomorrow
+    var tomorrow = new Date(today.getFullYear(), today.getMonth(), today.getDate()+1);
+    var starttime = tomorrow.getTime();
     starttime -= days * 24 * 3600 * 1000;
     var startday = new Date(starttime);
-    window.endtime = printDate( today );
-    window.starttime = printDate( startday );
-    $("#startdate").html(window.starttime);
-    $("#enddate").html(window.endtime);
-    $("#startdatepicker").val(window.starttime + "00:00");
-    $("#enddatepicker").val(window.endtime + "00:00");
+    update_dates(startday, tomorrow);
 }
 
 /**
@@ -170,6 +180,19 @@ function printDate( d ) {
     rtn += ((t < 10) ? "0" : "") + t + ":";
     t = d.getMinutes();
     rtn += ((t < 10) ? "0" : "") + t;
+    return rtn;
+}
+
+/**
+   Print a date in a format people like
+*/
+function prettyDate( d ) {
+    var rtn = "";
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    rtn += d.getDate() + "-";
+    rtn += months[d.getMonth()] + "-";
+    rtn += d.getFullYear();
     return rtn;
 }
 
@@ -217,3 +240,29 @@ function remove_chart_and_manipulate_buttons( sensorid ) {
 //     var endUTC = endDate.getTime() + endDate.getTimezoneOffset() * 60000;
 //     return endUTC;
 // 
+
+/** Takes two UTC dates.
+    Updates the labels on the graph screen and the default dates on the
+    datepicker
+    Updates the globals, window.starttime and window.endtime, used by the
+    graphs.
+*/
+function update_dates(startday, endday) {
+    window.starttime = printDate( startday );
+    window.endtime = printDate( endday );
+    window.prettyStart = prettyDate( startday );
+    window.prettyEnd = prettyDate( endday );
+    $("#startdate").html( window.prettyStart );
+    $("#enddate").html( window.prettyEnd );
+    $("#startText").val( window.prettyStart );
+    $("#endText").val( window.prettyEnd );
+    /* The Documentation for eternicode's date picker is pretty clear
+     * on the idea that one of these lines should cause the date we
+     * see on the custom date selector to match the date here.  It
+     * does not work.  This may be because we had to hack things to
+     * make them work for Bootstrap 3 and datepicker was written for
+     * bootstrap 2 */
+    
+    $("#endtimepicker").datepicker( 'setDate', endday );
+    $("#starttimepicker").datepicker( 'setDate', startday );
+}
