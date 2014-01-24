@@ -30,7 +30,7 @@ if __name__ == '__main__':
                      units_long = "decibars",
                      units_short = "dbar",
                      kind = "meteorological",
-                     line_color = populate.hex_color('green'),
+                     line_color = populate.hex_color('gray'),
                  )
     s2 = populate.add_sensor( sensor_id = "sp_water_temp",
                      source = mysource,
@@ -51,7 +51,7 @@ if __name__ == '__main__':
                      units_short = "ppt",
                      is_headliner = True,
                      kind = "hydrological",
-                     line_color = populate.hex_color('dark_green'),
+                     line_color = populate.hex_color('orange'),
                  )
     s4 = populate.add_sensor( sensor_id = "sp_water_pressure",
                      source = mysource,
@@ -72,7 +72,7 @@ if __name__ == '__main__':
                      units_short = "ug/L",
                      is_headliner = True,
                      kind = "hydrological",
-                     line_color = populate.hex_color('light_green'),
+                     line_color = populate.hex_color('dark_green'),
                  )
     s6 = populate.add_sensor( sensor_id = "sp_disolved_oxygen",
                      source = mysource,
@@ -82,7 +82,7 @@ if __name__ == '__main__':
                      units_long = "percent",
                      units_short = "%",
                      kind = "hydrological",
-                     line_color = populate.hex_color('grey'),
+                     line_color = populate.hex_color('cyan'),
                  )
     s7 = populate.add_sensor( sensor_id = "sp_rel_pressure",
                      source = mysource,
@@ -92,7 +92,7 @@ if __name__ == '__main__':
                      units_long = "decibars",
                      units_short = "dbar",
                      kind = "meteorological",
-                     line_color = populate.hex_color('cyan'),
+                     line_color = populate.hex_color('brown'),
                  )
 
     if debug: print "Finished Salt Pond setup script!"

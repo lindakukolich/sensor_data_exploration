@@ -43,7 +43,7 @@ if __name__ == '__main__':
                      units_long = "percent",
                      units_short = "%",
                      kind = "meteorological",
-                     line_color = populate.hex_color('brown'),
+                     line_color = populate.hex_color('light_green'),
                  )
     s3 = populate.add_sensor( sensor_id = "wu_ti_wind_dir",
                      source = mysource,
@@ -100,7 +100,7 @@ if __name__ == '__main__':
                      units_long = "degrees Celsius",
                      units_short = "°C",
                      kind = "meteorological",
-                     line_color = populate.hex_color('orange'),
+                     line_color = populate.hex_color('green'),
                  )
     s9 = populate.add_sensor( sensor_id = "wu_ti_precip_1hr_metric",
                      source = mysource,
@@ -176,7 +176,7 @@ if __name__ == '__main__':
 #                     units_long = "degrees Farenheit",
 #                     units_short = "°F",
 #                     kind = "meteorological",
-#                     line_color = populate.hex_color('orange'),
+#                     line_color = populate.hex_color('green'),
 #                 )
 #    s9 = populate.add_sensor( sensor_id = "wu_ti_precip_1hr_in",
 #                     source = mysource,

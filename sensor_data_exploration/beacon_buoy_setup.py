@@ -34,7 +34,7 @@ if __name__ == '__main__':
                      units_short = "PSU",
                      is_headliner = True,
                      kind = "hydrological",
-                     line_color = populate.hex_color('dark_green'),
+                     line_color = populate.hex_color('orange'),
                  )
     s2 = populate.add_sensor( sensor_id = "buoy5_CDOM",
                      source = mysource,
@@ -44,7 +44,7 @@ if __name__ == '__main__':
                      units_long = "QSU",
                      units_short = "QSU",
                      kind = "hydrological",
-                     line_color = populate.hex_color('pink'),
+                     line_color = populate.hex_color('brown'),
                  )
     s3 = populate.add_sensor( sensor_id = "buoy5_WaterTemp",
                      source = mysource,
@@ -113,7 +113,7 @@ if __name__ == '__main__':
                      units_long = "inches mercury",
                      units_short = "inHg",
                      kind = "meteorological",
-                     line_color = populate.hex_color('green'),
+                     line_color = populate.hex_color('gray'),
                  )
     s10 = populate.add_sensor( sensor_id = "buoy5_RelHumidity",
                      source = mysource,
@@ -123,7 +123,7 @@ if __name__ == '__main__':
                      units_long = "percent",
                      units_short = "%",
                      kind = "meteorological",
-                     line_color = populate.hex_color('brown'),
+                     line_color = populate.hex_color('light_green'),
                   )
     s11 = populate.add_sensor( sensor_id = "buoy5_DewPt",
                      source = mysource,
@@ -133,7 +133,7 @@ if __name__ == '__main__':
                      units_long = "degrees farenheit",
                      units_short = "°F",
                      kind = "meteorological",
-                     line_color = populate.hex_color('orange'),
+                     line_color = populate.hex_color('green'),
                   )
     s12 = populate.add_sensor( sensor_id = "buoy5_PAR",
                      source = mysource,
