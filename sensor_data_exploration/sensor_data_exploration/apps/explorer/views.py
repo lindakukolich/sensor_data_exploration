@@ -92,13 +92,16 @@ def get_data_ajax(request):
     # Pick out the values for each observation
     ydata = q.values_list('num_value', flat=True)
     ydata = list(ydata)
-    
+
+    plotError = ""
+    dataArray1 = []    
     # Make sure that we actually got some data, or this plot is no good
     if len(xdata) == 0 or len(ydata) == 0:
         print "get_data_ajax: Error retrieving plot data for plot " + plot_sensor_id + ": No data"
-        data_to_dump = {'goodPlotData': False,
-                        'plotError': "Error retrieving plot data for plot " + plot_sensor_id + ": No data for time range [" + plot_starttime + ", " + plot_endtime + "]",
-                    }
+        goodPlotData = False
+        plotError =  "Error retrieving plot data for plot " + plot_sensor_id + ": No data for time range [" + plot_starttime + ", " + plot_endtime + "]"
+
+
     else:
         #we have good data lets prep it and send it back.
     
@@ -109,24 +112,26 @@ def get_data_ajax(request):
         if (n_points > len(xdata)):
             n_points = len(xdata)
 
-        dataArray1 = []
         for i in range (0, n_points) :
              dataArray1.append( [xdata[i], ydata[i]] );
 
         goodPlotData = True
-        data_to_dump = {'data_array1': dataArray1, 
+    
+    # We need to dump data for both the good and the badPlots.    
+    data_to_dump = {'data_array1': dataArray1, 
                         'plot_short_name': plot_sensor['sensor_short_name'],
                         'plot_source_id': plot_sensor['data_source_id'],
                         'plot_units_long': plot_sensor['units_long'],
                         'plot_units_short': plot_sensor['units_short'],
                         'line_color': plot_sensor['line_color'],
                         'goodPlotData': goodPlotData,
+                        'plotError': plotError,
                         'sensor_id': plot_sensor['sensor_id']
                     }
     
     #send back the data or error as created above.
-    print "data_to_dump"
-    print data_to_dump
+#    print "data_to_dump"
+#    print data_to_dump
     json_data = json.dumps(data_to_dump, cls=DjangoJSONEncoder)
     return HttpResponse(json_data, mimetype='application/json')
 

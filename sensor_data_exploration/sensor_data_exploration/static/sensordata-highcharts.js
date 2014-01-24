@@ -68,7 +68,8 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 //		syncronizeCrossHairs(chart);
 		$('.'+sensorid).button('reset');  //Reset the loading on the button
 	    } else {
-		$('#'+chart_id).append('<div>'+data.plotError+'</div>');
+		var errorClass = 'alert alert-warning';
+		$('#'+chart_id).html('<div class="' + errorClass + '" >'+data.plotError+'</div>');
 		$('.'+sensorid).button('reset');  //Reset the loading on the button
 	    }
 	})
