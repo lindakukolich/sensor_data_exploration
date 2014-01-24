@@ -19,7 +19,7 @@ $( function () {
     changeStartTime( 7 );
 
     //Set up initial graphs: 
-    var initial_sensors = ['wu_ti_temp_c', 'bouy5_AirTemp', 'bouy5_WaterTemp'];
+    var initial_sensors = ['wu_ti_temp_c', 'wu_ti_pressure_mb', 'wu_ti_wind_kph'];
     initial_sensors.forEach( function( sensorid ) {
 	console.log('setting up initial graph for'+ sensorid);
 	make_chart_and_manipulate_buttons( sensorid );
@@ -105,6 +105,12 @@ $(".time-btn").click(function(){
 	});
     });
 
+    $("#clear").click(function(){
+	$('div#charts > div').each(function() {
+	    s_id = $(this).attr('data-sensorid');
+	    remove_chart_and_manipulate_buttons( s_id );
+	});
+    });
 
     $("#unzoom").click(function(){
 	// Unzoom all the charts
