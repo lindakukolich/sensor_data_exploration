@@ -70,21 +70,21 @@ $( function () {
       Update all the currently displayed graphs
     */
     $(".time-btn").click(function() {
-	change = $(this).attr('graph-days');
-	var currentBtn = getCurrentTimeBtn();
-	show_button_as_inactive(currentBtn);
-	currentBtn = "#" + $(this).attr('id');
-	show_button_as_active(currentBtn);
-	setCurrentTimeBtn(currentBtn);
-	// console.log('days to graph: ' + change);
-	changeStartTime(change);
-	update_existing_charts();
+	    var change = $(this).attr('graph-days');
+	    var currentBtn = getCurrentTimeBtn();
+	    show_button_as_inactive(currentBtn);
+	    currentBtn = "#" + $(this).attr('id');
+	    show_button_as_active(currentBtn);
+	    setCurrentTimeBtn(currentBtn);
+	    // console.log('days to graph: ' + change);
+	    changeStartTime(change);
+	    update_existing_charts();
     });
 
     $("#clear").click(function(){
 	$('div#charts > div').each(function() {
-	    s_id = $(this).attr('data-sensorid');
-	    remove_chart_and_manipulate_buttons( s_id );
+		var s_id = $(this).attr('data-sensorid');
+		remove_chart_and_manipulate_buttons( s_id );
 	});
     });
 
@@ -93,15 +93,17 @@ $( function () {
 	    //	console.log('starting unzoom')
 	    // We don't use startUTC and EndUTC here because we want to force to window settings.
 	    var startEndDates = getDataTimes();
-	    var startDate = new Date(startEndDates.starttime);
-	    var endDate = new Date(startEndDates.endtime);
+	    console.log("NEW DATE: unzoom: " + startEndDates.starttime + " to " +
+			startEndDates.endtime);
+	    var startDate = makeDate(startEndDates.starttime);
+	    var endDate = makeDate(startEndDates.endtime);
 	    var endUTC = endDate.getTime();
 	    var startUTC = startDate.getTime();
 
 	$('div#charts > div').each(function() {
-	    s_id = $(this).attr('data-sensorid');
+		var s_id = $(this).attr('data-sensorid');
 	    //	    console.log('going to unzoom the following: ' + s_id);
-	    var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
+		var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
 	    //	    console.log('chartindex is' + chartIndex);
 	    if (typeof chartIndex === 'number') {    //error messages will have undefined chartIndex
 		var thisChart = Highcharts.charts[chartIndex];
@@ -117,15 +119,17 @@ $( function () {
     data-end-time */
 function update_existing_charts() {
     var dataTime = getDataTimes();
-    var endDate = new Date(dataTime.endtime);
-    var startDate =new Date(dataTime.starttime);
+    console.log("NEW DATE: update_existing_charts: " + dataTime.starttime + " to " +
+		dataTime.endtime);
+    var endDate = makeDate(dataTime.endtime);
+    var startDate = makeDate(dataTime.starttime);
     // Time zone offset is in minutes, we want 60 * 1000 for ms
     var endUTC = endDate.getTime();
     var startUTC = startDate.getTime();
-    //    console.log("Update UTC from " + startUTC + " to " + endUTC);
+    console.log("Update UTC from " + startUTC + " to " + endUTC);
 	
     $('div#charts > div').each(function() {
-	    s_id = $(this).attr('data-sensorid');
+	    var s_id = $(this).attr('data-sensorid');
 	    var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
 	    //	    console.log('chartIndex is' + chartIndex +"for " + s_id);	  
 	    var thisChart = Highcharts.charts[chartIndex];
@@ -175,6 +179,20 @@ function changeStartTime(days) {
     update_dates(startday, today);
 }
 
+/**
+   Make a Date object from a date in our database format
+   2014-01-18 16:28-05:00.
+
+   If we just use new Date, the code only works on Chrome, not Firefox or IE
+*/
+function makeDate( dateString ){
+    var dateTime = dateString.split(/ /);
+    var dateParts = dateTime[0].split(/-/);
+    var timeAndZone = dateTime[1].split(/[-+]/);
+    var timeParts = timeAndZone[0].split(/:/);
+    var d = new Date(dateParts[0], dateParts[1] - 1, dateParts[2], timeParts[0], timeParts[1]);
+    return d;
+}
 /**
    Print the given Date in the format the database will expect
 

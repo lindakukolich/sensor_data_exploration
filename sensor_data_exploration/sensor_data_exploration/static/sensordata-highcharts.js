@@ -7,7 +7,7 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, rendo
     var endUTC = 0;
     var startUTC = 0;
     $('div#charts > div').each(function() {
-	s_id = $(this).attr('data-sensorid');
+	    var s_id = $(this).attr('data-sensorid');
 	var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
 	console.log('chartindex is' + chartIndex);
 	if (typeof chartIndex === 'number') {    //error messages will have undefined chartIndex
@@ -98,29 +98,6 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 	$('body').animate({"scrollTop": $(document).height()}, "slow");
 };
 
-function syncronizeCrossHairs(chart) {
-    var container = $(chart.container),
-    offset = container.offset(),
-    x, y, isInside, report;
-	
-    container.mousemove(function (evt) {
-	    
-        x = evt.clientX - chart.plotLeft - offset.left;
-        y = evt.clientY - chart.plotTop - offset.top;
-        var xAxis = chart.xAxis[0];
-        //remove old plot line and draw new plot line (crosshair) for this chart
-        var xAxis1 = chart.xAxis[0];
-        xAxis1.removePlotLine("myPlotLineId");
-        xAxis1.addPlotLine({
-            value: chart.xAxis[0].translate(x, true),
-            width: 1,
-            color: 'red',
-            //dashStyle: 'dash',                   
-            id: "myPlotLineId"
-        });
-    });
-}
-
 function syncZoom(zoomEvent) {
 
     var min = zoomEvent.min;
@@ -128,7 +105,7 @@ function syncZoom(zoomEvent) {
 
     //let run through all the charts and set them all to this min/max
     $('div#charts > div').each(function() {
-	s_id = $(this).attr('data-sensorid');
+	    var s_id = $(this).attr('data-sensorid');
 	    var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
 	    console.log('chartindex is' + chartIndex);
 	    if (typeof chartIndex === 'number') {    //error messages will have undefined chartIndex
