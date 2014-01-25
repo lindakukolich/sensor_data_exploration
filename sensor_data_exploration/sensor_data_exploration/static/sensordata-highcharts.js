@@ -1,11 +1,11 @@
 function sensordata_chart(title, subtitle, units, short_units, dataArray1, rendor_to, line_color) {
     //Its getting confusing to just keep putting variables in in order. Should we refactor to use a JSON or Dict? - CM
-    console.log('about to crate chart to put in ' + rendor_to);
+    console.log('about to create chart to put in ' + rendor_to);
     // Get the graph extremes
     
     //Find an existing graph and get it from that graph. This means that if the user has zoomed the new graph will come in at the same zoom.
-    var endUTC = 0
-    var startUTC = 0
+    var endUTC = 0;
+    var startUTC = 0;
     $('div#charts > div').each(function() {
 	s_id = $(this).attr('data-sensorid');
 	var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
@@ -53,7 +53,7 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, rendo
         },
         tooltip: {
             formatter: function() {
-		return '<b>'+ this.series.name +'</b><br/>'+ Highcharts.dateFormat('%Y/%m/%d %H:%M', this.x) +': '+ this.y +' ' + short_units
+		    return '<b>'+ this.series.name +'</b><br/>'+ Highcharts.dateFormat('%e-%b-%Y %H:%M', this.x) +': '+ this.y +' ' + short_units
             }
         },            
         series: [{
@@ -82,9 +82,7 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 	    var chart_id = sensorid + "-chart";
 	    if (data.goodPlotData) {
 		var chart = sensordata_chart(data.plot_short_name, data.plot_source_id, data.plot_units_long, data.plot_units_short, data.data_array1, chart_id, data.line_color);
-		chartList[sensorid] = chart;
 
-//		console.log(chartList);
 //		syncronizeCrossHairs(chart);
 		$('.'+sensorid).button('reset');  //Reset the loading on the button
 	    } else {
@@ -136,8 +134,10 @@ function syncZoom(zoomEvent) {
 	    if (typeof chartIndex === 'number') {    //error messages will have undefined chartIndex
 		var thisChart = Highcharts.charts[chartIndex];
 		var thisXAxis = thisChart.xAxis[0].getExtremes();
+		console.log(s_id + ' min is ' + thisXAxis.min + ' min is ' + min);
 		console.log(s_id + ' max is ' + thisXAxis.max + ' max is ' + max);
-		if (thisXAxis.min != min || thisXAxis.max != max) {
+		if (thisXAxis.min !== min ||
+		    thisXAxis.max !== max) {
 		    thisChart.xAxis[0].setExtremes(min, max, true);
 		}
 	    }

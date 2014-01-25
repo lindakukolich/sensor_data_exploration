@@ -6,6 +6,9 @@
 //This will be modified to help us get the look we want our of highcharts for Explorer.
 
 Highcharts.theme = {
+    global: {
+	timezoneOffset: 5*60
+    },
     colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
     chart: {
 	backgroundColor: {
@@ -51,8 +54,8 @@ Highcharts.theme = {
     xAxis: {
 	type: 'datetime',
 	dateTimeLabelFormats: {
-            hour: '%b-%e %H:%M',
-	    day: '%b-%e-%y'
+            hour: '%e-%b %H:%M',
+	    day: '%e-%b-%y'
             },
 	gridLineWidth: 1,
 	lineColor: '#000',
