@@ -28,13 +28,11 @@ div.container {
     font-size: 8px;
     font-weight: normal;
     min-width: 5px;
-    background-color: #ddf0fb;
+    background-color: #317eac;
+    right: 0px;
+    vertical-align: middle;
 }
 
-.time-btn,
-.graph-btn,
-#custom-btn {
-}
 
 .btn-default .badge {
   color:  black;
@@ -50,6 +48,7 @@ div.container {
   position: relative;
   top: 0px;
   right: -3px;
+  vertical-align: baseline;
 }
 
 .btn {
@@ -135,4 +134,8 @@ hr {
 .footer-logo {
     padding-right: 50 px;
     padding-left: 50px;
+}
+
+.jumbotron li {
+  line-height: 1.4;
 }
