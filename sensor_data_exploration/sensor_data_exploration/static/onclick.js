@@ -1,61 +1,54 @@
-/* This function is called automatically when the page is fully loaded */
+/** This function is called automatically when the page is fully loaded */
 $( function () {
-    //For bottom tabs
+    // For Sensor category tabs at bottom (Headliner, All Meterological, etc.)
     $( '#btn-tabs a' ).click( function (e) {
 	e.preventDefault();
 	$( this ).tab( 'show' );
     });
 
+    /* Change the start time to match the current-time-btn specified
+       on the graph page (explorer/index.html) */
+    var currentBtn = getCurrentTimeBtn();
+    show_button_as_active( currentBtn );
+    changeStartTime( $( currentBtn ).attr( "graph-days" ));
 
-    //set up a variable to keep all the charts in, we need to iterate over them to set up the crosshairs.
-    //CM - we should see if we can find a way to do this without having the programmer keep track.
-    window.chartList = {};
+    /** Set up initial graphs
 
-    // set up variables to keep the timestamp range in
-    window.starttime = "2014-01-01";
-    window.endtime = "2014-01-03";
-
-    // TODO: Make this use today and yesterday
-    window.current_btn = "#month-btn";
-    show_button_as_active(window.current_btn);
-    changeStartTime( 30 );
-
-    //Set up initial graphs: 
+	Note: These names need to match sensor names found in the
+	database.  There have been bugs in the past where the database
+	names have changed and this code has fallen behind
+     */
     var initial_sensors = ['wu_ti_temp_c', 'wu_ti_pressure_mb', 'wu_ti_wind_kph'];
     initial_sensors.forEach( function( sensorid ) {
-	console.log('setting up initial graph for'+ sensorid);
-	make_chart_and_manipulate_buttons( sensorid );
+	    // console.log('setting up initial graph for'+ sensorid);
+	    make_chart_and_manipulate_buttons( sensorid );
 	});
     	
 
-    /** Register the callback that handles clicks on the graph buttons */
+    /** Register the callback that handles clicks on the buttons that
+	request new charts */
     $( '.graph-btn' ).click( function(){
-	    /* If the click came from one of the "sensor" buttons, make a graph
-	       for that sensor */
 	var sensorid;
 	sensorid = $( this ).attr( 'data-sensorid' );
+	/* Make EVERYTING that is named sensorid (buttons and charts)
+	   say 'loading...' */
 	$( '.' + sensorid ).button( 'loading' );
 
-	console.log( 'button clicked: ' + sensorid )
+	// console.log( 'button clicked: ' + sensorid )
 	if ($( "#" + sensorid ).length != 0) {
-	    // This checks to see if a div called sensorid exists already.
-	    // To remove a chart. Remove the div. Change the button classes back. 
-	    // I bet this needs to get refactored so that it can also be called when you click the "x" from issue 8.
-	    console.log( 'about to remove: ' + sensorid );
+	    // If there is a div for this chart already, remove the chart
+	    // console.log( 'about to remove: ' + sensorid );
 	    remove_chart_and_manipulate_buttons( sensorid );
 	} else {
+	    // Otherwise, make the chart
 	    make_chart_and_manipulate_buttons( sensorid );
 	};
 	
     });
    
     /**
-      Change the date range to be from 'graph_days' ago till now
-      Update all the currently displayed graphs
-      TODO:
-       Update currently displayed start and end times
+       Save a custom date, updating user feed back and existing charts
      */
-
     $('#save-date').click(function(){
 	var newstart = $('#starttimepicker').datepicker('getDate');
 	var newend = $('#endtimepicker').datepicker('getDate');
@@ -64,20 +57,26 @@ $( function () {
 	    newstart = newend;
 	    newend = swaptime;
 	}
-	console.log('custom date start is ' + newstart + " and end is " + newend);
+	//	console.log('custom date start is ' + newstart + " and end is " + newend);
 	update_dates(newstart, newend);
 	update_existing_charts();
-	show_button_as_inactive(window.current_btn);
-	window.current_btn = "#custom-btn";
-	show_button_as_active(window.current_btn);
+	show_button_as_inactive(getCurrentTimeBtn());
+	setCurrentTimeBtn("#custom-btn");
+	show_button_as_active("#custom-btn");
     });
 
+    /**
+      Change the date range to be from 'graph-days' ago till now
+      Update all the currently displayed graphs
+    */
     $(".time-btn").click(function() {
-	change = $(this).attr('graph_days');
-	show_button_as_inactive(window.current_btn);
-	window.current_btn = "#" + $(this).attr('id');
-	show_button_as_active(window.current_btn);
-	console.log('days to graph: ' + change);
+	change = $(this).attr('graph-days');
+	var currentBtn = getCurrentTimeBtn();
+	show_button_as_inactive(currentBtn);
+	currentBtn = "#" + $(this).attr('id');
+	show_button_as_active(currentBtn);
+	setCurrentTimeBtn(currentBtn);
+	// console.log('days to graph: ' + change);
 	changeStartTime(change);
 	update_existing_charts();
     });
@@ -90,19 +89,20 @@ $( function () {
     });
 
     $("#unzoom").click(function(){
-	// Unzoom all the charts
-	console.log('startin unzoom')
-	// We don't use startUTC and EndUTC here because we want to force to window settings.
-	var endDate = new Date(window.endtime);
-	var endUTC = endDate.getTime() + endDate.getTimezoneOffset() * 60000;
-	var startDate =new Date(window.starttime);
-	var startUTC = startDate.getTime() + startDate.getTimezoneOffset() * 60000;
+	    // Unzoom all the charts
+	    //	console.log('starting unzoom')
+	    // We don't use startUTC and EndUTC here because we want to force to window settings.
+	    var startEndDates = getDataTimes();
+	    var startDate = new Date(startEndDates.starttime);
+	    var endDate = new Date(startEndDates.endtime);
+	    var endUTC = endDate.getTime();
+	    var startUTC = startDate.getTime();
 
 	$('div#charts > div').each(function() {
 	    s_id = $(this).attr('data-sensorid');
-	    console.log('going to unzome the following: ' + s_id);
+	    //	    console.log('going to unzoom the following: ' + s_id);
 	    var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
-	    console.log('chartindex is' + chartIndex);
+	    //	    console.log('chartindex is' + chartIndex);
 	    if (typeof chartIndex === 'number') {    //error messages will have undefined chartIndex
 		var thisChart = Highcharts.charts[chartIndex];
 		thisChart.xAxis[0].setExtremes(startUTC, endUTC, true);
@@ -113,26 +113,28 @@ $( function () {
 });
 
 /** This function updates the existing charts on our page with new time
-    selectors, which have already been stored in window.starttime and
-    window.endtime */
+    selectors, which have already been stored in data-start-time and
+    data-end-time */
 function update_existing_charts() {
-    var endDate = new Date(window.endtime);
-    var endUTC = endDate.getTime() + endDate.getTimezoneOffset() * 60000;
-    var startDate =new Date(window.starttime);
-    var startUTC = startDate.getTime() + startDate.getTimezoneOffset() * 60000;
+    var dataTime = getDataTimes();
+    var endDate = new Date(dataTime.endtime);
+    var startDate =new Date(dataTime.starttime);
+    // Time zone offset is in minutes, we want 60 * 1000 for ms
+    var endUTC = endDate.getTime();
+    var startUTC = startDate.getTime();
+    //    console.log("Update UTC from " + startUTC + " to " + endUTC);
 	
-    console.log('about to loop through chartList' + window.chartList);
     $('div#charts > div').each(function() {
 	    s_id = $(this).attr('data-sensorid');
 	    var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
-	    console.log('chartIndex is' + chartIndex +"for " + s_id);	  
+	    //	    console.log('chartIndex is' + chartIndex +"for " + s_id);	  
 	    var thisChart = Highcharts.charts[chartIndex];
 	    if (typeof chartIndex === 'number') {    //error messages will have undefined chartIndex  
 		thisChart.showLoading();
 		$('.'+s_id).button('loading');
 
 
-		$.getJSON('/explorer/get_data_ajax/',{'sensorid': s_id, 'starttime': starttime, 'endtime': endtime})
+		$.getJSON('/explorer/get_data_ajax/',{'sensorid': s_id, 'starttime': dataTime.starttime, 'endtime': dataTime.endtime})
 		    .done(function(data) {
 			if (data.goodPlotData) {
 
@@ -151,7 +153,7 @@ function update_existing_charts() {
 		    })
 		    .fail(function(jqxhr, textStatus, error) {
 			var err = textStatus + ", " + error;
-			console.log( "Request Failed: " + err );
+			//			console.log( "Request Failed: " + err );
 		    });
 		//need an else here to try again to draw the graph if it had an error in the original time.
 	    };
@@ -160,12 +162,13 @@ function update_existing_charts() {
 
 
 /**
-   Change window.endtime to now.
-   Change window.starttime to this number of days before now
+   Change data-end-time to now
+   Change data-start-time to this number of days before now
 */
 function changeStartTime(days) {
     var today = new Date();
-    // Get to midnight tonight, just on the start of tomorrow
+    // getTimezoneOffset is in minutes, we want milliseconds for Javascript
+    // back up the current time
     var starttime = today.getTime();
     starttime -= days * 24 * 3600 * 1000;
     var startday = new Date(starttime);
@@ -189,6 +192,17 @@ function printDate( d ) {
     rtn += ((t < 10) ? "0" : "") + t + ":";
     t = d.getMinutes();
     rtn += ((t < 10) ? "0" : "") + t;
+    // Mark the time zone
+    t = d.getTimezoneOffset();
+    var tzHr = t/60;
+    var tzMin = t % 60;
+    /* Why yes, this Timezone adjustment looks like it is backwards.
+       This is the number you need to add to local time to match GMT,
+       where the +- in the date tells you how far behind GMT your
+       local time is
+    */
+    rtn += ((t > 0) ? "-" : "+") + ((tzHr < 10) ? "0" : "") + tzHr;
+    rtn += ":" + ((tzMin < 10) ? "0" : "") + tzMin;
     return rtn;
 }
 
@@ -212,7 +226,8 @@ function prettyDate( d ) {
 function make_chart_and_manipulate_buttons( sensorid ) {
     $( '.'+sensorid ).button( 'loading' );
     show_button_as_active('.'+sensorid);
-    $.when( ajax_make_chart( sensorid, window.starttime, window.endtime ))
+    var dataTimes = getDataTimes();
+    $.when( ajax_make_chart( sensorid, dataTimes.starttime, dataTimes.endtime ))
 	.done( function() {
 		$( '.'+sensorid ).button( 'reset' );
 	    });
@@ -226,47 +241,25 @@ function remove_chart_and_manipulate_buttons( sensorid ) {
     // Remove the graph
     $( "#" + sensorid + "-chart" ).remove();
     $( "#" + sensorid ).remove();
-    show_button_as_active('.'+sensorid);
+    show_button_as_inactive('.'+sensorid);
     //Arbitrarily make the loading show up for half a second to discourage double clicking.
     setTimeout( function () {
 	    $( '.'+sensorid ).button( 'reset' );
 	}, 500);
 }
 
-
-// function startUTC() {
-//     //This returns the start extreme for the xAxis in UTC.
-//     //Need to add zoom here eventually
-//     var startDate =new Date(window.starttime);
-//     var startUTC = startDate.getTime() + startDate.getTimezoneOffset() * 60000;
-//     return startUTC;
-// }
-
-// function endUTC() {
-//     //This returns the end extreme for the xAxis in UTC.
-//     //Need to add zoom here eventually
-//     var endDate = new Date(window.endtime);
-//     var endUTC = endDate.getTime() + endDate.getTimezoneOffset() * 60000;
-//     return endUTC;
-// 
-
-/** Takes two UTC dates.
-    Updates the labels on the graph screen and the default dates on the
-    datepicker
-    Updates the globals, window.starttime and window.endtime, used by the
-    graphs.
+/**
+   Store the new start and end dates for graph data in the various
+   places that need to know it
 */
 function update_dates(startday, endday) {
-    window.starttime = printDate( startday );
-    window.endtime = printDate( endday );
-    window.prettyStart = prettyDate( startday );
-    window.prettyEnd = prettyDate( endday );
-    $("#startdate").html( window.prettyStart );
-    $("#enddate").html( window.prettyEnd );
-    
-    // This one does not get set
+    // save these dates as an attribute of our graph page
+    setDataTimes( printDate( startday ), printDate( endday ));
+    // Show the User the dates
+    $("#startdate").html( prettyDate( startday ));
+    $("#enddate").html( prettyDate( endday ));
+    // Update the custom date picker
     $("#endtimepicker").datepicker( 'setDate', endday );
-    // This one does, so that's a start
     $("#starttimepicker").datepicker( 'setDate', startday );
 }
 
@@ -284,4 +277,41 @@ function show_button_as_active(button_id) {
 function show_button_as_inactive(button_id) {
     $(button_id).addClass( 'btn-default');
     $(button_id).removeClass( 'btn-primary');
+}
+
+/**
+   Get the data time
+*/
+function getDataTimes(){
+    var startTime = $( "#timeselection" ).attr( "data-start-time" );
+    var endTime =  $( "#timeselection" ).attr( "data-end-time" );
+    return {starttime: startTime, endtime: endTime};
+}
+
+/**
+   Set the data time as a string with time zone on it
+*/
+function setDataTimes(starttime, endtime){
+    $("#timeselection").attr("data-start-time", starttime);
+    $("#timeselection").attr("data-end-time", endtime);
+}
+/**
+   Get the axis time, for displaying a zoomed subsegment of the data
+*/
+function getAxisTime() {
+    // Return as ms
+}
+
+/**
+   Get the HTML ID of the current time selection button.
+   The id is named in explorer/index.html
+ */
+function getCurrentTimeBtn() {
+    return $("#timeselection").attr("current-time-btn");
+}
+/**
+   Store the HTML ID of the current time selection button
+*/
+function setCurrentTimeBtn(btnId) {
+    $("#timeselection").attr("current-time-btn", btnId);
 }
