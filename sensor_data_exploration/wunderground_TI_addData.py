@@ -10,7 +10,7 @@ import sys
 import argparse
 import urllib2
 import json
-from datetime import datetime,tzinfo,timedelta
+from datetime import datetime,tzinfo,timedelta,date
 from time import sleep
 import populate
 
@@ -20,22 +20,38 @@ stationID='KMABOSTO32'
 
 def get_args():
     parser = argparse.ArgumentParser(description='Load historical data from wunderground into the database.')
-    parser.add_argument('-d','--date',metavar='YYYYMMDD', nargs='+',
-                        help='Retrieve and load data from this date.')
-    parser.add_argument('--history', action='store_true',
-                        help='Collect historical data from the specified dates.')
     parser.add_argument('--current', action='store_true',
                         help='Collect current conditions. (-d is ignored)')
+    parser.add_argument('--history', action='store_true',
+                        help='Collect historical data from the specified dates.')
+    parser.add_argument('-d','--date',metavar='YYYYMMDD', nargs='+',
+                        help='Retrieve and load data from these dates.')
+    parser.add_argument('--yesterday', action='store_true',
+                        help="Add yesterday's date to --date.")
+    parser.add_argument('--today', action='store_true',
+                        help="Add today's date to --date.")
     args = parser.parse_args()
     if args.history == args.current:
         sys.exit("You must specify either --history OR --current")
-    if args.history and not args.date:
+    if args.history and not (args.date or args.yesterday or args.today):
         sys.exit("You must specify at least one date: '-d YYYYMMDD'")
     if args.date:
         for d in args.date:
             if not (len(d)==8 and d.isdigit()):
                 sys.exit("%s is not in proper date format: YYYYMMDD"% d,)
     return args
+
+def get_date_list(args):
+    dates = []
+    if args.date:
+        dates = args.date
+    if args.yesterday:
+        yday = date.today() + timedelta(-1)
+        dates.append(yday.strftime('%Y%m%d'))
+    if args.today:
+        today = date.today()
+        dates.append(today.strftime('%Y%m%d'))
+    return dates
 
 def get_data(url):
     '''fetch data from this url'''
@@ -73,6 +89,8 @@ def parse_dt(dt_string):
 
 if __name__ == '__main__':
     args = get_args()
+    dates = get_date_list(args)
+
     if debug: print "Starting Weather Underground population script..."
 
     # list of sensors for this source 
@@ -95,7 +113,7 @@ if __name__ == '__main__':
 
     # load historical sensor data
     if args.history:
-        for date in args.date:
+        for date in dates:
             if debug: print "Reading data for date %s...\n"% date,
             url='http://api.wunderground.com/api/%s/history_%s/q/pws:%s.json' % (APIkey,date,stationID)
             data = get_data(url)
