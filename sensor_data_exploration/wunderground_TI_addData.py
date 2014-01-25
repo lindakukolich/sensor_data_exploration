@@ -6,6 +6,7 @@
 # (run with -h to see full usage message)
 # as new sensors are added, add them to the list of sensors (keys) in main.
 
+import os
 import sys
 import argparse
 import urllib2
@@ -15,7 +16,7 @@ from time import sleep
 import populate
 
 debug = True
-APIkey='2cbf77167bf2fe35'
+APIkey=os.environ.get('WU_API_KEY')
 stationID='KMABOSTO32'
 
 def get_args():
@@ -141,7 +142,6 @@ if __name__ == '__main__':
         if debug: print "Loading current data..."
         entry = data["current_observation"]
         timestamp = parse_dt(entry["observation_time_rfc822"])
-        if debug: print timestamp
         for key in keys:
             value = entry[ key[1] ]
             if key[1] == "relative_humidity":
@@ -152,6 +152,5 @@ if __name__ == '__main__':
                 populate.load_data(sensor_id=sensors[key[0]], time_stamp=timestamp, num_value=value, value_is_number=True)
             else:
                 populate.load_data(sensor_id=sensors[key[0]], time_stamp=timestamp, string_value=value)
-            if debug: print "loaded", key[0], value
 
     if debug: print "Finishing Weather Underground population script..."

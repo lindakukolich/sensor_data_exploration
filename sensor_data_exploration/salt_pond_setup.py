@@ -17,8 +17,8 @@ if __name__ == '__main__':
     mysource = populate.add_datasource( datasource_id = "Thompson Island Salt Pond",
                                desc="Thompson Island Salt Pond hydrologic sensor",
                                owner = "cesn - Coastal Environmental Sensing Networks",
-                               access_info="https://datagarrison.com/ thompson,thompson",
-                                symbol="SP"
+                               access_info="https://datagarrison.com/ user=thompson pass=SP_PASSWORD",
+                               symbol="SP"
                            )
 
     # create Sensors from this datasource ---------------------------------
