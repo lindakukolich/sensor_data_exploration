@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head_extra %}
-    <!-- Twitter date time picker. This must come after boostrap.min, which
-      breaks some of the drop-down settings used by the actual picker -->
+
 
     <!--- Datetime picker from http://eternicode.github.io/bootstrap-datepicker/ -->
     <link rel="stylesheet" type="text/css" media="screen" href="{% static "datepicker3.css" %}" />
@@ -12,10 +11,8 @@
         <script src="{%static "bootstrap-datepicker.js" %}"></script>
     <!-- Load this stylesheet last. It has the styles that overwrite bootstrap  -->
     <link rel="stylesheet" type="text/css" media="screen" href="{% static "explorer.css" %}" />
-    
-    
+
     <script src="{%static "handlebars-v1.3.0.js" %}"></script>
-    <!-- javascript for generating plots -->
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
     <script src="{%static "highcharts-explorer-theme.js" %}"></script>

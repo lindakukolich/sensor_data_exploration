@@ -19,7 +19,7 @@ if __name__ == '__main__':
                                latitude=42.3192,
                                longitude=-71.0104,
                                access_info="stationNo=6016 stationID=e22a07ba note .xls file is html",
-                               symbol="NO"
+                               symbol="NOR"
                            )
 
     # create Sensors from this datasource ---------------------------------

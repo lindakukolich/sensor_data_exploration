@@ -21,6 +21,7 @@ if __name__ == '__main__':
         latitude=42.3196,
         longitude=-71.0219,
         access_info="deviceID='2232583' station_type='cdombuoy'",
+        symbol="BB"
     )
 
     # create Sensors from this datasource ---------------------------------

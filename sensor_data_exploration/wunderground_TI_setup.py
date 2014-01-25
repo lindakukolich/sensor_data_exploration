@@ -57,7 +57,7 @@ if __name__ == '__main__':
                  )
     s4 = populate.add_sensor( sensor_id = "wu_ti_wind_degrees",
                      source = mysource,
-                     short_name="",
+                     short_name="Wind Degrees",
                      data_type = "float",
                      is_number = True,
                      units_long = "degrees",
