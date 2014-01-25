@@ -2,32 +2,11 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, rendo
     //Its getting confusing to just keep putting variables in in order. Should we refactor to use a JSON or Dict? - CM
     console.log('about to crate chart to put in ' + rendor_to);
     // Get the graph extremes
-    
-    //Find an existing graph and get it from that graph. This means that if the user has zoomed the new graph will come in at the same zoom.
-    var endUTC = 0
-    var startUTC = 0
-    $('div#charts > div').each(function() {
-	s_id = $(this).attr('data-sensorid');
-	var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
-	console.log('chartindex is' + chartIndex);
-	if (typeof chartIndex === 'number') {    //error messages will have undefined chartIndex
-	    var thisChart = Highcharts.charts[chartIndex];
-	    var thisXAxis = thisChart.xAxis[0].getExtremes();
-	    startUTC = thisXAxis.min;
-	    endUTC = thisXAxis.max;
-	    return false;
-	};
-    });
-    console.log('endUTC = ' + endUTC);
+    var startDate =new Date(window.starttime);
+    var startUTC = startDate.getTime() + startDate.getTimezoneOffset() * 60000;
+    var endDate = new Date(window.endtime);
+    var endUTC = endDate.getTime() + endDate.getTimezoneOffset() * 60000;
 
-    if (endUTC < 1) {
-	//There are no charts on the page. We should now check to see if a button is set. But for now I'm just going to default to are start times, today and -7 days.
-	var endDate = new Date();
-	var endUTC = endDate.getTime() + endDate.getTimezoneOffset() * 60000;
-	var startUTC = endUTC - (7 * 24 * 3600 *1000);
-    }
-
-    console.log('Chart new startUTC=' + startUTC + ' endUTC =' + endUTC);
     var chart = new Highcharts.Chart({
         chart: {
 	    renderTo: rendor_to,

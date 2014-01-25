@@ -89,7 +89,6 @@ div.container {
       margin-top: 0;
 }
 
-@media (min-width: 768px) {
   .nav-tabs.nav-justified > li > a {
     border-bottom: 10px;
   }
@@ -132,3 +131,4 @@ hr {
 #footer {
     padding-top: 10px;
 }
+
