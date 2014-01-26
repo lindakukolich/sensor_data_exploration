@@ -85,6 +85,8 @@ def get_data_ajax(request):
     print plot_sensor
     # Pick out Sensor fields to display as part of the plot
     
+
+    
     # Retrieve the actual data for the plot
     q = SensorData.objects.filter(
         sensor_id_id=plot_sensor_id
@@ -92,6 +94,7 @@ def get_data_ajax(request):
 
     # Pick out the times of the observations, and convert them to JavaScript
     # timestamps, which are in milliseconds
+
     xdata = []
     xdata_datetime = q.values_list('time_stamp', flat=True)
     for i in range(0, len(xdata_datetime)):
@@ -99,39 +102,58 @@ def get_data_ajax(request):
         xdata = list(xdata)
 
     # Pick out the values for each observation
-    ydata = q.values_list('num_value', flat=True)
-    ydata = list(ydata)
-
+    status = []
     plotError = ""
-    dataArray1 = []    
-    # Make sure that we actually got some data, or this plot is no good
-    if len(xdata) == 0 or len(ydata) == 0:
-        print "get_data_ajax: Error retrieving plot data for plot " + plot_sensor_id + ": No data"
-        goodPlotData = False
-        plotError =  "Error retrieving plot data for plot " + plot_sensor_id + ": No data for time range [" + plot_starttime + ", " + plot_endtime + "]"
 
+    status.append("before if ")
+    dataArray1 = []    
+    if plot_sensor['data_is_number']:
+        status.append(" data_is_number true")
+        ydata = q.values_list('num_value', flat=True)
+        ydata = list(ydata)
+
+        # Make sure that we actually got some data, or this plot is no good
+        if len(xdata) == 0 or len(ydata) == 0:
+    
+            print "get_data_ajax: Error retrieving plot data for plot " + plot_sensor_id + ": No data"
+            goodPlotData = False
+            plotError =  "Error retrieving plot data for plot " + plot_sensor_id + ": No data for time range [" + plot_starttime + ", " + plot_endtime + "]"
+        else:
+            #we have good data lets prep it and send it back.
+    
+            #make the array for highcharts
+            n_points = 0
+            n_points = len(ydata)
+
+            if (n_points > len(xdata)):
+                n_points = len(xdata)
+                status.append(" n_points ")
+                status.append(n_points)
+
+            for i in range (0, n_points) :
+                    dataArray1.append( [xdata[i], ydata[i]] );
+
+            goodPlotData = True
 
     else:
-        #we have good data lets prep it and send it back.
-    
-        #make the array for highcharts
-        n_points = 0
-        n_points = len(ydata)
-
-        if (n_points > len(xdata)):
-            n_points = len(xdata)
-
-        for i in range (0, n_points) :
-             dataArray1.append( [xdata[i], ydata[i]] );
-
+        status.append(" data_is_number false (else) ")
+        yurls = q.values_list('string_value', flat=True)
+        # Right now this is hardcoded for the fact there is one point. Need to put this into a loop so we have the right number of symbols.
+        ydata = 0
+        point = []
+            
+        dataArray1.append([xdata[0], 0])
+        dataArray1.append("ownURL: \'url here\'" )
         goodPlotData = True
     
     # We need to dump data for both the good and the badPlots.    
     data_to_dump = {'data_array1': dataArray1, 
                         'plot_short_name': plot_sensor['sensor_short_name'],
+                        'status': status,
                         'plot_source_id': plot_sensor['data_source_id'],
                         'plot_units_long': plot_sensor['units_long'],
                         'plot_units_short': plot_sensor['units_short'],
+                        'data_is_a_number': plot_sensor['data_is_number'],
                         'line_color': plot_sensor['line_color'],
                         'goodPlotData': goodPlotData,
                         'plotError': plotError,
@@ -139,8 +161,8 @@ def get_data_ajax(request):
                     }
     
     #send back the data or error as created above.
-    print "data_to_dump"
-    print data_to_dump
+#    print "data_to_dump"
+#    print data_to_dump
     json_data = json.dumps(data_to_dump, cls=DjangoJSONEncoder)
     return HttpResponse(json_data, mimetype='application/json')
 
@@ -153,11 +175,11 @@ def get_sensors():
     return sensors
 
 def tests3(request):
+    aws_bucket = settings.AWS_STORAGE_BUCKET_NAME
 
-    print "Running AWS Test PAge"
     def store_in_s3(filename, content):
         conn = S3Connection(settings.ACCESS_KEY, settings.PASS_KEY)
-        b = conn.create_bucket("TI-Dev")
+        b = conn.create_bucket(aws_bucket)
         mime = mimetypes.guess_type(filename)[0]
         k = Key(b)
         k.key = filename
@@ -165,15 +187,18 @@ def tests3(request):
         k.set_contents_from_string(content)
         k.set_acl("public-read")
 
+    print "Running AWS Test PAge"
     context = RequestContext(request)
     context_dict = {}
 
         
-    test_file_name = "TI-Buoy.jpt"
-    aws_bucket = settings.AWS_STORAGE_BUCKET_NAME
+    test_file_name = "TI-Buoy.jpg"
+
 
     url = "http://s3.amazonaws.com/" + aws_bucket + "/" + test_file_name
-    context_dict = { url: url }
+    context_dict = {
+        'url': url 
+    }
 
     #Next step. Upload a file 
     # Liz this isn't working, my current theory is because we don't have a Model for it.  We don't actually need it to work via a POST right now. Can you get it to work reading a file from the file system?
@@ -186,8 +211,5 @@ def tests3(request):
         print filename
         store_in_s3(filename, content)
 
-   
-
-
-
+    print context_dict
     return render_to_response('explorer/tests3.html', context_dict, context)
