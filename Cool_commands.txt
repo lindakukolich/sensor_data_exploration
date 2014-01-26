@@ -83,6 +83,8 @@ Delete the records I don't want
 
 Now you can count all the records again and see that the number is right
 
+select * from explorer_sensordata where "sensor_id_id" like 'wu_ti_temp_c';
+
 Heroku Reload database
 
 heroku pg:psql --app stark-caverns-7053
@@ -91,8 +93,6 @@ DROP TABLE "explorer_sensordata";
 DROP TABLE "explorer_sensor";
 DROP TABLE "explorer_datasource";
 COMMIT;
-
-select * from explorer_sensordata where "sensor_id_id" like 'wu_ti_temp_c';
 
 heroku run python sensor_data_exploration/manage.py syncdb --app stark-caverns-7053
 heroku run bash --app stark-caverns-7053

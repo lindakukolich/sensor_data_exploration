@@ -114,6 +114,8 @@ if __name__ == '__main__':
             value = entry[ key[1] ]
             if args.cesn:
                 value = entry[ key[2] ]
+            if not value:  # skip empty cells
+                continue
             if value.startswith('-888.') or value.startswith('-889.'):
                 continue
             numeric = sensors[key[0]].data_is_number
