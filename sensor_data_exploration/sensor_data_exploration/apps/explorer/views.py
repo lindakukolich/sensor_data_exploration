@@ -1,3 +1,5 @@
+
+
 import json
 from django.shortcuts import render
 from django.template import RequestContext
@@ -7,6 +9,13 @@ from django.utils import simplejson
 import time
 from django.http import HttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
+
+import mimetypes
+
+from django.conf import settings
+from boto.s3.connection import S3Connection
+from boto.s3.key import Key
+
 
 # Create your views here.
 
@@ -142,3 +151,43 @@ def get_sensors():
     sensors = SensorData.objects.values_list('sensor_id', flat=True).distinct()
     sensor = list(sensors)
     return sensors
+
+def tests3(request):
+
+    print "Running AWS Test PAge"
+    def store_in_s3(filename, content):
+        conn = S3Connection(settings.ACCESS_KEY, settings.PASS_KEY)
+        b = conn.create_bucket("TI-Dev")
+        mime = mimetypes.guess_type(filename)[0]
+        k = Key(b)
+        k.key = filename
+        k.set_metadata("Content-Type", mime)
+        k.set_contents_from_string(content)
+        k.set_acl("public-read")
+
+    context = RequestContext(request)
+    context_dict = {}
+
+        
+    test_file_name = "TI-Buoy.jpt"
+    aws_bucket = settings.AWS_STORAGE_BUCKET_NAME
+
+    url = "http://s3.amazonaws.com/" + aws_bucket + "/" + test_file_name
+    context_dict = { url: url }
+
+    #Next step. Upload a file 
+    # Liz this isn't working, my current theory is because we don't have a Model for it.  We don't actually need it to work via a POST right now. Can you get it to work reading a file from the file system?
+    
+    if request.method == "POST":
+        print "In Post"
+        file = request.FILES["file"]
+        filename = file["filename"]
+        content = file["content"]
+        print filename
+        store_in_s3(filename, content)
+
+   
+
+
+
+    return render_to_response('explorer/tests3.html', context_dict, context)

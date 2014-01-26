@@ -29,6 +29,12 @@ PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '6fi=sl-=r9fp!&5b2i$63fbzuy^kew^#k&!r%kw&gc!@^56sou'
 
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'TI-Dev'
+# We need to move this over to an account owned by Thompson Island.
+
+
 # DEBUG is always false here.  Only turn it on in your local_settings.py file,
 # which you DO NOT CHECK IN.  There should never be a local_settings.py on
 # GitHub
