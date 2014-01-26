@@ -58,7 +58,11 @@ def parse_dt(dt_string):
     '''takes a string and returns a datetime object'''
     tz = EST()
     # '12/6/13 14:00:00', "Time, Eastern Daylight Time"
-    x=datetime.strptime(dt_string, "%m/%d/%y %H:%M:%S")
+    # or '2013-08-22 12:00:00'
+    if '/' in dt_string:
+        x=datetime.strptime(dt_string, "%m/%d/%y %H:%M:%S")
+    else:
+        x=datetime.strptime(dt_string, "%Y-%m-%d %H:%M:%S")
     dt=datetime(int(x.year),int(x.month),int(x.day),int(x.hour),int(x.minute),int(x.second),tzinfo=tz)
     return dt
 
