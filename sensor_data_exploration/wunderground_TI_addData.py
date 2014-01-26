@@ -20,32 +20,48 @@ APIkey=os.environ.get('WU_API_KEY')
 stationID='KMABOSTO32'
 
 def get_args():
-    parser = argparse.ArgumentParser(description='Load historical data from wunderground into the database.')
+    parser = argparse.ArgumentParser(description='Load data from Weather Underground into the database.')
     parser.add_argument('--current', action='store_true',
-                        help='Collect current conditions. (-d is ignored)')
+                        help='Collect current conditions.')
     parser.add_argument('--history', action='store_true',
-                        help='Collect historical data from the specified dates.')
-    parser.add_argument('-d','--date',metavar='YYYYMMDD', nargs='+',
-                        help='Retrieve and load data from these dates.')
+                        help='Collect data from start date to end date, inclusive.')
+    parser.add_argument('--start',metavar='YYYY-MM-DD',
+                        help='Retrieve and load data starting from this date.')
+    parser.add_argument('--end',metavar='YYYY-MM-DD',
+                        help='Retrieve and load data ending on this date.')
     parser.add_argument('--yesterday', action='store_true',
-                        help="Add yesterday's date to --date.")
+                        help="Retrieve and load yesterday's data.")
     parser.add_argument('--today', action='store_true',
-                        help="Add today's date to --date.")
+                        help="Retrieve and load today's data.")
     args = parser.parse_args()
     if args.history == args.current:
         sys.exit("You must specify either --history OR --current")
-    if args.history and not (args.date or args.yesterday or args.today):
-        sys.exit("You must specify at least one date: '-d YYYYMMDD'")
-    if args.date:
-        for d in args.date:
-            if not (len(d)==8 and d.isdigit()):
-                sys.exit("%s is not in proper date format: YYYYMMDD"% d,)
+    if args.history:
+        if not ((args.start and args.end) or args.yesterday or args.today):
+            sys.exit("You must specify start & end dates, or yesterday or today.")
+        if args.start:
+            try:
+                datetime.strptime(args.start,'%Y-%m-%d')
+                datetime.strptime(args.end,'%Y-%m-%d')
+            except Exception as e:
+                sys.exit("Start or end %s" % e,)
     return args
+
+def next_day(day):
+    date = datetime.strptime(day,'%Y%m%d') + timedelta(1)
+    day = date.strftime('%Y%m%d')
+    return day
 
 def get_date_list(args):
     dates = []
-    if args.date:
-        dates = args.date
+    if args.start:
+        start_day = args.start.replace('-','')
+        end_day = args.end.replace('-','')
+        dates.append(start_day)
+        tomorrow = next_day(start_day)
+        while tomorrow <= end_day:
+            dates.append(tomorrow)
+            tomorrow = next_day(tomorrow)
     if args.yesterday:
         yday = date.today() + timedelta(-1)
         dates.append(yday.strftime('%Y%m%d'))
@@ -90,7 +106,7 @@ def parse_dt(dt_string):
 
 if __name__ == '__main__':
     args = get_args()
-    dates = get_date_list(args)
+    dates = get_date_list(args)  # might be an empty list
 
     if debug: print "Starting Weather Underground population script..."
 
