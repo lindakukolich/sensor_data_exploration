@@ -16,20 +16,26 @@ debug = True
 stationID = 'e22a07ba'
 
 def get_args():
-    parser = argparse.ArgumentParser(description='Load historical data into the database.')
+    parser = argparse.ArgumentParser(description='Load data from Nortek into the database.')
+    parser.add_argument('--current', action='store_true',
+                        help='Collect data from yesterday and today.')
     parser.add_argument('--history', action='store_true',
                         help='Collect data from start date to end date, inclusive.')
-    parser.add_argument('--current', action='store_true',
-                        help='Collect data from dates more recent than those already in the database.')
-    parser.add_argument('--startdate',metavar='YYYY-MM-DD',
-                        help='Retrieve and load data from this date.')
-    parser.add_argument('--enddate',metavar='YYYY-MM-DD',
-                        help='Retrieve and load data from this date.')
+    parser.add_argument('--start',metavar='YYYY-MM-DD',
+                        help='Retrieve and load data starting from this date.')
+    parser.add_argument('--end',metavar='YYYY-MM-DD',
+                        help='Retrieve and load data ending on this date.')
     args = parser.parse_args()
     if args.history == args.current:
         sys.exit("You must specify either --history OR --current")
-    if args.history and not (args.startdate and args.enddate):
-        sys.exit("You must specify --startdate and --enddate (YYYY-MM-DD)")
+    if args.history:
+        if not (args.start and args.end):
+            sys.exit("You must specify --start and --end (YYYY-MM-DD)")
+        try:
+            datetime.strptime(args.start,'%Y-%m-%d')
+            datetime.strptime(args.end,'%Y-%m-%d')
+        except Exception as e:
+            sys.exit("Start or end %s" % e,)
     return args
 
 def get_data(url):
@@ -101,16 +107,16 @@ if __name__ == '__main__':
     # assemble start and end times for url request
     timestr='T05:00:00Z'  # somewhat arbitrary
     if args.history:
-        startdate = args.startdate + timestr
-        enddate = args.enddate + timestr
+        startdate = args.start + timestr
+        enddate = args.end + timestr
     else:
         yesterday = date.today() + timedelta(-1)
         tomorrow = date.today() + timedelta(1)
         startdate = yesterday.strftime('%Y-%m-%d') + timestr
         enddate = tomorrow.strftime('%Y-%m-%d') + timestr
 
-    start=urllib.quote_plus(startdate)
-    end=urllib.quote_plus(enddate)
+    startdate=urllib.quote_plus(startdate)
+    enddate=urllib.quote_plus(enddate)
 
     for group in ['MetData','Profile']:
         keys = groupkeys[group]
@@ -121,7 +127,7 @@ if __name__ == '__main__':
 
         # get data list
         if debug: print "Reading data %s...\n" % group,
-        url='http://aos.nortek.no/Station/ExcelFileExport/%s?from=%s&to=%s&what=%s' % (stationID,start,end,group)
+        url='http://aos.nortek.no/Station/ExcelFileExport/%s?from=%s&to=%s&what=%s' % (stationID, startdate, enddate, group)
         d = get_data(url)
         data = parse_data(d)
 
