@@ -19,8 +19,8 @@ if __name__ == '__main__':
                                latitude=42.317165,
                                longitude=-71.007622,
                                elevation=100.0,
-                               access_info="stationID='KMABOSTO32' APIkey='2cbf77167bf2fe35'",
-                                symbol="WU"
+                               access_info="stationID='KMABOSTO32' APIkey=WU_API_KEY",
+                               symbol="WU"
                            )
 
     # create Sensors from this datasource ---------------------------------
