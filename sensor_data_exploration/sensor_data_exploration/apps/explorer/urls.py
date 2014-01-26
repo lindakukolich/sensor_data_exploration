@@ -6,4 +6,5 @@ urlpatterns = patterns('',
                        url(r'^about/', views.about, name='about'),
                        url(r'^map/', views.map, name='map'),
                        url(r'^get_data_ajax/', views.get_data_ajax, name='get_data_ajax'),
+                       url(r'^tests3', views.tests3, name='tests3'),
                        )

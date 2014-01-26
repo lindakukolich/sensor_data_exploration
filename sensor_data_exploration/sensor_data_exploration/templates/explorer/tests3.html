@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block about %}class="active"{% endblock %}
+{% block body_block %}
+<div class="jumbotron">
+TEST PAGE for s3
+This picture was uplaoded manually to S3
+
+<img src="http://s3.amazonaws.com/TI-Dev/TI-Buoy.jpg" height="100px"></img>
+<div>
+
+<form action="/explorer/tests3" method="post" enctype="multipart/form-data">{% csrf_token %}
+<label for="file">Filename:</label>
+<input type="file" name="file" id="file" />
+<br />
+<input type="submit" name="submit" value="Submit" />
+</form>
+
+</div>
+</div>
+{% endblock %}

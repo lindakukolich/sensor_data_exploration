@@ -1,3 +1,5 @@
+
+
 import json
 from django.shortcuts import render
 from django.template import RequestContext
@@ -7,6 +9,13 @@ from django.utils import simplejson
 import time
 from django.http import HttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
+
+import mimetypes
+
+from django.conf import settings
+from boto.s3.connection import S3Connection
+from boto.s3.key import Key
+
 
 # Create your views here.
 
@@ -48,23 +57,23 @@ def map(request):
 def get_data_ajax(request):
     '''Read data from the database, preparing to make a plot'''
 
-#    print "starting get_data_ajax with plot_sensor_id= "
+    print "starting get_data_ajax with plot_sensor_id= "
     plot_sensor_id = request.GET.get('sensorid')
- #   print plot_sensor_id
+    print plot_sensor_id
     print "start and end times are= "
     plot_starttime = request.GET.get('starttime')
     plot_endtime = request.GET.get('endtime')
-  #  print plot_starttime + ", " + plot_endtime
+    print plot_starttime + ", " + plot_endtime
 
     # Make sure we have a sensor_id that is in the sensor table
     if Sensor.objects.filter(sensor_id=plot_sensor_id) == False:
         data_to_dump = {'goodPlotData': False,
                         'plotError': "Error retrieving plot data for sensor " + plot_sensor_id + ": No such sensor"
                         }
-        #print "data_to_dump"
-        #print data_to_dump
+        print "data_to_dump"
+        print data_to_dump
         json_data = json.dumps(data_to_dump, cls=DjangoJSONEncoder)
-        #print json_data
+        print json_data
         return HttpResponse(json_data, mimetype='application/json')
 
     # We know there is at least one sensor that matches our given id.
@@ -130,8 +139,8 @@ def get_data_ajax(request):
                     }
     
     #send back the data or error as created above.
-#    print "data_to_dump"
-#    print data_to_dump
+    print "data_to_dump"
+    print data_to_dump
     json_data = json.dumps(data_to_dump, cls=DjangoJSONEncoder)
     return HttpResponse(json_data, mimetype='application/json')
 
@@ -142,3 +151,43 @@ def get_sensors():
     sensors = SensorData.objects.values_list('sensor_id', flat=True).distinct()
     sensor = list(sensors)
     return sensors
+
+def tests3(request):
+
+    print "Running AWS Test PAge"
+    def store_in_s3(filename, content):
+        conn = S3Connection(settings.ACCESS_KEY, settings.PASS_KEY)
+        b = conn.create_bucket("TI-Dev")
+        mime = mimetypes.guess_type(filename)[0]
+        k = Key(b)
+        k.key = filename
+        k.set_metadata("Content-Type", mime)
+        k.set_contents_from_string(content)
+        k.set_acl("public-read")
+
+    context = RequestContext(request)
+    context_dict = {}
+
+        
+    test_file_name = "TI-Buoy.jpt"
+    aws_bucket = settings.AWS_STORAGE_BUCKET_NAME
+
+    url = "http://s3.amazonaws.com/" + aws_bucket + "/" + test_file_name
+    context_dict = { url: url }
+
+    #Next step. Upload a file 
+    # Liz this isn't working, my current theory is because we don't have a Model for it.  We don't actually need it to work via a POST right now. Can you get it to work reading a file from the file system?
+    
+    if request.method == "POST":
+        print "In Post"
+        file = request.FILES["file"]
+        filename = file["filename"]
+        content = file["content"]
+        print filename
+        store_in_s3(filename, content)
+
+   
+
+
+
+    return render_to_response('explorer/tests3.html', context_dict, context)
