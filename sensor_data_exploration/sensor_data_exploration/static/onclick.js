@@ -36,14 +36,14 @@ $( function () {
 	$( '.' + sensorid ).button( 'loading' );
 
 	// console.log( 'button clicked: ' + sensorid )
-	if ($( "#" + sensorid ).length != 0) {
+	if ($( "#" + sensorid ).length !== 0) {
 	    // If there is a div for this chart already, remove the chart
 	    // console.log( 'about to remove: ' + sensorid );
 	    remove_chart_and_manipulate_buttons( sensorid );
 	} else {
 	    // Otherwise, make the chart
 	    make_chart_and_manipulate_buttons( sensorid );
-	};
+	}
 	
     });
    
@@ -110,10 +110,10 @@ $( function () {
 		var thisChart = Highcharts.charts[chartIndex];
 		thisChart.xAxis[0].setExtremes(startUTC, endUTC, true);
 		return false; // once we set one the sync zoom will set the rest
-	    };
+	    }
+	    });
 	});
     });
-});
 
 /** This function updates the existing charts on our page with new time
     selectors, which have already been stored in data-start-time and
@@ -196,8 +196,6 @@ function makeDate( dateString ){
 }
 /**
    Print the given Date in the format the database will expect
-
-   TODO: Add time zone and make sure it is GMT
  */
 function printDate( d ) {
     var rtn = "";
@@ -313,12 +311,6 @@ function getDataTimes(){
 function setDataTimes(starttime, endtime){
     $("#timeselection").attr("data-start-time", starttime);
     $("#timeselection").attr("data-end-time", endtime);
-}
-/**
-   Get the axis time, for displaying a zoomed subsegment of the data
-*/
-function getAxisTime() {
-    // Return as ms
 }
 
 /**

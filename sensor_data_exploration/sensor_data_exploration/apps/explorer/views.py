@@ -69,8 +69,15 @@ def get_data_ajax(request):
     # Make sure we have a sensor_id that is in the sensor table
     if Sensor.objects.filter(sensor_id=plot_sensor_id) == False:
         data_to_dump = {'goodPlotData': False,
-                        'plotError': "Error retrieving plot data for sensor " + plot_sensor_id + ": No such sensor"
-                        }
+                        'plotError': "Error retrieving plot data for sensor " + plot_sensor_id + ": No such sensor",
+                        'data_array1': dataArray1, 
+                        'plot_short_name': plot_sensor_id,
+                        'plot_source_id': plot_sensor_id,
+                        'plot_units_long': "",
+                        'plot_units_short': "",
+                        'line_color': "",
+                        'sensor_id': data_source_id,
+                    }
         print "data_to_dump"
         print data_to_dump
         json_data = json.dumps(data_to_dump, cls=DjangoJSONEncoder)

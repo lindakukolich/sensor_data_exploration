@@ -1,3 +1,9 @@
+/**
+   Generate a chart, given all the pieces needed to label one.
+
+   Set the axis limits to match other charts that are currently displayed,
+   or the data range selected by the user if there are no charts.
+*/
 function sensordata_chart(title, subtitle, units, short_units, dataArray1, sensorId, line_color, dataIsNumber, dataType) {
     //Its getting confusing to just keep putting variables in in order. Should we refactor to use a JSON or Dict? - CM
 
@@ -5,31 +11,9 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, senso
 
     // Get the graph extremes
     console.log(dataArray1);
-    //Find an existing graph and get it from that graph. This means that if the user has zoomed the new graph will come in at the same zoom.
-    var endUTC = 0;
-    var startUTC = 0;
-    $('div#charts > div').each(function() {
-	    var s_id = $(this).attr('data-sensorid');
-	var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
-	console.log('chartindex is' + chartIndex);
-	if (typeof chartIndex === 'number') {    //error messages will have undefined chartIndex
-	    var thisChart = Highcharts.charts[chartIndex];
-	    var thisXAxis = thisChart.xAxis[0].getExtremes();
-	    startUTC = thisXAxis.min;
-	    endUTC = thisXAxis.max;
-	    return false;
-	};
-    });
-    console.log('endUTC = ' + endUTC);
+    var axisTimes = getAxisTimes();
 
-    if (endUTC < 1) {
-	//There are no charts on the page. We should now check to see if a button is set. But for now I'm just going to default to are start times, today and -7 days.
-	var endDate = new Date();
-	var endUTC = endDate.getTime() + endDate.getTimezoneOffset() * 60000;
-	var startUTC = endUTC - (7 * 24 * 3600 *1000);
-    }
-
-    console.log('Chart new startUTC=' + startUTC + ' endUTC =' + endUTC);
+    console.log('Chart new startUTC=' + axisTimes.starttime + ' endUTC =' + axisTimes.endtime);
 
     //Set up chart for numeric or string value. Eventually we may want to differenciate between mp3 and images here.
     console.log(dataType);
@@ -63,8 +47,8 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, senso
             text: null
         },
         xAxis: {
-	    min: startUTC,
-	    max: endUTC,
+	    min: axisTimes.starttime,
+	    max: axisTimes.endtime,
 	    title: {
 		text: null
 	    }
@@ -177,4 +161,41 @@ function pointClicked(x,sensorId) {
 		$('#pointDisplay').modal('show');
 	    };
 	});
+}
+/**
+ Find an existing graph and get the Axis extremes from that graph.
+ This means that if the user has zoomed the new graph will come in at
+ the same zoom.
+
+ If there is no existing graph, use the times requested by the user
+
+Returns an object with two fields, startime and endtime
+ */
+function getAxisTimes() {
+    var endUTC = 0;
+    var startUTC = 0;
+    $('div#charts > div').each(function() {
+	    var s_id = $(this).attr('data-sensorid');
+	    var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
+	    //	    console.log('chartindex is' + chartIndex);
+	    if (typeof chartIndex === 'number') {
+		// This is a real chart
+		var thisChart = Highcharts.charts[chartIndex];
+		var thisXAxis = thisChart.xAxis[0].getExtremes();
+		startUTC = thisXAxis.min;
+		endUTC = thisXAxis.max;
+		// We found one, quit out of the loop
+		return false;
+	    }
+	});
+    //    console.log('endUTC = ' + endUTC);
+
+    // If this is still 0, there were no charts to get data from.
+    // Use the time range button selection on the graphs web page
+    if (endUTC < 1) {
+	var graph_limits = getDataTimes();
+	startUTC = makeDate(graph_limits.starttime).getTime();
+	endUTC = makeDate(graph_limits.endtime).getTime();
+    }
+    return {starttime: startUTC, endtime: endUTC};
 }
