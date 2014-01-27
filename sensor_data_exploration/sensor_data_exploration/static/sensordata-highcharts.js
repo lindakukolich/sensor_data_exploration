@@ -41,6 +41,14 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, senso
 	symbol = 'url(https://cdn1.iconfinder.com/data/icons/16x16-free-toolbar-icons/16/camera.png)';
     };
     
+    var ymin = null
+    var ymax = null
+    
+    if (units == 'degrees') {
+	ymin = 0
+	ymax = 360
+    }
+
 
     console.log('about to call charts for ' + chartId + symbol);
     var chart = new Highcharts.Chart({
@@ -64,7 +72,9 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, senso
         yAxis: {
             title: {
                 text: null
-            }
+            },
+	    min: ymin,
+	    max: ymax
         },
         tooltip: {
             formatter: function() {
@@ -161,7 +171,7 @@ function pointClicked(x,sensorId) {
 		console.log(data);
 		var modal_source = $('#pointModal').html();
 		var modal_template = Handlebars.compile(modal_source); //I wonder if I really need to be doing this compile over and over again like this?
-		var modal_data = {url: data.url, sensorId: sensorId};
+		var modal_data = {url: data.url};
 		console.log(data.url);
 		$('#modalHere').append(modal_template(modal_data));
 		$('#pointDisplay').modal('show');

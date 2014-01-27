@@ -74,6 +74,7 @@ Highcharts.theme = {
     },
     yAxis: {
 	minorTickInterval: 'auto',
+	endOnTick: false,
 	lineColor: '#000',
 	lineWidth: 1,
 	tickWidth: 1,
