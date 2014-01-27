@@ -91,7 +91,8 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 		sensorid: sensorid,
 		title: data.plot_short_name,
 		subtitle: data.plot_source_id,
-		units: data.plot_units_short+' '+data.plot_units_long
+		units: data.plot_units_short+' '+data.plot_units_long,
+		dataSourceSymbol: data.dataSourceSymbol
 	    };
 
 	    $('#charts').append(chart_template(legend_data));
