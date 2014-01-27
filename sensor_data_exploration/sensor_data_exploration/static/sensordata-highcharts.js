@@ -104,15 +104,19 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 		remove_chart_and_manipulate_buttons( sensorId );
 	    });
 	    
-	    if (data.goodPlotData) {
+	    //	    if (data.goodPlotData) {
 		var chart = sensordata_chart(data.plot_short_name, data.plot_source_id, data.plot_units_long, data.plot_units_short, data.data_array1, sensorid, data.line_color, data.dataIsNumber, data.dataType);
+		if (data.goodPlotData === false) {
+		    console.log("Plot error: " + data.plotError);
+		    chart.showNoData(data.plotError);
+		}
 		$('.'+sensorid).button('reset');  //Reset the loading on the button
-	    } else {
-		var errorClass = 'alert alert-warning';
-		var chartId = data.plot_source_id + "-chart";
-		$('#'+chartId).html('<div class="' + errorClass + '" >'+data.plotError+'</div>');
-		$('.'+sensorid).button('reset');  //Reset the loading on the button
-	    }
+		//	    } else {
+		//		var errorClass = 'alert alert-warning';
+		//		var chartId = data.plot_source_id + "-chart";
+		//		$('#'+chartId).html('<div class="' + errorClass + '" >'+data.plotError+'</div>');
+		//		$('.'+sensorid).button('reset');  //Reset the loading on the button
+		//	    }
 	})
 	.fail(function(jqxhr, textStatus, error) {
 	    var err = textStatus + ", " + error;

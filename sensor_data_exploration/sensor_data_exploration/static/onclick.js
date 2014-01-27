@@ -141,8 +141,6 @@ function update_existing_charts() {
 
 		$.getJSON('/explorer/get_data_ajax/',{'sensorid': s_id, 'starttime': dataTime.starttime, 'endtime': dataTime.endtime})
 		    .done(function(data) {
-			if (data.goodPlotData) {
-
 			    var chartIndex = $("#"+data.sensor_id+"-chart").data('highchartsChart');
 			    var thisChart = Highcharts.charts[chartIndex];
 			    thisChart.series[0].setData(data.data_array1,false);
@@ -150,11 +148,6 @@ function update_existing_charts() {
 			    thisChart.hideLoading();
 
 			    $('.'+data.sensor_id).button('reset');  //Reset the loading on the button
-			} else {
-			    var errorClass = 'alert alert-warning';
-			    $('#'+'data.sensor_id'+'-chart').html('<div class="' + errorClass + '" >'+data.plotError+'</div>');
-			    $('.'+data.sensor_id).button('reset');  //Reset the loading on the button
-			}
 		    })
 		    .fail(function(jqxhr, textStatus, error) {
 			var err = textStatus + ", " + error;
