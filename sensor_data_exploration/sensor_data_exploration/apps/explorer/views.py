@@ -183,6 +183,10 @@ def get_point_ajax(request):
 
     point = q.values()[0]
 
+    s = Sensor.objects.filter(
+        sensor_id=plot_sensor_id
+    )
+    plot_sensor = s.values()[0]
 
     if point['value_is_number']:
         url = ""
@@ -191,7 +195,10 @@ def get_point_ajax(request):
 
     data_to_dump = {
         'value_is_number': point['value_is_number'],
-        'url': url}
+        'url': url,
+        'dataType': plot_sensor['data_type']
+    }
+
     print point
     json_data = json.dumps(data_to_dump, cls=DjangoJSONEncoder)
     return HttpResponse(json_data, mimetype='application/json')

@@ -20,9 +20,11 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, senso
     if (dataType == 'float') {
 	var lineWidth = 1;
 	symbol = 'circle'
+    } else if (dataType == 'wav') {
+	symbol = 'url(https://cdn1.iconfinder.com/data/icons/inFocus_social_media/40/twitter-bird3.png)';
     } else {
 	var lineWidth = 0;
-	symbol = 'url(https://cdn1.iconfinder.com/data/icons/16x16-free-toolbar-icons/16/camera.png)';
+	symbol = 'url(https://cdn1.iconfinder.com/data/icons/ledicons/camera.png)';
     };
     
     var ymin = null
@@ -158,9 +160,19 @@ function pointClicked(x,sensorId) {
 		console.log('someone clicked a point that is just a number. Ignore this.');
 	    } else {
 		console.log(data);
-		var modal_source = $('#pointModal').html();
+		var modal_source = ""
+		var body = ""
+		if (data.dataType == 'jpg') {
+		    body = '<img src=' + data.url +' height=200px> </img>';
+		} else if (data.dataType == 'wav') {
+		    body = "<audio controls><source src='" + data.url +"'></audio>";
+		} else {
+		    return false;
+		};
+		console.log(body);
+		modal_source = $('#pointModal').html();
 		var modal_template = Handlebars.compile(modal_source); //I wonder if I really need to be doing this compile over and over again like this?
-		var modal_data = {url: data.url};
+		var modal_data = {url: data.url, body: body};
 		console.log(data.url);
 		$('#modalHere').append(modal_template(modal_data));
 		$('#pointDisplay').modal('show');
