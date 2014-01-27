@@ -95,10 +95,11 @@ DROP TABLE "explorer_datasource";
 COMMIT;
 
 heroku run python sensor_data_exploration/manage.py syncdb --app stark-caverns-7053
-heroku run bash --app stark-caverns-7053
-
-~ $ cd sensor_data_exploration/
-~/sensor_data_exploration $ ./setupDB.sh
+./loadDB_all.sh 2>&1 | tee -a log
+[ heroku run bash --app stark-caverns-7053 ]
+[ 
+[ ~ $ cd sensor_data_exploration/ ]
+[ ~/sensor_data_exploration $ ./setupDB.sh ]
 
 git push heroku master
 heroku addons:open scheduler
@@ -115,3 +116,5 @@ variable = os.environ.get['KEY']
 list of key names:
 WU_API_KEY
 SP_PASSWORD
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
