@@ -4,6 +4,8 @@
 # 25.January.2014 Liz Brooks
 # script to populate the database with Datasource and Sensor information 
 # from Nortek Weather Station and Aquadopp Profiler Thompson Island.
+# 
+# Kind=hide - Cell4 or Cell5 above the water line for extended periods during lower tides so we aren't showing the data.
 
 import populate
 debug = True
@@ -36,7 +38,7 @@ if __name__ == '__main__':
                  )
     s2 = populate.add_sensor( sensor_id = "nor_Wind_speed_max",
                      source = mysource,
-                     short_name="Gust Speed",
+                     short_name="Wind Gust",
                      data_type = "float",
                      is_number = True,
                      units_long = "meters per second",
@@ -112,12 +114,12 @@ if __name__ == '__main__':
                      is_number = True,
                      units_long = "degrees",
                      units_short = "°",
-                     kind = "hydrological",
+                     kind = "hide",
                      line_color = populate.hex_color('pink'),
                  )
     s11 = populate.add_sensor( sensor_id = "nor_Cell1_Speed",
                      source = mysource,
-                     short_name="Cell1 Speed",
+                     short_name="Current Speed (0.6m)",
                      data_type = "float",
                      is_number = True,
                      units_long = "meters per second",
@@ -127,7 +129,7 @@ if __name__ == '__main__':
                  )
     s12 = populate.add_sensor( sensor_id = "nor_Cell1_Direction",
                      source = mysource,
-                     short_name="Cell1 Direction",
+                     short_name="Current Dir (0.6m)",
                      data_type = "float",
                      is_number = True,
                      units_long = "degrees",
@@ -137,7 +139,7 @@ if __name__ == '__main__':
                  )
     s13 = populate.add_sensor( sensor_id = "nor_Cell1_Amplitude",
                      source = mysource,
-                     short_name="Cell1 Amplitude",
+                     short_name="Amplitude (0.6m)",
                      data_type = "float",
                      is_number = True,
                      units_long = "pounds",
@@ -147,7 +149,7 @@ if __name__ == '__main__':
                  )
     s14 = populate.add_sensor( sensor_id = "nor_Cell2_Speed",
                      source = mysource,
-                     short_name="Cell2 Speed",
+                     short_name="Current Speed (1.1m)",
                      data_type = "float",
                      is_number = True,
                      units_long = "meters per second",
@@ -157,7 +159,7 @@ if __name__ == '__main__':
                  )
     s15 = populate.add_sensor( sensor_id = "nor_Cell2_Direction",
                      source = mysource,
-                     short_name="Cell2 Direction",
+                     short_name="Current Dir (1.1m)",
                      data_type = "float",
                      is_number = True,
                      units_long = "degrees",
@@ -167,7 +169,7 @@ if __name__ == '__main__':
                  )
     s16 = populate.add_sensor( sensor_id = "nor_Cell2_Amplitude",
                      source = mysource,
-                     short_name="Cell2 Amplitude",
+                     short_name="Amplitude (1.1m)",
                      data_type = "float",
                      is_number = True,
                      units_long = "pounds",
@@ -177,7 +179,7 @@ if __name__ == '__main__':
                  )
     s17 = populate.add_sensor( sensor_id = "nor_Cell3_Speed",
                      source = mysource,
-                     short_name="Cell3 Speed",
+                     short_name="Current Speed (1.6m)",
                      data_type = "float",
                      is_number = True,
                      units_long = "meters per second",
@@ -187,7 +189,7 @@ if __name__ == '__main__':
                  )
     s18 = populate.add_sensor( sensor_id = "nor_Cell3_Direction",
                      source = mysource,
-                     short_name="Cell3 Direction",
+                     short_name="Current Dir (1.6m)",
                      data_type = "float",
                      is_number = True,
                      units_long = "degrees",
@@ -197,7 +199,7 @@ if __name__ == '__main__':
                  )
     s19 = populate.add_sensor( sensor_id = "nor_Cell3_Amplitude",
                      source = mysource,
-                     short_name="Cell3 Amplitude",
+                     short_name="Amplitude (1.6m)",
                      data_type = "float",
                      is_number = True,
                      units_long = "pounds",
@@ -212,7 +214,7 @@ if __name__ == '__main__':
                      is_number = True,
                      units_long = "meters per second",
                      units_short = "m/s",
-                     kind = "hydrological",
+                     kind = "hide",
                      line_color = populate.hex_color('dark_blue'),
                  )
     s21 = populate.add_sensor( sensor_id = "nor_Cell4_Direction",
@@ -222,7 +224,7 @@ if __name__ == '__main__':
                      is_number = True,
                      units_long = "degrees",
                      units_short = "°",
-                     kind = "hydrological",
+                     kind = "hide",
                      line_color = populate.hex_color('black'),
                  )
     s22 = populate.add_sensor( sensor_id = "nor_Cell4_Amplitude",
@@ -232,7 +234,7 @@ if __name__ == '__main__':
                      is_number = True,
                      units_long = "pounds",
                      units_short = "#",
-                     kind = "hydrological",
+                     kind = "hide",
                      line_color = populate.hex_color('brown'),
                  )
     s23 = populate.add_sensor( sensor_id = "nor_Cell5_Speed",
@@ -242,7 +244,7 @@ if __name__ == '__main__':
                      is_number = True,
                      units_long = "meters per second",
                      units_short = "m/s",
-                     kind = "hydrological",
+                     kind = "hide",
                      line_color = populate.hex_color('dark_blue'),
                  )
     s24 = populate.add_sensor( sensor_id = "nor_Cell5_Direction",
@@ -252,7 +254,7 @@ if __name__ == '__main__':
                      is_number = True,
                      units_long = "degrees",
                      units_short = "°",
-                     kind = "hydrological",
+                     kind = "hide",
                      line_color = populate.hex_color('black'),
                  )
     s25 = populate.add_sensor( sensor_id = "nor_Cell5_Amplitude",
@@ -262,7 +264,7 @@ if __name__ == '__main__':
                      is_number = True,
                      units_long = "pounds",
                      units_short = "#",
-                     kind = "hydrological",
+                     kind = "hide",
                      line_color = populate.hex_color('brown'),
                  )
 
