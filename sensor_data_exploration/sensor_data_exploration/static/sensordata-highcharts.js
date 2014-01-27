@@ -1,8 +1,9 @@
-function sensordata_chart(title, subtitle, units, short_units, dataArray1, sensorId, line_color, url_list) {
+function sensordata_chart(title, subtitle, units, short_units, dataArray1, sensorId, line_color, dataIsNumber, dataType) {
     //Its getting confusing to just keep putting variables in in order. Should we refactor to use a JSON or Dict? - CM
-    var chartId = sensorId + "-chart";
-    // Get the graph extremes
 
+    var chartId = sensorId + "-chart";
+
+    // Get the graph extremes
     console.log(dataArray1);
     //Find an existing graph and get it from that graph. This means that if the user has zoomed the new graph will come in at the same zoom.
     var endUTC = 0;
@@ -29,6 +30,19 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, senso
     }
 
     console.log('Chart new startUTC=' + startUTC + ' endUTC =' + endUTC);
+
+    //Set up chart for numeric or string value. Eventually we may want to differenciate between mp3 and images here.
+    console.log(dataType);
+    if (dataType == 'float') {
+	var lineWidth = 1;
+	symbol = 'circle'
+    } else {
+	var lineWidth = 0;
+	symbol = 'url(https://cdn1.iconfinder.com/data/icons/16x16-free-toolbar-icons/16/camera.png)';
+    };
+    
+
+    console.log('about to call charts for ' + chartId + symbol);
     var chart = new Highcharts.Chart({
         chart: {
 	    renderTo: chartId,
@@ -54,16 +68,21 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, senso
         },
         tooltip: {
             formatter: function() {
-		    return '<b>'+ this.series.name +'</b><br/>'+ Highcharts.dateFormat('%e-%b-%Y %H:%M', this.x) +': '+ this.y +' ' + short_units
+		return '<b>'+ this.series.name +'</b><br/>'+ Highcharts.dateFormat('%e-%b-%Y %H:%M', this.x) +': '+ this.y +' ' + short_units
             }
         },   
         series: [{
 	    name: title,
 	    sensorId: sensorId,
 	    color: line_color,
+	    lineWidth: lineWidth,
+	    marker: {
+		symbol: symbol
+	    },
 	    data: dataArray1
 	}]
     });
+    console.log('Created the chart about to return it');
     return chart;
 }
 
@@ -83,9 +102,7 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 	    $('#charts').append(chart_template(legend_data));
 	    
 	    if (data.goodPlotData) {
-		var chart = sensordata_chart(data.plot_short_name, data.plot_source_id, data.plot_units_long, data.plot_units_short, data.data_array1, sensorid, data.line_color, data.url_list);
-
-//		syncronizeCrossHairs(chart);
+		var chart = sensordata_chart(data.plot_short_name, data.plot_source_id, data.plot_units_long, data.plot_units_short, data.data_array1, sensorid, data.line_color, data.dataIsNumber, data.dataType);
 		$('.'+sensorid).button('reset');  //Reset the loading on the button
 	    } else {
 		var errorClass = 'alert alert-warning';

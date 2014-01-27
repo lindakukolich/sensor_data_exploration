@@ -1,4 +1,4 @@
-/** This function is called automatically when the page is fully loaded */
+/** This function is called automatically when the page is fully loaded. */
 $( function () {
     // For Sensor category tabs at bottom (Headliner, All Meterological, etc.)
     $( '#btn-tabs a' ).click( function (e) {

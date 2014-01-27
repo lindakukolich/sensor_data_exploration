@@ -139,3 +139,13 @@ hr {
 .jumbotron li {
   line-height: 1.4;
 }
+
+button.close {
+    color: #ddf0fb;
+    font-size: 85%;
+}
+
+.close:hover,
+.close:focus {
+    color: #ddf0fb;
+}
