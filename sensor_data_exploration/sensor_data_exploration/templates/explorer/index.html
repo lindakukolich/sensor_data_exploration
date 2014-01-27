@@ -25,7 +25,7 @@
       {% verbatim %}
       <div id="{{ sensorid }}" class="row"  data-sensorid="{{sensorid}}">
 	<div id="{{sensorid}}-legend" class="col-md-2">
-	  <button type="button" class="graph-btn close" align="right"  data-sensor_id="{{sensorId}}">&times;</button>
+	  <button type="button" class="x-graph-btn close" align="right"  data-sensorId="{{sensorid}}">&times;</button>
 	  <h4>{{title}}</h4>
 	  <h6>{{units}}</h6>
 	  <h5>{{subtitle}}</h5>
@@ -180,7 +180,7 @@
 
 	  <div class="tab-pane" id="misc">
             {% for sensor in sensor_list %}
-	    {% if sensor.kind != "hydrological" and sensor.kind != "meteorological" %}
+	    {% if sensor.kind != "hydrological" and sensor.kind != "meteorological" and sensor.kind != "hide" %}
              <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">
 	     	      {{sensor.sensor_short_name}} <span class="badge">{{ sensor.data_source.symbol }}</span>
 	     </button>

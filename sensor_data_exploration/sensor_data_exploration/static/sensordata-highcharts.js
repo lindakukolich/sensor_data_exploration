@@ -103,11 +103,11 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 	    $('#charts').append(chart_template(legend_data));
 
 	    //set up the listener on the X button in the legend
-	    $( '.graph-btn' ).click( function(){
+	    $( '.x-graph-btn' ).click( function(){
 		var sensorId;
 		sensorId = $( this ).attr( 'data-sensorId' );
 		console.log('graph-btn clicked x to remove '+ sensorId);
-		remove_chart_and_manipulate_buttons( sensorid );
+		remove_chart_and_manipulate_buttons( sensorId );
 	    });
 	    
 	    if (data.goodPlotData) {
@@ -161,7 +161,7 @@ function pointClicked(x,sensorId) {
 		console.log(data);
 		var modal_source = $('#pointModal').html();
 		var modal_template = Handlebars.compile(modal_source); //I wonder if I really need to be doing this compile over and over again like this?
-		var modal_data = {url: data.url};
+		var modal_data = {url: data.url, sensorId: sensorId};
 		console.log(data.url);
 		$('#modalHere').append(modal_template(modal_data));
 		$('#pointDisplay').modal('show');
