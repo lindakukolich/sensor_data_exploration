@@ -108,7 +108,21 @@ Highcharts.theme = {
 	    }
 	}
     },
-
+    plotOptions: {
+        series: {
+            cursor: 'pointer',
+            point: {
+                events: {
+                    click: function(pointEvent) {
+			var sensorId = this.series.userOptions.sensorId;
+			var x = this.x
+			pointClicked(x,sensorId);
+                    }
+                }
+            }
+        }
+    },
+        
    
 };
 

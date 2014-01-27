@@ -1,8 +1,9 @@
-function sensordata_chart(title, subtitle, units, short_units, dataArray1, rendor_to, line_color) {
+function sensordata_chart(title, subtitle, units, short_units, dataArray1, sensorId, line_color, url_list) {
     //Its getting confusing to just keep putting variables in in order. Should we refactor to use a JSON or Dict? - CM
-    console.log('about to create chart to put in ' + rendor_to);
+    var chartId = sensorId + "-chart";
     // Get the graph extremes
-    
+
+    console.log(dataArray1);
     //Find an existing graph and get it from that graph. This means that if the user has zoomed the new graph will come in at the same zoom.
     var endUTC = 0;
     var startUTC = 0;
@@ -30,7 +31,7 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, rendo
     console.log('Chart new startUTC=' + startUTC + ' endUTC =' + endUTC);
     var chart = new Highcharts.Chart({
         chart: {
-	    renderTo: rendor_to,
+	    renderTo: chartId,
             type: 'spline' 
         },
         title: {
@@ -55,9 +56,10 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, rendo
             formatter: function() {
 		    return '<b>'+ this.series.name +'</b><br/>'+ Highcharts.dateFormat('%e-%b-%Y %H:%M', this.x) +': '+ this.y +' ' + short_units
             }
-        },            
+        },   
         series: [{
 	    name: title,
+	    sensorId: sensorId,
 	    color: line_color,
 	    data: dataArray1
 	}]
@@ -79,15 +81,16 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 		units: data.plot_units_short+' '+data.plot_units_long
 	    };
 	    $('#charts').append(chart_template(legend_data));
-	    var chart_id = sensorid + "-chart";
+	    
 	    if (data.goodPlotData) {
-		var chart = sensordata_chart(data.plot_short_name, data.plot_source_id, data.plot_units_long, data.plot_units_short, data.data_array1, chart_id, data.line_color);
+		var chart = sensordata_chart(data.plot_short_name, data.plot_source_id, data.plot_units_long, data.plot_units_short, data.data_array1, sensorid, data.line_color, data.url_list);
 
 //		syncronizeCrossHairs(chart);
 		$('.'+sensorid).button('reset');  //Reset the loading on the button
 	    } else {
 		var errorClass = 'alert alert-warning';
-		$('#'+chart_id).html('<div class="' + errorClass + '" >'+data.plotError+'</div>');
+		var chartId = data.plot_source_id + "-chart";
+		$('#'+chartId).html('<div class="' + errorClass + '" >'+data.plotError+'</div>');
 		$('.'+sensorid).button('reset');  //Reset the loading on the button
 	    }
 	})
@@ -119,4 +122,18 @@ function syncZoom(zoomEvent) {
 		}
 	    }
     });
+}
+
+function pointClicked(x,sensorId) {
+
+    console.log('x= '+ x + ' pointClicked! senosrId ' + sensorId);
+    $.getJSON('/explorer/get_point_ajax/',{'sensorid': sensorId, 'x': x})
+	.done(function(data) {
+	    if (data.value_is_number) {
+		console.log('someone clicked a point that is just a number. Ignore this.');
+	    } else {
+		console.log(data);
+		$('#myModal').modal('show');
+	    };
+	});
 }

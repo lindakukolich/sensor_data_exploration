@@ -9,6 +9,7 @@ from django.utils import simplejson
 import time
 from django.http import HttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
+from datetime import datetime
 
 import mimetypes
 
@@ -107,48 +108,38 @@ def get_data_ajax(request):
 
     status.append("before if ")
     dataArray1 = []    
+    url_list = []
+    ydata = []
     if plot_sensor['data_is_number']:
+        #Putting in 0 for ones that are not numberical. Will use ajax to get the urls out of the string.
         status.append(" data_is_number true")
         ydata = q.values_list('num_value', flat=True)
         ydata = list(ydata)
 
-        # Make sure that we actually got some data, or this plot is no good
-        if len(xdata) == 0 or len(ydata) == 0:
-    
-            print "get_data_ajax: Error retrieving plot data for plot " + plot_sensor_id + ": No data"
-            goodPlotData = False
-            plotError =  "Error retrieving plot data for plot " + plot_sensor_id + ": No data for time range [" + plot_starttime + ", " + plot_endtime + "]"
-        else:
-            #we have good data lets prep it and send it back.
-    
-            #make the array for highcharts
-            n_points = 0
-            n_points = len(ydata)
+    n_points = 0
+    n_points = len(xdata)
 
-            if (n_points > len(xdata)):
-                n_points = len(xdata)
-                status.append(" n_points ")
-                status.append(n_points)
-
-            for i in range (0, n_points) :
-                    dataArray1.append( [xdata[i], ydata[i]] );
-
-            goodPlotData = True
+    # Make sure that we actually got some data, or this plot is no good
+    if n_points == 0:
+        print "get_data_ajax: Error retrieving plot data for plot " + plot_sensor_id + ": No data"
+        goodPlotData = False
+        plotError =  "Error retrieving plot data for plot " + plot_sensor_id + ": No data for time range [" + plot_starttime + ", " + plot_endtime + "]"
 
     else:
-        status.append(" data_is_number false (else) ")
-        yurls = q.values_list('string_value', flat=True)
-        # Right now this is hardcoded for the fact there is one point. Need to put this into a loop so we have the right number of symbols.
-        ydata = 0
-        point = []
-            
-        dataArray1.append([xdata[0], 0])
-        dataArray1.append("ownURL: \'url here\'" )
+
+        for i in range (0, n_points) :
+            if plot_sensor['data_is_number']:
+                dataArray1.append( [xdata[i], ydata[i]] );
+            else:
+                dataArray1.append([xdata[i], 0])
+
         goodPlotData = True
+        
     
     # We need to dump data for both the good and the badPlots.    
     data_to_dump = {'data_array1': dataArray1, 
-                        'plot_short_name': plot_sensor['sensor_short_name'],
+                    'url_list': url_list,
+                    'plot_short_name': plot_sensor['sensor_short_name'],
                         'status': status,
                         'plot_source_id': plot_sensor['data_source_id'],
                         'plot_units_long': plot_sensor['units_long'],
@@ -163,6 +154,31 @@ def get_data_ajax(request):
     #send back the data or error as created above.
 #    print "data_to_dump"
 #    print data_to_dump
+    json_data = json.dumps(data_to_dump, cls=DjangoJSONEncoder)
+    return HttpResponse(json_data, mimetype='application/json')
+
+def get_point_ajax(request):
+    plot_sensor_id = request.GET.get('sensorid')
+
+    x = request.GET.get('x')
+    x = float(x)/1000.0
+
+    pointTime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(x))   
+
+    q = SensorData.objects.filter(sensor_id_id=plot_sensor_id).filter(time_stamp=pointTime)
+
+    point = q.values()[0]
+
+
+    if point['value_is_number']:
+        url = ""
+    else:
+        url = point['string_value']
+
+    data_to_dump = {
+        'value_is_number': point['value_is_number'],
+        'url': url}
+    print point
     json_data = json.dumps(data_to_dump, cls=DjangoJSONEncoder)
     return HttpResponse(json_data, mimetype='application/json')
 
@@ -213,3 +229,5 @@ def tests3(request):
 
     print context_dict
     return render_to_response('explorer/tests3.html', context_dict, context)
+
+
