@@ -34,9 +34,11 @@ def index(request):
     
     sensor_list = Sensor.objects.order_by('sensor_short_name')
 
+    datasource_list = DataSource.objects.order_by('datasource_id')
 
     context_dict = {
         'sensor_list': sensor_list,
+        'datasource_list': datasource_list
     }
 
     # Return a rendered response to send to the client.
@@ -142,6 +144,9 @@ def get_data_ajax(request):
 
         goodPlotData = True
         
+    symbol = DataSource.objects.filter(datasource_id = plot_sensor['data_source_id']).values_list('symbol')
+    symbol = symbol[0]
+
     
     # We need to dump data for both the good and the badPlots.    
     data_to_dump = {'data_array1': dataArray1, 
@@ -156,7 +161,8 @@ def get_data_ajax(request):
                         'line_color': plot_sensor['line_color'],
                         'goodPlotData': goodPlotData,
                         'plotError': plotError,
-                        'sensor_id': plot_sensor['sensor_id']
+                        'sensor_id': plot_sensor['sensor_id'],
+                        'dataSourceSymbol':symbol
                     }
     
     #send back the data or error as created above.
