@@ -133,7 +133,12 @@ function pointClicked(x,sensorId) {
 		console.log('someone clicked a point that is just a number. Ignore this.');
 	    } else {
 		console.log(data);
-		$('#myModal').modal('show');
+		var modal_source = $('#pointModal').html();
+		var modal_template = Handlebars.compile(modal_source); //I wonder if I really need to be doing this compile over and over again like this?
+		var modal_data = {url: data.url};
+		console.log(data.url);
+		$('#modalHere').append(modal_template(modal_data));
+		$('#pointDisplay').modal('show');
 	    };
 	});
 }

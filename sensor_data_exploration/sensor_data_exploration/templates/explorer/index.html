@@ -35,26 +35,36 @@
       </div>
       {% endverbatim %}
     </script>
+
+    <script id="pointModal" type="text/x-handlebars-template">
+      <!-- Modal -->
+      {% verbatim %}
+      <div id="pointDisplay" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+	    <div class="modal-header">
+	      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	      <h3 id="myModalLabel">Image from string_value</h3>
+	    </div>
+	    <div class="modal-body">
+	      <img src="{{url}}" height=200px> </img>
+	      <p>{{url}}</p>
+	    </div>
+	    <div class="modal-footer">
+	      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	      <button class="btn btn-primary">Save changes</button>
+	    </div>
+	  </div>
+	</div>
+      </div
+      {% endverbatim %}
+    </script>
+
+
     {% endblock %}
     {% block graphs %}class="active"{% endblock %}
     {% block body_block %}
 
-<!-- Modal -->
-<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog"><div class="modal-content">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Modal header</h3>
-  </div>
-  <div class="modal-body">
-    <p>One fine body…</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary">Save changes</button>
-  </div><
-</div></div>
-</div>
 
 
 
@@ -176,8 +186,9 @@
 	     {% endif %}
 	    {% endfor %}
 	  </div>
-
+	  
 	</div>
       </div>
+      <div id="modalHere"></div>
 {% endblock %}
 
