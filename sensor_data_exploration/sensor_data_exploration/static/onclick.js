@@ -28,6 +28,7 @@ $( function () {
     /** Register the callback that handles clicks on the buttons that
 	request new charts */
     $( '.graph-btn' ).click( function(){
+	console.log('graph-btn clicked');
 	var sensorid;
 	sensorid = $( this ).attr( 'data-sensorid' );
 	/* Make EVERYTING that is named sensorid (buttons and charts)

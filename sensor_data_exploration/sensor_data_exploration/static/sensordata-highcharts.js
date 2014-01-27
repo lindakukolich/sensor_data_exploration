@@ -99,7 +99,16 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 		subtitle: data.plot_source_id,
 		units: data.plot_units_short+' '+data.plot_units_long
 	    };
+
 	    $('#charts').append(chart_template(legend_data));
+
+	    //set up the listener on the X button in the legend
+	    $( '.graph-btn' ).click( function(){
+		var sensorId;
+		sensorId = $( this ).attr( 'data-sensorId' );
+		console.log('graph-btn clicked x to remove '+ sensorId);
+		remove_chart_and_manipulate_buttons( sensorid );
+	    });
 	    
 	    if (data.goodPlotData) {
 		var chart = sensordata_chart(data.plot_short_name, data.plot_source_id, data.plot_units_long, data.plot_units_short, data.data_array1, sensorid, data.line_color, data.dataIsNumber, data.dataType);
