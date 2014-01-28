@@ -3,195 +3,222 @@
 {% block head_extra %}
 
 
-    <!--- Datetime picker from http://eternicode.github.io/bootstrap-datepicker/ -->
-    <link rel="stylesheet" type="text/css" media="screen" href="{% static "datepicker3.css" %}" />
+<!--- Datetime picker from http://eternicode.github.io/bootstrap-datepicker/ -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static "datepicker3.css" %}" />
 
-    <!-- Nonresponsive so the charts and the legend for the charts to go onto separate rows -->
-    <link rel="stylesheet" type="text/css" media="screen" href="{% static "non-responsive.css" %}" />
-        <script src="{%static "bootstrap-datepicker.js" %}"></script>
-    <!-- Load this stylesheet last. It has the styles that overwrite bootstrap  -->
-    <link rel="stylesheet" type="text/css" media="screen" href="{% static "explorer.css" %}" />
+<!-- Nonresponsive so the charts and the legend for the charts to go onto separate rows -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static "non-responsive.css" %}" />
+<script src="{%static "bootstrap-datepicker.js" %}"></script>
+<!-- Load this stylesheet last. It has the styles that overwrite bootstrap  -->
+<link rel="stylesheet" type="text/css" media="screen" href="{% static "explorer.css" %}" />
 
-    <script src="{%static "handlebars-v1.3.0.js" %}"></script>
-    <script src="http://code.highcharts.com/highcharts.js"></script>
-    <script src="http://github.highcharts.com/master/modules/no-data-to-display.src.js"></script>
-    <script src="http://code.highcharts.com/modules/exporting.js"></script>
-    <script src="{%static "highcharts-explorer-theme.js" %}"></script>
-    <script src="{%static "export-csv.js" %}"></script>
-    <script src="{%static "sensordata-highcharts.js" %}"></script>
-    <script src="{%static "onclick.js" %}"></script>
+<script src="{%static "handlebars-v1.3.0.js" %}"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://github.highcharts.com/master/modules/no-data-to-display.src.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<script src="{%static "highcharts-explorer-theme.js" %}"></script>
+<script src="{%static "export-csv.js" %}"></script>
+<script src="{%static "sensordata-highcharts.js" %}"></script>
+<script src="{%static "onclick.js" %}"></script>
 
-    <!-- Handlebar templates -->
-    <script id="chart-row" type="text/x-handlebars-template">
-      {% verbatim %}
-      <div id="{{ sensorid }}" class="row"  data-sensorid="{{sensorid}}">
-	<div id="{{sensorid}}-legend" class="col-md-2">
-	  <button type="button" class="x-graph-btn close" align="right"  data-sensorId="{{sensorid}}">&times;</button>
-	  <h4>{{title}}</h4>
-	  <h6>{{units}}</h6>
-	  <h5>{{subtitle}}	  
-<span class="small"><a href="/#{{dataSourceSymbol}}" class="{{dataSource}}" align="right"  data-sensorId="{{sensorid}}">(info)</a></class></h5>
+<!-- Handlebar templates -->
+<script id="chart-row" type="text/x-handlebars-template">
+  {% verbatim %}
+  <div id="{{ sensorid }}" class="row"  data-sensorid="{{sensorid}}">
+    <div id="{{sensorid}}-legend" class="col-md-2">
+      <button type="button" class="x-graph-btn close" align="right"  data-sensorId="{{sensorid}}">&times;</button>
+      <h4>{{title}}</h4>
+      <h6>{{units}}</h6>
+      <h5>{{subtitle}}	  
+	<span class="small"><a href="/#{{dataSourceSymbol}}" class="{{dataSource}}" align="right"  data-sensorId="{{sensorid}}">(info)</a></span></h5>
+      <button type="button" class="stats-btn btn" data-toggle="modal" data-sensorId="{{ sensorid }}">Statistics</button>
+    </div> <!-- div legend -->
+    <div id="{{sensorid}}-chart" class="col-md-10 highchart">
+      <!-- Highcharts will render the chart here -->
+    </div>
+  </div> <!-- div sensorid -->
+  {% endverbatim %}
+</script>
+
+<script id="statistics-modal" type="text/x-handlebars-template">
+  {% verbatim %}
+  <div id="{{ sensorid }}-statistics" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="statistics-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+	<div class="modal-header">
+	  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	  <h3 id="statistics-label" class="pointModalLabel">Statistics for {{subtitle}} {{title}}</h3>
 	</div>
-	<div id="{{sensorid}}-chart" class="col-md-10 highchart">
-	  <!-- Highcharts will render the chart here -->
+	<div class="modal-body">
+	  <p /><label>Start Time:</label> <span id="{{ sensorid }}-start">Start</span>
+	  <p /><label>End Time:</label>  <span id="{{ sensorid }}-end">End</span>
+	  <p /><label>Units:</label>  <span id="{{units}}">Start</span>
+	  <p /><label>Range:</label>  <span id="{{ sensorid }}-range-low">Low</span> to  <span id="{{ sensorid }}-range-high">High</span>
+	  <p /><label>Average:</label>  <span id="{{ sensorid }}-average">Average</span>
+	  <p /><label>Standard Deviation:</label> <span id="{{ sensorid }}-std-dev">Standard Deviation</span>
+	</div>
+	<div class="modal-footer">
+	  <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	</div> <!-- modal-footer -->
+      </div> <!-- modal-content -->
+    </div> <!-- modal-dialog -->
+  </div>
+  {% endverbatim %}
+</script>
+
+<script id="pointModal" type="text/x-handlebars-template">
+  <!-- Modal -->
+  {% verbatim %}
+  <div id="pointDisplay" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+	<div class="modal-header" align="center">
+	  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	  <h2 class="pointModalLabel">{{name}}</h2> 
+	  <h4 class="pointModalLabel"> from {{date}}</h4>
+	</div>
+	<div class="modal-body">
+	  {{{body}}}
+	</div>
+	<div class="modal-footer">
+	  <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 	</div>
       </div>
-      {% endverbatim %}
-    </script>
+    </div>
+  </div>
+  {% endverbatim %}
+</script>
 
-    <script id="pointModal" type="text/x-handlebars-template">
-      <!-- Modal -->
-      {% verbatim %}
-      <div id="pointDisplay" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+{% endblock %}
+{% block graphs %}class="active"{% endblock %}
+{% block body_block %}
+
+
+
+
+<div id="timeselection"
+     data-start-time=""
+     data-end-time=""
+     current-time-btn="#week-btn"
+     >
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <button id="day-btn" graph-days=1 type="button" class="btn btn-default time-btn">Last Day</button>
+      <button id="week-btn" graph-days=7 type="button" class="btn btn-default time-btn">Last Week</button>
+      <button id="month-btn" graph-days=30 type="button" class="btn btn-default time-btn">Last Month</button>
+      <button id="three-month-btn" graph-days=91 type="button" class="btn btn-default time-btn">Last Three Months</button>
+      <button id="custom-btn" class="btn btn-default" data-toggle="modal" data-target="#dateModal"> Custom Dates </button>
+      <div class="modal fade" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel" aria-hidden="true">
+	<!-- Modal -->
 	<div class="modal-dialog">
 	  <div class="modal-content">
-	    <div class="modal-header" align="center">
-	      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	      <h2 class="pointModalLabel">{{name}}</h2> 
-	      <h4 class="pointModalLabel"> from {{date}}</h4>
+	    <div class="modal-header">
+	      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	      <h4 class="modal-title" id="dateModalLabel">Select Start and End Dates</h4>
 	    </div>
 	    <div class="modal-body">
-	      {{{body}}}
+	      <div>
+		<label>Start Date</label>
+		<div id="starttimepicker" class="input-group date">
+		  <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+		</div>
+		
+		<label>End Date</label>
+		<div id="endtimepicker" class="input-group date">
+		  <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+		</div>
+		<script type="text/javascript">
+		  $('#starttimepicker').datepicker({
+		  format: "d-M-yyyy",
+		  endDate: "+1w"
+		  });
+		  $('#endtimepicker').datepicker({
+		  format: "d-M-yyyy",
+		  endDate: "+1w",
+		  });
+		</script>
+	      </div>
 	    </div>
 	    <div class="modal-footer">
-	      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      <button id="save-date" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
 	    </div>
-	  </div>
-	</div>
-      </div
-      {% endverbatim %}
-    </script>
+	  </div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <label>Start Date:</label>
+      <span id=startdate>Yesterday</span>
+      <label>End Date:</label>
+      <span id=enddate>Today</span>
+    </div>
+    <div class="col-md-2">
+      <button id="unzoom" class="btn btn-default">Unzoom</button>
+      <button id="clear" class="btn btn-default">Clear All</button>
+    </div>
+  </div>
+</div>
+<div id="modalHere"></div>
 
+<div id="charts">
+  <!-- Charts are added here with javascript -->
+</div>
 
-    {% endblock %}
-    {% block graphs %}class="active"{% endblock %}
-    {% block body_block %}
+<div id="ajax-graph" align="center" class="">
+  <ul class="nav nav-tabs nav-justified" id="btn-tabs">
+    <li class="active"><a href="#headliner">Weather Underground</a></li>
+    <li><a href="#met">All Meterological</a></li>
+    <li><a href="#hydro">Hydrological</a></li>
+    <li><a href="#misc">Other Sensor Data</a></li>
+  </ul>
 
+  <div id="buttons" class="tab-content">
+    <div class="tab-pane active" id="headliner">
+      {% for sensor in sensor_list %}
+      {% if sensor.is_headliner %}
+      <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">
+	{{sensor.sensor_short_name}} <span class="badge">{{ sensor.data_source.symbol }}</span>
 
+      </button>
+      {% endif %}
+      {% endfor %}
 
+    </div>
+    <div class="tab-pane" id="met">
+      {% for sensor in sensor_list %}
+      {% if sensor.kind == "meteorological" %}
+      <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">
+	{{sensor.sensor_short_name}} <span class="badge">{{ sensor.data_source.symbol }}</span>
+      </button>
+      {% endif %}
+      {% endfor %}
+    </div>
+    <div class="tab-pane" id="hydro">
+      {% for sensor in sensor_list %}
+      {% if sensor.kind == "hydrological" %}
+      <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">
+	{{sensor.sensor_short_name}} <span class="badge">{{ sensor.data_source.symbol }}</span>
+      </button>
+      {% endif %}
+      {% endfor %}
+    </div>
 
-    <div id="timeselection"
-	 data-start-time=""
-	 data-end-time=""
-	 current-time-btn="#week-btn"
-	 >
-      <dif class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-8">
-	<button id="day-btn" graph-days=1 type="button" class="btn btn-default time-btn">Last Day</button>
-	<button id="week-btn" graph-days=7 type="button" class="btn btn-default time-btn">Last Week</button>
-	<button id="month-btn" graph-days=30 type="button" class="btn btn-default time-btn">Last Month</button>
-	<button id="three-month-btn" graph-days=91 type="button" class="btn btn-default time-btn">Last Three Months</button>
-	<button id="custom-btn" class="btn btn-default" data-toggle="modal" data-target="#dateModal"> Custom Dates </button>
-	<div class="modal fade" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel" aria-hidden="true">
-	  <!-- Modal -->
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		<h4 class="modal-title" id="dateModalLabel">Select Start and End Dates</h4>
-	      </div>
-	      <div class="modal-body">
-		<div>
-		  <label>Start Date</label>
-		  <div id="starttimepicker" class="input-group date">
-		    <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-		  </div>
-		  
-		  <label>End Date</label>
-		  <div id="endtimepicker" class="input-group date">
-		    <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-		  </div>
-		  <script type="text/javascript">
-		    $('#starttimepicker').datepicker({
-		    format: "d-M-yyyy",
-		    endDate: "+1w"
-		    });
-		    $('#endtimepicker').datepicker({
-		    format: "d-M-yyyy",
-		    endDate: "+1w",
-		    });
-		  </script>
-		</div>
-	      </div>
-	      <div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		<button id="save-date" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
-	      </div>
-	    </div><!-- /.modal-content -->
-	  </div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
-      </div>
-      </div>
-      <div class="row">
-	<div class="col-md-2"></div>
-	<div class="col-md-8">
-	  <label>Start Date:</label>
-	  <span id=startdate>Yesterday</span>
-	  <label>End Date:</label>
-	  <span id=enddate>Today</span>
-	</div>
-	<div class="col-md-2">
-	  <button id="unzoom" class="btn btn-default">Unzoom</button>
-	  <button id="clear" class="btn btn-default">Clear All</button>
-	</div>
-      </div>
-      <div id="modalHere"></div>
-
-      <div id="charts">
-	<!-- Charts are added here with javascript -->
-      </div>
-
-      <div id="ajax-graph" align="center" class="">
-	<ul class="nav nav-tabs nav-justified" id="btn-tabs">
-	  <li class="active"><a href="#headliner">Weather Underground</a></li>
-	  <li><a href="#met">All Meterological</a></li>
-	  <li><a href="#hydro">Hydrological</a></li>
-	  <li><a href="#misc">Other Sensor Data</a></li>
-	</ul>
-
-	<div id="buttons" class="tab-content">
-	  <div class="tab-pane active" id="headliner">
-            {% for sensor in sensor_list %}
-	    {% if sensor.is_headliner %}
-            <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">
-	      {{sensor.sensor_short_name}} <span class="badge">{{ sensor.data_source.symbol }}</span>
-
-	    </button>
-	    {% endif %}
-	    {% endfor %}
-
-	  </div>
-	  <div class="tab-pane" id="met">
-            {% for sensor in sensor_list %}
-	    {% if sensor.kind == "meteorological" %}
-             <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">
-	      {{sensor.sensor_short_name}} <span class="badge">{{ sensor.data_source.symbol }}</span>
-	     </button>
-	     {% endif %}
-	    {% endfor %}
-	  </div>
-	  <div class="tab-pane" id="hydro">
-            {% for sensor in sensor_list %}
-	    {% if sensor.kind == "hydrological" %}
-             <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">
-	     	      {{sensor.sensor_short_name}} <span class="badge">{{ sensor.data_source.symbol }}</span>
-	     </button>
-	    {% endif %}
-	    {% endfor %}
-	  </div>
-
-	  <div class="tab-pane" id="misc">
-            {% for sensor in sensor_list %}
-	    {% if sensor.kind != "hydrological" and sensor.kind != "meteorological" and sensor.kind != "hide" %}
-             <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">
-	     	      {{sensor.sensor_short_name}} <span class="badge">{{ sensor.data_source.symbol }}</span>
-	     </button>
-	     {% endif %}
-	    {% endfor %}
-	  </div>
-	  
-	</div>
-      </div>
+    <div class="tab-pane" id="misc">
+      {% for sensor in sensor_list %}
+      {% if sensor.kind != "hydrological" and sensor.kind != "meteorological" and sensor.kind != "hide" %}
+      <button id="btn-{{sensor.sensor_id}}" data-sensorid="{{sensor.sensor_id}}" type="button" class="graph-btn btn btn-default {{sensor.sensor_id}}">
+	{{sensor.sensor_short_name}} <span class="badge">{{ sensor.data_source.symbol }}</span>
+      </button>
+      {% endif %}
+      {% endfor %}
+    </div>
+    
+  </div>
+</div>
 {% endblock %}
-

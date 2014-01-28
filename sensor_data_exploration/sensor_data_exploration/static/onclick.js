@@ -82,6 +82,9 @@ $( function () {
 	    update_existing_charts();
     });
 
+    /**
+       Erase all the charts, and un-select all their buttons
+     */
     $("#clear").click(function(){
 	$('div#charts > div').each(function() {
 		var s_id = $(this).attr('data-sensorid');
@@ -89,6 +92,9 @@ $( function () {
 	});
     });
 
+    /**
+       Go back to using the Data-time as the axis limits of all the charts
+     */
     $("#unzoom").click(function(){
 	    // Unzoom all the charts
 	    //	console.log('starting unzoom')
@@ -147,7 +153,7 @@ function update_existing_charts() {
 			    thisChart.xAxis[0].setExtremes(startUTC, endUTC, true);
 			    thisChart.hideLoading();
 
-			    $('.'+data.sensor_id).button('reset');  //Reset the loading on the button
+			    $('.'+data.sensor_id).button('reset');  // Reset the loading on the button
 		    })
 		    .fail(function(jqxhr, textStatus, error) {
 			var err = textStatus + ", " + error;
