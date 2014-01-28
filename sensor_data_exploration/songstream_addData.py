@@ -20,6 +20,7 @@ debug = True
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'ti_dev'
+s3_path ='https://s3.amazonaws.com/ti_dev/'
 
 account = 'THOMPSON_ISLAND'
 user = 'STUDENT'
@@ -129,11 +130,7 @@ if __name__ == '__main__':
     if debug: print "Reading data..."
     tmpdir = tempfile.mkdtemp()
     
-    #url='https://songstream.wildlifeacoustics.com/Files.php?account=THOMPSON_ISLAND&u=THOMPSON_ISLAND%2FSTUDENT&t=1390860617&a=55788a978829bb9e66becbf31879384f&fromyear=2013&frommonth=12&fromday=19&fromhour=0&toyear=2013&tomonth=12&today=21&tohour=23'
-    #songurl='https://songstream.wildlifeacoustics.com/download.php?filename=THOMPSON_ISLAND/DEFAULT/00409D6B0F57/THOMPSON_20131219_060700.wav&u=THOMPSON_ISLAND/STUDENT&t=1390860677&a=f47b8167fc655feb06ffc06eaf0a601b'
-    #url='https://songstream.wildlifeacoustics.com/Files.php?account=THOMPSON_ISLAND&u=THOMPSON_ISLAND%2FSTUDENT&t=1390866711&a=4052b662deda911f957b297adfc30ba6&fromyear=2013&frommonth=12&fromday=1&fromhour=0&toyear=2013&tomonth=12&today=31&tohour=23'
-    url='https://songstream.wildlifeacoustics.com/Files.php?account=THOMPSON_ISLAND&u=THOMPSON_ISLAND%2FSTUDENT&t=1390868580&a=f758ce12e921b842233b2bf6968f2c26&fromyear=2013&frommonth=12&fromday=27&fromhour=0&toyear=2013&tomonth=12&today=28&tohour=23'
-    url='https://songstream.wildlifeacoustics.com/Files.php?account=THOMPSON_ISLAND&u=THOMPSON_ISLAND%2FSTUDENT&t=1390872760&a=0e2ec73ca1a6754726f02005cc875a33&fromyear=2013&frommonth=12&fromday=1&fromhour=0&toyear=2013&tomonth=12&today=31&tohour=23'
+    url='https://songstream.wildlifeacoustics.com/Files.php?account=THOMPSON_ISLAND&u=THOMPSON_ISLAND%2FSTUDENT&t=1390876227&a=8d2ce4a58fcc973ca36f86cfa21cf70b&fromyear=2013&frommonth=12&fromday=1&fromhour=0&toyear=2013&tomonth=12&today=31&tohour=23'
 
     d = get_data(url)
     data = parse_data(d)
@@ -152,10 +149,11 @@ if __name__ == '__main__':
             print 'writing to S3', entry[0]
             store_data(entry, tmpdir, bucket)
         timestamp = entry[2]
+        s3_url = s3_path + entry[0]
         if args.current:
             if previous_load_date and timestamp <= previous_load_date:
                 continue
-        populate.load_data(sensor_id=sensors[keys[0][0]], time_stamp=timestamp, string_value=entry[0])
+        populate.load_data(sensor_id=sensors[keys[0][0]], time_stamp=timestamp, string_value=s3_url)
 
     os.removedirs(tmpdir)
     if debug: print "Finishing Song Stream population script..."
