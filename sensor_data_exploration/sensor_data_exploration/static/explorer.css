@@ -145,6 +145,12 @@ button.close {
     font-size: 85%;
 }
 
+button.stats-btn {
+    font-size: 85%;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
 .close:hover,
 .close:focus {
     color: #ddf0fb;
@@ -152,4 +158,9 @@ button.close {
 
 .pointModalLabel {
     color: #045c9c;
+}
+
+.img-rounded {
+    padding: 10px;
+    border-radius: 16px;
 }

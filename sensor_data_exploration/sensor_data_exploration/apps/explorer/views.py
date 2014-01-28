@@ -52,6 +52,12 @@ def about(request):
     context_dict = {}
     return render_to_response('explorer/about.html', context_dict, context)
 
+def sensors(request):
+    ''' About page, mostly to practice having links '''
+    context = RequestContext(request)
+    context_dict = {}
+    return render_to_response('explorer/sensors.html', context_dict, context)
+
 def map(request):
     context = RequestContext(request)
     context_dict = {}
