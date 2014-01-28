@@ -130,7 +130,7 @@ if __name__ == '__main__':
     if debug: print "Reading data..."
     tmpdir = tempfile.mkdtemp()
     
-    url='https://songstream.wildlifeacoustics.com/Files.php?account=THOMPSON_ISLAND&u=THOMPSON_ISLAND%2FSTUDENT&t=1390876227&a=8d2ce4a58fcc973ca36f86cfa21cf70b&fromyear=2013&frommonth=12&fromday=1&fromhour=0&toyear=2013&tomonth=12&today=31&tohour=23'
+    url='https://songstream.wildlifeacoustics.com/Files.php?account=THOMPSON_ISLAND&u=thompson_island%2Fstudent&t=1390916723&a=279a1df553dbd60a1069f99d88f76cac&fromyear=2013&frommonth=7&fromday=1&fromhour=0&toyear=2013&tomonth=7&today=31&tohour=23'
 
     d = get_data(url)
     data = parse_data(d)
