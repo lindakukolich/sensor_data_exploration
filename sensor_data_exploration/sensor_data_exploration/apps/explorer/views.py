@@ -243,5 +243,3 @@ def tests3(request):
 
     print context_dict
     return render_to_response('explorer/tests3.html', context_dict, context)
-
-

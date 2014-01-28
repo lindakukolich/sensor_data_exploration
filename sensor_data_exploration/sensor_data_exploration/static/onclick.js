@@ -82,6 +82,12 @@ $( function () {
 	    update_existing_charts();
     });
 
+    /**
+       Calculate the statistics for the current view of the data for a chart
+     */
+    $(".stats-btn").click(function() {
+	});
+
     $("#clear").click(function(){
 	$('div#charts > div').each(function() {
 		var s_id = $(this).attr('data-sensorid');
@@ -147,7 +153,7 @@ function update_existing_charts() {
 			    thisChart.xAxis[0].setExtremes(startUTC, endUTC, true);
 			    thisChart.hideLoading();
 
-			    $('.'+data.sensor_id).button('reset');  //Reset the loading on the button
+			    $('.'+data.sensor_id).button('reset');  // Reset the loading on the button
 		    })
 		    .fail(function(jqxhr, textStatus, error) {
 			var err = textStatus + ", " + error;
