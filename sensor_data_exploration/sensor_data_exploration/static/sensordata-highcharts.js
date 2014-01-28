@@ -100,7 +100,7 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 	    $('#charts').append(chart_template(legend_data));
 
 	    if (data.dataIsNumber === false) {
-		$('#'+sensorId+"-btn").addClass('.invisible');
+		$('#'+sensorid+"-btn").addClass('.invisible');
 	    }
 	    /**
 	       Calculate the statistics for the current view of the data for a chart
