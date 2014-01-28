@@ -83,11 +83,8 @@ $( function () {
     });
 
     /**
-       Calculate the statistics for the current view of the data for a chart
+       Erase all the charts, and un-select all their buttons
      */
-    $(".stats-btn").click(function() {
-	});
-
     $("#clear").click(function(){
 	$('div#charts > div').each(function() {
 		var s_id = $(this).attr('data-sensorid');
@@ -95,6 +92,9 @@ $( function () {
 	});
     });
 
+    /**
+       Go back to using the Data-time as the axis limits of all the charts
+     */
     $("#unzoom").click(function(){
 	    // Unzoom all the charts
 	    //	console.log('starting unzoom')
