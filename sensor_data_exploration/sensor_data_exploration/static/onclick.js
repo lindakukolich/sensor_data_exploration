@@ -229,6 +229,20 @@ function prettyDate( d ) {
     return rtn;
 }
 
+
+function prettyDateTime( d ) {
+    var rtn = "";
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    rtn += d.getDate() + "-";
+    rtn += months[d.getMonth()] + "-";
+    rtn += d.getFullYear() + " ";
+    rtn += d.getHours() + ":";
+    rtn += d.getMinutes();
+    return rtn;
+}
+
+
 /**
    Make the sensorid button display a loading message till the chart is
    displayed
