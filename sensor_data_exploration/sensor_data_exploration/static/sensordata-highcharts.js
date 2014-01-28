@@ -1,3 +1,9 @@
+/**
+   Generate a chart, given all the pieces needed to label one.
+
+   Set the axis limits to match other charts that are currently displayed,
+   or the data range selected by the user if there are no charts.
+*/
 function sensordata_chart(title, subtitle, units, short_units, dataArray1, sensorId, line_color, dataIsNumber, dataType) {
     //Its getting confusing to just keep putting variables in in order. Should we refactor to use a JSON or Dict? - CM
 
@@ -5,40 +11,20 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, senso
 
     // Get the graph extremes
     console.log(dataArray1);
-    //Find an existing graph and get it from that graph. This means that if the user has zoomed the new graph will come in at the same zoom.
-    var endUTC = 0;
-    var startUTC = 0;
-    $('div#charts > div').each(function() {
-	    var s_id = $(this).attr('data-sensorid');
-	var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
-	console.log('chartindex is' + chartIndex);
-	if (typeof chartIndex === 'number') {    //error messages will have undefined chartIndex
-	    var thisChart = Highcharts.charts[chartIndex];
-	    var thisXAxis = thisChart.xAxis[0].getExtremes();
-	    startUTC = thisXAxis.min;
-	    endUTC = thisXAxis.max;
-	    return false;
-	};
-    });
-    console.log('endUTC = ' + endUTC);
+    var axisTimes = getAxisTimes();
 
-    if (endUTC < 1) {
-	//There are no charts on the page. We should now check to see if a button is set. But for now I'm just going to default to are start times, today and -7 days.
-	var endDate = new Date();
-	var endUTC = endDate.getTime() + endDate.getTimezoneOffset() * 60000;
-	var startUTC = endUTC - (7 * 24 * 3600 *1000);
-    }
-
-    console.log('Chart new startUTC=' + startUTC + ' endUTC =' + endUTC);
+    console.log('Chart new startUTC=' + axisTimes.starttime + ' endUTC =' + axisTimes.endtime);
 
     //Set up chart for numeric or string value. Eventually we may want to differenciate between mp3 and images here.
     console.log(dataType);
     if (dataType == 'float') {
 	var lineWidth = 1;
 	symbol = 'circle'
+    } else if (dataType == 'wav') {
+	symbol = 'url(https://cdn1.iconfinder.com/data/icons/inFocus_social_media/40/twitter-bird3.png)';
     } else {
 	var lineWidth = 0;
-	symbol = 'url(https://cdn1.iconfinder.com/data/icons/16x16-free-toolbar-icons/16/camera.png)';
+	symbol = 'url(https://cdn1.iconfinder.com/data/icons/mimiGlyphs/16/camera.png)';
     };
     
     var ymin = null
@@ -63,8 +49,8 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, senso
             text: null
         },
         xAxis: {
-	    min: startUTC,
-	    max: endUTC,
+	    min: axisTimes.starttime,
+	    max: axisTimes.endtime,
 	    title: {
 		text: null
 	    }
@@ -107,7 +93,8 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 		sensorid: sensorid,
 		title: data.plot_short_name,
 		subtitle: data.plot_source_id,
-		units: data.plot_units_short+' '+data.plot_units_long
+		units: data.plot_units_short+' '+data.plot_units_long,
+		dataSourceSymbol: data.dataSourceSymbol
 	    };
 
 	    $('#charts').append(chart_template(legend_data));
@@ -120,15 +107,19 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 		remove_chart_and_manipulate_buttons( sensorId );
 	    });
 	    
-	    if (data.goodPlotData) {
+	    //	    if (data.goodPlotData) {
 		var chart = sensordata_chart(data.plot_short_name, data.plot_source_id, data.plot_units_long, data.plot_units_short, data.data_array1, sensorid, data.line_color, data.dataIsNumber, data.dataType);
+		if (data.goodPlotData === false) {
+		    console.log("Plot error: " + data.plotError);
+		    chart.showNoData(data.plotError);
+		}
 		$('.'+sensorid).button('reset');  //Reset the loading on the button
-	    } else {
-		var errorClass = 'alert alert-warning';
-		var chartId = data.plot_source_id + "-chart";
-		$('#'+chartId).html('<div class="' + errorClass + '" >'+data.plotError+'</div>');
-		$('.'+sensorid).button('reset');  //Reset the loading on the button
-	    }
+		//	    } else {
+		//		var errorClass = 'alert alert-warning';
+		//		var chartId = data.plot_source_id + "-chart";
+		//		$('#'+chartId).html('<div class="' + errorClass + '" >'+data.plotError+'</div>');
+		//		$('.'+sensorid).button('reset');  //Reset the loading on the button
+		//	    }
 	})
 	.fail(function(jqxhr, textStatus, error) {
 	    var err = textStatus + ", " + error;
@@ -169,12 +160,66 @@ function pointClicked(x,sensorId) {
 		console.log('someone clicked a point that is just a number. Ignore this.');
 	    } else {
 		console.log(data);
-		var modal_source = $('#pointModal').html();
+		var modal_source = ""
+		var body = ""
+		var d = new Date(x);
+		var date = prettyDateTime(d);
+		if (data.dataType == 'jpg') {
+		    body = '<img src=' + data.url +' height=200px> </img>';
+		} else if (data.dataType == 'wav') {
+		    body = "<audio controls><source src='" + data.url +"'></audio>";
+		} else {
+		    return false;
+		};
+		console.log(body);
+		modal_source = $('#pointModal').html();
 		var modal_template = Handlebars.compile(modal_source); //I wonder if I really need to be doing this compile over and over again like this?
-		var modal_data = {url: data.url};
+		var modal_data = {
+		    url: data.url, 
+		    body: body,
+		    name: data.plot_short_name,
+		    date: date
+		};
 		console.log(data.url);
 		$('#modalHere').append(modal_template(modal_data));
 		$('#pointDisplay').modal('show');
 	    };
 	});
+}
+/**
+ Find an existing graph and get the Axis extremes from that graph.
+ This means that if the user has zoomed the new graph will come in at
+ the same zoom.
+
+ If there is no existing graph, use the times requested by the user
+
+Returns an object with two fields, startime and endtime
+ */
+function getAxisTimes() {
+    var endUTC = 0;
+    var startUTC = 0;
+    $('div#charts > div').each(function() {
+	    var s_id = $(this).attr('data-sensorid');
+	    var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
+	    //	    console.log('chartindex is' + chartIndex);
+	    if (typeof chartIndex === 'number') {
+		// This is a real chart
+		var thisChart = Highcharts.charts[chartIndex];
+		var thisXAxis = thisChart.xAxis[0].getExtremes();
+		startUTC = thisXAxis.min;
+		endUTC = thisXAxis.max;
+		// We found one, quit out of the loop
+		return false;
+	    }
+	});
+    //    console.log('endUTC = ' + endUTC);
+
+    // If this is still 0, there were no charts to get data from.
+    // Use the time range button selection on the graphs web page
+    if (endUTC < 1) {
+	var graph_limits = getDataTimes();
+	startUTC = makeDate(graph_limits.starttime).getTime();
+	endUTC = makeDate(graph_limits.endtime).getTime();
+    }
+    return {starttime: startUTC, endtime: endUTC};
 }

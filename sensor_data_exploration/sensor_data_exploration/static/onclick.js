@@ -36,14 +36,14 @@ $( function () {
 	$( '.' + sensorid ).button( 'loading' );
 
 	// console.log( 'button clicked: ' + sensorid )
-	if ($( "#" + sensorid ).length != 0) {
+	if ($( "#" + sensorid ).length !== 0) {
 	    // If there is a div for this chart already, remove the chart
 	    // console.log( 'about to remove: ' + sensorid );
 	    remove_chart_and_manipulate_buttons( sensorid );
 	} else {
 	    // Otherwise, make the chart
 	    make_chart_and_manipulate_buttons( sensorid );
-	};
+	}
 	
     });
    
@@ -110,10 +110,10 @@ $( function () {
 		var thisChart = Highcharts.charts[chartIndex];
 		thisChart.xAxis[0].setExtremes(startUTC, endUTC, true);
 		return false; // once we set one the sync zoom will set the rest
-	    };
+	    }
+	    });
 	});
     });
-});
 
 /** This function updates the existing charts on our page with new time
     selectors, which have already been stored in data-start-time and
@@ -141,8 +141,6 @@ function update_existing_charts() {
 
 		$.getJSON('/explorer/get_data_ajax/',{'sensorid': s_id, 'starttime': dataTime.starttime, 'endtime': dataTime.endtime})
 		    .done(function(data) {
-			if (data.goodPlotData) {
-
 			    var chartIndex = $("#"+data.sensor_id+"-chart").data('highchartsChart');
 			    var thisChart = Highcharts.charts[chartIndex];
 			    thisChart.series[0].setData(data.data_array1,false);
@@ -150,11 +148,6 @@ function update_existing_charts() {
 			    thisChart.hideLoading();
 
 			    $('.'+data.sensor_id).button('reset');  //Reset the loading on the button
-			} else {
-			    var errorClass = 'alert alert-warning';
-			    $('#'+'data.sensor_id'+'-chart').html('<div class="' + errorClass + '" >'+data.plotError+'</div>');
-			    $('.'+data.sensor_id).button('reset');  //Reset the loading on the button
-			}
 		    })
 		    .fail(function(jqxhr, textStatus, error) {
 			var err = textStatus + ", " + error;
@@ -196,8 +189,6 @@ function makeDate( dateString ){
 }
 /**
    Print the given Date in the format the database will expect
-
-   TODO: Add time zone and make sure it is GMT
  */
 function printDate( d ) {
     var rtn = "";
@@ -237,6 +228,20 @@ function prettyDate( d ) {
     rtn += d.getFullYear();
     return rtn;
 }
+
+
+function prettyDateTime( d ) {
+    var rtn = "";
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    rtn += d.getDate() + "-";
+    rtn += months[d.getMonth()] + "-";
+    rtn += d.getFullYear() + " ";
+    rtn += d.getHours() + ":";
+    rtn += d.getMinutes();
+    return rtn;
+}
+
 
 /**
    Make the sensorid button display a loading message till the chart is
@@ -313,12 +318,6 @@ function getDataTimes(){
 function setDataTimes(starttime, endtime){
     $("#timeselection").attr("data-start-time", starttime);
     $("#timeselection").attr("data-end-time", endtime);
-}
-/**
-   Get the axis time, for displaying a zoomed subsegment of the data
-*/
-function getAxisTime() {
-    // Return as ms
 }
 
 /**

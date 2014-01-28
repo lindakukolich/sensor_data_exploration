@@ -149,3 +149,7 @@ button.close {
 .close:focus {
     color: #ddf0fb;
 }
+
+.pointModalLabel {
+    color: #045c9c;
+}

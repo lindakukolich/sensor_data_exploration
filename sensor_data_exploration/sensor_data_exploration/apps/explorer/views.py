@@ -34,9 +34,11 @@ def index(request):
     
     sensor_list = Sensor.objects.order_by('sensor_short_name')
 
+    datasource_list = DataSource.objects.order_by('datasource_id')
 
     context_dict = {
         'sensor_list': sensor_list,
+        'datasource_list': datasource_list
     }
 
     # Return a rendered response to send to the client.
@@ -69,8 +71,15 @@ def get_data_ajax(request):
     # Make sure we have a sensor_id that is in the sensor table
     if Sensor.objects.filter(sensor_id=plot_sensor_id) == False:
         data_to_dump = {'goodPlotData': False,
-                        'plotError': "Error retrieving plot data for sensor " + plot_sensor_id + ": No such sensor"
-                        }
+                        'plotError': "Error retrieving plot data for sensor " + plot_sensor_id + ": No such sensor",
+                        'data_array1': dataArray1, 
+                        'plot_short_name': plot_sensor_id,
+                        'plot_source_id': plot_sensor_id,
+                        'plot_units_long': "",
+                        'plot_units_short': "",
+                        'line_color': "",
+                        'sensor_id': data_source_id,
+                    }
         print "data_to_dump"
         print data_to_dump
         json_data = json.dumps(data_to_dump, cls=DjangoJSONEncoder)
@@ -135,6 +144,9 @@ def get_data_ajax(request):
 
         goodPlotData = True
         
+    symbol = DataSource.objects.filter(datasource_id = plot_sensor['data_source_id']).values_list('symbol')
+    symbol = symbol[0]
+
     
     # We need to dump data for both the good and the badPlots.    
     data_to_dump = {'data_array1': dataArray1, 
@@ -149,7 +161,8 @@ def get_data_ajax(request):
                         'line_color': plot_sensor['line_color'],
                         'goodPlotData': goodPlotData,
                         'plotError': plotError,
-                        'sensor_id': plot_sensor['sensor_id']
+                        'sensor_id': plot_sensor['sensor_id'],
+                        'dataSourceSymbol':symbol
                     }
     
     #send back the data or error as created above.
@@ -170,6 +183,10 @@ def get_point_ajax(request):
 
     point = q.values()[0]
 
+    s = Sensor.objects.filter(
+        sensor_id=plot_sensor_id
+    )
+    plot_sensor = s.values()[0]
 
     if point['value_is_number']:
         url = ""
@@ -178,7 +195,12 @@ def get_point_ajax(request):
 
     data_to_dump = {
         'value_is_number': point['value_is_number'],
-        'url': url}
+        'url': url,
+        'dataType': plot_sensor['data_type'],
+        'plot_short_name': plot_sensor['sensor_short_name'],
+        'plot_units_short': plot_sensor['units_short']
+    }
+
     print point
     json_data = json.dumps(data_to_dump, cls=DjangoJSONEncoder)
     return HttpResponse(json_data, mimetype='application/json')

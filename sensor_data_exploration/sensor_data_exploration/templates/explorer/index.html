@@ -14,6 +14,7 @@
 
     <script src="{%static "handlebars-v1.3.0.js" %}"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://github.highcharts.com/master/modules/no-data-to-display.src.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
     <script src="{%static "highcharts-explorer-theme.js" %}"></script>
     <script src="{%static "export-csv.js" %}"></script>
@@ -28,7 +29,8 @@
 	  <button type="button" class="x-graph-btn close" align="right"  data-sensorId="{{sensorid}}">&times;</button>
 	  <h4>{{title}}</h4>
 	  <h6>{{units}}</h6>
-	  <h5>{{subtitle}}</h5>
+	  <h5>{{subtitle}}	  
+<span class="small"><a href="/#{{dataSourceSymbol}}" class="{{dataSource}}" align="right"  data-sensorId="{{sensorid}}">(info)</a></class></h5>
 	</div>
 	<div id="{{sensorid}}-chart" class="col-md-10 highchart">
 	  <!-- Highcharts will render the chart here -->
@@ -43,17 +45,16 @@
       <div id="pointDisplay" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 	  <div class="modal-content">
-	    <div class="modal-header">
+	    <div class="modal-header" align="center">
 	      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	      <h3 id="myModalLabel">Image from string_value</h3>
+	      <h2 class="pointModalLabel">{{name}}</h2> 
+	      <h4 class="pointModalLabel"> from {{date}}</h4>
 	    </div>
 	    <div class="modal-body">
-	      <img src="{{url}}" height=200px> </img>
-	      <p>{{url}}</p>
+	      {{{body}}}
 	    </div>
 	    <div class="modal-footer">
 	      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-	      <button class="btn btn-primary">Save changes</button>
 	    </div>
 	  </div>
 	</div>
@@ -72,7 +73,7 @@
     <div id="timeselection"
 	 data-start-time=""
 	 data-end-time=""
-	 current-time-btn="#month-btn"
+	 current-time-btn="#week-btn"
 	 >
       <dif class="row">
       <div class="col-md-2"></div>
@@ -80,7 +81,7 @@
 	<button id="day-btn" graph-days=1 type="button" class="btn btn-default time-btn">Last Day</button>
 	<button id="week-btn" graph-days=7 type="button" class="btn btn-default time-btn">Last Week</button>
 	<button id="month-btn" graph-days=30 type="button" class="btn btn-default time-btn">Last Month</button>
-	<button id="year-btn" graph-days=365 type="button" class="btn btn-default time-btn">Last Year</button>
+	<button id="three-month-btn" graph-days=91 type="button" class="btn btn-default time-btn">Last Three Months</button>
 	<button id="custom-btn" class="btn btn-default" data-toggle="modal" data-target="#dateModal"> Custom Dates </button>
 	<div class="modal fade" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel" aria-hidden="true">
 	  <!-- Modal -->
@@ -135,6 +136,8 @@
 	  <button id="clear" class="btn btn-default">Clear All</button>
 	</div>
       </div>
+      <div id="modalHere"></div>
+
       <div id="charts">
 	<!-- Charts are added here with javascript -->
       </div>
@@ -190,6 +193,5 @@
 	  
 	</div>
       </div>
-      <div id="modalHere"></div>
 {% endblock %}
 
