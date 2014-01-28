@@ -138,24 +138,19 @@ if __name__ == '__main__':
     d = get_data(url)
     data = parse_data(d)
 
-    # store images on S3
-    if debug: print "Storing data..."
-    # filename, piece url, dt
-    bucket = get_s3_bucket()
-    for entry in data:
-        print '-', entry[0]
-        if not bucket.get_key(entry[0]):
-            print 'D', entry[0]
-            store_data(entry, tmpdir, bucket)
-
     # get the latest date already in the database
     previous_load_date = None
     if args.current:
         previous_load_date = populate.database_latest_date(keys)
 
-    # load sensor data
-    if debug: print "Loading data..."
+    # store images on S3 & load into database
+    if debug: print "Storing & loading data..."
+    bucket = get_s3_bucket()
     for entry in data:
+        print 'Trying', entry[0]
+        if not bucket.get_key(entry[0]):
+            print 'writing to S3', entry[0]
+            store_data(entry, tmpdir, bucket)
         timestamp = entry[2]
         if args.current:
             if previous_load_date and timestamp <= previous_load_date:
