@@ -160,3 +160,8 @@ button.stats-btn {
 .pointModalLabel {
     color: #045c9c;
 }
+
+.img-rounded {
+    padding: 10px;
+    border-radius: 16px;
+}

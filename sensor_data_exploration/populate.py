@@ -4,6 +4,7 @@
 # collection of functions used to populate the database
 
 import os
+import sys
 from datetime import datetime,tzinfo,timedelta
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sensor_data_exploration.settings')

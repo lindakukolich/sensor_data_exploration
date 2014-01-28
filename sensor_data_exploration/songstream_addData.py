@@ -85,14 +85,15 @@ def parse_data(html):
     for row in rows:
         if len(row.contents) != 8:
             continue
-        download = row.contents[4].a['href']
+        if not row.contents[7].text.startswith('On Server'):
+            continue
         name = row.contents[4].text
         if not name.endswith('wav'):
             continue
+        download = row.contents[4].a['href']
         datestr = row.contents[5].text
         dt = parse_dt(datestr)
-        if row.contents[7].text.startswith('On Server'):
-            data.append((name,download,dt))
+        data.append((name,download,dt))
     return data
 
 class EST(tzinfo):
@@ -146,11 +147,21 @@ if __name__ == '__main__':
     if debug: print "Getting sensor information..."
     sensors=populate.get_sensors(keys)
 
+    # get date range
+    if args.history:
+        startdate = args.start
+        enddate = args.end
+    elif args.current:
+        today = date.today()
+        lastmonth = date.today() + timedelta(weeks=-4)
+        startdate = lastmonth.strftime('%Y-%m-%d')
+        enddate = today.strftime('%Y-%m-%d')
+
     # get data list
     if debug: print "Reading data..."
     tmpdir = tempfile.mkdtemp()
     auth_url = login()
-    d = get_data(auth_url,args.start,args.end)
+    d = get_data(auth_url,startdate,enddate)
     data = parse_data(d)
 
     # get the latest date already in the database
@@ -162,7 +173,7 @@ if __name__ == '__main__':
     if debug: print "Storing & loading data..."
     bucket = get_s3_bucket()
     for entry in data:
-        if debug: print 'Trying', entry[0]
+        if debug: print 'checking', entry[0]
         if not bucket.get_key(entry[0]):
             if debug: print 'writing to S3', entry[0]
             store_data(entry, tmpdir, bucket)
@@ -173,6 +184,6 @@ if __name__ == '__main__':
                 continue
         populate.load_data(sensor_id=sensors[keys[0][0]], time_stamp=timestamp, string_value=s3_url)
 
-    os.system("rm -r tmpdir")
+    os.system("rm -r "+tmpdir)
     if debug: print "Finishing Song Stream population script..."
 

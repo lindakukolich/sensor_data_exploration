@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block sensors %}class="active"{% endblock %}
+{% block body_block %}
+<h1> Welcome to Thompson Island's Enviromental Sensors</h1>
+<div class="jumbotron">
+
+<p>
+Following are summaries for each of the island installations. Data and graphs from sensors with a  <span class="badge">Badge</span> symbol are on the <a href="/explorer/graphs">Graphs page</a> of this site.</p>
+<ul>
+<div class="row">
+  <div class="col-md-3">
+    <img src="{% static "TI-Davis-station.jpg" %}" class="img-rounded" width=100%><img>
+  </div>
+  <div class="cd-md-9">
+    <p><a name="WU"></a>Davis Weather Station  <span class="badge">WU</span> Installed by Thompson Island on the roof of the administration building in the center of the island to record island weather data.  Data is sent by the Davis Weather station to <a href="http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID=KMABOSTO32">Weather Underground</a> and retrieved through their API.</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <img src="{% static "BeconBuoy.jpg" %}" class="img-rounded" width=100%><img>
+  </div>
+  <div class="cd-md-9">
+    <p><a name="BB"></a>BEACON oceanographic buoys  <span class="badge">BB</span> installed by UMass Boston in the Thompson Island mooring field to record weather and water data just offshore of the island.*</p>
+  </div>
+</div>
+<div class="row">
+  <p><a name="SP"></a>Salt Pond Hydrologic Sensor <span class="badge">SP</span> deployed by UMass Boston in Thompson Island’s salt pond to record various water data from the salt pond.*</p>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <img src="{% static "Nortek.jpg" %}" class="img-rounded" width=100%><img>
+  </div>
+  <div class="cd-md-9">
+    <ul>
+      <li><a name="NOR"></a>Nortek Weather Station <span class="badge">NOR</span> installed by Nortek on the Thompson Island pier to record weather data.
+
+      <li><a name="NOR"></a>Nortek Aquadopp Profiler <span class="badge">NOR</span> installed by Nortek underwater off the Thompson Island pier to record water data.
+    </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <img src="{% static "SongStream.jpg" %}" class="img-rounded" width=100%><img>
+  </div>
+  <div class="cd-md-9">
+    <p><a name="SS"></a>Wildlife Acoustic Song Stream Remote Access Module  <span class="badge">SS</span> installed by Wildlife Acoustics on the shore of Thompson Island’s salt pond to monitor birdsong and bird activity in the salt pond marsh.</p>
+    </div>
+  </div>
+
+<li>Eroding Bluff Video Camera (Installed by UMass Boston/Boston University on the Northeast shore of Thompson Island to monitor the massively eroding cliffs)*
+
+<li>Salt Pond Video Camera (Installed by UMass Boston/Boston University on the shore of Thompson Island’s salt pond to monitor tidal flow)*
+</ul>
+<p>
+*Installations are part of the Coastal Environmental Sensing Network (CESN). The CESN at UMass Boston is researching the development of "smart" sensor networks for observing interactions of coastal systems in order to help manage our coastal resources and solve current and future coastal problems
+<p>
+<b>Data not currently available remotely:</b>
+<ul>
+<li>CO2 / Methane Monitor (installed on the main campus flagpole by Harvard University to record CO2/ methane levels on the island)
+<li> Plant phenology cameras (installed on plants throughout Thompson Island by the National Park Service to monitor seasonal changes in island plants)
+<li> Critter Cams (installed on trails throughout Thompson Island by the National Park Service and Suffolk University to monitor island mammals)
+<li> Freshwater Marsh sensor (installed by the National Park Service in Thompson Island’s freshwater marsh to record water levels)
+</ul>
+</div>
+{% endblock %}
