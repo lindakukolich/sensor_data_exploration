@@ -254,7 +254,7 @@ function pointClicked(x,sensorId) {
 		    date: date
 		};
 		console.log(data.url);
-		$('#modalHere').append(modal_template(modal_data));
+		$('#modalHere').html(modal_template(modal_data));
 		$('#pointDisplay').modal('show');
 	    };
 	});
