@@ -24,7 +24,7 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, senso
 	symbol = 'url(https://cdn1.iconfinder.com/data/icons/inFocus_social_media/40/twitter-bird3.png)';
     } else {
 	var lineWidth = 0;
-	symbol = 'url(https://cdn1.iconfinder.com/data/icons/ledicons/camera.png)';
+	symbol = 'url(https://cdn1.iconfinder.com/data/icons/mimiGlyphs/16/camera.png)';
     };
     
     var ymin = null

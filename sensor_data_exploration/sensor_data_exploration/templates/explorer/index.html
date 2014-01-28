@@ -45,9 +45,10 @@
       <div id="pointDisplay" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 	  <div class="modal-content">
-	    <div class="modal-header">
+	    <div class="modal-header" align="center">
 	      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	      <h2 id="myModalLabel">{{name}} - {{date}}</h2>
+	      <h2 class="pointModalLabel">{{name}}</h2> 
+	      <h4 class="pointModalLabel"> from {{date}}</h4>
 	    </div>
 	    <div class="modal-body">
 	      {{{body}}}
@@ -135,6 +136,8 @@
 	  <button id="clear" class="btn btn-default">Clear All</button>
 	</div>
       </div>
+      <div id="modalHere"></div>
+
       <div id="charts">
 	<!-- Charts are added here with javascript -->
       </div>
@@ -190,6 +193,5 @@
 	  
 	</div>
       </div>
-      <div id="modalHere"></div>
 {% endblock %}
 
