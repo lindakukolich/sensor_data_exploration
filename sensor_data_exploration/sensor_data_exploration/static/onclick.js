@@ -18,7 +18,7 @@ $( function () {
 	database.  There have been bugs in the past where the database
 	names have changed and this code has fallen behind
      */
-    var initial_sensors = ['wu_ti_temp_c', 'wu_ti_pressure_mb', 'wu_ti_wind_kph'];
+    var initial_sensors = ['wu_ti_temp_c', 'wu_ti_pressure_mb', 'nor_Wind_speed_avg'];
     initial_sensors.forEach( function( sensorid ) {
 	    // console.log('setting up initial graph for'+ sensorid);
 	    make_chart_and_manipulate_buttons( sensorid );
