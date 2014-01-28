@@ -146,11 +146,21 @@ if __name__ == '__main__':
     if debug: print "Getting sensor information..."
     sensors=populate.get_sensors(keys)
 
+    # get date range
+    if args.history:
+        startdate = args.start
+        enddate = args.end
+    elif args.current:
+        today = date.today()
+        lastmonth = date.today() + timedelta(weeks=-4)
+        startdate = lastmonth.strftime('%Y-%m-%d')
+        enddate = today.strftime('%Y-%m-%d')
+
     # get data list
     if debug: print "Reading data..."
     tmpdir = tempfile.mkdtemp()
     auth_url = login()
-    d = get_data(auth_url,args.start,args.end)
+    d = get_data(auth_url,startdate,enddate)
     data = parse_data(d)
 
     # get the latest date already in the database
@@ -162,7 +172,7 @@ if __name__ == '__main__':
     if debug: print "Storing & loading data..."
     bucket = get_s3_bucket()
     for entry in data:
-        if debug: print 'Trying', entry[0]
+        if debug: print 'checking', entry[0]
         if not bucket.get_key(entry[0]):
             if debug: print 'writing to S3', entry[0]
             store_data(entry, tmpdir, bucket)
