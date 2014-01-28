@@ -24,7 +24,7 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, senso
 	symbol = 'url(https://cdn1.iconfinder.com/data/icons/inFocus_social_media/40/twitter-bird3.png)';
     } else {
 	var lineWidth = 0;
-	symbol = 'url(https://cdn1.iconfinder.com/data/icons/ledicons/camera.png)';
+	symbol = 'url(https://cdn1.iconfinder.com/data/icons/mimiGlyphs/16/camera.png)';
     };
     
     var ymin = null
@@ -171,6 +171,8 @@ function pointClicked(x,sensorId) {
 		console.log(data);
 		var modal_source = ""
 		var body = ""
+		var d = new Date(x);
+		var date = prettyDateTime(d);
 		if (data.dataType == 'jpg') {
 		    body = '<img src=' + data.url +' height=200px> </img>';
 		} else if (data.dataType == 'wav') {
@@ -181,7 +183,12 @@ function pointClicked(x,sensorId) {
 		console.log(body);
 		modal_source = $('#pointModal').html();
 		var modal_template = Handlebars.compile(modal_source); //I wonder if I really need to be doing this compile over and over again like this?
-		var modal_data = {url: data.url, body: body};
+		var modal_data = {
+		    url: data.url, 
+		    body: body,
+		    name: data.plot_short_name,
+		    date: date
+		};
 		console.log(data.url);
 		$('#modalHere').append(modal_template(modal_data));
 		$('#pointDisplay').modal('show');

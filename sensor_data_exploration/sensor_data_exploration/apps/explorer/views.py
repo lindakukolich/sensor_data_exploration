@@ -196,7 +196,9 @@ def get_point_ajax(request):
     data_to_dump = {
         'value_is_number': point['value_is_number'],
         'url': url,
-        'dataType': plot_sensor['data_type']
+        'dataType': plot_sensor['data_type'],
+        'plot_short_name': plot_sensor['sensor_short_name'],
+        'plot_units_short': plot_sensor['units_short']
     }
 
     print point
