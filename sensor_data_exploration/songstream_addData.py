@@ -85,14 +85,15 @@ def parse_data(html):
     for row in rows:
         if len(row.contents) != 8:
             continue
-        download = row.contents[4].a['href']
+        if not row.contents[7].text.startswith('On Server'):
+            continue
         name = row.contents[4].text
         if not name.endswith('wav'):
             continue
+        download = row.contents[4].a['href']
         datestr = row.contents[5].text
         dt = parse_dt(datestr)
-        if row.contents[7].text.startswith('On Server'):
-            data.append((name,download,dt))
+        data.append((name,download,dt))
     return data
 
 class EST(tzinfo):
@@ -183,6 +184,6 @@ if __name__ == '__main__':
                 continue
         populate.load_data(sensor_id=sensors[keys[0][0]], time_stamp=timestamp, string_value=s3_url)
 
-    os.system("rm -r tmpdir")
+    os.system("rm -r "+tmpdir)
     if debug: print "Finishing Song Stream population script..."
 
