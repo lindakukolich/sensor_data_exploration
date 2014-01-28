@@ -33,6 +33,7 @@ if __name__ == '__main__':
                      is_number = True,
                      units_long = "meters per second",
                      units_short = "m/s",
+                     is_headliner = True,
                      kind = "meteorological",
                      line_color = populate.hex_color('dark_blue'),
                  )
@@ -43,6 +44,7 @@ if __name__ == '__main__':
                      is_number = True,
                      units_long = "meters per second",
                      units_short = "m/s",
+                     is_headliner = True,
                      kind = "meteorological",
                      line_color = populate.hex_color('blue'),
                  )
@@ -53,6 +55,7 @@ if __name__ == '__main__':
                      is_number = True,
                      units_long = "degrees",
                      units_short = "°",
+                     is_headliner = True,
                      kind = "meteorological",
                      line_color = populate.hex_color('black'),
                  )
@@ -74,6 +77,7 @@ if __name__ == '__main__':
                      is_number = True,
                      units_long = "percent",
                      units_short = "%",
+                     is_headliner = True,
                      kind = "meteorological",
                      line_color = populate.hex_color('light_green'),
                  )
@@ -124,6 +128,7 @@ if __name__ == '__main__':
                      is_number = True,
                      units_long = "meters per second",
                      units_short = "m/s",
+                     is_headliner = True,
                      kind = "hydrological",
                      line_color = populate.hex_color('dark_blue'),
                  )
@@ -144,6 +149,7 @@ if __name__ == '__main__':
                      is_number = True,
                      units_long = "pounds",
                      units_short = "#",
+                     is_headliner = True,
                      kind = "hydrological",
                      line_color = populate.hex_color('brown'),
                  )

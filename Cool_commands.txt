@@ -21,12 +21,12 @@ SensorData.object.filter(sensor_id_id='wu_ti_temp_f')
 Heroku
 ------
 
-git remote add alt git@heroku.com:stark-caverns-7053.git
-git fetch alt master
+git remote add heroku git@heroku.com:stark-caverns-7053.git
+git fetch heroku master
 git merge origin/master
 
 git remote # To see the list of remotes that I have registered
-git push alt
+git push heroku
 
 
 tiadmin

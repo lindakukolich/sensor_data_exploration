@@ -149,6 +149,7 @@ button.stats-btn {
     font-size: 85%;
     border: 1px solid transparent;
     border-radius: 4px;
+    float: right;
 }
 
 .close:hover,
@@ -163,4 +164,5 @@ button.stats-btn {
 .img-rounded {
     padding: 10px;
     border-radius: 16px;
+    float: left;
 }

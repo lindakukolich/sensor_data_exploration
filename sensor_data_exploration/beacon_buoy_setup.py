@@ -80,7 +80,7 @@ if __name__ == '__main__':
                  )
     s6 = populate.add_sensor( sensor_id = "buoy5_GustSpeed",
                      source = mysource,
-                     short_name="Gust Speed",
+                     short_name="Wind Gust",
                      data_type = "float",
                      is_number = True,
                      units_long = "miles per hour",
@@ -95,6 +95,7 @@ if __name__ == '__main__':
                      is_number = True,
                      units_long = "degrees",  
                      units_short = "°",
+                     kind = "meteorological",
                      line_color = populate.hex_color('black'),
                  )
     s8 = populate.add_sensor( sensor_id = "buoy5_BuoyDir",
@@ -104,6 +105,7 @@ if __name__ == '__main__':
                      is_number = True,
                      units_long = "degrees",
                      units_short = "°",
+                     kind = "hydrological",
                      line_color = populate.hex_color('black'),
                  )
     s9 = populate.add_sensor( sensor_id = "buoy5_Pressure",
