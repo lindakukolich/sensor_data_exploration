@@ -50,11 +50,32 @@ def get_args():
             sys.exit("Start or end %s" % e,)
     return args
 
-def get_data(url):
-    '''fetch data from this url'''
-    f = urllib2.urlopen(url)
-    data=f.read()
-    f.close()
+def login():
+    login_values = { 'u-a':account,
+                     'u-u':user,
+                     'p':password,
+                 }
+    login_str = urllib.urlencode(login_values)
+    req = urllib2.Request(site, login_str)
+    response = urllib2.urlopen(req)
+    auth_url = response.geturl()
+    return auth_url
+
+def get_data(auth_url,start,end):
+    files_url = auth_url.replace('index.php','Files.php')
+    files_values = { 'fromyear':start[:4],
+                     'frommonth':start[5:7],
+                     'fromday':start[8:],
+                     'fromhour':'0',
+                     'toyear':end[:4],
+                     'tomonth':end[5:7],
+                     'today':end[8:],
+                     'tohour':'23',
+                 }
+    files_str = urllib.urlencode(files_values)
+    url = files_url + '&' + files_str
+    response = urllib2.urlopen(url)
+    data = response.read()
     return data
 
 def parse_data(html):
@@ -66,6 +87,8 @@ def parse_data(html):
             continue
         download = row.contents[4].a['href']
         name = row.contents[4].text
+        if not name.endswith('wav'):
+            continue
         datestr = row.contents[5].text
         dt = parse_dt(datestr)
         if row.contents[7].text.startswith('On Server'):
@@ -86,9 +109,6 @@ def parse_dt(dt_string):
     dt=datetime(int(x.year),int(x.month),int(x.day),int(x.hour),int(x.minute),int(x.second),tzinfo=tz)
     return dt
 
-def get_image_dt(line,tmpdir):
-    return datetime.now()
-
 def get_s3_bucket():
     conn = S3Connection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
     bucket = conn.get_bucket(AWS_STORAGE_BUCKET_NAME)
@@ -102,16 +122,16 @@ def store_in_s3(filename, fh, bucket):
     k.set_acl("public-read")
 
 def store_data(entry, tmpdir, bucket):
-        name = entry[0]
-        song_url = site + entry[1]
-        songhandle = urllib2.urlopen(song_url)
+    name = entry[0]
+    song_url = site + entry[1]
+    songhandle = urllib2.urlopen(song_url)
 
-        filehandle = open(os.path.join(tmpdir,name),'wb')
-        filehandle.write( songhandle.read() )
-        filehandle.close()
+    filehandle = open(os.path.join(tmpdir,name),'wb')
+    filehandle.write( songhandle.read() )
+    filehandle.close()
 
-        fh = open(os.path.join(tmpdir,name),'rb')
-        store_in_s3(name, fh, bucket)
+    fh = open(os.path.join(tmpdir,name),'rb')
+    store_in_s3(name, fh, bucket)
 
 
 if __name__ == '__main__':
@@ -129,10 +149,8 @@ if __name__ == '__main__':
     # get data list
     if debug: print "Reading data..."
     tmpdir = tempfile.mkdtemp()
-    
-    url='https://songstream.wildlifeacoustics.com/Files.php?account=THOMPSON_ISLAND&u=THOMPSON_ISLAND%2FSTUDENT&t=1390876227&a=8d2ce4a58fcc973ca36f86cfa21cf70b&fromyear=2013&frommonth=12&fromday=1&fromhour=0&toyear=2013&tomonth=12&today=31&tohour=23'
-
-    d = get_data(url)
+    auth_url = login()
+    d = get_data(auth_url,args.start,args.end)
     data = parse_data(d)
 
     # get the latest date already in the database
@@ -144,9 +162,9 @@ if __name__ == '__main__':
     if debug: print "Storing & loading data..."
     bucket = get_s3_bucket()
     for entry in data:
-        print 'Trying', entry[0]
+        if debug: print 'Trying', entry[0]
         if not bucket.get_key(entry[0]):
-            print 'writing to S3', entry[0]
+            if debug: print 'writing to S3', entry[0]
             store_data(entry, tmpdir, bucket)
         timestamp = entry[2]
         s3_url = s3_path + entry[0]
@@ -155,6 +173,6 @@ if __name__ == '__main__':
                 continue
         populate.load_data(sensor_id=sensors[keys[0][0]], time_stamp=timestamp, string_value=s3_url)
 
-    os.removedirs(tmpdir)
+    os.system("rm -r tmpdir")
     if debug: print "Finishing Song Stream population script..."
 
