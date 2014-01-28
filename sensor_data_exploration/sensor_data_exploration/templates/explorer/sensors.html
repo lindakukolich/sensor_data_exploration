@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block sensors %}class="active"{% endblock %}
+{% block body_block %}
+<h1> Welcome to Thompson Island's Sensor Data Exploration Site!</h1>
+<div class="jumbotron">
+<p><a href="http//thompsonisland.org">Thompson Island Outward Bound Education Center</a>and its partners at the <a href="http://www.nps.gov/boha/historyculture/facts-thom.htm">National Park Service</a>, <a href="http://www.cesn.org/thompson.php">UMass Boston</a>, <a href="http://thompson.nortek.no/">Nortek</a> and Wildlife Acoustics have each installed environmental sensors on Thompson Island. Data from weather stations and buoys, hydrologic sensors, audio recording devices, video cameras, more is all being broadcasted remotely by cellular, wireless and satellite technology. Each instrument has its own mechanism for data access and many provide different data types, making it extremely difficult for staff, teachers and students in Thompson Island programs to easily access all the data or to 
+compare information from different data sources.
+<p>
+This website, however, has been created by a team of MIT alumni in order to bring all of the data together in one place and make it exciting and fun for students to explore. <a href="/explorer/about"> Learn more about this project.</a>
+<p>
+Following are summaries for each of the island installations. Data and graphs from sensors with a  <span class="badge">Badge</span> symbol are on the <a href="/explorer/grpaphs">Graphs page</a> of this site.
+<ul>
+<li><a name="WU"></a>Davis Weather Station  <span class="badge">WU</span> Installed by Thompson Island on the roof of the administration building in the center of the island to record island weather data.  Data is sent by the Davis Weather station to <a href="http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID=KMABOSTO32">Weather Underground</a> and retrieved through their API.
+
+<li><a name="BB"></a>BEACON oceanographic buoys  <span class="badge">BB</span> installed by UMass Boston in the Thompson Island mooring field to record weather and water data just offshore of the island.*
+
+<li><a name="SP"></a>Salt Pond Hydrologic Sensor <span class="badge">SP</span> deployed by UMass Boston in Thompson Island’s salt pond to record various water data from the salt pond.*
+
+<li><a name="NOR"></a>Nortek Weather Station <span class="badge">NOR</span> installed by Nortek on the Thompson Island pier to record weather data.
+
+<li><a name="NOR"></a>Nortek Aquadopp Profiler <span class="badge">NOR</span> installed by Nortek underwater off the Thompson Island pier to record water data.
+
+<li>Wildlife Acoustic Song Stream Remote Access Module  <span class="badge">SS</span> installed by Wildlife Acoustics on the shore of Thompson Island’s salt pond to monitor birdsong and bird activity in the salt pond marsh.
+
+<li>Eroding Bluff Video Camera (Installed by UMass Boston/Boston University on the Northeast shore of Thompson Island to monitor the massively eroding cliffs)*
+
+<li>Salt Pond Video Camera (Installed by UMass Boston/Boston University on the shore of Thompson Island’s salt pond to monitor tidal flow)*
+</ul>
+<p>
+*Installations are part of the Coastal Environmental Sensing Network (CESN). The CESN at UMass Boston is researching the development of "smart" sensor networks for observing interactions of coastal systems in order to help manage our coastal resources and solve current and future coastal problems
+<p>
+<b>Data not currently available remotely:</b>
+<ul>
+<li>CO2 / Methane Monitor (installed on the main campus flagpole by Harvard University to record CO2/ methane levels on the island)
+<li> Plant phenology cameras (installed on plants throughout Thompson Island by the National Park Service to monitor seasonal changes in island plants)
+<li> Critter Cams (installed on trails throughout Thompson Island by the National Park Service and Suffolk University to monitor island mammals)
+<li> Freshwater Marsh sensor (installed by the National Park Service in Thompson Island’s freshwater marsh to record water levels)
+</ul>
+</div>
+{% endblock %}

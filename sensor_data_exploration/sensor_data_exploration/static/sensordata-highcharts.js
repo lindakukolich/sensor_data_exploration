@@ -89,12 +89,13 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 	    //make the div use chart-row template
 	    var chart_source = $('#chart-row').html();
 	    var chart_template = Handlebars.compile(chart_source); //I wonder if I really need to be doing this compile over and over again like this?
+	    console.log('The Symbol is' + data.dataSourceSymbol);
 	    var legend_data = {
 		sensorid: sensorid,
 		title: data.plot_short_name,
 		subtitle: data.plot_source_id,
 		units: data.plot_units_short+' '+data.plot_units_long,
-		dataSourceSymbol: data.dataSourceSymbol
+		symbol: data.dataSourceSymbol
 	    };
 
 	    $('#charts').append(chart_template(legend_data));
@@ -111,7 +112,7 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 
 		    var modal_source = $('#statistics-modal').html();
 		    var modal_template = Handlebars.compile(modal_source); // Still wondering if this could be done once for all
-		    var modal_data = {sensorid: sensorId, subtitle: data.plot_source_id, title: data.plot_short_name, units: data.plot_units_long};
+		    var modal_data = {sensorid: sensorId, subtitle: data.plot_source_id, title: data.plot_short_name, units: data.plot_units_long, symbol: data.dataSourceSymbol};
 		    $('#modalHere').append(modal_template(modal_data));
 		    // Calculate the statistics and set the html for the appropriate spans
 		    $( "#" + sensorId + "-start" ).html("No statistics possible for non-numeric data");
@@ -253,7 +254,6 @@ function pointClicked(x,sensorId) {
 		    name: data.plot_short_name,
 		    date: date
 		};
-		console.log(data.url);
 		$('#modalHere').html(modal_template(modal_data));
 		$('#pointDisplay').modal('show');
 	    };
