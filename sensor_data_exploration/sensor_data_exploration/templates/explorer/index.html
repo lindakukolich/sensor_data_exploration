@@ -31,34 +31,38 @@
       <h6>{{units}}</h6>
       <h5>{{subtitle}}	  
 	<span class="small"><a href="/#{{dataSourceSymbol}}" class="{{dataSource}}" align="right"  data-sensorId="{{sensorid}}">(info)</a></h5>
-      <button type="button" class="btn">Statistics</button>
-      <div id="{{ sensorid }}-statistics" class="stats-btn modal fade" tabindex="-1" role="dialog" aria-labelledby="statistics-label" aria-hidden="true">
-	<div class="modal-dialog">
-	  <div class="modal-content">
-	    <div class="modal-header">
-	      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	      <h3 id="statistics-label">Statistics for {{subtitle}} {{title}}</h3>
-	    </div>
-	    <div class="modal-body">
-	      <p /><label>Start Time:</label> <span id="{{ sensorid }}-start">Start</span>
-	      <p /><label>End Time:</label>  <span id="{{ sensorid }}-end">End</span>
-	      <p /><label>Units:</label>  <span id="{{units}}">Start</span>
-	      <p /><label>Range:</label>  <span id="{{ sensorid }}-range-low">Low</span> to  <span id="{{ sensorid }}-range-high">High</span>
-	      <p /><label>Average:</label>  <span id="{{ sensorid }}-average">Average</span>
-	      <p /><label>Standard Deviation:</label> <span id="{{ sensorid }}-std-dev">Standard Deviation</span>
-	    </div>
-	    <div class="modal-footer">
-	      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-	    </div> <!-- modal-footer -->
-	  </div> <!-- modal-content -->
-	</div> <!-- modal-dialog -->
-      </div> <!-- div statistics -->
+      <button type="button" class="stats-btn btn" data-toggle="modal" data-sensorId="{{ sensorid }}">Statistics</button>
     </div> <!-- div legend -->
     <div id="{{sensorid}}-chart" class="col-md-10 highchart">
       <!-- Highcharts will render the chart here -->
     </div>
   </div> <!-- div sensorid -->
   {% endverbatim %}
+</script>
+
+<script id="statistics-modal" type="text/x-handlebars-template">
+  {% verbatim %}
+  <div id="{{ sensorid }}-statistics" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="statistics-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+	<div class="modal-header">
+	  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	  <h3 id="statistics-label">Statistics for {{subtitle}} {{title}}</h3>
+	</div>
+	<div class="modal-body">
+	  <p /><label>Start Time:</label> <span id="{{ sensorid }}-start">Start</span>
+	  <p /><label>End Time:</label>  <span id="{{ sensorid }}-end">End</span>
+	  <p /><label>Units:</label>  <span id="{{units}}">Start</span>
+	  <p /><label>Range:</label>  <span id="{{ sensorid }}-range-low">Low</span> to  <span id="{{ sensorid }}-range-high">High</span>
+	  <p /><label>Average:</label>  <span id="{{ sensorid }}-average">Average</span>
+	  <p /><label>Standard Deviation:</label> <span id="{{ sensorid }}-std-dev">Standard Deviation</span>
+	</div>
+	<div class="modal-footer">
+	  <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+	</div> <!-- modal-footer -->
+      </div> <!-- modal-content -->
+    </div> <!-- modal-dialog -->
+  </div>
 </script>
 
 <script id="pointModal" type="text/x-handlebars-template">
@@ -71,10 +75,7 @@
 	  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 	  <h3 id="myModalLabel">Image from string_value</h3>
 	</div>
-	<div class="modal-body">
-	  <img src="{{url}}" height=200px>Photo from a Sensor</img>
-	  <p>{{url}}</p>
-	</div>
+	{{{body}}}
 	<div class="modal-footer">
 	  <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 	</div>

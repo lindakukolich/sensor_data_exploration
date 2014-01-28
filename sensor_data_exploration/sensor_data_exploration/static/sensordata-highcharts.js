@@ -20,9 +20,11 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, senso
     if (dataType == 'float') {
 	var lineWidth = 1;
 	symbol = 'circle'
+    } else if (dataType == 'wav') {
+	symbol = 'url(https://cdn1.iconfinder.com/data/icons/inFocus_social_media/40/twitter-bird3.png)';
     } else {
 	var lineWidth = 0;
-	symbol = 'url(https://cdn1.iconfinder.com/data/icons/16x16-free-toolbar-icons/16/camera.png)';
+	symbol = 'url(https://cdn1.iconfinder.com/data/icons/ledicons/camera.png)';
     };
     
     var ymin = null
@@ -97,6 +99,20 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 
 	    $('#charts').append(chart_template(legend_data));
 
+	    /**
+	       Calculate the statistics for the current view of the data for a chart
+	    */
+	    $('.stats-btn').click(function() {
+		    var sensorId;
+		    sensorId = $( this ).attr( 'data-sensorId' );
+
+		    var modal_source = $('#statistics-modal').html();
+		    var modal_template = Handlebars.compile(modal_source); // Still wondering if this could be done once for all
+		    var modal_data = {sensorid: sensorId, subtitle: "subtitle", title: "title", units: "units"};
+		    $('#modalHere').append(modal_template(modal_data));
+		    $('#' + sensorId + "-statistics").modal('show');
+		});
+
 	    //set up the listener on the X button in the legend
 	    $( '.x-graph-btn' ).click( function(){
 		var sensorId;
@@ -109,15 +125,10 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 		var chart = sensordata_chart(data.plot_short_name, data.plot_source_id, data.plot_units_long, data.plot_units_short, data.data_array1, sensorid, data.line_color, data.dataIsNumber, data.dataType);
 		if (data.goodPlotData === false) {
 		    console.log("Plot error: " + data.plotError);
+		    // TODO: This does not affect the No-Data message on the chart yet
 		    chart.showNoData(data.plotError);
 		}
 		$('.'+sensorid).button('reset');  //Reset the loading on the button
-		//	    } else {
-		//		var errorClass = 'alert alert-warning';
-		//		var chartId = data.plot_source_id + "-chart";
-		//		$('#'+chartId).html('<div class="' + errorClass + '" >'+data.plotError+'</div>');
-		//		$('.'+sensorid).button('reset');  //Reset the loading on the button
-		//	    }
 	})
 	.fail(function(jqxhr, textStatus, error) {
 	    var err = textStatus + ", " + error;
@@ -158,9 +169,19 @@ function pointClicked(x,sensorId) {
 		console.log('someone clicked a point that is just a number. Ignore this.');
 	    } else {
 		console.log(data);
-		var modal_source = $('#pointModal').html();
+		var modal_source = ""
+		var body = ""
+		if (data.dataType == 'jpg') {
+		    body = '<img src=' + data.url +' height=200px> </img>';
+		} else if (data.dataType == 'wav') {
+		    body = "<audio controls><source src='" + data.url +"'></audio>";
+		} else {
+		    return false;
+		};
+		console.log(body);
+		modal_source = $('#pointModal').html();
 		var modal_template = Handlebars.compile(modal_source); //I wonder if I really need to be doing this compile over and over again like this?
-		var modal_data = {url: data.url};
+		var modal_data = {url: data.url, body: body};
 		console.log(data.url);
 		$('#modalHere').append(modal_template(modal_data));
 		$('#pointDisplay').modal('show');
