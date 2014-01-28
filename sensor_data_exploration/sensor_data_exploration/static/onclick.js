@@ -235,16 +235,16 @@ function prettyDate( d ) {
     return rtn;
 }
 
-
+/**
+   Add the time to a prettyDate
+ */
 function prettyDateTime( d ) {
     var rtn = "";
-    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-    rtn += d.getDate() + "-";
-    rtn += months[d.getMonth()] + "-";
-    rtn += d.getFullYear() + " ";
-    rtn += d.getHours() + ":";
-    rtn += d.getMinutes();
+    rtn = prettyDate(d);
+    var t = d.getHours();
+    rtn += " " + ((t < 10) ? "0" : "") + t + ":";
+    t = d.getMinutes();
+    rtn += ((t < 10) ? "0" : "") + t;
     return rtn;
 }
 

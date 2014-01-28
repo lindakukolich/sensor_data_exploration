@@ -99,6 +99,9 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 
 	    $('#charts').append(chart_template(legend_data));
 
+	    if (data.dataIsNumber === false) {
+		$('#'+sensorid+"-btn").addClass('.invisible');
+	    }
 	    /**
 	       Calculate the statistics for the current view of the data for a chart
 	    */
@@ -108,8 +111,69 @@ function ajax_make_chart(sensorid, starttime, endtime) {
 
 		    var modal_source = $('#statistics-modal').html();
 		    var modal_template = Handlebars.compile(modal_source); // Still wondering if this could be done once for all
-		    var modal_data = {sensorid: sensorId, subtitle: "subtitle", title: "title", units: "units"};
+		    var modal_data = {sensorid: sensorId, subtitle: data.plot_source_id, title: data.plot_short_name, units: data.plot_units_long};
 		    $('#modalHere').append(modal_template(modal_data));
+		    // Calculate the statistics and set the html for the appropriate spans
+		    $( "#" + sensorId + "-start" ).html("No statistics possible for non-numeric data");
+		    $( "#" + sensorId + "-end" ).html("No statistics possible for non-numeric data");
+		    $( "#" + sensorId + "-num-points" ).html("No statistics possible for non-numeric data");
+		    $( "#" + sensorId + "-range-low" ).html("No statistics possible for non-numeric data");
+		    $( "#" + sensorId + "-range-high" ).html("No statistics possible for non-numeric data");
+		    $( "#" + sensorId + "-average" ).html("No statistics possible for non-numeric data");
+		    $( "#" + sensorId + "-std-dev" ).html("No statistics possible for non-numeric data");
+		    var chartIndex = $("#"+sensorId+"-chart").data('highchartsChart');
+		    if (typeof chartIndex === 'number') {
+			var thisChart = Highcharts.charts[chartIndex];
+			var thisXAxis = thisChart.xAxis[0].getExtremes();
+			var chartStart = prettyDateTime(new Date(thisXAxis.min));
+			$( "#" + sensorId + "-start" ).html(chartStart);
+			var chartEnd = prettyDateTime(new Date(thisXAxis.max));
+			$( "#" + sensorId + "-end" ).html(chartEnd);
+			var series = thisChart.series[0].data;
+			$( "#" + sensorId + "-num-points" ).html(series_len);
+
+			// Calculate the mean and standard deviation
+			var mean = 0, deviation = 0, series_len = series.length, series_min = Number.MAX_VALUE, series_max = - Number.MAX_VALUE;
+			var sum = 0, l = series_len, data_len = 0;
+			for (; l; l--) {
+			    var x = series[l-1].x;
+			    var y = series[l-1].y;
+			    if (x >= thisXAxis.min && x <= thisXAxis.max) {
+				sum += y;
+				++data_len;
+				if (y < series_min) {
+				    series_min = y;
+				}
+				if (y > series_max) {
+				    series_max = y;
+				}
+			    }
+			}
+			if (data_len <= 0) {
+			    $( "#" + sensorId + "-num-points" ).html(data_len);
+			    $( "#" + sensorId + "-range-low" ).html("No data in range");
+			    $( "#" + sensorId + "-range-high" ).html("No data in range");
+			    $( "#" + sensorId + "-average" ).html("No data in range");
+			    $( "#" + sensorId + "-std-dev" ).html("No data in range");
+			} else {
+			    mean = sum / data_len;
+			    l = series_len, sum = 0;
+			    for (; l; l--) {
+				x = series[l-1].x, y = series[l-1].y;
+				if (x >= thisXAxis.min && x <= thisXAxis.max) {
+				    sum += Math.pow(y - mean, 2);
+				}
+			    }
+			    deviation = Math.sqrt(sum / data_len);
+
+			    $( "#" + sensorId + "-num-points" ).html(data_len);
+			    $( "#" + sensorId + "-range-low" ).html(series_min);
+			    $( "#" + sensorId + "-range-high" ).html(series_max);
+			    $( "#" + sensorId + "-average" ).html(mean.toFixed(1));
+			    $( "#" + sensorId + "-std-dev" ).html(deviation.toFixed(1));
+			}
+		    }
+		    
 		    $('#' + sensorId + "-statistics").modal('show');
 		});
 
@@ -190,7 +254,7 @@ function pointClicked(x,sensorId) {
 		    date: date
 		};
 		console.log(data.url);
-		$('#modalHere').append(modal_template(modal_data));
+		$('#modalHere').html(modal_template(modal_data));
 		$('#pointDisplay').modal('show');
 	    };
 	});

@@ -31,7 +31,7 @@
       <h6>{{units}}</h6>
       <h5>{{subtitle}}	  
 	<span class="small"><a href="/#{{dataSourceSymbol}}" class="{{dataSource}}" align="right"  data-sensorId="{{sensorid}}">(info)</a></span></h5>
-      <button type="button" class="stats-btn btn" data-toggle="modal" data-sensorId="{{ sensorid }}">Statistics</button>
+      <button type="button" id="{{sensorid}}-btn" class="stats-btn btn" data-toggle="modal" data-sensorId="{{ sensorid }}">Statistics</button>
     </div> <!-- div legend -->
     <div id="{{sensorid}}-chart" class="col-md-10 highchart">
       <!-- Highcharts will render the chart here -->
@@ -47,13 +47,15 @@
       <div class="modal-content">
 	<div class="modal-header">
 	  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	  <h3 id="statistics-label" class="pointModalLabel">Statistics for {{subtitle}} {{title}}</h3>
+	  <h3 id="statistics-label" class="pointModalLabel">Statistics for {{title}}</h3>
+	  <h4 class="pointModalLabel">{{subtitle}}</h4>
 	</div>
 	<div class="modal-body">
 	  <p /><label>Start Time:</label> <span id="{{ sensorid }}-start">Start</span>
 	  <p /><label>End Time:</label>  <span id="{{ sensorid }}-end">End</span>
-	  <p /><label>Units:</label>  <span id="{{units}}">Start</span>
-	  <p /><label>Range:</label>  <span id="{{ sensorid }}-range-low">Low</span> to  <span id="{{ sensorid }}-range-high">High</span>
+	  <p /><label>Units:</label>  <span id="{{sensorid}}-units">{{units}}</span>
+	  <p /><label>Number of Points:</label>  <span id="{{ sensorid }}-num-points">Points</span>
+	  <p /><label>Range:</label>  <span id="{{ sensorid }}-range-low">Low</span> <label>to</label>  <span id="{{ sensorid }}-range-high">High</span>
 	  <p /><label>Average:</label>  <span id="{{ sensorid }}-average">Average</span>
 	  <p /><label>Standard Deviation:</label> <span id="{{ sensorid }}-std-dev">Standard Deviation</span>
 	</div>
