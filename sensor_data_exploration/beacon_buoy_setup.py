@@ -80,7 +80,7 @@ if __name__ == '__main__':
                  )
     s6 = populate.add_sensor( sensor_id = "buoy5_GustSpeed",
                      source = mysource,
-                     short_name="Gust Speed",
+                     short_name="Wind Gust",
                      data_type = "float",
                      is_number = True,
                      units_long = "miles per hour",
