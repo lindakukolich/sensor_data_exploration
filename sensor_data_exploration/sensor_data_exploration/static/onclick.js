@@ -117,40 +117,52 @@ $( function () {
     });
 
     $("#crosshairs").click(function(){
-	btn = $("#crosshairs");
-	show_button_as_active( btn );
 	console.log('Crosshairs clicked');
-
+	btn = $("#crosshairs");
 	var currentCharts = chartArray();
+
+	if (btn.hasClass('btn-primary')) {
+	    show_button_as_inactive( btn );
+	    var remove = true
+	} else {
+	    show_button_as_active( btn );
+	};
 	console.log('currentCharts.length =' + currentCharts.length);
+
 	for (var i=0; i<currentCharts.length; i++) {
 	    var chart = currentCharts[i];
 	    var container = $(chart.container),
 	    offset = container.offset(),
-            x, y, isInside, report;
+	    x, y, isInside, report;
 
-	    container.mousemove(function(evt) {
-
-                x = evt.clientX - chart.plotLeft - offset.left;
-                y = evt.clientY - chart.plotTop - offset.top;
-                var xAxis = chart.xAxis[0];
-                //remove old plot line and draw new plot line (crosshair) for this chart
-
-		for (var j = 0; j<currentCharts.length; j++) {
-
-		    otherChart = currentCharts[j];
-		    var xAxis1 = otherChart.xAxis[0];
-                    xAxis1.removePlotLine("myPlotLineId");
-                    xAxis1.addPlotLine({
-			value: chart.xAxis[0].translate(x, true),
-			width: 1,
-			color: 'red',
-			//dashStyle: 'dash',                   
-			id: "myPlotLineId"
-                    });
-
-		};
-	    });
+	    if (remove == true) {
+		var xAxis = chart.xAxis[0];
+		xAxis.removePlotLine("myPlotLineId");
+		container.unbind('mousemove');
+	    } else {
+		
+		container.mousemove(function(evt) {
+		    
+		    x = evt.clientX - chart.plotLeft - offset.left;
+		    y = evt.clientY - chart.plotTop - offset.top;
+		    var xAxis = chart.xAxis[0];
+		    //remove old plot line and draw new plot line (crosshair) for this chart
+		    
+		    for (var j = 0; j<currentCharts.length; j++) {
+			
+			otherChart = currentCharts[j];
+			var xAxis1 = otherChart.xAxis[0];
+			xAxis1.removePlotLine("myPlotLineId");
+			xAxis1.addPlotLine({
+			    value: chart.xAxis[0].translate(x, true),
+			    width: 1,
+			    color: 'red',
+			    //dashStyle: 'dash',                   
+			    id: "myPlotLineId"
+			});
+		    };
+		});
+	    };
 	};
     });
 });
