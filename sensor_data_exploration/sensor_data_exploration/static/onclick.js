@@ -96,30 +96,78 @@ $( function () {
        Go back to using the Data-time as the axis limits of all the charts
      */
     $("#unzoom").click(function(){
-	    // Unzoom all the charts
-	    //	console.log('starting unzoom')
-	    // We don't use startUTC and EndUTC here because we want to force to window settings.
-	    var startEndDates = getDataTimes();
-	    console.log("NEW DATE: unzoom: " + startEndDates.starttime + " to " +
-			startEndDates.endtime);
-	    var startDate = makeDate(startEndDates.starttime);
-	    var endDate = makeDate(startEndDates.endtime);
-	    var endUTC = endDate.getTime();
-	    var startUTC = startDate.getTime();
+	// Unzoom all the charts
+	//	console.log('starting unzoom')
+	// We don't use startUTC and EndUTC here because we want to force to window settings.
+	var startEndDates = getDataTimes();
+	console.log("NEW DATE: unzoom: " + startEndDates.starttime + " to " +
+		    startEndDates.endtime);
+	var startDate = makeDate(startEndDates.starttime);
+	var endDate = makeDate(startEndDates.endtime);
+	var endUTC = endDate.getTime();
+	var startUTC = startDate.getTime();
+	var currentCharts = chartArray();
 
-	$('div#charts > div').each(function() {
-		var s_id = $(this).attr('data-sensorid');
-	    //	    console.log('going to unzoom the following: ' + s_id);
-		var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
-	    //	    console.log('chartindex is' + chartIndex);
-	    if (typeof chartIndex === 'number') {    //error messages will have undefined chartIndex
-		var thisChart = Highcharts.charts[chartIndex];
-		thisChart.xAxis[0].setExtremes(startUTC, endUTC, true);
-		return false; // once we set one the sync zoom will set the rest
-	    }
-	    });
-	});
+	for (var i=0; i<currentCharts.length; i++) {
+	    var thisChart = currentCharts[i];
+	    thisChart.xAxis[0].setExtremes(startUTC, endUTC, true);
+	    return false; // once we set one the sync zoom will set the rest
+	};
+
     });
+
+    $("#crosshairs").click(function(){
+	btn = $("#crosshairs");
+	show_button_as_active( btn );
+	console.log('Crosshairs clicked');
+
+	var currentCharts = chartArray();
+	console.log('currentCharts.length =' + currentCharts.length);
+	for (var i=0; i<currentCharts.length; i++) {
+	    var chart = currentCharts[i];
+	    var container = $(chart.container),
+	    offset = container.offset(),
+            x, y, isInside, report;
+
+	    container.mousemove(function(evt) {
+
+                x = evt.clientX - chart.plotLeft - offset.left;
+                y = evt.clientY - chart.plotTop - offset.top;
+                var xAxis = chart.xAxis[0];
+                //remove old plot line and draw new plot line (crosshair) for this chart
+
+		for (var j = 0; j<currentCharts.length; j++) {
+
+		    otherChart = currentCharts[j];
+		    var xAxis1 = otherChart.xAxis[0];
+                    xAxis1.removePlotLine("myPlotLineId");
+                    xAxis1.addPlotLine({
+			value: chart.xAxis[0].translate(x, true),
+			width: 1,
+			color: 'red',
+			//dashStyle: 'dash',                   
+			id: "myPlotLineId"
+                    });
+
+		};
+	    });
+	};
+    });
+});
+
+function chartArray() {
+    var currentCharts = []
+    $('div#charts > div').each(function() {
+	var s_id = $(this).attr('data-sensorid');
+	var chartIndex = $("#"+s_id+"-chart").data('highchartsChart');
+	//	    console.log('chartindex is' + chartIndex);
+	if (typeof chartIndex === 'number') {    //error messages will have undefined chartIndex
+	    var thisChart = Highcharts.charts[chartIndex];
+	    currentCharts.push(thisChart)
+	};
+    });
+    return currentCharts
+};
 
 /** This function updates the existing charts on our page with new time
     selectors, which have already been stored in data-start-time and
