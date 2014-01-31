@@ -12,4 +12,4 @@ virtualenvwrapper==4.1.1
 wsgiref==0.1.2
 beautifulsoup4==4.3.2
 boto==2.23.0
-
+ExifRead==1.4.2
