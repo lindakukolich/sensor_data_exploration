@@ -26,7 +26,8 @@ if __name__ == '__main__':
                      source = mysource,
                      short_name="Plant Phenology",
                      data_type = "jpg",
-                     is_headliner = True,
+                     is_headliner = False,
+                     kind = "hide",
                  )
 
     if debug: print "Finished Phenocam setup script."
