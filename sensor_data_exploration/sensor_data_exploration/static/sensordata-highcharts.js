@@ -78,6 +78,7 @@ function sensordata_chart(title, subtitle, units, short_units, dataArray1, senso
 	    data: dataArray1
 	}]
     });
+    updateCrosshairs();
     console.log('Created the chart about to return it');
     return chart;
 }

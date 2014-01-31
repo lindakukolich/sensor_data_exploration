@@ -116,18 +116,26 @@ $( function () {
 
     });
 
-    $("#crosshairs").click(function(){
-	console.log('Crosshairs clicked');
-	btn = $("#crosshairs");
-	var currentCharts = chartArray();
 
-	if (btn.hasClass('btn-primary')) {
-	    show_button_as_inactive( btn );
-	    var remove = true
-	} else {
-	    show_button_as_active( btn );
-	};
-	console.log('currentCharts.length =' + currentCharts.length);
+
+  $("#crosshairs").click(function(){
+      console.log('Crosshairs clicked');
+      btn = $("#crosshairs");
+      if (btn.hasClass('btn-primary')) {
+	  show_button_as_inactive( btn );
+      } else {
+	  show_button_as_active( btn );
+      };
+      updateCrosshairs();
+  });
+});
+
+function updateCrosshairs() {
+    //This function is called when someone clicks the crosshair button or when a new chart is drawn.
+
+    //First delete all the crosshairs, then if crosshairs is "on" create all crosshairs.
+    
+    var currentCharts = chartArray();
 
 	for (var i=0; i<currentCharts.length; i++) {
 	    var chart = currentCharts[i];
@@ -135,37 +143,45 @@ $( function () {
 	    offset = container.offset(),
 	    x, y, isInside, report;
 
-	    if (remove == true) {
+	    var xAxis = chart.xAxis[0];
+	    xAxis.removePlotLine("myPlotLineId");
+	    container.unbind('mousemove');
+	}
+
+    if (btn.hasClass('btn-primary')) {
+
+	for (var i=0; i<currentCharts.length; i++) {
+	    var chart = currentCharts[i];
+	    var container = $(chart.container),
+	    offset = container.offset(),
+	    x, y, isInside, report;
+
+	    var xAxis = chart.xAxis[0];
+
+	    container.mousemove(function(evt) {
+
+		x = evt.clientX - chart.plotLeft - offset.left;
+		y = evt.clientY - chart.plotTop - offset.top;
 		var xAxis = chart.xAxis[0];
-		xAxis.removePlotLine("myPlotLineId");
-		container.unbind('mousemove');
-	    } else {
+		//remove old plot line and draw new plot line (crosshair) for this chart
 		
-		container.mousemove(function(evt) {
-		    
-		    x = evt.clientX - chart.plotLeft - offset.left;
-		    y = evt.clientY - chart.plotTop - offset.top;
-		    var xAxis = chart.xAxis[0];
-		    //remove old plot line and draw new plot line (crosshair) for this chart
-		    
-		    for (var j = 0; j<currentCharts.length; j++) {
-			
-			otherChart = currentCharts[j];
-			var xAxis1 = otherChart.xAxis[0];
-			xAxis1.removePlotLine("myPlotLineId");
-			xAxis1.addPlotLine({
-			    value: chart.xAxis[0].translate(x, true),
-			    width: 1,
-			    color: 'red',
-			    //dashStyle: 'dash',                   
-			    id: "myPlotLineId"
-			});
-		    };
-		});
-	    };
+		for (var j = 0; j<currentCharts.length; j++) {
+
+		    otherChart = currentCharts[j];
+		    var xAxis1 = otherChart.xAxis[0];
+		    xAxis1.removePlotLine("myPlotLineId");
+		    xAxis1.addPlotLine({
+			value: chart.xAxis[0].translate(x, true),
+			width: 1,
+			color: 'red',
+			//dashStyle: 'dash',                   
+			id: "myPlotLineId"
+		    });
+		};
+	    });
 	};
-    });
-});
+    };
+};
 
 function chartArray() {
     var currentCharts = []
