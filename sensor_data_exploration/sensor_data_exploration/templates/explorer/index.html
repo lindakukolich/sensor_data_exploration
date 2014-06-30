@@ -97,8 +97,6 @@
 {% block body_block %}
 
 
-
-
 <div id="timeselection"
      data-start-time=""
      data-end-time=""
@@ -112,45 +110,6 @@
       <button id="month-btn" graph-days=30 type="button" class="btn btn-default time-btn">Last Month</button>
       <button id="three-month-btn" graph-days=91 type="button" class="btn btn-default time-btn">3 Months</button>
       <button id="custom-btn" class="btn btn-default" data-toggle="modal" data-target="#dateModal"> Custom Dates </button>
-      <div class="modal fade" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel" aria-hidden="true">
-	<!-- Modal -->
-	<div class="modal-dialog">
-	  <div class="modal-content">
-	    <div class="modal-header">
-	      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	      <h4 class="modal-title" id="dateModalLabel">Select Start and End Dates</h4>
-	    </div>
-	    <div class="modal-body">
-	      <div>
-		<label>Start Date</label>
-		<div id="starttimepicker" class="input-group date">
-		  <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-		</div>
-		
-		<label>End Date</label>
-		<div id="endtimepicker" class="input-group date">
-		  <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-		</div>
-		<script type="text/javascript">
-		  $('#starttimepicker').datepicker({
-		  format: "d-M-yyyy",
-		  endDate: "+1w"
-		  });
-		  $('#endtimepicker').datepicker({
-		  format: "d-M-yyyy",
-		  endDate: "+1w",
-		  });
-		</script>
-	      </div>
-	    </div>
-	    <div class="modal-footer">
-	      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	      <button id="save-date" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
-	    </div>
-	  </div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-      </div><!-- /.modal -->
-      <br>
       <label>Start Date:</label>
       <span id=startdate>Yesterday</span>
       <label>End Date:</label>
@@ -163,6 +122,45 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel" aria-hidden="true">
+  <!-- Modal -->
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="dateModalLabel">Select Start and End Dates</h4>
+      </div>
+      <div class="modal-body">
+        <div>
+  	  <label>Start Date</label>
+  	  <div id="starttimepicker" class="input-group date">
+	    <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+    	  </div>
+	
+	  <label>End Date</label>
+	  <div id="endtimepicker" class="input-group date">
+	    <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+	  </div>
+	  <script type="text/javascript">
+	    $('#starttimepicker').datepicker({
+	    format: "d-M-yyyy",
+	    endDate: "+1w"
+	    });
+	    $('#endtimepicker').datepicker({
+	    format: "d-M-yyyy",
+	    endDate: "+1w",
+	    });
+	  </script>
+        </div>
+      </div>
+     <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button id="save-date" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+     </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<br>
 <div id="modalHere"></div>
 
 <div id="charts">

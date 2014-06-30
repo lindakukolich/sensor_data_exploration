@@ -7,39 +7,39 @@
 # or Usage: ./loadDB_all.sh &> log
 
 # set this! ------------------------------------------------------------
-#HEROKU_MODE=''           # use to run locally, or from within heroku bash
-HEROKU_MODE='heroku run' # use to run on remote server from local terminal
+HEROKU_MODE=''           # use to run locally, or from within heroku bash
+#HEROKU_MODE='heroku run' # use to run on remote server from local terminal
 
 echo === Starting loadDB at: `date`
 # create the Data Sources and Sensors ----------------------------------
-$HEROKU_MODE sensor_data_exploration/wunderground_TI_setup.py
-$HEROKU_MODE sensor_data_exploration/nortek_setup.py
-$HEROKU_MODE sensor_data_exploration/salt_pond_setup.py
-$HEROKU_MODE sensor_data_exploration/beacon_buoy_setup.py
+$HEROKU_MODE sensor_data_exploration/data_collection/wunderground_TI_setup.py
+$HEROKU_MODE sensor_data_exploration/data_collection/nortek_setup.py
+$HEROKU_MODE sensor_data_exploration/data_collection/salt_pond_setup.py
+$HEROKU_MODE sensor_data_exploration/data_collection/beacon_buoy_setup.py
 
 # load Sensor Data -----------------------------------------------------
 wu_history() 
 {
     echo ---Starting WU load at: `date`
-    $HEROKU_MODE sensor_data_exploration/wunderground_TI_addData.py --history --start $START --end $END
+    $HEROKU_MODE sensor_data_exploration/data_collection/wunderground_TI_addData.py --history --start $START --end $END
     echo ---Finished WU load at: `date`
 }
 
 nor_history() 
 {
     echo ---Starting NOR load at: `date`
-    $HEROKU_MODE sensor_data_exploration/nortek_addData.py --history --start $START --end $END
+    $HEROKU_MODE sensor_data_exploration/data_collection/nortek_addData.py --history --start $START --end $END
     echo ---Finished NOR load at: `date`
 }
 
 # SP available from 2013-09-27 through now (with some gaps)
 echo ---Starting SP load at: `date`
-$HEROKU_MODE sensor_data_exploration/salt_pond_addData.py --history
+$HEROKU_MODE sensor_data_exploration/data_collection/salt_pond_addData.py --history
 echo ---Finished SP load at: `date`
 
 # BB available from 2013-08-22 through 2014-01-04
 echo ---Starting BB load at: `date`
-$HEROKU_MODE sensor_data_exploration/beacon_buoy_addData.py --history --cesn
+$HEROKU_MODE sensor_data_exploration/data_collection/beacon_buoy_addData.py --history --cesn
 echo ---Finished BB load at: `date`
 
 MONTH=January

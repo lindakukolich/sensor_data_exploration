@@ -62,9 +62,14 @@ class EST(tzinfo):
     def utcoffset(self, dt):
         return timedelta(hours=-5)
 
+class EDT(tzinfo):
+    '''returns an object representing EST time zone offset'''
+    def utcoffset(self, dt):
+        return timedelta(hours=-4)
+
 def parse_dt(dt_string):
     '''takes a string and returns a datetime object'''
-    tz = EST()
+    tz = EDT() # changed for testing only. 
     # 24.01.2014 04:50:08
     x=datetime.strptime(dt_string, "%d.%m.%Y %H:%M:%S")
     dt=datetime(int(x.year),int(x.month),int(x.day),int(x.hour),int(x.minute),int(x.second),tzinfo=tz)

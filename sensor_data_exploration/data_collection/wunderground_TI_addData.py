@@ -83,6 +83,12 @@ class EST(tzinfo):
     def utcoffset(self, dt):
         return timedelta(hours=-5)
 
+class EDT(tzinfo):
+    '''returns an object representing EDT time zone offset'''
+    def utcoffset(self, dt):
+        return timedelta(hours=-4)
+
+
 def assemble_dt(date_dict):
     '''takes a date dictionary and returns a datetime object'''
     tz = EST()
@@ -95,7 +101,7 @@ def assemble_dt(date_dict):
 
 def parse_dt(dt_string):
     '''takes a string and returns a datetime object'''
-    tz = EST()
+    tz = EDT() # changed for testing. This should not be hard-coded
     # "observation_time_rfc822":"Fri, 10 Jan 2014 11:52:09 -0500"
     ## grrrr, %z is not available!
     dt_string = dt_string[:-6]

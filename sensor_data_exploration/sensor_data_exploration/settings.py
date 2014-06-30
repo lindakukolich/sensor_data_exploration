@@ -56,7 +56,7 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
-    'sensor_data_exploration.apps.explorer',
+    'sensor_data_exploration.explorer',
 )
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -82,8 +82,15 @@ WSGI_APPLICATION = 'sensor_data_exploration.wsgi.application'
 # server, this DATABASES value is changed below.
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+	'ENGINE': 'django.db.backends.mysql',
+	'NAME': 'db51163_explorer',
+	'USER': 'userweb51163',
+	'PASSWORD': 'kf84kr',
+	#'HOST': 'localhost',
+	'HOST': '127.0.0.1',
+	'PORT': '3306',
     }
 }
 
@@ -106,10 +113,10 @@ USE_TZ = True
 
 #advice from stack overflow
 STATIC_ROOT = 'staticfiles'
-STATIC_URL = '/static/'
+STATIC_URL = '/explorer/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_PATH, 'static'),
+    os.path.join(PROJECT_PATH, 'explorer/static'),
 )
 
 # Templates
@@ -132,8 +139,8 @@ ALLOWED_HOSTS = ['*']
 
 #Heroku specific
 # Parse database configuration from $DATABASE_URL
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+#import dj_database_url
+#DATABASES['default'] =  dj_database_url.config()
 
 # Try to load local_settings.py if it exists
 try:

@@ -8,7 +8,7 @@ import sys
 from datetime import datetime,tzinfo,timedelta
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sensor_data_exploration.settings')
-from sensor_data_exploration.apps.explorer.models import *
+from sensor_data_exploration.explorer.models import *
 
 colors = { 'black':'#000000',
            'brown':'#660000',

@@ -1,14 +1,10 @@
 Django==1.6.1
-PIL==1.1.7
-stevedore==0.13
 virtualenv==1.11
 virtualenv-clone==0.2.4
 virtualenvwrapper==4.1.1
 wsgiref==0.1.2
-python==2.7.6
 dj-static==0.0.5
 dj-database-url==0.2.2
-psycopg2==2.5.1
 
 # install all of our production dependencies only.
 # use pip install -r requirements/dev.txt to install the development dependencies

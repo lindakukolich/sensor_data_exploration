@@ -7,11 +7,17 @@ import views
 admin.autodiscover()
 
 urlpatterns = patterns('',
-                       # This says read in the urls.py file in sensor_data_exploration/apps/explorer
-                       url(r'^explorer/', include('sensor_data_exploration.apps.explorer.urls')),
+                       # This says read in the urls.py file in sensor_data_exploration/explorer
                        url(r'^admin/', include(admin.site.urls)),
                        # html is generates in views.py file by the index method
                        url(r'^$', views.index, name='index'),
+                       url(r'^about/', views.about, name='about'),
+                       url(r'^map/', views.map, name='map'),
+                       url(r'^sensors/', views.sensors, name='sensors'),
+                       url(r'^get_data_ajax/', views.get_data_ajax, name='get_data_ajax'),
+                       url(r'^get_point_ajax/', views.get_point_ajax, name='get_point_ajax'),
+                       url(r'^tests3', views.tests3, name='tests3'),
+		       url(r'^shortTest$', views.shortTest, name='shortTest'),
                    )
 
 # prep to handle uploaded media (people's login photo) in debug mode

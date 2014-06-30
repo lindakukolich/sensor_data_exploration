@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from sensor_data_exploration.apps.explorer import views
+from sensor_data_exploration.explorer import views
 
 urlpatterns = patterns('',
                        url(r'^$', views.index, name='index'),
@@ -9,4 +9,5 @@ urlpatterns = patterns('',
                        url(r'^get_data_ajax/', views.get_data_ajax, name='get_data_ajax'),
                        url(r'^get_point_ajax/', views.get_point_ajax, name='get_point_ajax'),
                        url(r'^tests3', views.tests3, name='tests3'),
+		       url(r'^shortTest', views.shortTest, name='shortTest'),
                        )

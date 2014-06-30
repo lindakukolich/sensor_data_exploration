@@ -4,7 +4,7 @@ import json
 from django.shortcuts import render
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from sensor_data_exploration.apps.explorer.models import *
+from sensor_data_exploration.explorer.models import *
 from django.utils import simplejson
 import time
 from django.http import HttpResponse
@@ -46,11 +46,11 @@ def index(request):
     # Note that the first parameter is the template we wish to use.
     return render_to_response('explorer/index.html', context_dict, context)
 
-def about(request):
-    ''' About page, mostly to practice having links '''
-    context = RequestContext(request)
-    context_dict = {}
-    return render_to_response('explorer/about.html', context_dict, context)
+#def about(request):
+#    ''' About page, mostly to practice having links '''
+#    context = RequestContext(request)
+#    context_dict = {}
+#    return render_to_response('explorer/about.html', context_dict, context)
 
 def sensors(request):
     ''' About page, mostly to practice having links '''
@@ -258,3 +258,7 @@ def tests3(request):
 
     print context_dict
     return render_to_response('explorer/tests3.html', context_dict, context)
+
+def shortTest(request):
+    return HttpResponse("Hello world from sensor_data_exploration website root!")
+
